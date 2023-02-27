@@ -3,7 +3,7 @@ An application solely for education purposes
 
 ## Usage
 - Clone the repo
-- Open the repo project on your terminal
+- `cd` into the repo folder or open the repo project on your terminal
 - Run `npm i`
 - Run `npm run dev`
 
