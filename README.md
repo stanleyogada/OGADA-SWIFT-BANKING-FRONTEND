@@ -2,8 +2,8 @@
 An application solely for education purposes 
 
 ## Usage
-- Clone the repo
-- `cd` into the repo folder or open the repo project on your terminal
+- Run `git clone `
+- Run `cd Opay-Demo-Frontend`
 - Run `npm i`
 - Run `npm run dev`
 
