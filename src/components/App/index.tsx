@@ -1,11 +1,6 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
-import About from "../../pages/About";
-import Home from "../../pages/Home";
+import About from "@/pages/About";
+import Home from "@/pages/Home";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {

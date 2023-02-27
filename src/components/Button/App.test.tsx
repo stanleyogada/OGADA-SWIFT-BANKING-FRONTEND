@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import App from ".";
+import App from "../App";
 
 describe("App", () => {
   test("Renders Button and it the counter works", async () => {
