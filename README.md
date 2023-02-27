@@ -12,6 +12,6 @@ An application solely for education purposes
 
 ## Branch / Commits Conventions
 #### Branch
-- Format <ch|ft|bg>-<name-of-your-ticket-like-this>
-- Example ft-add-button-component
+- Format `<ch|ft|bg>-<name-of-your-ticket-like-this>`
+- Example `ft-add-button-component`
 
