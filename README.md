@@ -7,8 +7,12 @@ An application solely for education purposes
 - Run `npm i`
 - Run `npm run dev`
 
+#
+
 ## VSCode
 - Install Prettier extension on your VSCode.
+
+#
 
 ## How to contribute
 1. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
@@ -20,6 +24,8 @@ An application solely for education purposes
 7. Push your changes eg. `git push origin ch-add-pretier-configuration`
 8. Create a **PR** in GitHub.
 
+#
+
 ## Pull Request (**PR**)
 #### Rules
 1. Request an Engineer/s to review to your PR.
@@ -27,12 +33,15 @@ An application solely for education purposes
 3. Don't Merge without approval from your Code reviewer/s.
 4. Merge after approval.
 
+#
+
 #### Format
 - The **PR** title. eg. `[#675] Add prettier configuration`
 - The **PR** body: this should be the link to the ticket on trello. eg. `Trello: https://trello.com/c/XEv0yeTA`
-
+**Screenshot example of the perfect PR**
 ![image](https://user-images.githubusercontent.com/104577296/221747744-f5a893cf-ae75-4a63-ba69-9016798e47a9.png)
 
+#
 
 ## Branch / Commits Conventions
 #### Branch
