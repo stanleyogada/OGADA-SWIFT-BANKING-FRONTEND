@@ -27,7 +27,7 @@ An application solely for education purposes!
 7. Push your changes on your current branch! eg. `git push origin ch-add-pretier-configuration`
 8. Create a **PR** in GitHub.
 9. If any change/s is requested by your Code Reviewers, repeat **step 2 to 7** until your **PR** is approved.
-10. Merge **PR**.  🚢
+10. Merge **PR**. 🚢
 
 #
 
@@ -35,8 +35,8 @@ An application solely for education purposes!
 #### Rules
 1. Request an Engineer/s to review to your PR (to check if your code makes sense to merge to `dev` branch).
 2. Assign yourself (for anyone to quickly identify you as the owner of the PR).
-3. Don't Merge without approval from your Code reviewer/s.
-4. Merge after approval.
+3. Don't Merge without approval from your Code reviewer/s!!! (This could deal some potential damage)
+4. Merge after approval. 🚢
 
 #### Format
 - The **PR** title. eg. `[#675] Add prettier configuration`.
