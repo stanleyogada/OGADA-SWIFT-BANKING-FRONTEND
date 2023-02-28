@@ -21,8 +21,8 @@ An application solely for education purposes
 8. Create a **PR** in GitHub.
 
 ## Pull Request (**PR**)
-- The **PR** title. eg. [#675] Add prettier configuration
-- The **PR** body: this should be the link to the ticket on trello. eg. Trello: https://trello.com/c/XEv0yeTA
+- The **PR** title. eg. `[#675] Add prettier configuration`
+- The **PR** body: this should be the link to the ticket on trello. eg. `Trello: https://trello.com/c/XEv0yeTA`
 
 ## Branch / Commits Conventions
 #### Branch
