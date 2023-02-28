@@ -1,23 +1,28 @@
 # Opay-Demo-Frontend
+
 An application solely for education purposes!
 
 #
 
 ## Usage
+
+- First update to latest node version - https://nodejs.org/en/download/
 - Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 - Run `cd Opay-Demo-Frontend`
-- Run `npm i`
+- Run `npm i --legacy-peer-deps`
 - Run `npm run dev`
 
 #
 
 ## VSCode Extensions
+
 - Install `Prettier` extension.
 - Install `vscode-styled-components` extension
 
 #
 
 ## How to contribute
+
 1. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 2. Make your changes.
 3. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
@@ -32,26 +37,31 @@ An application solely for education purposes!
 #
 
 ## Pull Request (**PR**)
+
 #### Rules
+
 1. Request an Engineer/s to review to your PR (to check if your code makes sense to merge to `dev` branch).
 2. Assign yourself (for anyone to quickly identify you as the owner of the PR).
 3. Don't Merge without approval from your Code reviewer/s!!! (This could deal some potential damage if you do this 🥴)
 4. Merge after approval. 🚢
 
 #### Format
+
 - The **PR** title. eg. `[#675] Add prettier configuration`.
 - The **PR** body: this should be the link to the ticket on trello. eg. `Trello: https://trello.com/c/XEv0yeTA`.
 - **Below is screenshot example of the perfect PR**: take a look=>https://github.com/stanleyogada/Opay-Demo-Frontend/pull/3
-![image](https://user-images.githubusercontent.com/104577296/221747744-f5a893cf-ae75-4a63-ba69-9016798e47a9.png)
+  ![image](https://user-images.githubusercontent.com/104577296/221747744-f5a893cf-ae75-4a63-ba69-9016798e47a9.png)
 
 #
 
 ## Branch / Commits Conventions
+
 #### Branch
+
 - Format `<ch|ft|bg>-#ticket-id-<ticket-title>`
 - Example `ft-#675--add-button-component`
 
 #### Commit
+
 - Format `<ch|ft|bg>-#ticket-id: <short description>`
 - Example `bg-#675: fix all failing links`
-
