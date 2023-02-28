@@ -29,8 +29,8 @@ An application solely for education purposes
 
 ## Pull Request (**PR**)
 #### Rules
-1. Request an Engineer/s to review to your PR.
-2. Assign yourself.
+1. Request an Engineer/s to review to your PR (to check if your code makes sense to merge to `dev` branch).
+2. Assign yourself (to quickly identify you as the owner of the PR).
 3. Don't Merge without approval from your Code reviewer/s.
 4. Merge after approval.
 
