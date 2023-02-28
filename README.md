@@ -34,8 +34,6 @@ An application solely for education purposes
 3. Don't Merge without approval from your Code reviewer/s.
 4. Merge after approval.
 
-#
-
 #### Format
 - The **PR** title. eg. `[#675] Add prettier configuration`
 - The **PR** body: this should be the link to the ticket on trello. eg. `Trello: https://trello.com/c/XEv0yeTA`
