@@ -24,7 +24,7 @@ An application solely for education purposes!
 4. Repeat **step 2 and 3** until you're done with your ticket tasks.
 5. Pull from origin `dev` branch to sync all changes online with your local branch `git pull origin dev`.
 6. Fix all conflict/s if any (You might need to consult help from the Engineer responsible for causing the conflict/s).
-7. Push your changes on your current branch! eg. `git push origin ch-add-pretier-configuration`
+7. Push your changes on your current branch! eg. `git push origin ch-#5-add-pretier-configuration`
 8. Create a **PR** in GitHub.
 9. If any change/s is requested by your Code Reviewers, repeat **step 2 to 7** until your **PR** is approved.
 10. Merge **PR**. 🚢
