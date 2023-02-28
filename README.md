@@ -18,7 +18,7 @@ An application solely for education purposes
 ## How to contribute
 1. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 2. Make your changes.
-3. Stage and commit your changes. e.g. `git add . && git commit -m "ch: setup prettier configuration"`.
+3. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
 4. Repeat **step 2 and 3** until you're done with your ticket tasks.
 5. Pull from origin `dev` branch to sync all changes online to your local branch `git pull origin dev`.
 6. Fix and conflict/s if any (You might need to consult help from the Engineer responsible for causing the conflict/s).
