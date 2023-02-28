@@ -11,7 +11,7 @@ An application solely for education purposes
 - Install Prettier extension on your VSCode.
 
 ## How to contribute
-1. Create your branch with the of your current ticket e.g `git checkout -b ch[#675]-add-pretier-configuration`.
+1. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 2. Make your changes.
 3. Stage and commit your changes. e.g. `git add . && git commit -m "ch: setup prettier configuration"`.
 4. Repeat **step 2 and 3** until you're done with your ticket tasks.
@@ -26,10 +26,10 @@ An application solely for education purposes
 
 ## Branch / Commits Conventions
 #### Branch
-- Format `<ch|ft|bg>[#ticket-id]-<name-of-your-ticket-like-this>`
-- Example `ft[#675]-add-button-component`
+- Format `<ch|ft|bg>-#ticket-id-<name-of-your-ticket-like-this>`
+- Example `ft-#675--add-button-component`
 
 #### Commit
-- Format `<ch|ft|bg>[#ticket-id]: <short description>`
-- Example `bg[#675]: fix all failing links`
+- Format `<ch|ft|bg>-#ticket-id: <short description>`
+- Example `bg-#675: fix all failing links`
 
