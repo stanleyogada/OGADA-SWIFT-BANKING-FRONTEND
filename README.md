@@ -35,7 +35,7 @@ An application solely for education purposes!
 #### Rules
 1. Request an Engineer/s to review to your PR (to check if your code makes sense to merge to `dev` branch).
 2. Assign yourself (for anyone to quickly identify you as the owner of the PR).
-3. Don't Merge without approval from your Code reviewer/s!!! (This could deal some potential damage)
+3. Don't Merge without approval from your Code reviewer/s!!! (This could deal some potential damage if you do this 🥴)
 4. Merge after approval. 🚢
 
 #### Format
