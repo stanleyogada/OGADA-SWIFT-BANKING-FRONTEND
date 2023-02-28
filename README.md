@@ -22,7 +22,7 @@ An application solely for education purposes!
 2. Make your changes.
 3. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
 4. Repeat **step 2 and 3** until you're done with your ticket tasks.
-5. Pull from origin `dev` branch to sync all changes online to your local branch `git pull origin dev`.
+5. Pull from origin `dev` branch to sync all changes online with your local branch `git pull origin dev`.
 6. Fix and conflict/s if any (You might need to consult help from the Engineer responsible for causing the conflict/s).
 7. Push your changes eg. `git push origin ch-add-pretier-configuration`
 8. Create a **PR** in GitHub.
