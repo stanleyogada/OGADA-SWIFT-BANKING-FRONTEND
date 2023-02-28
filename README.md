@@ -48,7 +48,7 @@ An application solely for education purposes!
 
 ## Branch / Commits Conventions
 #### Branch
-- Format `<ch|ft|bg>-#ticket-id-<name-of-your-ticket-like-this>`
+- Format `<ch|ft|bg>-#ticket-id-<ticket-title>`
 - Example `ft-#675--add-button-component`
 
 #### Commit
