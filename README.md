@@ -20,7 +20,14 @@ An application solely for education purposes
 7. Push your changes eg. `git push origin ch-add-pretier-configuration`
 8. Create a **PR** in GitHub.
 
-## Pull Request (**PR**) -> Quick Note: NEVER MERGE YOUR OWN PR!!!!
+## Pull Request (**PR**)
+#### Rules
+1. Request an Engineer/s to review to your PR.
+2. Assign yourself.
+3. Don't Merge without approval from your Code reviewer/s.
+4. Merge after approval.
+
+#### Format
 - The **PR** title. eg. `[#675] Add prettier configuration`
 - The **PR** body: this should be the link to the ticket on trello. eg. `Trello: https://trello.com/c/XEv0yeTA`
 
