@@ -24,6 +24,8 @@ An application solely for education purposes
 6. Fix and conflict/s if any (You might need to consult help from the Engineer responsible for causing the conflict/s).
 7. Push your changes eg. `git push origin ch-add-pretier-configuration`
 8. Create a **PR** in GitHub.
+9. If any change/s is requested by your Code Reviewers, repeat **step 2 to 7** until your **PR** is approved.
+10. Merge **PR**. 
 
 #
 
