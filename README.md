@@ -6,7 +6,7 @@ An application solely for education purposes!
 
 ## Usage
 
-- First Run 'node -v' if your version **< v12** Then update to latest node version - https://nodejs.org/en/download/, Otherwise don't download the lastest
+- First Run `node -v` if your version **< v12** Then update to latest node version - https://nodejs.org/en/download/, Otherwise don't download the lastest
 - Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 - Run `cd Opay-Demo-Frontend`
 - Run `npm i --legacy-peer-deps`
