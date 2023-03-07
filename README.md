@@ -59,7 +59,7 @@ An application solely for education purposes!
 #### Branch
 
 - Format `<ch|ft|bg>-#ticket-id-<ticket-title>`
-- Example `ft-#675--add-button-component`
+- Example `ft-#675-add-button-component`
 
 #### Commit
 
