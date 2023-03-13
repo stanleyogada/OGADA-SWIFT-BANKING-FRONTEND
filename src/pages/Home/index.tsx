@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import icons from "../../constants/icons";
 import Button from "../../components/Button";
 import Tabs from "../../components/Tabs/Tabs";
+import styled from "styled-components";
+import { COLORS } from "../../constants/colors";
 
 const Home = () => {
   return (
-    <div className="space-y-4">
+    <SHome className="space-y-4">
       <h1>Global Font Inter</h1>
 
       {/* Tabs */}
@@ -20,6 +22,23 @@ const Home = () => {
             heading: "Tab 2",
           },
         ]}
+      >
+        <div>Pane 1</div>
+        <div>Pane 2</div>
+      </Tabs>
+      {/* Tabs */}
+      <Tabs
+        data={[
+          {
+            id: "tab-1",
+            heading: "Tab 1",
+          },
+          {
+            id: "tab-2",
+            heading: "Tab 2",
+          },
+        ]}
+        type2
       >
         <div>Pane 1</div>
         <div>Pane 2</div>
@@ -65,8 +84,11 @@ const Home = () => {
 
       <Button>Hello World</Button>
       <Link to="/about">About page</Link>
-    </div>
+    </SHome>
   );
 };
 
+const SHome = styled.section`
+  background-color: ${COLORS.gray};
+`;
 export default Home;
