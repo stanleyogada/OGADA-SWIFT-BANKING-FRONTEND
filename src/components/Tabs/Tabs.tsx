@@ -19,7 +19,6 @@ const useTabs = (data: TProps["data"]) => {
 
   const handleChangeActiveId = (tabId: string) => {
     setActiveId(tabId);
-
     navigate({
       search: `?tabId=${tabId}`,
     });
