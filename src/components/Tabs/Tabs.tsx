@@ -13,25 +13,18 @@ type TProps = {
 };
 
 const useTabs = (data: TProps["data"]) => {
-  let params = new URLSearchParams(document.location.search);
-
+  const params = new URLSearchParams(document.location.search);
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState(params.get("tabId") || data[0].id);
 
-  console.log(params.get("tab"));
-
   const handleChangeActiveId = (tabId: string) => {
     setActiveId(tabId);
-    navigate({
-      search: `?tabId=${tabId}`,
-    });
+    navigate({ search: `?tabId=${tabId}` });
   };
 
   const getActiveIndex = () => {
     return data.findIndex((tab) => tab.id === activeId);
   };
-
-  console.log(activeId);
 
   return { activeId, handleChangeActiveId, getActiveIndex };
 };
