@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type TProps = {
   data: Array<{
@@ -9,10 +10,19 @@ type TProps = {
 };
 
 const useTabs = (data: TProps["data"]) => {
-  const [activeId, setActiveId] = useState(data[0].id);
+  let params = new URLSearchParams(document.location.search);
+
+  const navigate = useNavigate();
+  const [activeId, setActiveId] = useState(params.get("tabId") || data[0].id);
+
+  console.log(params.get("tab"));
 
   const handleChangeActiveId = (tabId: string) => {
     setActiveId(tabId);
+
+    navigate({
+      search: `?tabId=${tabId}`,
+    });
   };
 
   const getActiveIndex = () => {

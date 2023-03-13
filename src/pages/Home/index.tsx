@@ -1,11 +1,29 @@
 import { Link } from "react-router-dom";
 import icons from "../../constants/icons";
 import Button from "../../components/Button";
+import Tabs from "../../components/Tabs/Tabs";
 
 const Home = () => {
   return (
     <div className="space-y-4">
       <h1>Global Font Inter</h1>
+
+      {/* Tabs */}
+      <Tabs
+        data={[
+          {
+            id: "tab-1",
+            heading: "Tab 1",
+          },
+          {
+            id: "tab-2",
+            heading: "Tab 2",
+          },
+        ]}
+      >
+        <div>Pane 1</div>
+        <div>Pane 2</div>
+      </Tabs>
 
       {/* EXAMPLES OF HOW ICONS IMPORTING WORKS */}
       <div className="space-x-4" style={{ backgroundColor: "orange" }}>
