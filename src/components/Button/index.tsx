@@ -1,15 +1,15 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
+
 import config from "../../constants";
 
 const { COLORS } = config;
 
-const Button = styled.button`
-  background: ${COLORS.blue};
-  border-radius: 3px;
-  border: 2px solid ${COLORS.blue};
-  color: ${COLORS.white};
-  margin: 0 1em;
-  padding: 0.25em 1em;
-`;
+interface ButtonProps {
+  icons: React.ReactNode;
+}
 
+const Button: React.FC<ButtonProps> = ({ icons }) => {
+  return <button>{icons}</button>;
+};
 export default Button;
