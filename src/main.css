@@ -19,7 +19,8 @@ div.space-y-4 > :not(:last-child) {
 }
 button {
   background-color: Transparent;
-
+  display: flex;
+  flex-direction: column;
   background-repeat: no-repeat;
   border: none;
 }
