@@ -6,17 +6,17 @@ import config from "../../constants";
 const { COLORS } = config;
 
 interface ButtonProps {
-  icons: React.ReactNode;
+  icon: React.ReactNode;
   children?: ReactNode;
 }
 const SpanSyle = styled.span`
   margin-top: 5px;
   color: ${COLORS.black};
 `;
-const Button: React.FC<ButtonProps> = ({ icons, children }) => {
+const Button: React.FC<ButtonProps> = ({ icon, children }) => {
   return (
     <button>
-      {icons}
+      {icon}
       <SpanSyle> {children}</SpanSyle>
     </button>
   );

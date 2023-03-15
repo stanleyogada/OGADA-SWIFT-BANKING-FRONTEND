@@ -46,7 +46,7 @@ const Home = () => {
         <span className="cursor-pointer">{icons.blackuserIcon()}</span>
       </div>
 
-      <Button icons={icons.phoneIcon()}>Airtime</Button>
+      <Button icon={icons.phoneIcon()}>Airtime</Button>
       <Link to="/about">About page</Link>
     </div>
   );
