@@ -1,20 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
-
-div.space-x-4> :not(:last-child) {
+div.space-x-4 > :not(:last-child) {
   margin-right: 1rem;
 }
 
-div.space-y-4> :not(:last-child) {
+div.space-y-4 > :not(:last-child) {
   margin-bottom: 1rem;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+button {
+  background-color: Transparent;
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  border: none;
 }

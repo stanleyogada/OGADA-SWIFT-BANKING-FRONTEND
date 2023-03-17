@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import icons from "../../constants/icons";
 import Button from "../../components/Button";
+import { ReactNode } from "react";
 
 const Home = () => {
   return (
@@ -45,7 +46,7 @@ const Home = () => {
         <span className="cursor-pointer">{icons.blackuserIcon()}</span>
       </div>
 
-      <Button>Hello World</Button>
+      <Button icon={icons.phoneIcon()}>Airtime</Button>
       <Link to="/about">About page</Link>
     </div>
   );
