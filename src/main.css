@@ -23,4 +23,8 @@ button {
   flex-direction: column;
   background-repeat: no-repeat;
   border: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
 }
