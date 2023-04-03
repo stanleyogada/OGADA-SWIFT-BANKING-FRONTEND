@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import icons from "../../constants/icons";
 import Button from "../../components/Button";
+import Navigation from "../../components/Navigation";
+
 import { ReactNode } from "react";
 
 const Home = () => {
@@ -52,6 +54,10 @@ const Home = () => {
         text
       </Button>
       <Link to="/about">About page</Link>
+
+      <Navigation/>
+
+
     </div>
   );
 };

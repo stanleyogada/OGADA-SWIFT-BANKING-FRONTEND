@@ -22,6 +22,11 @@ const GlobalStyles = createGlobalStyle`
     height: auto;
   }
 
+  a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 `
 
 export default GlobalStyles;
