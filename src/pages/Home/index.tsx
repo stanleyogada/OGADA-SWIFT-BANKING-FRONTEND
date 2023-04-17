@@ -4,6 +4,9 @@ import Button from "../../components/Button";
 import Tabs from "../../components/Tabs/Tabs";
 import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
+import Navigation from "../../components/Navigation";
+
+import { ReactNode } from "react";
 
 const Home = () => {
   return (
@@ -82,8 +85,14 @@ const Home = () => {
         <span className="cursor-pointer">{icons.blackuserIcon()}</span>
       </div>
 
-      <Button>Hello World</Button>
+      <Button>text</Button>
+      <Button icon={icons.phoneIcon()}>text</Button>
+      <Button icon={icons.phoneIcon()} link={"#"}>
+        text
+      </Button>
       <Link to="/about">About page</Link>
+
+      <Navigation />
     </SHome>
   );
 };

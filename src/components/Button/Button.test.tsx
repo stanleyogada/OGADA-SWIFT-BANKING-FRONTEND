@@ -1,10 +1,49 @@
-import { screen, render } from "@testing-library/react";
+import { screen, render, cleanup } from "@testing-library/react";
+import icons from "../../constants/icons";
 import Button from "../Button";
+import { MemoryRouter } from "react-router-dom";
+
+const mockedUseHerf = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...(jest.requireActual("react-router-dom") as any),
+  useHref: () => mockedUseHerf,
+}));
 
 describe("Button", () => {
-  test("Renders Button and it the counter works", async () => {
-    render(<Button>Test Button</Button>);
+  test("Renders Button contents correctly", () => {
+    render(
+      <MemoryRouter>
+        <Button>Test content</Button>
+      </MemoryRouter>
+    );
 
-    screen.getByRole("button", { name: /test button/i });
+    expect(screen.getByRole("button", { name: /test content/i })).toBeInTheDocument();
+    expect(screen.queryByTestId("btn-icon")).not.toBeInTheDocument();
+
+    cleanup();
+
+    render(
+      <MemoryRouter>
+        <Button icon={icons.phoneIcon()} />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByTestId("btn-icon")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /test content/i })).not.toBeInTheDocument();
+
+    cleanup();
+
+    render(
+      <MemoryRouter>
+        <Button icon={icons.phoneIcon()} link="#">
+          Test content
+        </Button>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByTestId("btn-link")).toBeInTheDocument();
+    expect(screen.getByTestId("btn-icon")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /test content/i })).toBeInTheDocument();
   });
 });
