@@ -1,10 +1,10 @@
 import { COLORS } from '../../constants/colors'
 import Navigation from '../../components/Navigation'
 import icons from '../../constants/icons'
-import profilePic from '../../assets/profile-picture.png'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Button from '../../components/Button'
+import Avatar from '../../components/Avatar/Avatar'
 
 const HomePage = () => {
   return (
@@ -13,7 +13,7 @@ const HomePage = () => {
       {/* Header Info */}
       <div className='profile-head'>
         <div className='profile-info'>
-          <img src={profilePic} alt="" />
+          <Avatar />
           <h3>Hello, Tega</h3>
         </div>
         <div className='profile-icons'>
@@ -97,10 +97,6 @@ align-item: center;
 justify-content: space-between;
 gap:0.85rem;
 
-img{
-  object-fit: cover;
-  border-radius: 50%;
-}
 
 h3 {
   justify-self: center;
