@@ -27,12 +27,14 @@ const SButton = styled.button`
     margin-top: 5px;
     color: ${COLORS.black};
   }
+
+  
 `;
 const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
   const btn = (
     <SButton>
       {icon && <div data-testid="btn-icon">{icon}</div>}
-      <span>{children}</span>
+      <span >{children}</span>
     </SButton>
   );
 

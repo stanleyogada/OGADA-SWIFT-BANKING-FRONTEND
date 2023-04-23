@@ -5,4 +5,5 @@ export const CLIENT_ROUTES = {
   rewards: "/rewards",
   cards: "/cards",
   profile: "/profile",
+  homeSample: '/homesample'
 };

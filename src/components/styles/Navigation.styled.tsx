@@ -45,6 +45,7 @@ export const Nav = styled.nav`
     color: ${COLORS.black};
     font-weight: 600;
     padding-top: 5px;
+    text-decoration: none;
   }
 
 `;
