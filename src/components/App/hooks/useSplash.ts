@@ -17,4 +17,5 @@ const useSplash = () => {
   };
 };
 
+
 export default useSplash;
