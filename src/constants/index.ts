@@ -1,10 +1,8 @@
 import { COLORS } from "./colors";
+import { CLIENT_ROUTES, ROUTER } from "./router";
 
-import { CLIENT_ROUTES } from "./routes";
-
-const config = {
+export {
   COLORS,
   CLIENT_ROUTES,
+  ROUTER
 };
-
-export default config;
