@@ -10,7 +10,7 @@ function App() {
   // if (isAppLoading) return <SplashScreen />;
 
   // return <RouterProvider router={ROUTER} />;
-
+  
 }
 
 export default App;
