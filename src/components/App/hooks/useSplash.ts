@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useSplash = () => {
-  const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
+const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
 
   useEffect(() => {
     try {

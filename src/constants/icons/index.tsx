@@ -1,4 +1,6 @@
 // DEFINE THE ICONS HERE IN A FUNCTION FORMAT
+import logoRoundSvg from  "../../assets/opay-logo-round.svg" 
+import logoSvg from  "../../assets/opay-logo.svg" 
 
 const todayrewardIcon = () => (
   <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -447,6 +449,11 @@ const phoneIcon = () => (
   </svg>
 );
 
+
+const logo = (isRound: boolean = true)=> {
+  return (
+    <img src={isRound? logoRoundSvg: logoSvg} alt="logo"/>)
+}
 // IMPORT THE NEW ICON CREATED ABOVE
 const icons = {
   loudspeakerIcon,
@@ -485,6 +492,7 @@ const icons = {
   blackleftarrowIcon,
   blueprofileIcon,
   blackuserIcon,
+  logo,
 };
 
 export default icons;
