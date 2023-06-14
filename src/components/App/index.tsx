@@ -6,11 +6,9 @@ import useSplash from "./hooks/useSplash";
 function App() {
   const { isAppLoading } = useSplash();
 
-  return <SplashScreen />;
-  // if (isAppLoading) return <SplashScreen />;
+  if (isAppLoading) return <SplashScreen />;
 
-  // return <RouterProvider router={ROUTER} />;
-  
+  return <RouterProvider router={ROUTER} />;
 }
 
 export default App;
