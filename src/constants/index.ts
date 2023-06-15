@@ -1,8 +1,4 @@
 import { COLORS } from "./colors";
-import { CLIENT_ROUTES, ROUTER } from "./router";
+import { CLIENT_ROUTES } from "./routes";
 
-export {
-  COLORS,
-  CLIENT_ROUTES,
-  ROUTER
-};
+export { COLORS, CLIENT_ROUTES };

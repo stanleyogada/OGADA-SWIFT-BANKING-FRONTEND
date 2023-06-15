@@ -1,17 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import { CLIENT_ROUTES } from "../../constants";
 import Home from "../../pages/Home";
 import About from "../../pages/About";
-import Auth from "../../components/Auth";
-
-// GLOBAL CONFGURATIONS FILE FOR THE APP
-const CLIENT_ROUTES = {
-  home: "/",
-  about: "/about",
-  auth: "/auth",
-  authSignin: "/auth/signin",
-  authSignup: "/auth/signup",
-};
+import Welcome from "../../pages/Welcome";
+import Signin from "../../pages/Signin";
+import Signup from "../../pages/Signup";
 
 const ROUTER = createBrowserRouter([
   {
@@ -23,24 +16,27 @@ const ROUTER = createBrowserRouter([
       },
       {
         path: CLIENT_ROUTES.about,
-        element: <About/>,
+        element: <About />,
       },
     ],
   },
   {
-    path: CLIENT_ROUTES.auth,
-    element: <Auth />,
+    path: "/auth",
     children: [
       {
+        path: CLIENT_ROUTES.authWelcome,
+        element: <Welcome />,
+      },
+      {
         path: CLIENT_ROUTES.authSignin,
-        element: <div>Sign In</div>,
+        element: <Signin />,
       },
       {
         path: CLIENT_ROUTES.authSignup,
-        element: <div>Sign Up</div>,
+        element: <Signup />,
       },
     ],
   },
 ]);
 
-export { CLIENT_ROUTES, ROUTER };
+export default ROUTER;

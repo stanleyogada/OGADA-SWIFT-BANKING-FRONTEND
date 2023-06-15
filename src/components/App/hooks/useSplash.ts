@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 const useSplash = () => {
-const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
+  const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
 
   useEffect(() => {
     try {
-      setTimeout(() => setIsAppLoading(false), 4000);
+      setTimeout(() => setIsAppLoading(false), 1000);
     } catch (e) {
       console.log(e);
       setIsAppLoading(false);
@@ -16,6 +16,5 @@ const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
     isAppLoading,
   };
 };
-
 
 export default useSplash;
