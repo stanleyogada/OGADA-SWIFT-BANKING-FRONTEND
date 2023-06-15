@@ -6,7 +6,9 @@ import ROUTER from "./router";
 function App() {
   const { isAppLoading } = useSplash();
 
-  if (isAppLoading) return <SplashScreen />;
+  if (isAppLoading) {
+    return <SplashScreen />;
+  }
 
   return <RouterProvider router={ROUTER} />;
 }

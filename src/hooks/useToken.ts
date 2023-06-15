@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_KEYS } from "../constants";
 
 type TToken = {
@@ -17,19 +17,6 @@ const TOKEN: TToken = {
 
 const useToken = () => {
   const [token, setToken] = useState(TOKEN);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem(LOCAL_STORAGE_KEYS.token) || undefined;
-  //   setToken({
-  //     value: token,
-  //     error: undefined,
-  //     isLoading: false,
-  //   });
-  // }, []);
-
-  useMemo(() => {
-    console.log("Token value changed", token.value, LOCAL_STORAGE_KEYS.token);
-  }, [token.value]);
 
   const handleSignin = () => {
     setToken((token) => ({
@@ -71,10 +58,6 @@ const useToken = () => {
     }, 2000); // TODO: remove this
   };
 
-  // const tokenHasLoaded = useMemo(
-  //   () => (token.value !== undefined || token.error !== undefined) && token.isLoading === false,
-  //   [token.value, token.error, token.isLoading]
-  // );
   useEffect(() => {
     if (!token.isInit) {
       window.location.reload();
@@ -85,7 +68,6 @@ const useToken = () => {
     handleSignin,
     handleSignout,
     token,
-    // tokenHasLoaded,
   };
 };
 
