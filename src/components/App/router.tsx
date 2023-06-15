@@ -5,6 +5,7 @@ import About from "../../pages/About";
 import Welcome from "../../pages/Welcome";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
+import PageWrapper from "../PageWrapper";
 
 const ROUTER = createBrowserRouter([
   {
@@ -12,11 +13,19 @@ const ROUTER = createBrowserRouter([
     children: [
       {
         path: CLIENT_ROUTES.home,
-        element: <Home />,
+        element: (
+          <PageWrapper>
+            <Home />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTES.about,
-        element: <About />,
+        element: (
+          <PageWrapper>
+            <About />
+          </PageWrapper>
+        ),
       },
     ],
   },
@@ -25,15 +34,27 @@ const ROUTER = createBrowserRouter([
     children: [
       {
         path: CLIENT_ROUTES.authWelcome,
-        element: <Welcome />,
+        element: (
+          <PageWrapper>
+            <Welcome />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTES.authSignin,
-        element: <Signin />,
+        element: (
+          <PageWrapper>
+            <Signin />
+          </PageWrapper>
+        ),
       },
       {
         path: CLIENT_ROUTES.authSignup,
-        element: <Signup />,
+        element: (
+          <PageWrapper>
+            <Signup />
+          </PageWrapper>
+        ),
       },
     ],
   },

@@ -1,28 +1,35 @@
 import { useEffect, useMemo, useState } from "react";
+import { LOCAL_STORAGE_KEYS } from "../constants";
 
 type TToken = {
   value?: string;
   error?: string;
   isLoading: boolean;
+  isInit?: boolean;
 };
 
 const TOKEN: TToken = {
-  value: undefined,
+  value: localStorage.getItem(LOCAL_STORAGE_KEYS.token) || undefined,
   isLoading: false,
   error: undefined,
+  isInit: true,
 };
 
 const useToken = () => {
   const [token, setToken] = useState(TOKEN);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token") || undefined;
-    setToken({
-      value: token,
-      error: undefined,
-      isLoading: false,
-    });
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem(LOCAL_STORAGE_KEYS.token) || undefined;
+  //   setToken({
+  //     value: token,
+  //     error: undefined,
+  //     isLoading: false,
+  //   });
+  // }, []);
+
+  useMemo(() => {
+    console.log("Token value changed", token.value, LOCAL_STORAGE_KEYS.token);
+  }, [token.value]);
 
   const handleSignin = () => {
     setToken((token) => ({
@@ -33,7 +40,7 @@ const useToken = () => {
     setTimeout(() => {
       // TODO: remove this
       const token = "123456";
-      localStorage.setItem("token", token);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.token, token);
       setToken({
         value: token,
         error: undefined,
@@ -53,7 +60,7 @@ const useToken = () => {
 
     setTimeout(() => {
       // TODO: remove this
-      localStorage.removeItem("token");
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.token);
       setToken({
         value: undefined,
         error: undefined,
@@ -68,6 +75,11 @@ const useToken = () => {
   //   () => (token.value !== undefined || token.error !== undefined) && token.isLoading === false,
   //   [token.value, token.error, token.isLoading]
   // );
+  useEffect(() => {
+    if (!token.isInit) {
+      window.location.reload();
+    }
+  }, [token.value, token.isInit]);
 
   return {
     handleSignin,

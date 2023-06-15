@@ -6,6 +6,8 @@ import GlobalStyles from "../../components/styles/Global";
 const About = () => {
   // useRedirectToAuthPage();
 
+  console.log("About rendered");
+
   return (
     <>
       <GlobalStyles />

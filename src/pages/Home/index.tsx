@@ -10,6 +10,7 @@ import Avatar from "../../components/Avatar/Avatar";
 const Home = () => {
   // useRedirectToAuthPage();
 
+  console.log("Home rendered");
   return (
     <>
       <HomeInfoWrapper>
