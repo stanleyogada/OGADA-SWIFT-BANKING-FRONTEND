@@ -9,7 +9,7 @@ import PageWrapper from "../PageWrapper";
 
 const ROUTER = createBrowserRouter([
   {
-    path: CLIENT_ROUTES.home,
+    path: "/",
     children: [
       {
         path: CLIENT_ROUTES.home,
