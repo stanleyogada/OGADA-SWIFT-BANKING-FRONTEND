@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
 import { COLORS } from "../../constants";
 
 interface ButtonProps {
@@ -23,7 +22,7 @@ const SButton = styled.button`
 
   & span {
     margin-top: 5px;
-    color: ${COLORS.black};
+    color: ${COLORS.white};
   }
 `;
 const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
