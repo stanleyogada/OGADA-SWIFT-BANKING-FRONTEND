@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
 import Navigation from "../../components/Navigation";
 import GlobalStyles from "../../components/styles/Global";
-// import useRedirectToAuthPage from "../../hooks/useRedirectToAuthPage";
 
 const About = () => {
-  // useRedirectToAuthPage();
-
-  console.log("About rendered");
-
   return (
     <>
       <GlobalStyles />

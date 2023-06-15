@@ -1,18 +1,8 @@
-// import { useEffect } from "react";
 import useToken from "../../hooks/useToken";
-import useRedirectToHomePage from "../../hooks/useRedirectToHomePage";
 import { CLIENT_ROUTES } from "../../constants";
 import { Link } from "react-router-dom";
 
-// const useSignin = () => {
-
-//   return { token };
-// };
-
 const Signin = () => {
-  // const { token } = useSignin();
-  // useRedirectToHomePage();
-
   const { token, handleSignin, handleSignout } = useToken();
 
   console.log("Signin rendered");

@@ -8,8 +8,6 @@ function App() {
 
   if (isAppLoading) return <SplashScreen />;
 
-  console.log("App root rendered");
-
   return <RouterProvider router={ROUTER} />;
 }
 
