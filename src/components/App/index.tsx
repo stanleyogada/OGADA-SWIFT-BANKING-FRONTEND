@@ -1,40 +1,16 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AboutPage from "../../pages/About";
-import HomePage from "../../pages/Home";
-import Auth from "../Auth";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    children: [
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/about",
-        element: <AboutPage />,
-      },
-    ],
-  },
-  {
-    path: "/auth",
-    element: <Auth />,
-    children: [
-      {
-        path: "/auth/signin",
-        element: <div>Sign In</div>,
-      },
-      {
-        path: "/auth/signup",
-        element: <div>Sign Up</div>,
-      },
-    ],
-  },
-]);
+import { RouterProvider } from "react-router-dom";
+import SplashScreen from "../SplashScreen/Index";
+import useSplash from "./hooks/useSplash";
+import ROUTER from "./router";
 
 function App() {
-  return <RouterProvider router={router} />;
+  const { isAppLoading } = useSplash();
+
+  if (isAppLoading) {
+    return <SplashScreen />;
+  }
+
+  return <RouterProvider router={ROUTER} />;
 }
 
 export default App;

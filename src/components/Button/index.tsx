@@ -1,10 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-import config from "../../constants";
-
-const { COLORS } = config;
+import { COLORS } from "../../constants";
 
 interface ButtonProps {
   icon?: ReactNode;
@@ -25,16 +22,14 @@ const SButton = styled.button`
 
   & span {
     margin-top: 5px;
-    color: ${COLORS.black};
+    color: ${COLORS.white};
   }
-
-  
 `;
 const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
   const btn = (
     <SButton>
       {icon && <div data-testid="btn-icon">{icon}</div>}
-      <span >{children}</span>
+      <span>{children}</span>
     </SButton>
   );
 

@@ -1,9 +1,9 @@
-// GLOBAL CONFGURATIONS FILE FOR THE APP
-export const CLIENT_ROUTES = {
+const CLIENT_ROUTES = {
   home: "/",
   about: "/about",
-  rewards: "/rewards",
-  cards: "/cards",
-  profile: "/profile",
-  homeSample: '/homesample'
+  authWelcome: "/auth/welcome",
+  authSignin: "/auth/signin",
+  authSignup: "/auth/signup",
 };
+
+export { CLIENT_ROUTES };

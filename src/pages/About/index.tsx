@@ -4,13 +4,12 @@ import GlobalStyles from "../../components/styles/Global";
 
 const About = () => {
   return (
-      <>
-      <GlobalStyles/>
+    <>
+      <GlobalStyles />
       <h1>About page</h1>
       <Link to="/">Homepages</Link>
-      <Navigation/>
-      </>
-
+      <Navigation />
+    </>
   );
 };
 

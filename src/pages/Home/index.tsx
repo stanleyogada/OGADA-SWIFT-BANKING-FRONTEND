@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
 
-const HomePage = () => {
+const Home = () => {
   return (
     <>
       <HomeInfoWrapper>
@@ -85,7 +85,7 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
 
 const HomeInfoWrapper = styled.section`
   .profile-head {

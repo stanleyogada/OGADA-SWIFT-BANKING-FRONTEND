@@ -1,9 +1,8 @@
 import { COLORS } from "./colors";
 import { CLIENT_ROUTES } from "./routes";
 
-const config = {
-  COLORS,
-  CLIENT_ROUTES,
+const LOCAL_STORAGE_KEYS = {
+  token: "token",
 };
 
-export default config;
+export { COLORS, CLIENT_ROUTES, LOCAL_STORAGE_KEYS };
