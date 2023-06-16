@@ -5,8 +5,11 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
+import useToken from "../../hooks/useToken";
 
 const Home = () => {
+  const { handleSignout } = useToken();
+
   return (
     <>
       <HomeInfoWrapper>
@@ -17,9 +20,12 @@ const Home = () => {
             <h3>Hello, Tega</h3>
           </div>
           <div className="profile-icons">
-            <Link to="/" className="notify">
-              <span className="cursor-pointer">{icons.blackuserIcon()}</span>
-            </Link>
+            <div onClick={handleSignout}>
+              <Link to="/" className="notify">
+                <span className="cursor-pointer">{icons.blackuserIcon()}</span>
+              </Link>
+            </div>
+
             <Link to="/" className="notify">
               <span>{icons.bellIcon()}</span>
             </Link>
