@@ -25,6 +25,12 @@ const SButton = styled.button`
     color: ${COLORS.white};
   }
 `;
+
+const LinkWrapper = styled.div`
+  & a {
+    text-decoration: none;
+  }
+`;
 const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
   const btn = (
     <SButton>
@@ -34,9 +40,11 @@ const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
   );
 
   return link ? (
-    <Link data-testid="btn-link" to={link}>
-      {btn}
-    </Link>
+    <LinkWrapper>
+      <Link data-testid="btn-link" to={link}>
+        {btn}
+      </Link>
+    </LinkWrapper>
   ) : (
     btn
   );
