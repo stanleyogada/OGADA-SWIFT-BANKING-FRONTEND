@@ -16,7 +16,6 @@ const Welcome = () => {
             isShowDots={{ isOut: false }}
             isShowButtons={false}
             isAutoSlide={false}
-            animationInterval={120000}
           >
             <div className="slide-box">
               <div className="slide-header"> Up to 15% Annual Interest on Wealth</div>
