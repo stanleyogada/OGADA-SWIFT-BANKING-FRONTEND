@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { CLIENT_ROUTES } from "../../constants";
 import icons from "../../constants/icons";
-import Button from "../Button";
-import { ReactNode } from "react";
 import { Header, Nav, List } from "../styles/Navigation.styled";
 
 const Navigation = () => {

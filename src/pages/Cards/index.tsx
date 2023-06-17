@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { CLIENT_ROUTES } from "../../constants";
 import Navigation from "../../components/Navigation";
 import GlobalStyles from "../../components/styles/Global";
 
