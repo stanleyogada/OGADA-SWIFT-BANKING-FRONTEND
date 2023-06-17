@@ -21,7 +21,7 @@ export const Nav = styled.nav`
 
   width: 100%;
   height: 4rem;
-  padding: 0 1rem
+  padding: 0 1rem;
   display: grid;
   align-content: center;
   border-radius: 1.25rem 1.25rem 0 0;

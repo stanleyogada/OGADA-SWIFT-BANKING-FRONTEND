@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { CLIENT_ROUTES } from "../../constants";
 import icons from "../../constants/icons";
 import Button from "../Button";
 import { ReactNode } from "react";
@@ -11,35 +12,35 @@ const Navigation = () => {
         <ul>
 
           <List>
-            <Link to="/">
+            <Link to={CLIENT_ROUTES.home}>
               <i>{icons.blackhomeIcon()}</i>
               <span>Home</span>
             </Link>
           </List>
 
           <List>
-            <Link to="/rewards">
+            <Link to={CLIENT_ROUTES.rewards}>
               <i>{icons.blackheartIcon()}</i>
               <span className="nav__name">Rewards</span>
             </Link>
           </List>
 
           <List>
-            <Link to="/">
+            <Link to={CLIENT_ROUTES.finance}>
               <i>{icons.blackchartIcon()}</i>
               <span>Finance</span>
             </Link>
           </List>
 
           <List>
-            <Link to="/">
+            <Link to={CLIENT_ROUTES.cards}>
               <i>{icons.blackcardIcon()}</i>
               <span>Cards</span>
             </Link>
           </List>
 
           <List>
-            <Link to="/">
+            <Link to={CLIENT_ROUTES.profile}>
               <i>{icons.blackmeIcon()}</i>
               <span>Profile</span>
             </Link>

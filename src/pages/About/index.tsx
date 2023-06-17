@@ -7,7 +7,8 @@ const About = () => {
     <>
       <GlobalStyles />
       <h1>About page</h1>
-      <Link to="/">Homepages</Link>
+      <p> Something about the App page</p>
+
       <Navigation />
     </>
   );
