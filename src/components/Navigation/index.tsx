@@ -9,7 +9,6 @@ const Navigation = () => {
     <Header>
       <Nav>
         <ul>
-
           <List>
             <Link to="/">
               <i>{icons.blackhomeIcon()}</i>
@@ -39,16 +38,15 @@ const Navigation = () => {
           </List>
 
           <List>
-            <Link to="/">
+            <Link to="/profile">
               <i>{icons.blackmeIcon()}</i>
               <span>Profile</span>
             </Link>
           </List>
-
         </ul>
       </Nav>
     </Header>
   );
-}
+};
 
 export default Navigation;
