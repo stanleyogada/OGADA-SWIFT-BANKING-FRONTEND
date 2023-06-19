@@ -3,6 +3,7 @@ import icons from "../../constants/icons";
 import Button from "../Button";
 import { ReactNode } from "react";
 import { Header, Nav, List } from "../styles/Navigation.styled";
+import { CLIENT_ROUTES } from "../../constants";
 
 const Navigation = () => {
   return (
@@ -38,7 +39,7 @@ const Navigation = () => {
           </List>
 
           <List>
-            <Link to="/profile">
+            <Link to={CLIENT_ROUTES.profile}>
               <i>{icons.blackmeIcon()}</i>
               <span>Profile</span>
             </Link>
