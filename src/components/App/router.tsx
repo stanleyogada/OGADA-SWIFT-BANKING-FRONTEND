@@ -6,6 +6,7 @@ import Welcome from "../../pages/Welcome";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
 import PageWrapper from "../PageWrapper";
+import Profile from "../../pages/Profile";
 
 const ROUTER = createBrowserRouter([
   {
@@ -24,6 +25,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <About />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.profile,
+        element: (
+          <PageWrapper>
+            <Profile />
           </PageWrapper>
         ),
       },
