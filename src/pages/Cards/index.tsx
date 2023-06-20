@@ -4,6 +4,7 @@ import { COLORS } from "../../constants";
 
 import VirtualCard from "./../../components/VirtualCard/index";
 import Navigation from "./../../components/Navigation/index";
+import PhysicalCard from "../../components/PhysicalCard";
 
 const Cards = () => {
   return (
@@ -19,7 +20,8 @@ const Cards = () => {
             <p className="virtual-card">Virtual Card</p>
           </div>
         </div>
-        <VirtualCard />
+        {/* <VirtualCard /> */}
+        <PhysicalCard />
         <Navigation />
       </CardsWrapper>
     </>

@@ -1,63 +1,60 @@
 import React from "react";
 import styled from "styled-components";
-import { COLORS } from "../../constants";
+import vector from "./../../constants/images/vector";
 import icons from "./../../constants/icons/index";
-import vector from "../../constants/images/vector";
 import Button from "./../Button/index";
+import { COLORS } from "./../../constants/colors/index";
 
-const VirtualCard = () => {
+function PhysicalCard() {
   return (
-    <>
-      <VirtualWrapper>
-        <div className="virtual-card-img">{vector.virtual()}</div>
-        <div className="instant-access-wrapper">
-          <Button>
-            <div className="instant-icon">{icons.instantAccess()}</div>
-          </Button>
-          <div className="instant-info">
-            <h3 className="instant-text">Instant Access</h3>
-            <h5>
-              Apply and activate<span className="activate-text"> lnstantly</span>{" "}
-            </h5>
-          </div>
+    <PhysicalCardWrapper>
+      <div className="virtual-card-img">{vector.physical()}</div>
+      <div className="instant-access-wrapper">
+        <Button>
+          <div className="instant-icon">{icons.lightBlueIconCard()}</div>
+        </Button>
+        <div className="instant-info">
+          <h3 className="instant-text">Free Application and Usage</h3>
+          <h5>
+            <span className="activate-text"> Free</span>
+            application, <span className="activate-text"> Zero </span>cost for ATM withdrawal and Maintenance
+          </h5>
         </div>
-        <div className="safety-wrapper">
-          <Button>
-            <div className="safety-icon">{icons.bluecardIcon()}</div>
-          </Button>
-          <div className="safety-info">
-            <h3 className="safety-text">Safety</h3>
-            <h5 className="activate">
-              No physical handing,<span className="activate-text"> No risk of loss</span>{" "}
-            </h5>
-          </div>
+      </div>
+      <div className="safety-wrapper">
+        <Button>
+          <div className="safety-icon">{icons.dollarIcon()}</div>
+        </Button>
+        <div className="safety-info">
+          <h3 className="safety-text">Earn</h3>
+          <h5 className="activate">
+            Flexible Spending with<span className="activate-text">15%annual interest,</span>
+          </h5>
         </div>
-        <div className="marchant-wrapper">
-          <Button>
-            <div className="">{icons.worldIcon()}</div>
-          </Button>
-          <div className="marchant-info">
-            <h3 className="online">Online Merchant Acceptance</h3>
-            <h3 className="marchant-text">
-              Accepted by <span className="num">40,000</span>+online marchant including
-              <br />
-              <span>JUMIA,KONGA,NETFLIX</span>
-            </h3>
-          </div>
+      </div>
+      <div className="marchant-wrapper">
+        <Button>
+          <div className="">{icons.securityIcon()}</div>
+        </Button>
+        <div className="marchant-info">
+          <h3 className="online">Security</h3>
+          <h3 className="marchant-text">
+            <span className="num"> CBN </span> licensed. <span className="num">NDIC </span> insuranced
+          </h3>
         </div>
-        <div className="btn-get-now">
-          <Button>
-            <h4 className="get">Get it now</h4>
-          </Button>
-        </div>
-      </VirtualWrapper>
-    </>
+      </div>
+      <div className="btn-get-now">
+        <Button>
+          <h4 className="get">Get it Now</h4>
+        </Button>
+      </div>
+    </PhysicalCardWrapper>
   );
-};
+}
 
-export default VirtualCard;
+export default PhysicalCard;
 
-const VirtualWrapper = styled.div`
+const PhysicalCardWrapper = styled.div`
   .virtual-card-img {
     width: 100%;
     display: flex;
@@ -123,7 +120,7 @@ const VirtualWrapper = styled.div`
     }
   }
   .marchant-wrapper {
-    margin: 1rem 0;
+    margin: 0.8rem 0;
     display: flex;
     align-items: center;
     padding: 0.5rem 0.8rem;
@@ -161,7 +158,7 @@ const VirtualWrapper = styled.div`
     background-color: ${COLORS.blue};
     display: flex;
     justify-content: center;
-    margin: 1rem auto;
+    margin: 0 auto;
     width: 90%;
 
     border-radius: 5px;
