@@ -15,10 +15,10 @@ function PhysicalCard() {
         </Button>
         <div className="instant-info">
           <h3 className="instant-text">Free Application and Usage</h3>
-          <h5>
-            <span className="activate-text"> Free</span>
-            application, <span className="activate-text"> Zero </span>cost for ATM withdrawal and Maintenance
-          </h5>
+          <h6>
+            <strong className="activate-text">Free </strong>
+            application, <strong className="activate-text">Zero </strong>cost for ATM withdrawal and Maintenance
+          </h6>
         </div>
       </div>
       <div className="safety-wrapper">
@@ -60,13 +60,12 @@ const PhysicalCardWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1.3rem 0;
   }
   .instant-access-wrapper {
     display: flex;
     align-items: center;
     padding: 0.5rem 0.8rem;
-    margin: 0.8rem 0;
+    margin: 0.3rem 0;
     gap: 10px;
     .instant-icon {
       width: 36px;
@@ -120,7 +119,7 @@ const PhysicalCardWrapper = styled.div`
     }
   }
   .marchant-wrapper {
-    margin: 0.8rem 0;
+    margin: 0.9rem 0;
     display: flex;
     align-items: center;
     padding: 0.5rem 0.8rem;
@@ -141,7 +140,7 @@ const PhysicalCardWrapper = styled.div`
         color: ${COLORS.blue};
       }
       .marchant-text {
-        font-size: 13px;
+        font-size: 11px;
         font-weight: 800;
       }
       .num {
@@ -158,7 +157,7 @@ const PhysicalCardWrapper = styled.div`
     background-color: ${COLORS.blue};
     display: flex;
     justify-content: center;
-    margin: 0 auto;
+    margin: 0.7rem auto;
     width: 90%;
 
     border-radius: 5px;

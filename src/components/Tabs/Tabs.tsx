@@ -65,12 +65,14 @@ const STabs = styled.section`
         text-align: center;
         font-size: 20px;
         background-color: transparent;
-        color: ${COLORS.blue};
-
+        color: ${COLORS.black};
         &--active {
           border-radius: 10px 10px 0 0;
           background-color: ${COLORS.white};
-          color: ${COLORS.black};
+
+          color: ${COLORS.blue};
+          border-bottom: 3px solid ${COLORS.blue};
+          transition: all 0.3s ease-in-out;
         }
       }
     }

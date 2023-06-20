@@ -63,13 +63,12 @@ const VirtualWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1.3rem 0;
   }
   .instant-access-wrapper {
     display: flex;
     align-items: center;
     padding: 0.5rem 0.8rem;
-    margin: 0.8rem 0;
+    margin: 0.3rem 0;
     gap: 10px;
     .instant-icon {
       width: 36px;
@@ -123,7 +122,7 @@ const VirtualWrapper = styled.div`
     }
   }
   .marchant-wrapper {
-    margin: 1rem 0;
+    margin: 0.9rem 0;
     display: flex;
     align-items: center;
     padding: 0.5rem 0.8rem;
@@ -144,7 +143,7 @@ const VirtualWrapper = styled.div`
         color: ${COLORS.blue};
       }
       .marchant-text {
-        font-size: 13px;
+        font-size: 11px;
         font-weight: 800;
       }
       .num {
@@ -161,7 +160,7 @@ const VirtualWrapper = styled.div`
     background-color: ${COLORS.blue};
     display: flex;
     justify-content: center;
-    margin: 1rem auto;
+    margin: 0.7rem auto;
     width: 90%;
 
     border-radius: 5px;

@@ -5,7 +5,18 @@ import { COLORS } from "../../constants";
 import VirtualCard from "./../../components/VirtualCard/index";
 import Navigation from "./../../components/Navigation/index";
 import PhysicalCard from "../../components/PhysicalCard";
+import Tabs from "../../components/Tabs/Tabs";
 
+const CardName = [
+  {
+    heading: "Physical Card",
+    id: "1",
+  },
+  {
+    heading: "Virtual Card",
+    id: "2",
+  },
+];
 const Cards = () => {
   return (
     <>
@@ -14,14 +25,15 @@ const Cards = () => {
           <div className="card">Cards</div>
           <div className="question">Q&A</div>
         </div>
-        <div className="card-title-wrapper">
+        {/* <div className="card-title-wrapper">
           <div className="card-title">
             <p className="physical-card">Physical Card</p>
             <p className="virtual-card">Virtual Card</p>
           </div>
-        </div>
-        {/* <VirtualCard /> */}
-        <PhysicalCard />
+        </div> */}
+
+        <Tabs data={CardName}>{[<PhysicalCard />, <VirtualCard />]}</Tabs>
+
         <Navigation />
       </CardsWrapper>
     </>
