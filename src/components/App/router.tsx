@@ -7,6 +7,7 @@ import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
 import PageWrapper from "../PageWrapper";
 import Profile from "../../pages/Profile";
+import Cards from "../../pages/Cards";
 
 const ROUTER = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Profile />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.cards,
+        element: (
+          <PageWrapper>
+            <Cards />
           </PageWrapper>
         ),
       },
