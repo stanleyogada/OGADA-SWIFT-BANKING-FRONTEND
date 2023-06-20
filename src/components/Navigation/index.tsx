@@ -8,7 +8,6 @@ const Navigation = () => {
     <Header>
       <Nav>
         <ul>
-
           <List>
             <NavLink to={CLIENT_ROUTES.home}>
               <i>{icons.blackhomeIcon()}</i>
@@ -43,11 +42,10 @@ const Navigation = () => {
               <span>Profile</span>
             </NavLink>
           </List>
-
         </ul>
       </Nav>
     </Header>
   );
-}
+};
 
 export default Navigation;

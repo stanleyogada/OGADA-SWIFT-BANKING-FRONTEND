@@ -11,6 +11,7 @@ import Rewards from "../../pages/Rewards";
 import Profile from "../../pages/Profile";
 
 import PageWrapper from "../PageWrapper";
+import Profile from "../../pages/Profile";
 
 const ROUTER = createBrowserRouter([
   {
