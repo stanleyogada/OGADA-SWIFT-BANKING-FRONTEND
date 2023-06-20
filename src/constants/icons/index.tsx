@@ -446,9 +446,15 @@ const phoneIcon = () => (
     />
   </svg>
 );
+const instantAccess = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18 0L0 7.53V8.51L6.84 11.16L9.48 18H10.46L18 0Z" fill="#006FFF" />
+  </svg>
+);
 
 // IMPORT THE NEW ICON CREATED ABOVE
 const icons = {
+  instantAccess,
   loudspeakerIcon,
   phoneIcon,
   speakerIcon,

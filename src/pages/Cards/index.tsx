@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { COLORS } from "../../constants";
 
 import VirtualCard from "./../../components/VirtualCard/index";
+import Navigation from "./../../components/Navigation/index";
 
 const Cards = () => {
   return (
@@ -19,6 +20,7 @@ const Cards = () => {
           </div>
         </div>
         <VirtualCard />
+        <Navigation />
       </CardsWrapper>
     </>
   );
@@ -58,12 +60,12 @@ const CardsWrapper = styled.div`
       align-items: center;
       .physical-card {
         font-size: 15px;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 18.15px;
       }
       .virtual-card {
         font-size: 15px;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 18.15px;
       }
     }
