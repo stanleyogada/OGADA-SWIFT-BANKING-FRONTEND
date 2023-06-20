@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CLIENT_ROUTES } from "../../constants";
 import icons from "../../constants/icons";
 import { Header, Nav, List } from "../styles/Navigation.styled";
@@ -10,38 +10,38 @@ const Navigation = () => {
         <ul>
 
           <List>
-            <Link to={CLIENT_ROUTES.home}>
+            <NavLink to={CLIENT_ROUTES.home}>
               <i>{icons.blackhomeIcon()}</i>
               <span>Home</span>
-            </Link>
+            </NavLink>
           </List>
 
           <List>
-            <Link to={CLIENT_ROUTES.rewards}>
+            <NavLink to={CLIENT_ROUTES.rewards}>
               <i>{icons.blackheartIcon()}</i>
               <span className="nav__name">Rewards</span>
-            </Link>
+            </NavLink>
           </List>
 
           <List>
-            <Link to={CLIENT_ROUTES.finance}>
+            <NavLink to={CLIENT_ROUTES.finance}>
               <i>{icons.blackchartIcon()}</i>
               <span>Finance</span>
-            </Link>
+            </NavLink>
           </List>
 
           <List>
-            <Link to={CLIENT_ROUTES.cards}>
+            <NavLink to={CLIENT_ROUTES.cards}>
               <i>{icons.blackcardIcon()}</i>
               <span>Cards</span>
-            </Link>
+            </NavLink>
           </List>
 
           <List>
-            <Link to={CLIENT_ROUTES.profile}>
+            <NavLink  to={CLIENT_ROUTES.profile}>
               <i>{icons.blackmeIcon()}</i>
               <span>Profile</span>
-            </Link>
+            </NavLink>
           </List>
 
         </ul>

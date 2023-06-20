@@ -62,6 +62,9 @@ export const List = styled.li`
     font-size: 1.5rem;
   }
 
+  a.active{
+    color: ${COLORS.blue}; /*This affects the SVG icons inside also*/
+  }
 `;
 
 
