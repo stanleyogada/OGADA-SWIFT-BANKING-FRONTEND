@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: ${COLORS.white};
     color: hsl(192, 100%, 9%);
     font-family: 'Inter', sans-serif;
-    font-size: 1.15em;
+    font-size: 1.15rem;
     margin: 0;
   }
 
