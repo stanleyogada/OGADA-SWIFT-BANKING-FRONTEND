@@ -23,7 +23,7 @@ An application solely for education purposes!
 
 ## How to contribute
 
-1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main`
+1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main && npm i`
 2. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 3. Make your changes.
 4. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
