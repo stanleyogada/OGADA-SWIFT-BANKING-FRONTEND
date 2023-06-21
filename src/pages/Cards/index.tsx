@@ -25,12 +25,6 @@ const Cards = () => {
           <div className="card">Cards</div>
           <div className="question">Q&A</div>
         </div>
-        {/* <div className="card-title-wrapper">
-          <div className="card-title">
-            <p className="physical-card">Physical Card</p>
-            <p className="virtual-card">Virtual Card</p>
-          </div>
-        </div> */}
 
         <Tabs data={CardName}>{[<PhysicalCard />, <VirtualCard />]}</Tabs>
 
