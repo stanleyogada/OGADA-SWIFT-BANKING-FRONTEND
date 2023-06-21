@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { COLORS } from "../../constants";
-
+import Navigation from "../../components/Navigation";
+import GlobalStyles from "../../components/styles/Global";
 import VirtualCard from "./../../components/VirtualCard/index";
-import Navigation from "./../../components/Navigation/index";
+
 import PhysicalCard from "../../components/PhysicalCard";
 import Tabs from "../../components/Tabs/Tabs";
 

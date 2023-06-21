@@ -1,13 +1,13 @@
 import Navigation from "../../components/Navigation";
 import GlobalStyles from "../../components/styles/Global";
 
-const Profile = () => {
+const Rewards = () => {
   return (
     <>
     <GlobalStyles />
       <div>
-        <h1>Profile</h1>
-        <p> Something about Profile page</p>
+        <h1>Rewards</h1>
+        <p> Something about Rewards page</p>
         
       </div>
       <Navigation />
@@ -15,4 +15,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Rewards;
