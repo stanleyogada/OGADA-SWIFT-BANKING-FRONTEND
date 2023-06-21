@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
 import useToken from "../../hooks/useToken";
+import { CLIENT_ROUTES } from "../../constants";
 
 const Home = () => {
   const { handleSignout } = useToken();
@@ -47,7 +48,7 @@ const Home = () => {
         </div>
         {/* Below Card */}
         <div className="bottom-card">
-          <Link to="/" className="bottom-card-link">
+          <Link to={CLIENT_ROUTES.addMoney} className="bottom-card-link">
             <Button icon={icons.addmoneyIcon()}>Add Money</Button>
           </Link>
           <Link to="/" className="bottom-card-link">

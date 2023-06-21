@@ -1,6 +1,7 @@
 const CLIENT_ROUTES = {
   home: "/",
   about: "/about",
+  addMoney: "/addmoney",
   profile: "/profile",
   rewards: "/rewards",
   finance: "/finance",
