@@ -66,11 +66,13 @@ const STabs = styled.section`
         font-size: 20px;
         background-color: transparent;
         color: ${COLORS.blue};
-
         &--active {
           border-radius: 10px 10px 0 0;
           background-color: ${COLORS.white};
+
           color: ${COLORS.black};
+          border-bottom: 3px solid ${COLORS.blue};
+          transition: all 0.3s ease-in-out;
         }
       }
     }

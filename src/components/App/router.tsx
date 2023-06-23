@@ -5,13 +5,13 @@ import About from "../../pages/About";
 import Welcome from "../../pages/Welcome";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
-import Cards from "../../pages/Cards";
+
 import Finance from "../../pages/Finance";
 import Rewards from "../../pages/Rewards";
 import Profile from "../../pages/Profile";
-import PageWrapper from "../PageWrapper";
+import PageWrapper from "./../PageWrapper/index";
+import Cards from "./../../pages/Cards/index";
 import AddMoney from "../../pages/AddMoney";
-
 
 const ROUTER = createBrowserRouter([
   {
@@ -66,10 +66,10 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.rewards,
+        path: CLIENT_ROUTES.cards,
         element: (
           <PageWrapper>
-            <Rewards />
+            <Cards />
           </PageWrapper>
         ),
       },
