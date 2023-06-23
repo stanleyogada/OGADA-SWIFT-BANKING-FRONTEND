@@ -164,4 +164,18 @@ const ProfileWrapper = styled.div`
       }
     }
   }
+
+  @media (max-width: 900px) {
+     .addmoney-header{
+      display: flex;
+      // justify-content: center;
+      width: 100%;
+     }
+     .profile-buttons{
+      margin-left: 2rem;
+     }
+     .profile-buttons-two{
+      margin-left: 2rem;
+     }
+  }
 `;
