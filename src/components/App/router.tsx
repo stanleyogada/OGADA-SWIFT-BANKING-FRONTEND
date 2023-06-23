@@ -11,6 +11,7 @@ import Rewards from "../../pages/Rewards";
 import Profile from "../../pages/Profile";
 import PageWrapper from "./../PageWrapper/index";
 import Cards from "./../../pages/Cards/index";
+import Account from "../../pages/Account.tsx";
 
 const ROUTER = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Cards />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.account,
+        element: (
+          <PageWrapper>
+            <Account />
           </PageWrapper>
         ),
       },
