@@ -17,7 +17,7 @@ export const Nav = styled.nav`
 
   width: 100%;
   height: 4rem;
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   display: grid;
   align-content: center;
   border-radius: 1.25rem 1.25rem 0 0;
@@ -53,5 +53,9 @@ export const List = styled.li`
 
   a > i {
     font-size: 1.5rem;
+  }
+
+  a.active {
+    color: ${COLORS.blue}; /*This affects the SVG icons inside also*/
   }
 `;

@@ -5,9 +5,11 @@ import About from "../../pages/About";
 import Welcome from "../../pages/Welcome";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
-import PageWrapper from "../PageWrapper";
-import Profile from "../../pages/Profile";
+import Cards from "../../pages/Cards";
 import Finance from "../../pages/Finance";
+import Rewards from "../../pages/Rewards";
+import Profile from "../../pages/Profile";
+import PageWrapper from "../PageWrapper";
 
 const ROUTER = createBrowserRouter([
   {
@@ -30,10 +32,10 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.profile,
+        path: CLIENT_ROUTES.cards,
         element: (
           <PageWrapper>
-            <Profile />
+            <Cards />
           </PageWrapper>
         ),
       },
@@ -42,6 +44,22 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Finance />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.profile,
+        element: (
+          <PageWrapper>
+            <Profile />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.rewards,
+        element: (
+          <PageWrapper>
+            <Rewards />
           </PageWrapper>
         ),
       },
