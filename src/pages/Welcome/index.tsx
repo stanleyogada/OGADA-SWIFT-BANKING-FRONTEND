@@ -15,7 +15,6 @@ const Welcome = () => {
             theme={{ color: COLORS.blue, backgroundColor: COLORS.gray }}
             isShowDots={{ isOut: false }}
             isShowButtons={false}
-            isAutoSlide={false}
           >
             <div className="slide-box">
               <div className="slide-header"> Up to 15% Annual Interest on Wealth</div>
