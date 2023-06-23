@@ -33,10 +33,10 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.cards,
+        path: CLIENT_ROUTES.rewards,
         element: (
           <PageWrapper>
-            <Cards />
+            <Rewards />
           </PageWrapper>
         ),
       },
