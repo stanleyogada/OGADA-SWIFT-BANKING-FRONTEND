@@ -3,6 +3,8 @@ import access from "../../assets/Opay-machine.svg";
 import stats from "../../assets/Opay-stats.svg";
 import transfer from "../../assets/transfer.svg";
 import board from "../../assets/Opay-board.svg";
+import virtual from "../../assets/virtual-card.svg";
+import physical from "../../assets/physical-card.svg";
 
 const vector = {
   stats() {
@@ -19,6 +21,12 @@ const vector = {
   },
   board() {
     return <img src={board} />;
+  },
+  virtual() {
+    return <img src={virtual} />;
+  },
+  physical() {
+    return <img src={physical} />;
   },
 };
 
