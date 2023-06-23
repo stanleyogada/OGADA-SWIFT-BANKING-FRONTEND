@@ -5,7 +5,6 @@ import About from "../../pages/About";
 import Welcome from "../../pages/Welcome";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
-
 import Finance from "../../pages/Finance";
 import Rewards from "../../pages/Rewards";
 import Profile from "../../pages/Profile";
