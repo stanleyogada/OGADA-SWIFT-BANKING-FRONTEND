@@ -459,9 +459,31 @@ const lightBlueIconCard = () => (
     />
   </svg>
 );
+const futureReward = () => (
+  <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M11.5 24C17.8513 24 23 18.6274 23 12C23 5.37258 17.8513 0 11.5 0C5.14873 0 0 5.37258 0 12C0 18.6274 5.14873 24 11.5 24Z"
+      fill="#B2D1F9"
+    />
+  </svg>
+);
+const circle = () => (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z"
+      fill="#B2D1F9"
+    />
+    <path
+      d="M20 39.5C30.7696 39.5 39.5 30.7696 39.5 20C39.5 9.23045 30.7696 0.5 20 0.5C9.23045 0.5 0.5 9.23045 0.5 20C0.5 30.7696 9.23045 39.5 20 39.5Z"
+      stroke="#006FFF"
+    />
+  </svg>
+);
 
 // IMPORT THE NEW ICON CREATED ABOVE
 const icons = {
+  circle,
+  futureReward,
   lightBlueIconCard,
   instantAccess,
   loudspeakerIcon,
