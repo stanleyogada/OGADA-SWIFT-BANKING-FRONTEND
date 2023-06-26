@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
 
-
 export const Header = styled.header`
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-
-
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Nav = styled.nav`
@@ -18,54 +15,47 @@ export const Nav = styled.nav`
   background-color: #f1f1f1;
   box-shadow: 0 -2px 12px hsla(174, 63%, 15%, 0.25);
 
-
   width: 100%;
   height: 4rem;
   padding: 0 1rem;
   display: grid;
   align-content: center;
   border-radius: 1.25rem 1.25rem 0 0;
-  transition:.4s;
-  
+  transition: 0.4s;
 
-  ul{
+  ul {
     list-style: none;
     display: flex;
     justify-content: space-around;
   }
 
-  li, a{
+  li,
+  a {
     display: flex;
   }
 
-  a{
+  a {
     flex-direction: column;
     align-items: center;
-    row-gap: .25rem;
+    row-gap: 0.25rem;
     color: ${COLORS.black};
     font-weight: 600;
     padding-top: 5px;
     text-decoration: none;
   }
-
 `;
 
 export const List = styled.li`
-
-  a > span{
+  a > span {
     font-size: 1rem;
     text-decoration: none;
-
   }
 
-  a > i{
+  a > i {
     font-size: 1.5rem;
   }
 
-  a.active{
+  a.active {
     color: ${COLORS.blue}; /*This affects the SVG icons inside also*/
   }
 `;
-
-
-
