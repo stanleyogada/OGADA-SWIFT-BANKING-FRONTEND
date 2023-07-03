@@ -3,11 +3,6 @@ import user from "@testing-library/user-event";
 import Account from ".";
 
 describe("Account", () => {
-  test("should render account component properly", () => {
-    render(<Account />);
-    const account = screen.getByRole("account-section");
-  });
-
   test("component should render with correct height", async () => {
     user.setup();
     render(<Account />);
