@@ -2,12 +2,28 @@ import styled from "styled-components";
 import icons from "../../constants/icons";
 import Avatar from "../../components/Avatar/Avatar";
 import { COLORS } from "../../constants";
+import { useRef, useState } from "react";
 
 const Account = () => {
+  const [isClicked, setIsClicked] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleToggleIcon = () => {
+    if (ref.current) {
+      if (!isClicked) {
+        setIsClicked(!isClicked);
+        ref.current.style.height = "200px";
+      } else {
+        setIsClicked(!isClicked);
+        ref.current.style.height = "128px";
+      }
+    }
+  };
+
   return (
     <>
       <AccountWrapper>
-        <div className="account-section">
+        <div className="account-section" role="account-section">
           <div className="header">
             <div className="navigation-section">
               <div className="back-icon"> {icons.blueleftarrowIcon()}</div>
@@ -26,7 +42,7 @@ const Account = () => {
             </div>
           </div>
 
-          <div className="user-info-section">
+          <div className="user-info-section" ref={ref} role="info-section">
             <div className="info-wrapper">
               <div className="label">Name</div>
               <div className="info">Egajivwie Samuel akpevwe</div>
@@ -46,8 +62,10 @@ const Account = () => {
 
             <div className="expand">
               <div className="show-wrapper">
-                <div className="show-wrapper-text"> Show More </div>
-                <div className="show-wrapper-icon">{icons.blueDropdownIcon()}</div>
+                <div className="show-wrapper-text">{isClicked ? "Show Less" : "Show More"}</div>
+                <div className="show-wrapper-icon" role="toggle" onClick={() => handleToggleIcon()}>
+                  {icons.blueDropdownIcon()}
+                </div>
               </div>
             </div>
           </div>
@@ -124,6 +142,8 @@ const AccountWrapper = styled.div`
       background-color: ${COLORS.blue};
       padding: 9px 16px 9px 37px;
       position: relative;
+      overflow: hidden;
+      transition: height 0.3s ease-out;
 
       .info-wrapper {
         display: flex;
@@ -151,11 +171,12 @@ const AccountWrapper = styled.div`
 
     .expand {
       width: 100%;
-      height: 40px;
+      height: 20px;
       display: flex;
       justify-content: center;
-      position: relative;
+      position: absolute;
       bottom: 0;
+      left: 2%;
 
       .show-wrapper {
         display: flex;
