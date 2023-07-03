@@ -460,6 +460,24 @@ const lightBlueIconCard = () => (
   </svg>
 );
 
+const checkIcon = () => (
+  <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M3.06302 4.88604L1.57202 3.39304L1.07202 3.89304L3.06302 5.88404L7.32802 1.61804L6.82802 1.11804L3.06302 4.88604Z"
+      fill="#006FFF"
+      stroke="#006FFF"
+    />
+  </svg>
+);
+
+const blueDropdownIcon = () => (
+  <svg width="10" height="5" viewBox="0 0 10 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M0.362061 1.89203L1.45206 0.80203L5.00006 4.34303L8.54806 0.80203L9.63806 1.89203L5.00006 6.53003L0.362061 1.89203Z"
+      fill="white"
+    />
+  </svg>
+);
 // IMPORT THE NEW ICON CREATED ABOVE
 const icons = {
   lightBlueIconCard,
@@ -500,6 +518,8 @@ const icons = {
   blackleftarrowIcon,
   blueprofileIcon,
   blackuserIcon,
+  checkIcon,
+  blueDropdownIcon,
 };
 
 export default icons;
