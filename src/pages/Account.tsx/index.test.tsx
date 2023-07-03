@@ -15,6 +15,4 @@ describe("Account", () => {
 
     expect(infoSection).toHaveStyle("height: 200px");
   });
-
-  //
 });
