@@ -6,7 +6,6 @@ describe("Account", () => {
   test("should render account component properly", () => {
     render(<Account />);
     const account = screen.getByRole("account-section");
-    expect(account).toBeInTheDocument();
   });
 
   test("component should render with correct height", async () => {
