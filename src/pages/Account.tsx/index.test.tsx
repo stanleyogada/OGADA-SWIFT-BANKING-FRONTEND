@@ -5,7 +5,6 @@ import Account from ".";
 describe("Account", () => {
   test("should render account component properly", () => {
     render(<Account />);
-
     const account = screen.getByRole("account-section");
     expect(account).toBeInTheDocument();
   });
@@ -14,13 +13,13 @@ describe("Account", () => {
     user.setup();
     render(<Account />);
 
-    const wrapper = await screen.getByRole("info-section");
-    expect(wrapper).toHaveStyle("height: 128px");
+    const infoSection = await screen.getByRole("info-section");
+    expect(infoSection).toHaveStyle("height: 128px");
 
-    const Toggle = screen.getByRole("toggle");
-    await user.click(Toggle);
+    const toggleButton = screen.getByRole("toggle");
+    await user.click(toggleButton);
 
-    expect(wrapper).toHaveStyle("height: 200px");
+    expect(infoSection).toHaveStyle("height: 200px");
   });
 
   //
