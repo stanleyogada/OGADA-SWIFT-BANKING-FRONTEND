@@ -3,6 +3,8 @@ import Avatar from "../../components/Avatar/Avatar";
 import { COLORS } from "../../constants";
 import icons from "../../constants/icons";
 import Navigation from "../../components/Navigation";
+import { NavLink } from "react-router-dom";
+import { CLIENT_ROUTES } from "../../constants";
 
 const Profile = () => {
   return (
@@ -36,13 +38,15 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="profile-btn">
-            <div className="btn-icon">{icons.userIcon()}</div>
-            <div className="btn-content">
-              <p className="heading">Customer Service</p>
-              <p className="sub-heading">seek support from us</p>
+          <NavLink to={CLIENT_ROUTES.livechat}>
+            <div className="profile-btn">
+              <div className="btn-icon">{icons.userIcon()}</div>
+              <div className="btn-content">
+                <p className="heading">Customer Service</p>
+                <p className="sub-heading">seek support from us</p>
+              </div>
             </div>
-          </div>
+          </NavLink>
 
           <div className="profile-btn">
             <div className="btn-icon">{icons.starIcon()}</div>

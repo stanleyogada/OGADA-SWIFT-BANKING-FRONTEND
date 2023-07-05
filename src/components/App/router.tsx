@@ -11,6 +11,7 @@ import Profile from "../../pages/Profile";
 import PageWrapper from "./../PageWrapper/index";
 import Cards from "./../../pages/Cards/index";
 import Account from "../../pages/Account.tsx";
+import Livechat from "../../pages/Livechat";
 
 const ROUTER = createBrowserRouter([
   {
@@ -69,6 +70,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Account />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.livechat,
+        element: (
+          <PageWrapper>
+            <Livechat />
           </PageWrapper>
         ),
       },
