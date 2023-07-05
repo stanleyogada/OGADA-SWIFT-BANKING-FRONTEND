@@ -9,6 +9,7 @@ const CLIENT_ROUTES = {
   authWelcome: "/auth/welcome",
   authSignin: "/auth/signin",
   authSignup: "/auth/signup",
+  livechat: "/livechat",
 };
 
 export { CLIENT_ROUTES };
