@@ -62,7 +62,8 @@ const FFooter = styled.footer`
         border: none;
         padding-top: 0;
         font-size: 1rem;
-        }
+        white-space: nowrap;
+      }
       
       Button:hover, Button:focus{
         border: 1px solid;

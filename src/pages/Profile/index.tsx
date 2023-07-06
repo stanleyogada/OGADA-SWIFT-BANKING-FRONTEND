@@ -69,6 +69,10 @@ const ProfileWrapper = styled.div`
   height: 100%;
   color: ${COLORS.black};
 
+  a{
+    text-decoration: none;
+  }
+
   .top-profile-wrapper {
     width: 100%;
     height: 238px;
