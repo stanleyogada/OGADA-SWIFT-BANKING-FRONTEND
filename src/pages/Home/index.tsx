@@ -217,6 +217,7 @@ const NotifyWrapper = styled.section`
   position: absolute;
   left: 1rem;
   bottom: 5rem;
+  right: 0;
 
   .notify-1,
   .notify-2,

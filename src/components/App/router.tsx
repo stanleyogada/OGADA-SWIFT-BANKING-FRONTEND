@@ -5,12 +5,12 @@ import About from "../../pages/About";
 import Welcome from "../../pages/Welcome";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
-
 import Finance from "../../pages/Finance";
 import Profile from "../../pages/Profile";
 import PageWrapper from "./../PageWrapper/index";
 import Cards from "./../../pages/Cards/index";
 import { useEffect } from "react";
+import Account from "../../pages/Account.tsx";
 
 const ROUTER = createBrowserRouter([
   {
@@ -61,6 +61,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Cards />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.account,
+        element: (
+          <PageWrapper>
+            <Account />
           </PageWrapper>
         ),
       },
