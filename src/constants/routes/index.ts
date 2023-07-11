@@ -5,6 +5,7 @@ const CLIENT_ROUTES = {
   rewards: "/rewards",
   finance: "/finance",
   cards: "/cards",
+  auth: "/auth",
   authWelcome: "/auth/welcome",
   authSignin: "/auth/signin",
   authSignup: "/auth/signup",

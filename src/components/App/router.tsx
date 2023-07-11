@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter, redirect, useLocation } from "react-router-dom";
 import { CLIENT_ROUTES } from "../../constants";
 import Home from "../../pages/Home";
 import About from "../../pages/About";
@@ -11,10 +11,11 @@ import Rewards from "../../pages/Rewards";
 import Profile from "../../pages/Profile";
 import PageWrapper from "./../PageWrapper/index";
 import Cards from "./../../pages/Cards/index";
+import { useEffect } from "react";
 
 const ROUTER = createBrowserRouter([
   {
-    path: "/",
+    path: CLIENT_ROUTES.home,
     children: [
       {
         path: CLIENT_ROUTES.home,
@@ -68,6 +69,7 @@ const ROUTER = createBrowserRouter([
   },
   {
     path: "/auth",
+    element: <Redirect path={CLIENT_ROUTES.auth} />,
     children: [
       {
         path: CLIENT_ROUTES.authWelcome,
@@ -96,5 +98,16 @@ const ROUTER = createBrowserRouter([
     ],
   },
 ]);
+
+function Redirect({ path }: { path: string }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== path) return;
+    redirect(CLIENT_ROUTES.authSignin);
+  });
+
+  return <Outlet />;
+}
 
 export default ROUTER;
