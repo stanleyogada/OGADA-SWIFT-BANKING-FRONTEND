@@ -1,16 +1,18 @@
+import { useEffect } from "react";
 import { Outlet, createBrowserRouter, redirect, useLocation } from "react-router-dom";
+
 import { CLIENT_ROUTES } from "../../constants";
+import PageWrapper from "./../PageWrapper/index";
+
 import Home from "../../pages/Home";
 import About from "../../pages/About";
-import Welcome from "../../pages/Welcome";
-import Signin from "../../pages/Signin";
-import Signup from "../../pages/Signup";
 import Finance from "../../pages/Finance";
 import Profile from "../../pages/Profile";
-import PageWrapper from "./../PageWrapper/index";
 import Cards from "./../../pages/Cards/index";
-import { useEffect } from "react";
 import Account from "../../pages/Account.tsx";
+import Signin from "../../pages/Signin";
+import Signup from "../../pages/Signup";
+import Welcome from "../../pages/Welcome";
 
 const ROUTER = createBrowserRouter([
   {
