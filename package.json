@@ -10,10 +10,11 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "@types/react-query": "^1.2.9",
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-query": "^3.39.3",
+    "react-query": "3.19.2",
     "react-rc-carousel": "^4.0.7",
     "react-router-dom": "^6.13.0",
     "styled-components": "^5.3.6"

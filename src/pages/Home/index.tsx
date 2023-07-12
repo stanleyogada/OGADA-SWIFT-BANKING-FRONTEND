@@ -5,10 +5,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
-import useToken from "../../hooks/useToken";
+// import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
-  const { handleSignout } = useToken();
+  // const { handleSignout } = useAuth();
 
   return (
     <>
@@ -20,7 +20,9 @@ const Home = () => {
             <h3>Hello, Tega</h3>
           </div>
           <div className="profile-icons">
-            <div onClick={handleSignout}>
+            <div
+            // onClick={handleSignout}
+            >
               <Link to="/" className="notify">
                 <span className="cursor-pointer">{icons.blackuserIcon()}</span>
               </Link>
@@ -195,7 +197,7 @@ const PaymentWrapper = styled.section`
 
   .icons {
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
   }

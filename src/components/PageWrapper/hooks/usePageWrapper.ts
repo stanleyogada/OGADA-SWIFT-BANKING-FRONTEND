@@ -1,21 +1,28 @@
 import { useCallback, useEffect, useMemo } from "react";
+import { useLocation, redirect } from "react-router-dom";
+
 import { CLIENT_ROUTES } from "../../../constants";
-import { useLocation, useNavigate } from "react-router-dom";
-import useToken from "../../../hooks/useToken";
+import useSplash from "../../App/hooks/useSplash";
+import useAuth from "../../../hooks/useAuth";
 
 const usePageWrapper = () => {
-  const { token } = useToken();
+  const { userIsAuthenticated } = useAuth();
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+
   const isAuthPage = useMemo(() => pathname.includes("auth"), [pathname]);
 
   const handleRedirect = useCallback(() => {
-    if (!isAuthPage && !token.value) {
-      navigate(CLIENT_ROUTES.authSignin);
-    } else if (isAuthPage && token.value) {
-      navigate(CLIENT_ROUTES.home);
+    console.log("userIsAuthenticated", userIsAuthenticated);
+    console.log("isAuthPage", isAuthPage);
+
+    if (!isAuthPage && !userIsAuthenticated) {
+      console.log(userIsAuthenticated);
+
+      redirect(CLIENT_ROUTES.authSignin);
+    } else if (isAuthPage && userIsAuthenticated) {
+      redirect(CLIENT_ROUTES.home);
     }
-  }, [isAuthPage, token.value]);
+  }, [isAuthPage, userIsAuthenticated]);
 
   useEffect(() => {
     handleRedirect();
