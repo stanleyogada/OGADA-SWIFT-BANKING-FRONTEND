@@ -22,7 +22,7 @@ const Home = () => {
           <div className="profile-icons">
             <div onClick={handleSignout}>
               <Link to="/" className="notify">
-                <span className="cursor-pointer">{icons.blackuserIcon()}</span>
+                <span className="cursor-pointer">{icons.blackUserIcon()}</span>
               </Link>
             </div>
 
@@ -38,7 +38,7 @@ const Home = () => {
           <div className="top-card-1">
             <div className="card-1">
               <h5>Total Balance</h5>
-              <Button icon={icons.eyeopenIcon()} />
+              <Button icon={icons.eyeOpenIcon()} />
             </div>
             <h5>Transact...n History</h5>
           </div>

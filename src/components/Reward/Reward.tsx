@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { COLORS } from "./../../constants/colors/index";
 import Button from "./../Button/index";
@@ -33,14 +32,14 @@ export default function Reward() {
           </div>
 
           <div className="reward-icon">
-            {icons.missrewardIcon()}
+            {icons.missRewardIcon()}
 
-            {icons.collectedrewardIcon()}
-            {icons.collectedrewardIcon()}
-            {icons.todayrewardIcon()}
-            {icons.collectedrewardIcon()}
-            {icons.collectedrewardIcon()}
-            {icons.collectedrewardIcon()}
+            {icons.collectedRewardIcon()}
+            {icons.collectedRewardIcon()}
+            {icons.todayRewardIcon()}
+            {icons.collectedRewardIcon()}
+            {icons.collectedRewardIcon()}
+            {icons.collectedRewardIcon()}
           </div>
           <div className="btn-wrapper">
             <Button>
@@ -100,6 +99,7 @@ const RewardWrapper = styled.div`
     background: ${COLORS.blue};
     position: relative;
   }
+
   .curve::after {
     content: "";
     position: absolute;
@@ -111,6 +111,7 @@ const RewardWrapper = styled.div`
     border-right: 50px solid transparent;
     border-top: 28.8675px solid ${COLORS.blue};
   }
+
   .box-one {
     height: 230px;
     width: 350px;
@@ -130,6 +131,7 @@ const RewardWrapper = styled.div`
       align-items: center;
       justify-content: center;
       gap: 6px;
+
       .cash {
         background-color: ${COLORS.gray};
         width: 160px;
@@ -139,16 +141,16 @@ const RewardWrapper = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-
         font-weight: 600;
+
         .amount-wrapper {
           display: flex;
           gap: 10px;
           justify-content: space-between;
           padding: 3px 10px;
           font-size: 12px;
-
           width: 90%;
+
           .amount {
             font-size: 15px;
             color: ${COLORS.blue};
@@ -156,6 +158,7 @@ const RewardWrapper = styled.div`
           }
         }
       }
+
       .vou {
         background-color: ${COLORS.gray};
         width: 160px;
@@ -167,6 +170,7 @@ const RewardWrapper = styled.div`
 
         font-weight: 600;
         flex-direction: column;
+
         .amountTwo-wrapper {
           display: flex;
           align-items: center;
@@ -176,6 +180,7 @@ const RewardWrapper = styled.div`
           font-size: 12px;
 
           width: 100%;
+
           .amountTwo {
             font-size: 16px;
             color: ${COLORS.blue};
@@ -184,6 +189,7 @@ const RewardWrapper = styled.div`
         }
       }
     }
+
     .daily {
       padding: 5px 15px;
       font-size: 14px;
@@ -192,6 +198,7 @@ const RewardWrapper = styled.div`
         color: ${COLORS.yellow};
       }
     }
+
     .reward-icon {
       width: 100%;
       margin-top: 0.8rem;
@@ -200,6 +207,7 @@ const RewardWrapper = styled.div`
       align-items: center;
       gap: 1.7rem;
     }
+
     .btn-wrapper {
       margin: 20px 20px auto auto;
       background: ${COLORS.lightblue};
@@ -210,11 +218,13 @@ const RewardWrapper = styled.div`
       padding: 6px;
       border-radius: 23px;
       width: 90%;
+
       &button {
         outline: none;
       }
     }
   }
+
   .box-two {
     margin-top: 10rem;
 
@@ -224,6 +234,7 @@ const RewardWrapper = styled.div`
     background-color: ${COLORS.white};
     border-radius: 4px;
     box-shadow: 2px 2px 2px ${COLORS.gray}, -2px 2px 2px 2px ${COLORS.gray};
+
     .head-wrapper {
       display: flex;
       width: 100%;
@@ -231,9 +242,11 @@ const RewardWrapper = styled.div`
       padding: 10px 10px;
       justify-content: space-between;
     }
+
     .line {
       border-width: 0.6px;
     }
+
     .time-limit {
       width: 100%;
       display: flex;
@@ -243,6 +256,7 @@ const RewardWrapper = styled.div`
       padding-top: 10px;
       font-size: 12px;
       flex-direction: column;
+
       .underline {
         height: 3px;
         width: 30px;
@@ -251,6 +265,7 @@ const RewardWrapper = styled.div`
         background: ${COLORS.blue};
       }
     }
+
     .buy-airtime {
       display: flex;
       margin-top: 18px;
@@ -260,9 +275,11 @@ const RewardWrapper = styled.div`
       gap: 10px;
       padding-left: 9px;
       align-items: center;
+
       & p {
         font-size: 13px;
       }
+
       .buy-airtime-btn {
         background-color: ${COLORS.blue};
         width: 50px;
@@ -281,6 +298,7 @@ const RewardWrapper = styled.div`
         }
       }
     }
+
     .buy-data {
       display: flex;
       margin-top: 18px;
@@ -289,9 +307,11 @@ const RewardWrapper = styled.div`
       gap: 10px;
       padding-left: 9px;
       align-items: center;
+
       & p {
         font-size: 13px;
       }
+
       .buy-data-btn {
         background-color: ${COLORS.blue};
         width: 50px;
@@ -299,10 +319,10 @@ const RewardWrapper = styled.div`
         justify-content: center;
         margin-top: 13px;
         margin-left: 9px;
-
         border-radius: 10px;
         height: 22px;
         padding: 3px;
+
         & button {
           display: flex;
           justify-content: center;
