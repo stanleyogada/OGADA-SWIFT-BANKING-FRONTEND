@@ -7,8 +7,6 @@ import SplashScreen from "../SplashScreen";
 function App() {
   const { isAppLoading } = useSplash();
 
-  console.log({ isAppLoading });
-
   if (isAppLoading) {
     return <SplashScreen />;
   }
