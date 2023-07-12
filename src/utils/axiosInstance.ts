@@ -1,10 +1,18 @@
 import axios from "axios";
 
+// get token from cookies
+let token = "";
+document.cookie.split(";").forEach((cookie) => {
+  if (cookie.includes("token")) {
+    token = cookie.split("=")[1];
+  }
+});
+
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:4000",
+  baseURL: "http://ec2-54-195-154-57.eu-west-1.compute.amazonaws.com/",
   headers: {
-    Authorization: "Bearer YOUR_AUTH_TOKEN", // Replace with your authorization token
-    "Content-Type": "application/json", // Example header, add any other headers you need
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   },
 });
 
