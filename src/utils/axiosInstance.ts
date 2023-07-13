@@ -7,7 +7,7 @@ import { BASE_URL } from "../constants/services";
 //   if (cookie.includes("token")) {
 //     token = cookie.split("=")[1];
 //   }
-// });
+// }); // TODO: uncomment this after fixing cookie issue on the backend
 
 const token = localStorage.getItem("token") || ""; // TODO: remove this after fixing cookie issue on the backend
 
