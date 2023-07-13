@@ -107,14 +107,22 @@ test("Signing form works correctly onLoading", async () => {
 
   await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
+  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
+
   const signInButton = screen.getByRole("button", { name: /sign in/i });
+
+  expect(signInButton).not.toBeDisabled();
+
   await user.click(signInButton);
 
   const getLoadingElement = () => screen.getByTestId("loading");
   expect(getLoadingElement()).toBeInTheDocument();
+
+  expect(signInButton).toBeDisabled();
   await waitForElementToBeRemoved(() => getLoadingElement());
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
+  expect(signInButton).not.toBeDisabled();
 });
 
 test("Signing form works correctly onError", async () => {
