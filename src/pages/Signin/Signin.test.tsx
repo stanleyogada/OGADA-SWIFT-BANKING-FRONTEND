@@ -123,6 +123,11 @@ test("Signing form works correctly onLoading", async () => {
   const signInButton = screen.getByRole("button", { name: /sign in/i });
   await user.click(signInButton);
 
-  expect(screen.getByTestId("loading")).toBeInTheDocument();
-  await waitForElementToBeRemoved(() => screen.getByTestId("loading"));
+  const getLoadingElement = () => screen.getByTestId("loading");
+  expect(getLoadingElement()).toBeInTheDocument();
+  await waitForElementToBeRemoved(() => getLoadingElement());
+
+  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
 });
+
+test("Signing form works correctly onError", async () => {});
