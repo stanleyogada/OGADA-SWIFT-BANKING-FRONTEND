@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import useAuth from "../../hooks/useAuth";
@@ -25,6 +25,7 @@ const Signin = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     await handleSignIn(formData.phoneNumber, formData.loginPasscode);
   };
 

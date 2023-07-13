@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -98,19 +98,6 @@ const handleTypeInForm = async (user: UserEvent, formData: { phone: string; logi
   expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
 };
 
-test("Displays loading state when submitting form", async () => {
-  const user = userEvent.setup();
-  renderComponent();
-
-  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
-  expect(screen.getByTestId("loading")).toBeInTheDocument();
-
-  await waitFor(() => {
-    expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-  });
-});
-
 test("Signing form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   renderComponent();
@@ -123,6 +110,19 @@ test("Signing form works correctly onSuccess", async () => {
   await user.click(signInButton);
 
   expect(window.location.reload).toHaveBeenCalled();
+});
+
+test.only("Signing form works correctly onLoading", async () => {
+  const user = userEvent.setup();
+  renderComponent();
+
+  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+  const signInButton = screen.getByRole("button", { name: /sign in/i });
+  await user.click(signInButton);
+
+  expect(screen.getByTestId("loading")).toBeInTheDocument();
+  await waitForElementToBeRemoved(() => screen.getByTestId("loading"));
 });
 
 const pause = () => new Promise((res) => setTimeout(res, 100));

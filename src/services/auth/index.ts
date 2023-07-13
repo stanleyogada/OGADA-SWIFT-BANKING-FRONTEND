@@ -1,7 +1,8 @@
 import { ENDPOINTS } from "../../constants/services";
 import { axiosInstance } from "../../utils/axiosInstance";
+import { TPostSignInPayload } from "./types";
 
-const postSignIn = async ({ phone, loginPasscode }: { phone: string; loginPasscode: string }) => {
+const postSignIn = async ({ phone, loginPasscode }: TPostSignInPayload) => {
   const { data } = await axiosInstance({
     method: "POST",
     url: ENDPOINTS.signIn,
@@ -11,7 +12,7 @@ const postSignIn = async ({ phone, loginPasscode }: { phone: string; loginPassco
     },
   });
 
-  return data.token;
+  return data.token as string;
 };
 
 export { postSignIn };

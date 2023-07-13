@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MutationFunction, UseMutationOptions, useMutation } from "react-query";
 
-const useCustomMutation = (
-  mutationFn: MutationFunction<any, unknown>,
+const useCustomMutation = <T>(
+  mutationFn: MutationFunction<any, T>,
   options?: UseMutationOptions<any, unknown, unknown, void> | undefined
 ) => {
   const [mutationIsLoading, setMutationIsLoading] = useState(false);
@@ -14,12 +14,15 @@ const useCustomMutation = (
 
       options?.onMutate?.(variables);
     },
-    onSettled: (data: unknown, error: unknown, variables: unknown) => {
-      setMutationIsLoading(false);
-
-      options?.onSettled?.(data, error, variables);
-    },
   });
+
+  useEffect(() => {
+    setMutationIsLoading(false);
+  }, [mutation.isSuccess]);
+
+  useEffect(() => {
+    console.log("isLoading", mutationIsLoading);
+  }, [mutationIsLoading]);
 
   return {
     ...mutation,
