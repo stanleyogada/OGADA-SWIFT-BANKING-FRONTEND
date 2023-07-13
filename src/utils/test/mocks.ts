@@ -1,12 +1,12 @@
 const { reload } = window.location;
 
-beforeAll(() => {
+beforeEach(() => {
   Object.defineProperty(window, "location", {
     writable: true,
     value: { reload: jest.fn() },
   });
 });
 
-afterAll(() => {
+afterEach(() => {
   window.location.reload = reload;
 });

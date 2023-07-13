@@ -87,20 +87,6 @@ const handleTypeInForm = async (
   expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
 };
 
-test("Signing form works correctly onSuccess", async () => {
-  const user = userEvent.setup();
-  renderComponent();
-
-  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
-  expect(window.location.reload).not.toHaveBeenCalled();
-
-  const signInButton = screen.getByRole("button", { name: /sign in/i });
-  await user.click(signInButton);
-
-  expect(window.location.reload).toHaveBeenCalled();
-});
-
 test("Signing form works correctly onLoading", async () => {
   const user = userEvent.setup();
   renderComponent();
@@ -123,6 +109,20 @@ test("Signing form works correctly onLoading", async () => {
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
   expect(signInButton).not.toBeDisabled();
+});
+
+test("Signing form works correctly onSuccess", async () => {
+  const user = userEvent.setup();
+  renderComponent();
+
+  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+  expect(window.location.reload).not.toHaveBeenCalled();
+
+  const signInButton = screen.getByRole("button", { name: /sign in/i });
+  await user.click(signInButton);
+
+  expect(window.location.reload).toHaveBeenCalled();
 });
 
 test("Signing form works correctly onError", async () => {
