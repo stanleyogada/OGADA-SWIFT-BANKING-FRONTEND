@@ -1,5 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+import { Optional } from "../../types";
 
 type HandlerConfig = {
   method?: "get" | "post" | "put" | "delete";
@@ -7,8 +8,8 @@ type HandlerConfig = {
   res: (req: any, res: any, ctx: any) => Object;
 };
 
-const createServer = (handlerConfig: HandlerConfig[]) => {
-  const handlers = handlerConfig.map((config) =>
+const createServer = (handlerConfigs: HandlerConfig[]) => {
+  const handlers = handlerConfigs.map((config) =>
     rest[config.method || "get"](config.url, (req, res, ctx) => {
       return res(
         // Add a DELAY to the response to simulate network latency,
@@ -24,6 +25,27 @@ const createServer = (handlerConfig: HandlerConfig[]) => {
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
+
+  const handleError = (handlerConfig: Optional<HandlerConfig, "res"> & { statusCode?: number }) => {
+    server.use(
+      rest[handlerConfig.method || "get"](handlerConfig.url, (req, res, ctx) => {
+        return res(
+          ctx.status(handlerConfig.statusCode || 500),
+          ctx.json(
+            handlerConfig.res
+              ? handlerConfig.res(req, res, ctx)
+              : {
+                  message: "Internal Server Error",
+                }
+          )
+        );
+      })
+    );
+  };
+
+  return {
+    handleError,
+  };
 };
 
 export default createServer;

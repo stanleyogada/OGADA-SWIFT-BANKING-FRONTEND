@@ -4,8 +4,6 @@ import { useMutation } from "react-query";
 import useCurrentUser from "./useCurrentUser";
 import { postSignIn } from "../services/auth";
 import { AxiosError } from "axios";
-import useCustomMutation from "./useCustomMutation";
-import { TPostSignInPayload } from "../services/auth/types";
 
 const useAuth = () => {
   const { data: currentUser, isLoading } = useCurrentUser();
@@ -23,7 +21,7 @@ const useAuth = () => {
   //
   //
 
-  const signInMutation = useCustomMutation<TPostSignInPayload>(postSignIn, {
+  const signInMutation = useMutation(postSignIn, {
     onSuccess: (token: string) => {
       localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
       window.location.reload();
