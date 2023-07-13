@@ -28,8 +28,8 @@ const useAuth = () => {
     },
   });
 
-  const handleSignIn = async (phone: string, loginPasscode: string) => {
-    await signInMutation.mutateAsync({ phone, loginPasscode });
+  const handleSignIn = (phone: string, loginPasscode: string) => {
+    signInMutation.mutate({ phone, loginPasscode });
   };
 
   const handleSignOut = () => {

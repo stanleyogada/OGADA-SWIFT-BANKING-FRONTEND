@@ -27,7 +27,7 @@ const renderComponent = () => {
   );
 };
 
-createServer([
+const { handleError } = createServer([
   {
     method: "post",
     url: `${BASE_URL}/auth/signin`,
@@ -130,4 +130,27 @@ test("Signing form works correctly onLoading", async () => {
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
 });
 
-test("Signing form works correctly onError", async () => {});
+test("Signing form works correctly onError", async () => {
+  const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+
+  handleError({
+    method: "post",
+    url: `${BASE_URL}/auth/signin`,
+    statusCode: 400,
+  });
+
+  const user = userEvent.setup();
+  renderComponent();
+
+  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+  expect(consoleErrorSpy).not.toHaveBeenCalled();
+
+  const signInButton = screen.getByRole("button", { name: /sign in/i });
+  await user.click(signInButton);
+
+  expect(consoleErrorSpy).toHaveBeenCalled();
+  consoleErrorSpy.mockRestore();
+
+  expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
+});
