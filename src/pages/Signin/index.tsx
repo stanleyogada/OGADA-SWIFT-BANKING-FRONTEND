@@ -43,8 +43,7 @@ const Signin = () => {
 
       <h2>Welcome Back</h2>
 
-      {signInMutationState.isLoading && <p data-testid="loading">submitting form ...</p>}
-
+      {signInMutationState.isLoading && <p data-testid="loading"></p>}
       {signInMutationState.isError && <p data-testid="error"></p>}
 
       <form onSubmit={handleSubmit}>
