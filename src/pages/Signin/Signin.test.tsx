@@ -126,5 +126,3 @@ test("Signing form works correctly onLoading", async () => {
   expect(screen.getByTestId("loading")).toBeInTheDocument();
   await waitForElementToBeRemoved(() => screen.getByTestId("loading"));
 });
-
-const pause = () => new Promise((res) => setTimeout(res, 100));
