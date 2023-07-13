@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { CLIENT_ROUTES } from "../../constants";
 
 const Signin = () => {
-  const { handleSignIn, handleSignOut } = useAuth();
+  const { handleSignIn, handleSignOut, signInMutationState } = useAuth();
 
   console.log("Signin rendered");
 
@@ -36,23 +36,17 @@ const Signin = () => {
         <button onClick={handleSignOut}>Sign out</button>
       </div>
       <>
-        {/* {token.isLoading && (
+        {signInMutationState.isLoading && (
           <div>
             <p>Loading...</p>
           </div>
         )}
-        {token.error && (
+
+        {signInMutationState.isError && (
           <div>
-            <p>Error: {token.error}</p>
+            <p>Error: {signInMutationState.error.message}</p>
           </div>
         )}
-        {token.value && (
-          <div>
-            <p>Token: {token.value}</p>
-            <h3>User is signed in, Yey!</h3>
-          </div>
-        )} */}
-        TODO
       </>
     </>
   );
