@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { CLIENT_ROUTES } from "../../../constants";
-import useSplash from "../../App/hooks/useSplash";
 import useAuth from "../../../hooks/useAuth";
 
 const usePageWrapper = () => {

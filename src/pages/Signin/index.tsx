@@ -1,9 +1,10 @@
-// import useAuth from "../../hooks/useAuth";
-import { CLIENT_ROUTES } from "../../constants";
 import { Link } from "react-router-dom";
 
+import useAuth from "../../hooks/useAuth";
+import { CLIENT_ROUTES } from "../../constants";
+
 const Signin = () => {
-  // const { token, handleSignin, handleSignout } = useAuth();
+  const { handleSignIn, handleSignOut } = useAuth();
 
   console.log("Signin rendered");
 
@@ -31,16 +32,8 @@ const Signin = () => {
 
       <div>
         <h2>Simulating a signin</h2>
-        <button
-        // onClick={handleSignin}
-        >
-          Sign in
-        </button>
-        <button
-        // onClick={handleSignout}
-        >
-          Sign out
-        </button>
+        <button onClick={() => handleSignIn("9012345678", "654321")}>Sign in</button>
+        <button onClick={handleSignOut}>Sign out</button>
       </div>
       <>
         {/* {token.isLoading && (
