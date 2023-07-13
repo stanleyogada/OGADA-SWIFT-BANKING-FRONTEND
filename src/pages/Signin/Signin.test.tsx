@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, waitForElementToBeRemoved, act } from "@testing-library/react";
+import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -6,7 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import Signin from "./";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL } from "../../constants/services";
-import { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -87,7 +86,10 @@ test("Render content of Signin page correctly", () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-const handleTypeInForm = async (user: UserEvent, formData: { phone: string; loginPasscode: string }) => {
+const handleTypeInForm = async (
+  user: ReturnType<typeof userEvent.setup>,
+  formData: { phone: string; loginPasscode: string }
+) => {
   const phoneInput = screen.getByPlaceholderText(/phone number/i);
   const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
 
