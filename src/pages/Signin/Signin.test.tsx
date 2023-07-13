@@ -27,7 +27,7 @@ const renderComponent = () => {
   );
 };
 
-const { handleCreateErrorServer } = createServer([
+const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
     url: `${BASE_URL}/auth/signin`,
@@ -133,7 +133,7 @@ test("Signing form works correctly onLoading", async () => {
 test("Signing form works correctly onError", async () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
 
-  handleCreateErrorServer({
+  handleCreateErrorConfig({
     method: "post",
     url: `${BASE_URL}/auth/signin`,
     statusCode: 400,

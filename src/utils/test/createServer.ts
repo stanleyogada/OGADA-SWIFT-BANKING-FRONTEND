@@ -26,7 +26,7 @@ const createServer = (handlerConfigs: HandlerConfig[]) => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  const handleCreateErrorServer = (handlerConfig: Optional<HandlerConfig, "res"> & { statusCode?: number }) => {
+  const handleCreateErrorConfig = (handlerConfig: Optional<HandlerConfig, "res"> & { statusCode?: number }) => {
     server.use(
       rest[handlerConfig.method || "get"](handlerConfig.url, (req, res, ctx) => {
         return res(
@@ -44,7 +44,7 @@ const createServer = (handlerConfigs: HandlerConfig[]) => {
   };
 
   return {
-    handleCreateErrorServer,
+    handleCreateErrorConfig,
   };
 };
 
