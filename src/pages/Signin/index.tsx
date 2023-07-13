@@ -23,10 +23,9 @@ const Signin = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    await handleSignIn(formData.phoneNumber, formData.loginPasscode);
+    handleSignIn(formData.phoneNumber, formData.loginPasscode);
   };
 
   return (
@@ -36,6 +35,8 @@ const Signin = () => {
       <h2>Welcome Back</h2>
 
       {signInMutationState.isLoading && <p data-testid="loading">submitting form ...</p>}
+
+      {signInMutationState.isError && <p data-testid="error">Invalid credentials. Please try again!</p>}
 
       <form onSubmit={handleSubmit}>
         <input
