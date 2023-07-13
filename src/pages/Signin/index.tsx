@@ -4,9 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { CLIENT_ROUTES } from "../../constants";
 
 const Signin = () => {
-  const { handleSignIn, handleSignOut, signInMutationState } = useAuth();
-
-  console.log("Signin rendered");
+  const { handleSignIn, signInMutationState } = useAuth();
 
   return (
     <>
@@ -31,9 +29,8 @@ const Signin = () => {
       </div>
 
       <div>
-        <h2>Simulating a signin</h2>
+        <h2>Simulate a Sign In</h2>
         <button onClick={() => handleSignIn("9012345678", "654321")}>Sign in</button>
-        <button onClick={handleSignOut}>Sign out</button>
       </div>
       <>
         {signInMutationState.isLoading && (
