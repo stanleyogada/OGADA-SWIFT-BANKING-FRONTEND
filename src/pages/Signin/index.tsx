@@ -7,45 +7,27 @@ const Signin = () => {
   const { handleSignIn, signInMutationState } = useAuth();
 
   return (
-    <>
-      <div>
-        <h1>Sign In</h1>
+    <div>
+      <h1>Sign In</h1>
+
+      <h2>Welcome Back</h2>
+
+      <form>
+        <input type="text" placeholder="Phone Number" />
+        <input type="password" placeholder="Enter 6 digits login passcode" />
 
         <div>
-          <Link to={CLIENT_ROUTES.authSignup}>Go Signup</Link>
+          <label htmlFor="remember-login-passcode">
+            <input type="checkbox" id="remember-login-passcode" />
+            Remember login passcode
+          </label>
+
+          <Link to="#">Forgot login passcode?</Link>
+
+          <button type="submit">Sign In</button>
         </div>
-
-        <div>
-          <Link to={CLIENT_ROUTES.authWelcome}>Go Welcome</Link>
-        </div>
-
-        <div>
-          <Link to={CLIENT_ROUTES.about}>Go About</Link>
-        </div>
-
-        <div>
-          <Link to={CLIENT_ROUTES.home}>Go Home</Link>
-        </div>
-      </div>
-
-      <div>
-        <h2>Simulate a Sign In</h2>
-        <button onClick={() => handleSignIn("9012345678", "654321")}>Sign in</button>
-      </div>
-      <>
-        {signInMutationState.isLoading && (
-          <div>
-            <p>Loading...</p>
-          </div>
-        )}
-
-        {signInMutationState.isError && (
-          <div>
-            <p>Error: {signInMutationState.error.message}</p>
-          </div>
-        )}
-      </>
-    </>
+      </form>
+    </div>
   );
 };
 
