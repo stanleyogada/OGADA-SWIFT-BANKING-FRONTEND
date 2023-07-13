@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASE_URL } from "../constants/services";
 
 // get token from cookies
 // let token = "";
@@ -11,7 +12,7 @@ import axios from "axios";
 const token = localStorage.getItem("token") || ""; // TODO: remove this after fixing cookie issue on the backend
 
 const axiosInstance = axios.create({
-  baseURL: "http://ec2-54-195-154-57.eu-west-1.compute.amazonaws.com/api/v1",
+  baseURL: BASE_URL,
   headers: {
     Authorization: `Bearer ${token}`,
     "Content-Type": "application/json",

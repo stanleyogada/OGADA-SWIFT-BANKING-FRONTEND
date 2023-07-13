@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import Signin from "./";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
+import createServer from "../../utils/test/createServer";
+import { BASE_URL } from "../../constants/services";
 
 const renderComponent = () => {
   const queryClient = new QueryClient();
@@ -15,6 +17,20 @@ const renderComponent = () => {
     </QueryClientProvider>
   );
 };
+
+createServer([
+  {
+    method: "post",
+    url: `${BASE_URL}/auth/signin`,
+    res() {
+      return {
+        data: {
+          id: 1,
+        },
+      };
+    },
+  },
+]);
 
 test("Render content of Signin page correctly", () => {
   renderComponent();

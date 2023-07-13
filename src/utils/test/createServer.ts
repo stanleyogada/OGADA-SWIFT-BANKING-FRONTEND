@@ -2,14 +2,14 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 
 type HandlerConfig = {
-  method: "get" | "post" | "put" | "delete";
-  path: string;
+  method?: "get" | "post" | "put" | "delete";
+  url: string;
   res: (req: any, res: any, ctx: any) => Object;
 };
 
 const createServer = (handlerConfig: HandlerConfig[]) => {
   const handlers = handlerConfig.map((config) =>
-    rest[config.method || "get"](config.path, (req, res, ctx) => {
+    rest[config.method || "get"](config.url, (req, res, ctx) => {
       return res(ctx.json(config.res(req, res, ctx)));
     })
   );
