@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 import useAuth from "../../hooks/useAuth";
 
@@ -28,6 +29,14 @@ const Signin = () => {
     handleSignIn(formData.phoneNumber, formData.loginPasscode);
   };
 
+  useEffect(() => {
+    if (signInMutationState.isError) {
+      toast.error("Invalid credentials. Please try again!", {
+        position: "top-right",
+      });
+    }
+  }, [signInMutationState.isError]);
+
   return (
     <div>
       <h1>Sign In</h1>
@@ -36,7 +45,7 @@ const Signin = () => {
 
       {signInMutationState.isLoading && <p data-testid="loading">submitting form ...</p>}
 
-      {signInMutationState.isError && <p data-testid="error">Invalid credentials. Please try again!</p>}
+      {signInMutationState.isError && <p data-testid="error"></p>}
 
       <form onSubmit={handleSubmit}>
         <input

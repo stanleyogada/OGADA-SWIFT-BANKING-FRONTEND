@@ -137,7 +137,9 @@ test("Signing form works correctly onError", async () => {
   await user.click(signInButton);
 
   expect(consoleErrorSpy).toHaveBeenCalled();
-  consoleErrorSpy.mockRestore();
+  const error = screen.getByTestId("error");
+  expect(error).toBeInTheDocument();
+  expect(error).toHaveTextContent("");
 
-  expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
+  consoleErrorSpy.mockRestore();
 });
