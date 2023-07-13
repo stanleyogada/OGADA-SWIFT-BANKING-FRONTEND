@@ -114,7 +114,7 @@ test("Signing form works correctly onSuccess", async () => {
   expect(window.location.reload).toHaveBeenCalled();
 });
 
-test.only("Signing form works correctly onLoading", async () => {
+test("Signing form works correctly onLoading", async () => {
   const user = userEvent.setup();
   renderComponent();
 
