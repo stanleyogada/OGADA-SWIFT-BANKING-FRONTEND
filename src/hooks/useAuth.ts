@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useMutation } from "react-query";
 
 import useCurrentUser from "./useCurrentUser";
@@ -7,13 +7,6 @@ import { AxiosError } from "axios";
 
 const useAuth = () => {
   const { data: currentUser, isLoading } = useCurrentUser();
-  const signInMutation = useMutation(postSignIn, {
-    onSuccess: (token: string) => {
-      localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
-      window.location.reload();
-    },
-  });
-
   const userIsAuthenticated = useMemo(() => {
     if (isLoading) {
       return null;
@@ -24,6 +17,16 @@ const useAuth = () => {
 
     return true;
   }, [currentUser, isLoading]);
+
+  //
+  //
+
+  const signInMutation = useMutation(postSignIn, {
+    onSuccess: (token: string) => {
+      localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
+      window.location.reload();
+    },
+  });
 
   const handleSignIn = async (phone: string, loginPasscode: string) => {
     await signInMutation.mutateAsync({ phone, loginPasscode });
