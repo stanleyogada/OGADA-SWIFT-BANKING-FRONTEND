@@ -29,10 +29,18 @@ const useAuth = () => {
     signin({ phone, loginPasscode });
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem("token"); // TODO: remove this after fixing cookie issue on the backend
+
+    // signout(); // TODO: real implementation call signout mutation
+
+    window.location.reload();
+  };
+
   return {
     userIsAuthenticated,
     handleSignIn,
-    handleSignOut: () => {},
+    handleSignOut,
   };
 };
 

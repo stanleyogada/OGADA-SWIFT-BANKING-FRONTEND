@@ -5,10 +5,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
-// import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 const Home = () => {
-  // const { handleSignout } = useAuth();
+  const { handleSignOut } = useAuth();
 
   return (
     <>
@@ -20,9 +20,7 @@ const Home = () => {
             <h3>Hello, Tega</h3>
           </div>
           <div className="profile-icons">
-            <div
-            // onClick={handleSignout}
-            >
+            <div onClick={handleSignOut}>
               <Link to="/" className="notify">
                 <span className="cursor-pointer">{icons.blackuserIcon()}</span>
               </Link>
