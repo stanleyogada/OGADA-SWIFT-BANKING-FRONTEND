@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/react-query": "^1.2.9",
     "axios": "^1.4.0",
+    "msw": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "3.19.2",
