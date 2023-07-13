@@ -73,7 +73,7 @@ test("Render content of Signin page correctly", () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-const handleTypeInForm = async (
+const handleAssertTypeInForm = async (
   user: ReturnType<typeof userEvent.setup>,
   formData: { phone: string; loginPasscode: string }
 ) => {
@@ -87,19 +87,8 @@ const handleTypeInForm = async (
   expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
 };
 
-test("Signing form works correctly onLoading", async () => {
-  const user = userEvent.setup();
-  renderComponent();
-
-  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
-  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-
+const handleAssertLoadingAfterSubmitClick = async () => {
   const signInButton = screen.getByRole("button", { name: /sign in/i });
-
-  expect(signInButton).not.toBeDisabled();
-
-  await user.click(signInButton);
 
   const getLoadingElement = () => screen.getByTestId("loading");
   expect(getLoadingElement()).toBeInTheDocument();
@@ -109,18 +98,36 @@ test("Signing form works correctly onLoading", async () => {
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
   expect(signInButton).not.toBeDisabled();
+};
+
+test("Signing form works correctly onLoading", async () => {
+  const user = userEvent.setup();
+  renderComponent();
+
+  await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
+
+  const signInButton = screen.getByRole("button", { name: /sign in/i });
+  expect(signInButton).not.toBeDisabled();
+
+  await user.click(signInButton);
+
+  await handleAssertLoadingAfterSubmitClick();
 });
 
 test("Signing form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   renderComponent();
 
-  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
   expect(window.location.reload).not.toHaveBeenCalled();
 
   const signInButton = screen.getByRole("button", { name: /sign in/i });
   await user.click(signInButton);
+
+  await handleAssertLoadingAfterSubmitClick();
 
   expect(window.location.reload).toHaveBeenCalled();
 });
@@ -137,12 +144,14 @@ test("Signing form works correctly onError", async () => {
   const user = userEvent.setup();
   renderComponent();
 
-  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
   expect(consoleErrorSpy).not.toHaveBeenCalled();
 
   const signInButton = screen.getByRole("button", { name: /sign in/i });
   await user.click(signInButton);
+
+  await handleAssertLoadingAfterSubmitClick();
 
   expect(consoleErrorSpy).toHaveBeenCalled();
   const error = screen.getByTestId("error");
