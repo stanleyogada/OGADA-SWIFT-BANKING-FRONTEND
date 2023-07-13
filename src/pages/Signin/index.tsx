@@ -1,20 +1,56 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import useAuth from "../../hooks/useAuth";
-import { CLIENT_ROUTES } from "../../constants";
+
+type TFormData = {
+  phoneNumber: string;
+  loginPasscode: string;
+};
 
 const Signin = () => {
   const { handleSignIn, signInMutationState } = useAuth();
 
+  const [formData, setFormData] = useState<TFormData>({
+    phoneNumber: "",
+    loginPasscode: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await handleSignIn(formData.phoneNumber, formData.loginPasscode);
+  };
   return (
     <div>
       <h1>Sign In</h1>
 
       <h2>Welcome Back</h2>
 
-      <form>
-        <input type="text" placeholder="Phone Number" />
-        <input type="password" placeholder="Enter 6 digits login passcode" />
+      {signInMutationState.isLoading && <p data-testid="loading">submitting form ...</p>}
+
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Phone Number"
+          name="phoneNumber"
+          onChange={handleInputChange}
+          value={formData.phoneNumber}
+        />
+        <input
+          type="password"
+          placeholder="Enter 6 digits login passcode"
+          name="loginPasscode"
+          onChange={handleInputChange}
+          value={formData.loginPasscode}
+        />
 
         <div>
           <label htmlFor="remember-login-passcode">

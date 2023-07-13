@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Signin from "./";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -6,7 +7,14 @@ import createServer from "../../utils/test/createServer";
 import { BASE_URL } from "../../constants/services";
 
 const renderComponent = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // ✅ turns retries off
+        retry: false,
+      },
+    },
+  });
 
   render(
     // @ts-ignore
@@ -24,6 +32,15 @@ createServer([
     url: `${BASE_URL}/auth/signin`,
     res() {
       return {
+        token: "1234567890",
+      };
+    },
+  },
+  {
+    method: "get",
+    url: `${BASE_URL}/users/me`,
+    res() {
+      return {
         data: {
           id: 1,
         },
@@ -31,6 +48,19 @@ createServer([
     },
   },
 ]);
+
+const { reload } = window.location;
+
+beforeAll(() => {
+  Object.defineProperty(window, "location", {
+    writable: true,
+    value: { reload: jest.fn() },
+  });
+});
+
+afterAll(() => {
+  window.location.reload = reload;
+});
 
 test("Render content of Signin page correctly", () => {
   renderComponent();
@@ -55,6 +85,25 @@ test("Render content of Signin page correctly", () => {
   expect(signInButton).toBeInTheDocument();
 });
 
-test("Signing form works correctly", () => {
+test("Signing form works correctly onSuccess", async () => {
+  const user = userEvent.setup();
   renderComponent();
+
+  const phoneInput = screen.getByPlaceholderText(/phone number/i);
+  const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+
+  await user.type(phoneInput, "1234567890");
+  await user.type(passwordInput, "123456");
+
+  expect(phoneInput).toHaveValue("1234567890");
+  expect(passwordInput).toHaveValue("123456");
+
+  expect(window.location.reload).not.toHaveBeenCalled();
+
+  const signInButton = screen.getByRole("button", { name: /sign in/i });
+  await user.click(signInButton);
+
+  expect(window.location.reload).toHaveBeenCalled();
 });
+
+const pause = () => new Promise((res) => setTimeout(res, 100));
