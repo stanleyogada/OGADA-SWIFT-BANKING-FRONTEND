@@ -50,19 +50,6 @@ const { handleCreateErrorConfig } = createServer([
   },
 ]);
 
-const { reload } = window.location;
-
-beforeAll(() => {
-  Object.defineProperty(window, "location", {
-    writable: true,
-    value: { reload: jest.fn() },
-  });
-});
-
-afterAll(() => {
-  window.location.reload = reload;
-});
-
 test("Render content of Signin page correctly", () => {
   renderComponent();
 
