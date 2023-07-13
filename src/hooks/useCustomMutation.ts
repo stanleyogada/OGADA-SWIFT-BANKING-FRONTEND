@@ -20,10 +20,6 @@ const useCustomMutation = <T>(
     setMutationIsLoading(false);
   }, [mutation.isSuccess]);
 
-  useEffect(() => {
-    console.log("isLoading", mutationIsLoading);
-  }, [mutationIsLoading]);
-
   return {
     ...mutation,
     isLoading: mutationIsLoading,
