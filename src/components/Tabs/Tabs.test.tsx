@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 const user = userEvent.setup();
 
-beforeEach(() => {
+const renderComponent = () => {
   render(
     <MemoryRouter>
       <Tabs
@@ -25,10 +25,11 @@ beforeEach(() => {
       </Tabs>
     </MemoryRouter>
   );
-});
+};
 
 describe("Tabs", () => {
   test("renders props correctly", () => {
+    renderComponent();
     screen.getByText(/tab 1/i);
     screen.getByText(/tab 2/i);
     screen.getByText(/pane 1/i);
@@ -36,6 +37,7 @@ describe("Tabs", () => {
   });
 
   test("renders one pane at a time", async () => {
+    renderComponent();
     screen.getByText(/pane 1/i);
     expect(screen.queryByText(/pane 2/i)).not.toBeInTheDocument();
 
