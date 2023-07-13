@@ -18,12 +18,11 @@ const useAuth = () => {
     if (isLoading) {
       return null;
     }
-
     if (user === null) {
       return false;
-    } else {
-      return true;
     }
+
+    return true;
   }, [user, isLoading]);
 
   const handleSignIn = (phone: string, loginPasscode: string) => {
