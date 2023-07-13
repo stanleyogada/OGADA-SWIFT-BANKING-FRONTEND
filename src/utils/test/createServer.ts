@@ -10,7 +10,12 @@ type HandlerConfig = {
 const createServer = (handlerConfig: HandlerConfig[]) => {
   const handlers = handlerConfig.map((config) =>
     rest[config.method || "get"](config.url, (req, res, ctx) => {
-      return res(ctx.json(config.res(req, res, ctx)));
+      return res(
+        // Add a DELAY to the response to simulate network latency,
+        // Otherwise we can't test loading states
+        ctx.delay(1),
+        ctx.json(config.res(req, res, ctx))
+      );
     })
   );
 
