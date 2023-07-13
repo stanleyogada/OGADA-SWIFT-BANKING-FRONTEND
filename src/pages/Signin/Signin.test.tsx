@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Signin from "./";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
+
+import Signin from "./";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL } from "../../constants/services";
 
