@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -6,6 +6,7 @@ import { MemoryRouter } from "react-router-dom";
 import Signin from "./";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL } from "../../constants/services";
+import { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -86,18 +87,35 @@ test("Render content of Signin page correctly", () => {
   expect(signInButton).toBeInTheDocument();
 });
 
+const handleTypeInForm = async (user: UserEvent, formData: { phone: string; loginPasscode: string }) => {
+  const phoneInput = screen.getByPlaceholderText(/phone number/i);
+  const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+
+  await user.type(phoneInput, formData.phone);
+  await user.type(loginPasscodeInput, formData.loginPasscode);
+
+  expect(phoneInput).toHaveValue(formData.phone);
+  expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
+};
+
+test("Displays loading state when submitting form", async () => {
+  const user = userEvent.setup();
+  renderComponent();
+
+  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+  expect(screen.getByTestId("loading")).toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
+  });
+});
+
 test("Signing form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   renderComponent();
 
-  const phoneInput = screen.getByPlaceholderText(/phone number/i);
-  const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
-
-  await user.type(phoneInput, "1234567890");
-  await user.type(passwordInput, "123456");
-
-  expect(phoneInput).toHaveValue("1234567890");
-  expect(passwordInput).toHaveValue("123456");
+  await handleTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
   expect(window.location.reload).not.toHaveBeenCalled();
 
