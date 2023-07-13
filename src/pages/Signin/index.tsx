@@ -25,9 +25,9 @@ const Signin = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     await handleSignIn(formData.phoneNumber, formData.loginPasscode);
   };
+
   return (
     <div>
       <h1>Sign In</h1>
