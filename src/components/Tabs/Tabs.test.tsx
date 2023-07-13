@@ -1,26 +1,29 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Tabs from "./Tabs";
+import { MemoryRouter } from "react-router-dom";
 
 const user = userEvent.setup();
 
 beforeEach(() => {
   render(
-    <Tabs
-      data={[
-        {
-          id: "tab-1",
-          heading: "Tab 1",
-        },
-        {
-          id: "tab-2",
-          heading: "Tab 2",
-        },
-      ]}
-    >
-      <div>Pane 1</div>
-      <div>Pane 2</div>
-    </Tabs>
+    <MemoryRouter>
+      <Tabs
+        data={[
+          {
+            id: "tab-1",
+            heading: "Tab 1",
+          },
+          {
+            id: "tab-2",
+            heading: "Tab 2",
+          },
+        ]}
+      >
+        <div>Pane 1</div>
+        <div>Pane 2</div>
+      </Tabs>
+    </MemoryRouter>
   );
 });
 
