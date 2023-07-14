@@ -30,6 +30,9 @@ const createServer = (handlerConfigs: HandlerConfig[]) => {
     server.use(
       rest[handlerConfig.method || "get"](handlerConfig.url, (req, res, ctx) => {
         return res(
+          // Add a DELAY to the response to simulate network latency,
+          // Otherwise we can't test loading states
+          ctx.delay(1),
           ctx.status(handlerConfig.statusCode || 500),
           ctx.json(
             handlerConfig.res
