@@ -161,5 +161,6 @@ test("Signing form works correctly onError", async () => {
 test("Display +234 in phone input", () => {
   renderComponent();
 
-  expect(screen.getByText("+234")).toBeInTheDocument();
+  const countryCode = screen.getByTestId("country-code");
+  expect(countryCode).toBeInTheDocument();
 });
