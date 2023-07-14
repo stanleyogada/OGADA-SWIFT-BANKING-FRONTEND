@@ -31,7 +31,7 @@ An application solely for education purposes!
 6. Pull from origin `main` branch to sync all changes online with your local branch `git pull origin main && npm i`.
 7. Fix all conflict/s if any (You might need to consult help from the Engineer responsible for causing the conflict/s).
 8. Push your changes on your current branch! eg. `git push origin ch-#5-add-pretier-configuration`
-9. Create a **PR** in GitHub.
+9. Create a **PR** in GitHub if you don't have any yet.
 10. If any change/s is requested by your Code Reviewers, repeat **step 3 to 8** until your **PR** is approved.
 11. Merge **PR**. 🚢
 
