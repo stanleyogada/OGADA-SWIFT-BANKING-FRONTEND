@@ -5,7 +5,7 @@ import { COLORS } from "../../constants";
 
 type TProps = {
   icon?: ReactNode;
-  children?: ReactNode;
+  children?: ReactNode | ReactNode[];
   link?: any;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
