@@ -479,6 +479,14 @@ const blueDropdownIcon = () => (
   </svg>
 );
 
+const nigeriaFlagIcon = () => (
+  <svg width="33" height="20" viewBox="0 0 33 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="11" height="20" fill="#05723E" />
+    <rect x="22" width="11" height="20" fill="#05723E" />
+    <rect x="11" width="11" height="20" fill="white" />
+  </svg>
+);
+
 // IMPORT THE NEW ICON CREATED ABOVE
 const icons = {
   lightBlueIconCard,
@@ -521,6 +529,7 @@ const icons = {
   blackuserIcon,
   checkIcon,
   blueDropdownIcon,
+  nigeriaFlagIcon,
 };
 
 export default icons;

@@ -6,6 +6,7 @@ const PhoneInputWrapper = styled.div`
 
   .country {
     display: flex;
+    align-items: center;
     gap: 11px;
     padding-right: 11px;
     border-right: 1px solid;
@@ -14,14 +15,6 @@ const PhoneInputWrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
     left: 11px;
-
-    &__flag {
-      /* .img { */
-      width: 32px;
-      height: 20px;
-      border: solid;
-      /* } */
-    }
   }
 
   input {
