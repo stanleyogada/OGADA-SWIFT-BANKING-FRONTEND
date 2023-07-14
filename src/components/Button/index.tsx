@@ -7,6 +7,9 @@ interface ButtonProps {
   icon?: ReactNode;
   children?: ReactNode;
   link?: any;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  className?: string;
 }
 
 const SButton = styled.button`
@@ -31,9 +34,9 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
 `;
-const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
+const Button: React.FC<ButtonProps> = ({ icon, children, link, type, disabled, className }) => {
   const btn = (
-    <SButton>
+    <SButton type={type} disabled={disabled} className={className}>
       {icon && <div data-testid="btn-icon">{icon}</div>}
       <span>{children}</span>
     </SButton>
