@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../../../constants";
 
 const PasswordInputWrapper = styled.div`
   position: relative;
@@ -9,7 +10,6 @@ const PasswordInputWrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
     right: 11px;
-    border: solid;
   }
 
   input {

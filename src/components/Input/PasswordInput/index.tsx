@@ -4,6 +4,7 @@ import PasswordInputWrapper from "./PasswordInputWrapper";
 import type { TInputProps } from "../types";
 import Button from "../../Button";
 import { useState } from "react";
+import icons from "../../../constants/icons";
 
 const usePasswordInput = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -27,7 +28,7 @@ const PasswordInput = (props: TInputProps) => {
 
       <Button type="button" onClick={handleTogglePasswordVisibility}>
         <div className="eye" data-testid="eye-icon">
-          e
+          {isPasswordVisible ? icons.eyecloseIcon() : icons.eyeopenIcon()}
         </div>
       </Button>
     </PasswordInputWrapper>

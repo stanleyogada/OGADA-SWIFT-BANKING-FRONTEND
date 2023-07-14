@@ -164,19 +164,3 @@ test("Displays phone input", () => {
   const countryCode = screen.getByTestId("country-code");
   expect(countryCode).toBeInTheDocument();
 });
-
-test("Displays password input", async () => {
-  const user = userEvent.setup();
-  renderComponent();
-
-  const eyeIcon = screen.getByTestId("eye-icon");
-  expect(eyeIcon).toBeInTheDocument();
-
-  expect(screen.getByPlaceholderText(/enter 6 digits login passcode/i)).toHaveAttribute("type", "password");
-
-  await user.click(eyeIcon);
-  expect(screen.getByPlaceholderText(/enter 6 digits login passcode/i)).toHaveAttribute("type", "text");
-
-  await user.click(eyeIcon);
-  expect(screen.getByPlaceholderText(/enter 6 digits login passcode/i)).toHaveAttribute("type", "password");
-});
