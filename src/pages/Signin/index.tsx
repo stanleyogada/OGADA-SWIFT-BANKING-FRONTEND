@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useSignin from "./hooks/useSignin";
 import SigninWrapper from "./SigninWrapper";
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 const Signin = () => {
   const { handleInputChange, handleSubmit, signInMutationState, formData } = useSignin();
@@ -18,22 +19,20 @@ const Signin = () => {
         <h2 className="sub-title">Welcome Back!</h2>
 
         <form onSubmit={handleSubmit} className="form">
-          <div className="form__input-wrapper">
-            <input
+          <div className="form__input-list">
+            <Input
               type="text"
               placeholder="Phone Number"
               name="phoneNumber"
               onChange={handleInputChange}
               value={formData.phoneNumber}
-              className="form__input form__input--phone-number"
             />
-            <input
+            <Input
               type="password"
               placeholder="Enter 6 digits login passcode"
               name="loginPasscode"
               onChange={handleInputChange}
               value={formData.loginPasscode}
-              className="form__input form__input--login-passcode"
             />
           </div>
 

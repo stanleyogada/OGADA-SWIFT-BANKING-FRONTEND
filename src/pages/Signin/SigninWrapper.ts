@@ -19,19 +19,11 @@ const SigninWrapper = styled.div`
     .form {
       padding: 0 13px;
 
-      &__input {
-        &-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 27px;
-          padding-bottom: 87px;
-        }
-
-        border: none;
-        border-radius: 9px;
-        background: ${COLORS.gray};
-        padding: 11px;
-        font-size: 15px;
+      &__input-list {
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+        padding-bottom: 87px;
       }
 
       &__actions {
