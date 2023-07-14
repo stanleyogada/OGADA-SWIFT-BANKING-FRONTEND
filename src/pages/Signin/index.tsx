@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import useSignin from "./hooks/useSignin";
 import SigninWrapper from "./SigninWrapper";
 import Button from "../../components/Button";
-import Input from "../../components/Input";
 import PhoneInput from "../../components/Input/PhoneInput";
+import PasswordInput from "../../components/Input/PasswordInput";
 
 const Signin = () => {
   const { handleInputChange, handleSubmit, signInMutationState, formData } = useSignin();
@@ -28,7 +28,7 @@ const Signin = () => {
               onChange={handleInputChange}
               value={formData.phoneNumber}
             />
-            <Input
+            <PasswordInput
               type="password"
               placeholder="Enter 6 digits login passcode"
               name="loginPasscode"

@@ -10,11 +10,21 @@ type TProps = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: string;
+  onClick?: () => void;
 };
 
-const Button = ({ icon, children, link, type, disabled, className }: TProps) => {
+const Button = ({
+  icon,
+  children,
+  link,
+  type,
+  disabled,
+  className,
+
+  onClick,
+}: TProps) => {
   const btn = (
-    <ButtonWrapper type={type} disabled={disabled} className={className}>
+    <ButtonWrapper type={type} disabled={disabled} className={className} onClick={onClick}>
       {icon && <div data-testid="btn-icon">{icon}</div>}
       <span>{children}</span>
     </ButtonWrapper>
