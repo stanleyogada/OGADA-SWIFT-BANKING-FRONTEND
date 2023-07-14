@@ -3,6 +3,7 @@ import useSignin from "./hooks/useSignin";
 import SigninWrapper from "./SigninWrapper";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import PhoneInput from "../../components/Input/PhoneInput";
 
 const Signin = () => {
   const { handleInputChange, handleSubmit, signInMutationState, formData } = useSignin();
@@ -20,7 +21,7 @@ const Signin = () => {
 
         <form onSubmit={handleSubmit} className="form">
           <div className="form__input-list">
-            <Input
+            <PhoneInput
               type="text"
               placeholder="Phone Number"
               name="phoneNumber"

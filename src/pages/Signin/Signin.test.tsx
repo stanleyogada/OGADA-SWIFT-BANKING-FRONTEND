@@ -157,3 +157,9 @@ test("Signing form works correctly onError", async () => {
 
   consoleErrorSpy.mockRestore();
 });
+
+test("Display +234 in phone input", () => {
+  renderComponent();
+
+  expect(screen.getByText("+234")).toBeInTheDocument();
+});

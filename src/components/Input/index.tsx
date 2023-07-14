@@ -1,15 +1,7 @@
 import InputWrapper from "./InputWrapper";
+import type { TInputProps } from "./types";
 
-type TProps = {
-  type?: string;
-  placeholder?: string;
-  name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
-  className?: string;
-};
-
-const Input = ({ type, placeholder, name, onChange, value, className }: TProps) => {
+const Input = ({ type, placeholder, name, onChange, value, className }: TInputProps) => {
   return (
     <InputWrapper
       type={type}
