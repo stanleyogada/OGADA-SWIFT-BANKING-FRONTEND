@@ -1,41 +1,8 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-hot-toast";
-
-import useAuth from "../../hooks/useAuth";
-
-type TFormData = {
-  phoneNumber: string;
-  loginPasscode: string;
-};
+import useSignin from "./hooks/useSignin";
 
 const Signin = () => {
-  const { handleSignIn, signInMutationState } = useAuth();
-
-  const [formData, setFormData] = useState<TFormData>({
-    phoneNumber: "",
-    loginPasscode: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSignIn(formData.phoneNumber, formData.loginPasscode);
-  };
-
-  useEffect(() => {
-    if (signInMutationState.isError) {
-      toast.error("Invalid credentials. Please try again!", {
-        position: "top-right",
-      });
-    }
-  }, [signInMutationState.isError]);
+  const { handleInputChange, handleSubmit, signInMutationState, formData } = useSignin();
 
   return (
     <div>
