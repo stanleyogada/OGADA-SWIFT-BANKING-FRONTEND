@@ -25,13 +25,18 @@ const PasswordInput = forwardRef((props: TInputProps, ref: ForwardedRef<HTMLInpu
 
   return (
     <PasswordInputWrapper>
-      <Input {...props} type={isPasswordVisible ? "text" : "password"} ref={ref} />
-
-      <Button type="button" onClick={handleTogglePasswordVisibility}>
-        <div className="eye" data-testid="eye-icon">
-          {isPasswordVisible ? icons.eyecloseIcon() : icons.eyeopenIcon()}
-        </div>
-      </Button>
+      <Input
+        {...props}
+        type={isPasswordVisible ? "text" : "password"}
+        ref={ref}
+        renderRight={() => (
+          <Button type="button" onClick={handleTogglePasswordVisibility}>
+            <div className="eye" data-testid="eye-icon">
+              {isPasswordVisible ? icons.eyecloseIcon() : icons.eyeopenIcon()}
+            </div>
+          </Button>
+        )}
+      />
     </PasswordInputWrapper>
   );
 });

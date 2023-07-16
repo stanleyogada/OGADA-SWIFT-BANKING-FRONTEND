@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PhoneInputWrapper = styled.div`
-  position: relative;
+  /* position: relative;
   display: flex;
 
   .country {
@@ -20,7 +20,7 @@ const PhoneInputWrapper = styled.div`
   .input__control {
     flex: 1;
     padding-left: 120px;
-  }
+  } */
 `;
 
 export default PhoneInputWrapper;

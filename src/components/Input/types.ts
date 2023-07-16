@@ -8,6 +8,8 @@ type TInputProps = {
   error?: string;
   label?: string;
   required?: boolean;
+  renderLeft?: () => React.ReactNode;
+  renderRight?: () => React.ReactNode;
 };
 
 export type { TInputProps };

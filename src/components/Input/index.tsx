@@ -5,12 +5,26 @@ import type { TInputProps } from "./types";
 
 const Input = forwardRef(
   (
-    { type, placeholder, name, onChange, value, className, error, label, required }: TInputProps,
+    {
+      type,
+      placeholder,
+      name,
+      onChange,
+      value,
+      className,
+      error,
+      label,
+      required,
+      renderLeft,
+      renderRight,
+    }: TInputProps,
     ref: ForwardedRef<HTMLInputElement | null>
   ) => {
     return (
       <InputWrapper>
         <div className="input__group">
+          {renderLeft && <div className="input__left">{renderLeft()}</div>}
+
           {label && (
             <label className="input__label" htmlFor={name}>
               {label}
@@ -34,6 +48,8 @@ const Input = forwardRef(
           />
 
           {error && <p className="input__error">{error}</p>}
+
+          {renderRight && <div className="input__right">{renderRight()}</div>}
         </div>
       </InputWrapper>
     );

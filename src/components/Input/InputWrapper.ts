@@ -15,6 +15,8 @@ const InputWrapper = styled.div`
     }
 
     &__label {
+      font-size: 11px;
+      padding-bottom: 5px;
     }
 
     &__required {

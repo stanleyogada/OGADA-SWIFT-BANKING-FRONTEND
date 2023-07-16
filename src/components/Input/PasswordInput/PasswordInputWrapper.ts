@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PasswordInputWrapper = styled.div`
-  position: relative;
+  /* position: relative;
   display: flex;
 
   .eye {
@@ -14,7 +14,7 @@ const PasswordInputWrapper = styled.div`
   .input__control {
     flex: 1;
     padding-right: 40px;
-  }
+  } */
 `;
 
 export default PasswordInputWrapper;

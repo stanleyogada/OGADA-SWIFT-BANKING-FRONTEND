@@ -25,6 +25,8 @@ const Signin = () => {
             <PhoneInput
               type="text"
               placeholder="Phone Number"
+              label="Phone Number"
+              required
               {...register("phoneNumber", {
                 required: "Phone number is required",
                 maxLength: { value: 10, message: "Phone number must be 10 digits" },
@@ -35,6 +37,8 @@ const Signin = () => {
             <PasswordInput
               type="password"
               placeholder="Enter 6 digits login passcode"
+              label="Login Passcode"
+              required
               {...register("loginPasscode", {
                 required: "Login passcode is required",
                 maxLength: { value: 6, message: "Login passcode must be 6 digits" },
