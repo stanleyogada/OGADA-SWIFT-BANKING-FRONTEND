@@ -1,10 +1,11 @@
+import { ForwardedRef, forwardRef, useState } from "react";
+
 import Input from "..";
 import PasswordInputWrapper from "./PasswordInputWrapper";
+import Button from "../../Button";
+import icons from "../../../constants/icons";
 
 import type { TInputProps } from "../types";
-import Button from "../../Button";
-import { ForwardedRef, forwardRef, useState } from "react";
-import icons from "../../../constants/icons";
 
 const usePasswordInput = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);

@@ -17,10 +17,11 @@ const useSignin = () => {
     formState: { errors },
   } = useForm<TFormValues>();
 
-  const handleSubmit = () =>
-    _handleSubmit((data: TFormValues) => {
+  const handleSubmit = () => {
+    return _handleSubmit((data: TFormValues) => {
       handleSignIn(data.phoneNumber, data.loginPasscode);
     });
+  };
 
   useEffect(() => {
     const handleToast = (message: string) => {

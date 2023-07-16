@@ -1,9 +1,10 @@
+import { ForwardedRef, forwardRef } from "react";
+
 import Input from "..";
 import PhoneInputWrapper from "./PhoneInputWrapper";
 import icons from "../../../constants/icons";
 
 import type { TInputProps } from "../types";
-import { ForwardedRef, forwardRef } from "react";
 
 const PhoneInput = forwardRef((props: TInputProps, ref: ForwardedRef<HTMLInputElement | null>) => {
   return (

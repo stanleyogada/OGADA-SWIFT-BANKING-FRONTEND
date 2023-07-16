@@ -1,4 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
+
 import Input from ".";
 import { COLORS } from "../../constants";
 

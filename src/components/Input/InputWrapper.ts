@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { COLORS } from "../../constants";
 
 const InputWrapper = styled.div`
