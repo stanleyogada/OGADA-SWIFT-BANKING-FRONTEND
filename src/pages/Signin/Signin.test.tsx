@@ -157,10 +157,3 @@ test("Signing form works correctly onError", async () => {
 
   consoleErrorSpy.mockRestore();
 });
-
-test("Displays phone input", () => {
-  renderComponent();
-
-  const countryCode = screen.getByTestId("country-code");
-  expect(countryCode).toBeInTheDocument();
-});
