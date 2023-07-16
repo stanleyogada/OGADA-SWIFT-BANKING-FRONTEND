@@ -64,25 +64,6 @@ const Signin = () => {
         </form>
       </main>
     </SigninWrapper>
-
-    // <form onSubmit={handleSubmit2((data) => console.log(data))}>
-    //   <input
-    //     type="text"
-    //     placeholder="First Name"
-    //     {...register("firstName", {
-    //       required: true,
-    //     })}
-    //   />
-    //   <input
-    //     type="text"
-    //     placeholder="Last Name"
-    //     {...register("lastName", {
-    //       required: true,
-    //     })}
-    //   />
-
-    //   <button type="submit">Submit</button>
-    // </form>
   );
 };
 
