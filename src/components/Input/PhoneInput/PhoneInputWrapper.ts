@@ -13,14 +13,13 @@ const PhoneInputWrapper = styled.div`
 
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-55%);
     left: 11px;
   }
 
-  input {
+  .input__control {
     flex: 1;
     padding-left: 120px;
-    border: 2px solid blue;
   }
 `;
 

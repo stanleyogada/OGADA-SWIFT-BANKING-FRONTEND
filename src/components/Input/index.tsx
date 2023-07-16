@@ -4,20 +4,24 @@ import type { TInputProps } from "./types";
 
 const Input = forwardRef(
   (
-    { type, placeholder, name, onChange, value, className }: TInputProps,
+    { type, placeholder, name, onChange, value, className, error }: TInputProps,
     ref: ForwardedRef<HTMLInputElement | null>
   ) => {
     return (
       <InputWrapper>
-        <input
-          ref={ref}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          onChange={onChange}
-          value={value}
-          className={className}
-        />
+        <div className="input__group">
+          <input
+            ref={ref}
+            type={type}
+            placeholder={placeholder}
+            name={name}
+            onChange={onChange}
+            value={value}
+            className={"input__control " + className}
+          />
+
+          {error && <p className="input__error">{error}</p>}
+        </div>
       </InputWrapper>
     );
   }

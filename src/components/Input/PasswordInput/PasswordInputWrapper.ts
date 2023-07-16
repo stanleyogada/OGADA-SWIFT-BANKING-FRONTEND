@@ -11,7 +11,7 @@ const PasswordInputWrapper = styled.div`
     right: 11px;
   }
 
-  input {
+  .input__control {
     flex: 1;
     padding-right: 40px;
   }

@@ -22,7 +22,7 @@ const SigninWrapper = styled.div`
       &__input-list {
         display: flex;
         flex-direction: column;
-        gap: 27px;
+        /* gap: 27px; */
         padding-bottom: 87px;
       }
 

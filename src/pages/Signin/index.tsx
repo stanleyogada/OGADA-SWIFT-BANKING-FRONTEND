@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import useSignin from "./hooks/useSignin";
 import SigninWrapper from "./SigninWrapper";
 import Button from "../../components/Button";
@@ -6,7 +7,7 @@ import PhoneInput from "../../components/Input/PhoneInput";
 import PasswordInput from "../../components/Input/PasswordInput";
 
 const Signin = () => {
-  const { handleSubmit, register, mutationState } = useSignin();
+  const { handleSubmit, register, mutationState, errors } = useSignin();
 
   return (
     <SigninWrapper>
@@ -25,17 +26,21 @@ const Signin = () => {
               type="text"
               placeholder="Phone Number"
               {...register("phoneNumber", {
-                required: true,
+                required: "Phone number is required",
+                maxLength: { value: 10, message: "Phone number must be 10 digits" },
+                minLength: { value: 10, message: "Phone number must be 10 digits" },
               })}
+              error={errors.phoneNumber?.message}
             />
             <PasswordInput
               type="password"
               placeholder="Enter 6 digits login passcode"
               {...register("loginPasscode", {
-                required: true,
-                maxLength: 6,
-                minLength: 6,
+                required: "Login passcode is required",
+                maxLength: { value: 6, message: "Login passcode must be 6 digits" },
+                minLength: { value: 6, message: "Login passcode must be 6 digits" },
               })}
+              error={errors.loginPasscode?.message}
             />
           </div>
 
