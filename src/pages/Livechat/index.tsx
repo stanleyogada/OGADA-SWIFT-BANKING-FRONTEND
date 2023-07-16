@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from "styled-components";
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -8,14 +7,14 @@ const Livechat = () => {
     <>
       <Header />
 
-      <MMain>
+      <MainWrapper>
         <div className="chat chat-container">
           <p className="chat chat-content">
             Hello Pay intelligenr robot will serve you, are you an agent or a
             user? What can I do for you?
           </p>
         </div>
-      </MMain>
+      </MainWrapper>
 
       <Footer />
     </>
@@ -25,7 +24,7 @@ const Livechat = () => {
 
 export default Livechat;
 
-const MMain = styled.main`
+const MainWrapper = styled.main`
 
     .chat.chat-container{
       width: calc(255rem / 16);

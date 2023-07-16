@@ -3,7 +3,7 @@ import Avatar from "../../components/Avatar/Avatar";
 import { COLORS } from "../../constants";
 import icons from "../../constants/icons";
 import Navigation from "../../components/Navigation";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CLIENT_ROUTES } from "../../constants";
 
 const Profile = () => {
@@ -38,7 +38,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <NavLink to={CLIENT_ROUTES.livechat}>
+          <Link to={CLIENT_ROUTES.liveChat}>
             <div className="profile-btn">
               <div className="btn-icon">{icons.userIcon()}</div>
               <div className="btn-content">
@@ -46,7 +46,7 @@ const Profile = () => {
                 <p className="sub-heading">seek support from us</p>
               </div>
             </div>
-          </NavLink>
+          </Link>
 
           <div className="profile-btn">
             <div className="btn-icon">{icons.starIcon()}</div>

@@ -74,7 +74,7 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.livechat,
+        path: CLIENT_ROUTES.liveChat,
         element: (
           <PageWrapper>
             <Livechat />

@@ -7,18 +7,18 @@ import { COLORS } from "../../constants";
 const Header = () => {
   return (
     <>
-    <MHeader>
+    <HeaderWrapper>
       <NavLink to={CLIENT_ROUTES.home}>
         <i>{icons.backIcon()}</i>
       </NavLink>
         <h2>Live Chat</h2>
      
-    </MHeader>
+    </HeaderWrapper>
    </>
   )
 }
 
-const MHeader = styled.header`
+const HeaderWrapper = styled.header`
   width: 100%;
   height: 100px;
   min-height: min-content;
