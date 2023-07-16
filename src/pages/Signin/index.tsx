@@ -6,11 +6,11 @@ import PhoneInput from "../../components/Input/PhoneInput";
 import PasswordInput from "../../components/Input/PasswordInput";
 
 const Signin = () => {
-  const { handleInputChange, handleSubmit, signInMutationState, formData } = useSignin();
+  const { handleSubmit, register, mutationState } = useSignin();
 
   return (
     <SigninWrapper>
-      {signInMutationState.isError && <p data-testid="error"></p>}
+      {mutationState.isError && <p data-testid="error"></p>}
 
       <header>
         <h1 className="page-title">Sign In</h1>
@@ -19,21 +19,23 @@ const Signin = () => {
       <main className="content">
         <h2 className="sub-title">Welcome Back!</h2>
 
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit()} className="form">
           <div className="form__input-list">
             <PhoneInput
               type="text"
               placeholder="Phone Number"
-              name="phoneNumber"
-              onChange={handleInputChange}
-              value={formData.phoneNumber}
+              {...register("phoneNumber", {
+                required: true,
+              })}
             />
             <PasswordInput
               type="password"
               placeholder="Enter 6 digits login passcode"
-              name="loginPasscode"
-              onChange={handleInputChange}
-              value={formData.loginPasscode}
+              {...register("loginPasscode", {
+                required: true,
+                maxLength: 6,
+                minLength: 6,
+              })}
             />
           </div>
 
@@ -49,14 +51,33 @@ const Signin = () => {
               </Link>
             </div>
 
-            <Button type="submit" disabled={signInMutationState.isLoading} className="form__actions-bottom">
+            <Button type="submit" disabled={mutationState.isLoading} className="form__actions-bottom">
               Sign In
-              {signInMutationState.isLoading && <p data-testid="loading"></p>}
+              {mutationState.isLoading && <p data-testid="loading"></p>}
             </Button>
           </div>
         </form>
       </main>
     </SigninWrapper>
+
+    // <form onSubmit={handleSubmit2((data) => console.log(data))}>
+    //   <input
+    //     type="text"
+    //     placeholder="First Name"
+    //     {...register("firstName", {
+    //       required: true,
+    //     })}
+    //   />
+    //   <input
+    //     type="text"
+    //     placeholder="Last Name"
+    //     {...register("lastName", {
+    //       required: true,
+    //     })}
+    //   />
+
+    //   <button type="submit">Submit</button>
+    // </form>
   );
 };
 

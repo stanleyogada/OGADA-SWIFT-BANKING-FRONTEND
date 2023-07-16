@@ -3,7 +3,7 @@ import PasswordInputWrapper from "./PasswordInputWrapper";
 
 import type { TInputProps } from "../types";
 import Button from "../../Button";
-import { useState } from "react";
+import { ForwardedRef, forwardRef, useState } from "react";
 import icons from "../../../constants/icons";
 
 const usePasswordInput = () => {
@@ -19,12 +19,12 @@ const usePasswordInput = () => {
   };
 };
 
-const PasswordInput = (props: TInputProps) => {
+const PasswordInput = forwardRef((props: TInputProps, ref: ForwardedRef<unknown>) => {
   const { isPasswordVisible, handleTogglePasswordVisibility } = usePasswordInput();
 
   return (
     <PasswordInputWrapper>
-      <Input {...props} type={isPasswordVisible ? "text" : "password"} />
+      <Input {...props} type={isPasswordVisible ? "text" : "password"} ref={ref} />
 
       <Button type="button" onClick={handleTogglePasswordVisibility}>
         <div className="eye" data-testid="eye-icon">
@@ -33,6 +33,6 @@ const PasswordInput = (props: TInputProps) => {
       </Button>
     </PasswordInputWrapper>
   );
-};
+});
 
 export default PasswordInput;

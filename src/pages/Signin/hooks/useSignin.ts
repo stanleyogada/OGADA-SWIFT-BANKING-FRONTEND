@@ -1,45 +1,44 @@
+import { useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
 import useAuth from "../../../hooks/useAuth";
 
-type TFormData = {
+type TFormValues = {
   phoneNumber: string;
   loginPasscode: string;
 };
 
 const useSignin = () => {
   const { handleSignIn, signInMutationState } = useAuth();
+  const {
+    register,
+    handleSubmit: _handleSubmit,
+    formState: { errors },
+  } = useForm<TFormValues>();
 
-  const [formData, setFormData] = useState<TFormData>({
-    phoneNumber: "",
-    loginPasscode: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSignIn(formData.phoneNumber, formData.loginPasscode);
-  };
+  const handleSubmit = () =>
+    _handleSubmit((data: TFormValues) => {
+      handleSignIn(data.phoneNumber, data.loginPasscode);
+    });
 
   useEffect(() => {
-    if (signInMutationState.isError) {
-      toast.error("Invalid credentials. Please try again!", {
+    const handleToast = (message: string) => {
+      toast.error(message, {
         position: "top-right",
       });
+    };
+
+    if (signInMutationState.isError) {
+      handleToast("Invalid credentials. Please try again!");
     }
   }, [signInMutationState.isError]);
 
   return {
-    handleInputChange,
+    mutationState: signInMutationState,
+    errors,
     handleSubmit,
-    signInMutationState,
-    formData,
+    register,
   };
 };
 
