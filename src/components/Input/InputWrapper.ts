@@ -14,6 +14,13 @@ const InputWrapper = styled.div`
       margin-top: 13px;
     }
 
+    &__label {
+    }
+
+    &__required {
+      color: ${COLORS.pink};
+    }
+
     &__control {
       flex: 1;
       border: none;

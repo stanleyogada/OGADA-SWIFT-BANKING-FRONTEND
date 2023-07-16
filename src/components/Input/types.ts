@@ -6,6 +6,8 @@ type TInputProps = {
   value?: string;
   className?: string;
   error?: string;
+  label?: string;
+  required?: boolean;
 };
 
 export type { TInputProps };
