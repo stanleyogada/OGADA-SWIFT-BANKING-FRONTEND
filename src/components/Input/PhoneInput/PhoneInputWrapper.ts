@@ -20,6 +20,7 @@ const PhoneInputWrapper = styled.div`
   input {
     flex: 1;
     padding-left: 120px;
+    border: 2px solid blue;
   }
 `;
 

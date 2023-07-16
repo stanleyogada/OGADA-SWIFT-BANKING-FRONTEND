@@ -19,7 +19,7 @@ const usePasswordInput = () => {
   };
 };
 
-const PasswordInput = forwardRef((props: TInputProps, ref: ForwardedRef<unknown>) => {
+const PasswordInput = forwardRef((props: TInputProps, ref: ForwardedRef<HTMLInputElement | null>) => {
   const { isPasswordVisible, handleTogglePasswordVisibility } = usePasswordInput();
 
   return (

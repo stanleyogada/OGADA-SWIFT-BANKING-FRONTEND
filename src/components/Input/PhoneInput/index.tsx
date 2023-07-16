@@ -5,7 +5,7 @@ import icons from "../../../constants/icons";
 import type { TInputProps } from "../types";
 import { ForwardedRef, forwardRef } from "react";
 
-const PhoneInput = forwardRef((props: TInputProps, ref: ForwardedRef<unknown>) => {
+const PhoneInput = forwardRef((props: TInputProps, ref: ForwardedRef<HTMLInputElement | null>) => {
   return (
     <PhoneInputWrapper>
       <div className="country" data-testid="country-code">
