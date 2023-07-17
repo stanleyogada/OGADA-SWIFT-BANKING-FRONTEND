@@ -1,21 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, createBrowserRouter, redirect, useLocation } from "react-router-dom";
+
 import { CLIENT_ROUTES } from "../../constants";
+import PageWrapper from "./../PageWrapper/index";
+
 import Home from "../../pages/Home";
 import About from "../../pages/About";
-import Welcome from "../../pages/Welcome";
-import Signin from "../../pages/Signin";
-import Signup from "../../pages/Signup";
 import Finance from "../../pages/Finance";
-import Rewards from "../../pages/Rewards";
 import Profile from "../../pages/Profile";
-import PageWrapper from "./../PageWrapper/index";
 import Cards from "./../../pages/Cards/index";
 import Account from "../../pages/Account.tsx";
 import Livechat from "../../pages/Livechat";
+import Signin from "../../pages/Signin";
+import Signup from "../../pages/Signup";
+import Welcome from "../../pages/Welcome";
 
 const ROUTER = createBrowserRouter([
   {
-    path: "/",
+    path: CLIENT_ROUTES.home,
     children: [
       {
         path: CLIENT_ROUTES.home,
@@ -85,6 +87,7 @@ const ROUTER = createBrowserRouter([
   },
   {
     path: "/auth",
+    element: <Redirect path={CLIENT_ROUTES.auth} />,
     children: [
       {
         path: CLIENT_ROUTES.authWelcome,
@@ -113,5 +116,16 @@ const ROUTER = createBrowserRouter([
     ],
   },
 ]);
+
+function Redirect({ path }: { path: string }) {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== path) return;
+    redirect(CLIENT_ROUTES.authSignin);
+  });
+
+  return <Outlet />;
+}
 
 export default ROUTER;
