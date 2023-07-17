@@ -23,14 +23,12 @@ const SigninWrapper = styled.div`
       &__input-list {
         display: flex;
         flex-direction: column;
-        /* gap: 27px; */
         padding-bottom: 87px;
       }
 
       &__actions {
         &-top {
           display: flex;
-          justify-content: space-between;
           font-size: 10px;
           padding-bottom: 32px;
 
@@ -39,11 +37,6 @@ const SigninWrapper = styled.div`
             display: flex;
             align-items: center;
             gap: 5px;
-          }
-
-          .form__link {
-            color: ${COLORS.blue};
-            text-decoration: none;
           }
         }
 
@@ -56,10 +49,16 @@ const SigninWrapper = styled.div`
 
           font-size: 15px;
           font-weight: 700;
+          margin-bottom: 20px;
 
           * {
             margin: 0;
           }
+        }
+
+        .form__link {
+          color: ${COLORS.blue};
+          text-decoration: none;
         }
       }
     }
