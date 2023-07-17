@@ -23,7 +23,6 @@ const Signin = () => {
         <form onSubmit={handleSubmit()} className="form">
           <div className="form__input-list">
             <PhoneInput
-              type="text"
               placeholder="Phone Number"
               required
               {...register("phoneNumber", {
@@ -34,7 +33,6 @@ const Signin = () => {
               error={errors.phoneNumber?.message}
             />
             <PasswordInput
-              type="password"
               placeholder="Enter 6 digits login passcode"
               required
               {...register("loginPasscode", {
