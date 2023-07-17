@@ -30,6 +30,7 @@ const InputWrapper = styled.div`
         &__control {
           &-wrapper {
             display: flex;
+            align-items: center;
           }
 
           &-left,
