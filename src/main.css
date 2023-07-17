@@ -5,15 +5,17 @@
   --white: #ffffff;
   --black: #000000;
   --purple: #3a00ff;
-  --lightpurple: #d7c9ff;
+  --lightPurple: #d7c9ff;
   --gray: #e8e8e8;
-  --lightyellow: #ffddb5;
+  --lightGray: #c0c0c0;
+  --darkGray: #5d5d5d;
+  --lightYellow: #ffddb5;
   --yellow: #ff8800;
-  --lightpink: #ffe4fd;
-  --lightblue: #b2d2f9;
+  --lightPink: #ffe4fd;
+  --lightBlue: #b2d2f9;
   --pink: #ff00dd;
   --orange: #ff8800;
-  --lightorange: #ffddb5;
+  --lightOrange: #ffddb5;
 }
 
 * {
