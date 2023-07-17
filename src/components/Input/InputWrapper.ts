@@ -5,14 +5,14 @@ import { COLORS } from "../../constants";
 const InputWrapper = styled.div`
   .input {
     &__group {
-      margin: 5px;
-      padding-bottom: 15px;
+      padding-bottom: 13px;
       position: relative;
 
       .input {
         &__label {
           font-size: 11px;
           position: relative;
+          font-weight: 600;
         }
 
         &__required {
@@ -28,26 +28,29 @@ const InputWrapper = styled.div`
           &-wrapper {
             display: flex;
             align-items: center;
+
+            background: ${COLORS.gray};
+            border-radius: 9px;
+            margin-top: 2px;
           }
 
           &-left,
           &-right {
             flex: 0 0 auto;
+            padding: 0 11px;
           }
 
           flex: 1;
 
-          margin-top: 5px;
           border: none;
-          border-radius: 9px;
-          background: ${COLORS.gray};
+          background: none;
           padding: 11px;
           font-size: 15px;
         }
 
         &__error {
           color: ${COLORS.pink};
-          font-size: 13px;
+          font-size: 12px;
           position: absolute;
           bottom: 0px;
           left: 0;
