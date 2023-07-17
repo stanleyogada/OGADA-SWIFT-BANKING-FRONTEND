@@ -7,6 +7,7 @@ test("Displays error message when error is passed", () => {
   render(<Input error="This is an error" />);
 
   const errorMessage = screen.getByText(/This is an error/i);
+  expect(screen.getByTestId("input-error")).toBeInTheDocument();
   expect(errorMessage).toBeInTheDocument();
   expect(errorMessage).toHaveStyle("color: " + COLORS.pink);
 
@@ -16,6 +17,7 @@ test("Displays error message when error is passed", () => {
 
   const errorMessage2 = screen.queryByText(/This is an error/i);
   expect(errorMessage2).not.toBeInTheDocument();
+  expect(screen.queryByTestId("input-error")).not.toBeInTheDocument();
 });
 
 test("Displays label when label is passed", () => {
@@ -47,9 +49,9 @@ test("`renderLeft` and `renderRight` props work correctly", () => {
   const right = screen.getByText(/Right/i);
 
   expect(left).toBeInTheDocument();
-  expect(left.parentElement).toHaveClass("input__left");
+  expect(left.parentElement).toHaveClass("input__control-left");
   expect(right).toBeInTheDocument();
-  expect(right.parentElement).toHaveClass("input__right");
+  expect(right.parentElement).toHaveClass("input__control-right");
 
   cleanup();
 

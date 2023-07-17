@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 const PhoneInputWrapper = styled.div`
+  border: solid blue;
+
+  .country {
+    border: solid red;
+  }
+
   /* position: relative;
   display: flex;
 

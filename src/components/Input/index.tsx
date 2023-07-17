@@ -23,8 +23,6 @@ const Input = forwardRef(
     return (
       <InputWrapper>
         <div className="input__group">
-          {renderLeft && <div className="input__left">{renderLeft()}</div>}
-
           {label && (
             <label className="input__label" htmlFor={name}>
               {label}
@@ -36,20 +34,27 @@ const Input = forwardRef(
             </label>
           )}
 
-          <input
-            ref={ref}
-            type={type}
-            placeholder={placeholder}
-            name={name}
-            id={name}
-            onChange={onChange}
-            value={value}
-            className={"input__control " + className}
-          />
+          <div className="input__control-wrapper">
+            {renderLeft && <div className="input__control-left">{renderLeft()}</div>}
 
-          {error && <p className="input__error">{error}</p>}
+            <input
+              ref={ref}
+              type={type}
+              placeholder={placeholder}
+              name={name}
+              id={name}
+              onChange={onChange}
+              value={value}
+              className={"input__control " + className}
+            />
 
-          {renderRight && <div className="input__right">{renderRight()}</div>}
+            {renderRight && <div className="input__control-right">{renderRight()}</div>}
+          </div>
+          {error && (
+            <p className="input__error" data-testid="input-error">
+              {error}
+            </p>
+          )}
         </div>
       </InputWrapper>
     );
