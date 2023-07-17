@@ -9,12 +9,13 @@ const Input = forwardRef(
       type,
       placeholder,
       name,
-      onChange,
       value,
       className,
       error,
       label,
       required,
+      info,
+      onChange,
       renderLeft,
       renderRight,
     }: TInputProps,
@@ -55,6 +56,8 @@ const Input = forwardRef(
               {error}
             </p>
           )}
+
+          {info && <p className="input__info">{info}</p>}
         </div>
       </InputWrapper>
     );

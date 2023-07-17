@@ -54,6 +54,10 @@ const InputWrapper = styled.div`
           bottom: 0px;
           left: 0;
         }
+
+        &__info {
+          color: ${COLORS.gray};
+        }
       }
     }
   }

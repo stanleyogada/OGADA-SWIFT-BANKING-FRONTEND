@@ -72,3 +72,18 @@ test("`renderLeft` and `renderRight` props work correctly", () => {
   expect(left3).not.toBeInTheDocument();
   expect(right3).toBeInTheDocument();
 });
+
+test("Displays info when info is passed", () => {
+  render(<Input info="This is info" />);
+
+  const info = screen.getByText(/This is info/i);
+  expect(info).toBeInTheDocument();
+  expect(info).toHaveStyle("color: " + COLORS.gray);
+
+  cleanup();
+
+  render(<Input />);
+
+  const info2 = screen.queryByText(/This is info/i);
+  expect(info2).not.toBeInTheDocument();
+});
