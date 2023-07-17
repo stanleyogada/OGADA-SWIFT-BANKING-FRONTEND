@@ -17,6 +17,8 @@ const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => 
   return data.token as string;
 };
 
+const fakePostRequest = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
 const postSignup = async ({
   firstName,
   lastName,
@@ -25,30 +27,34 @@ const postSignup = async ({
   phoneNumber,
   loginPasscode,
 }: TSignUpFormValues) => {
-  const { data } = await axiosInstance({
-    method: "POST",
-    url: ENDPOINTS.signUp,
-    data: {
-      first_name: firstName,
-      last_name: lastName,
-      phone: phoneNumber,
-      middle_name: middleName,
-      email: email,
-      login_passcode: loginPasscode,
-    },
-  });
+  // await axiosInstance({
+  //   method: "POST",
+  //   url: ENDPOINTS.signUp,
+  //   data: {
+  //     first_name: firstName,
+  //     last_name: lastName,
+  //     phone: phoneNumber,
+  //     middle_name: middleName,
+  //     email: email,
+  //     login_passcode: loginPasscode,
+  //   },
+  // });
 
-  return { email: data.email as string };
+  await fakePostRequest();
+
+  return { email };
 };
 
 const postSendEmail = async (email: string) => {
-  await axiosInstance({
-    method: "POST",
-    url: ENDPOINTS.sendEmail,
-    data: {
-      email: "test1@gmail.com",
-    },
-  });
+  // await axiosInstance({
+  //   method: "POST",
+  //   url: ENDPOINTS.sendEmail,
+  //   data: {
+  //     email,
+  //   },
+  // });
+
+  await fakePostRequest();
 
   return email;
 };

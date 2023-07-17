@@ -25,6 +25,7 @@ const useSignup = () => {
       acceptTerms: true,
     },
   });
+
   const navigate = useNavigate();
   const sendEmailMutation = useMutation(postSendEmail, {
     onSuccess: (email) => {

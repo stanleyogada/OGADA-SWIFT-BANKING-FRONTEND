@@ -70,18 +70,26 @@ test("Render content of Signup page correctly", () => {
   const goToSignin = screen.getByRole("link", { name: /already have an account\? sign in/i });
   expect(goToSignin).toHaveAttribute("href", "/auth/signin");
 
-  expect(pageTitle).toBeInTheDocument();
-  expect(firstNameInput).toBeInTheDocument();
-  expect(lastNameInput).toBeInTheDocument();
-  expect(middleNameInput).toBeInTheDocument();
-  expect(emailInput).toBeInTheDocument();
-  expect(phoneInput).toBeInTheDocument();
-  expect(phoneInputInfo).toBeInTheDocument(); // TODO: uncomment this line after adding this text to the page
-  expect(passwordInput).toBeInTheDocument();
-  expect(clickToAgree).toBeInTheDocument();
-  expect(termsAndConditions).toBeInTheDocument();
-  expect(confirmButton).toBeInTheDocument();
-  expect(goToSignin).toBeInTheDocument();
+  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
+
+  const Elements = [
+    pageTitle,
+    firstNameInput,
+    lastNameInput,
+    middleNameInput,
+    emailInput,
+    phoneInput,
+    phoneInputInfo,
+    passwordInput,
+    clickToAgree,
+    termsAndConditions,
+    confirmButton,
+    goToSignin,
+  ];
+
+  for (let element of Elements) {
+    expect(element).toBeInTheDocument();
+  }
 });
 
 // const handleAssertTypeInForm = async (
