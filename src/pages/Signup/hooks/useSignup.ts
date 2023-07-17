@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import useAuth from "../../../hooks/useAuth";
-
 type TFormValues = {
   firstName: string;
   lastName: string;
@@ -14,12 +12,43 @@ type TFormValues = {
 };
 
 const useSignup = () => {
-  const { handleSignIn, signInMutationState } = useAuth();
+  // const signUpMutation = useMutation(postSignup, {
+  //   onSuccess: () => {
+  //     // ...
+  //   }
+  // });
+  // const handleSignUp = ({
+  //   phone,
+  //   // ..
+  //  }: TFormValues) => {
+  //   signUpMutation.mutate({
+  //      // ..
+  //     });
+  //  };
+
+  // const signUpMutationState = useMemo(
+  //   () => ({
+  //     isLoading: signUpMutation.isLoading,
+  //     error: signUpMutation.error as AxiosError,
+  //     isError: signUpMutation.isError,
+  //   }),
+  //   [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
+  // );
+
   const { register, handleSubmit: _handleSubmit, formState } = useForm<TFormValues>();
 
   const handleSubmit = () => {
     return _handleSubmit((data: TFormValues) => {
-      handleSignIn(data.phoneNumber, data.loginPasscode);
+      // signUpMutation.mutate(...)
+
+      localStorage.setItem(
+        "signup-success",
+        JSON.stringify({
+          // email: data.email,
+          email: "test@gmail.com",
+          time: new Date().getTime(),
+        })
+      );
     });
   };
 
@@ -31,11 +60,11 @@ const useSignup = () => {
     alert(message); // TODO: Remove this after fixing toast
   };
 
-  useEffect(() => {
-    if (signInMutationState.isError) {
-      handleToast("Invalid credentials. Please try again!");
-    }
-  }, [signInMutationState.isError]);
+  // useEffect(() => {
+  //   if (signInMutationState.isError) {
+  //     handleToast("Invalid credentials. Please try again!");
+  //   }
+  // }, [signInMutationState.isError]);
 
   useEffect(() => {
     if (formState.errors.acceptTerms?.message) {
@@ -43,8 +72,11 @@ const useSignup = () => {
     }
   }, [formState.errors.acceptTerms?.message, formState.submitCount]);
 
+  // TODO: Add useEffect for signUpMutationState.isSuccess
+  // call another mutation to send email verification
+
   return {
-    mutationState: signInMutationState,
+    // mutationState: signInMutationState,
     errors: formState.errors,
     handleSubmit,
     register,
