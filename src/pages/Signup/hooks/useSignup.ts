@@ -36,7 +36,21 @@ const useSignup = () => {
   //   [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
   // );
 
-  const { register, handleSubmit: _handleSubmit, formState } = useForm<TFormValues>();
+  const {
+    register,
+    handleSubmit: _handleSubmit,
+    formState,
+  } = useForm<TFormValues>({
+    defaultValues: {
+      firstName: "Test",
+      lastName: "User",
+      middleName: "Mid guy",
+      email: "test@gmail.com",
+      phoneNumber: "1234567890",
+      loginPasscode: "123456",
+      acceptTerms: true,
+    },
+  });
 
   const handleSubmit = () => {
     return _handleSubmit((data: TFormValues) => {
