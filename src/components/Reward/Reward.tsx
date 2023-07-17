@@ -92,6 +92,10 @@ export default function Reward() {
 const RewardWrapper = styled.div`
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 160px;
 
   .curve {
     width: 100%;
@@ -118,9 +122,9 @@ const RewardWrapper = styled.div`
     background-color: ${COLORS.white};
     position: absolute;
     top: 25px;
-    left: 20px;
+    left: 18px;
     z-index: 10;
-    padding: 0 10px;
+    padding: 0 15px;
     border-radius: 4px;
     box-shadow: 2px 2px 2px 1px ${COLORS.gray}, -2px 2px 2px 1px ${COLORS.gray};
 
@@ -210,7 +214,7 @@ const RewardWrapper = styled.div`
     }
 
     .btn-wrapper {
-      margin: 20px 20px auto auto;
+      margin: 10px 5px auto auto;
       background: ${COLORS.lightblue};
       text-align: center;
       display: flex;
@@ -227,9 +231,9 @@ const RewardWrapper = styled.div`
   }
 
   .box-two {
-    margin-top: 10rem;
     padding: 0 10px;
     margin-left: 20px;
+    margin-bottom: 3.5rem;
     height: 250px;
     width: 90%;
     background-color: ${COLORS.white};
