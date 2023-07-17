@@ -41,4 +41,16 @@ const postSignup = async ({
   return { email: data.email as string };
 };
 
-export { postSignIn, postSignup };
+const postSendEmail = async (email: string) => {
+  await axiosInstance({
+    method: "POST",
+    url: ENDPOINTS.sendEmail,
+    data: {
+      email: "test1@gmail.com",
+    },
+  });
+
+  return email;
+};
+
+export { postSignIn, postSignup, postSendEmail };
