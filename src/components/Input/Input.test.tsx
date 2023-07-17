@@ -78,7 +78,7 @@ test("Displays info when info is passed", () => {
 
   const info = screen.getByText(/This is info/i);
   expect(info).toBeInTheDocument();
-  expect(info).toHaveStyle("color: " + COLORS.gray);
+  expect(info).toHaveStyle("color: " + COLORS.darkGray);
 
   cleanup();
 

@@ -5,6 +5,7 @@ import { COLORS } from "../../constants";
 const InputWrapper = styled.div`
   .input {
     &__group {
+      margin-bottom: 8px;
       padding-bottom: 13px;
       position: relative;
 
@@ -56,7 +57,10 @@ const InputWrapper = styled.div`
         }
 
         &__info {
-          color: ${COLORS.gray};
+          color: ${COLORS.darkGray};
+          font-size: 14px;
+          font-weight: 500;
+          margin: 5px 0;
         }
       }
     }
