@@ -40,11 +40,6 @@ const SigninWrapper = styled.div`
             align-items: center;
             gap: 5px;
           }
-
-          .form__link {
-            color: ${COLORS.blue};
-            text-decoration: none;
-          }
         }
 
         &-bottom {
@@ -56,10 +51,16 @@ const SigninWrapper = styled.div`
 
           font-size: 15px;
           font-weight: 700;
+          margin-bottom: 20px;
 
           * {
             margin: 0;
           }
+        }
+
+        .form__link {
+          color: ${COLORS.blue};
+          text-decoration: none;
         }
       }
     }

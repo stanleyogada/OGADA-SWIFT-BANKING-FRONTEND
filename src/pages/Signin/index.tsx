@@ -60,6 +60,10 @@ const Signin = () => {
               Sign In
               {mutationState.isLoading && <p data-testid="loading"></p>}
             </Button>
+
+            <Link to="/auth/signup" className="form__link">
+              Don't have an account? Sign Up
+            </Link>
           </div>
         </form>
       </main>

@@ -63,6 +63,9 @@ test("Render content of Signin page correctly", () => {
 
   const signInButton = screen.getByRole("button", { name: /sign in/i });
 
+  const goToSignup = screen.getByRole("link", { name: /don\'t have an account\? sign up/i });
+  expect(goToSignup).toHaveAttribute("href", "/auth/signup");
+
   expect(pageTitle).toBeInTheDocument();
   expect(subTitle).toBeInTheDocument();
   expect(phoneInput).toBeInTheDocument();
@@ -70,6 +73,7 @@ test("Render content of Signin page correctly", () => {
   expect(rememberLoginPasscode).toBeInTheDocument();
   expect(forgotLoginPasscode).toBeInTheDocument();
   expect(signInButton).toBeInTheDocument();
+  expect(goToSignup).toBeInTheDocument();
 });
 
 const handleAssertTypeInForm = async (
