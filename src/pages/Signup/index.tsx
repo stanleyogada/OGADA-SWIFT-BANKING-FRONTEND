@@ -88,7 +88,13 @@ const Signup = () => {
           <div className="form__actions">
             <div className="form__actions-top">
               <label htmlFor="click-to-confirm" className="form__checkbox">
-                <input type="checkbox" id="click-to-confirm" />
+                <input
+                  type="checkbox"
+                  id="click-to-confirm"
+                  {...register("acceptTerms", {
+                    required: "You must confirm",
+                  })}
+                />
                 Click “Confirm” to accept&nbsp;
               </label>
 
