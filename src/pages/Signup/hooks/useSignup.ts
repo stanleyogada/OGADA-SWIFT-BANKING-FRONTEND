@@ -1,49 +1,20 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+import { useForm } from "react-hook-form";
 
-type TFormValues = {
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  email: string;
-  phoneNumber: string;
-  loginPasscode: string;
-  acceptTerms: boolean;
-};
+import { postSignup } from "../../../services/auth";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
+
+import type { TSignUpFormValues } from "../type";
 
 const useSignup = () => {
-  const navigate = useNavigate();
-  // const signUpMutation = useMutation(postSignup, {
-  //   onSuccess: () => {
-  //     // ...
-  //   }
-  // });
-  // const handleSignUp = ({
-  //   phone,
-  //   // ..
-  //  }: TFormValues) => {
-  //   signUpMutation.mutate({
-  //      // ..
-  //     });
-  //  };
-
-  // const signUpMutationState = useMemo(
-  //   () => ({
-  //     isLoading: signUpMutation.isLoading,
-  //     error: signUpMutation.error as AxiosError,
-  //     isError: signUpMutation.isError,
-  //   }),
-  //   [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
-  // );
-
   const {
     register,
     handleSubmit: _handleSubmit,
     formState,
     getValues,
-  } = useForm<TFormValues>({
+  } = useForm<TSignUpFormValues>({
     defaultValues: {
       firstName: "Test",
       lastName: "User",
@@ -54,10 +25,25 @@ const useSignup = () => {
       acceptTerms: true,
     },
   });
+  const navigate = useNavigate();
+  const signUpMutation = useMutation(postSignup, {
+    onSuccess: () => {
+      // ...
+    },
+  });
+
+  // const signUpMutationState = useMemo(
+  //   () => ({
+  //     isLoading: signUpMutation.isLoading,
+  //     error: signUpMutation.error as AxiosError,
+  //     isError: signUpMutation.isError,
+  //   }),
+  //   [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
+  // );
 
   const handleSubmit = () => {
-    return _handleSubmit((data: TFormValues) => {
-      // signUpMutation.mutate(...)
+    return _handleSubmit((data: TSignUpFormValues) => {
+      signUpMutation.mutate(data);
     });
   };
 

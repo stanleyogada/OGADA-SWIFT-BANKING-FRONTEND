@@ -28,8 +28,8 @@ const useAuth = () => {
     },
   });
 
-  const handleSignIn = (phone: string, loginPasscode: string) => {
-    signInMutation.mutate({ phone, loginPasscode });
+  const handleSignIn = (phoneNumber: string, loginPasscode: string) => {
+    signInMutation.mutate({ phoneNumber, loginPasscode });
   };
 
   const handleSignOut = () => {

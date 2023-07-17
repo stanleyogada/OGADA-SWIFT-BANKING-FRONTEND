@@ -1,13 +1,9 @@
 import { useEffect } from "react";
-import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 
 import useAuth from "../../../hooks/useAuth";
 
-type TFormValues = {
-  phoneNumber: string;
-  loginPasscode: string;
-};
+import type { TSignInFormValues } from "../type";
 
 const useSignin = () => {
   const { handleSignIn, signInMutationState } = useAuth();
@@ -15,10 +11,10 @@ const useSignin = () => {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
-  } = useForm<TFormValues>();
+  } = useForm<TSignInFormValues>();
 
   const handleSubmit = () => {
-    return _handleSubmit((data: TFormValues) => {
+    return _handleSubmit((data: TSignInFormValues) => {
       handleSignIn(data.phoneNumber, data.loginPasscode);
     });
   };

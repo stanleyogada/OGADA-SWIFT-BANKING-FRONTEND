@@ -7,6 +7,7 @@ const QUERY_KEYS = {
 const ENDPOINTS = {
   currentUser: "/users/me",
   signIn: "/auth/signin",
+  signUp: "/auth/signup",
 };
 
 export { QUERY_KEYS, ENDPOINTS, BASE_URL };
