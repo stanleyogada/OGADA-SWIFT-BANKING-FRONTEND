@@ -27,8 +27,10 @@ const Signin = () => {
               required
               {...register("phoneNumber", {
                 required: "Phone number is required",
-                maxLength: { value: 10, message: "Phone number must be 10 digits" },
-                minLength: { value: 10, message: "Phone number must be 10 digits" },
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "Phone number must be 10 digits",
+                },
               })}
               error={errors.phoneNumber?.message}
             />
@@ -37,8 +39,10 @@ const Signin = () => {
               required
               {...register("loginPasscode", {
                 required: "Login passcode is required",
-                maxLength: { value: 6, message: "Login passcode must be 6 digits" },
-                minLength: { value: 6, message: "Login passcode must be 6 digits" },
+                pattern: {
+                  value: /^\d{6}$/,
+                  message: "Login passcode must be 6 digits",
+                },
               })}
               error={errors.loginPasscode?.message}
             />
