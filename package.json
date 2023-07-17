@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "start": "vite preview",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --no-cache"
   },
   "dependencies": {
     "react": "^18.2.0",

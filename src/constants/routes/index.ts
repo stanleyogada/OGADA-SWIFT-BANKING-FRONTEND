@@ -6,6 +6,7 @@ const CLIENT_ROUTES = {
   finance: "/finance",
   account: "/account",
   cards: "/cards",
+  auth: "/auth",
   authWelcome: "/auth/welcome",
   authSignin: "/auth/signin",
   authSignup: "/auth/signup",
