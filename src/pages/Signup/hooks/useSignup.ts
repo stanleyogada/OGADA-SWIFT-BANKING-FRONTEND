@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { LOCAL_STORAGE_KEYS } from "../../../constants";
+import { Navigate } from "react-router-dom";
 
 type TFormValues = {
   firstName: string;
