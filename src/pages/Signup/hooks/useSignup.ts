@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { LOCAL_STORAGE_KEYS } from "../../../constants";
 
 type TFormValues = {
   firstName: string;
@@ -42,10 +43,10 @@ const useSignup = () => {
       // signUpMutation.mutate(...)
 
       localStorage.setItem(
-        "signup-success",
+        LOCAL_STORAGE_KEYS.signupSuccess,
         JSON.stringify({
-          // email: data.email,
-          email: "test@gmail.com",
+          // email: data.email, // TODO: uncomment this after adding mutation
+          email: "test@gmail.com", // TODO: remove this after adding mutation
           time: new Date().getTime(),
         })
       );
