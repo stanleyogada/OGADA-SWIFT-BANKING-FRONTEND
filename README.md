@@ -9,7 +9,7 @@ An application solely for education purposes!
 1. First Run `node -v` if your version **< v12** Then update to the latest node version - https://nodejs.org/en/download/, Otherwise don't download the latest
 2. Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 3. Run `cd Opay-Demo-Frontend`
-4. Run `npm i --legacy-peer-deps`
+4. Run `npm i --force --legacy-peer-deps`
 5. Run `npm run dev`
 
 #
@@ -23,7 +23,7 @@ An application solely for education purposes!
 
 ## How to contribute
 
-1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main && npm i`
+1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main && npm i --force --legacy-peer-deps`
 2. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 3. Make your changes.
 4. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
