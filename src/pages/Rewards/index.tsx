@@ -1,5 +1,4 @@
 import Navigation from "../../components/Navigation";
-import GlobalStyles from "../../components/styles/Global";
 import styled from "styled-components";
 import { COLORS } from "./../../constants/colors/index";
 
@@ -32,10 +31,12 @@ const RewardsWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px 10px 20px;
+
     .reward {
       font-weight: 700;
       font-size: 25px;
     }
+
     .rules {
       font-weight: 400;
       font-size: 16px;

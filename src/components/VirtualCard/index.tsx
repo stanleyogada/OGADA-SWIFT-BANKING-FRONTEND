@@ -23,7 +23,7 @@ const VirtualCard = () => {
         </div>
         <div className="safety-wrapper">
           <Button>
-            <div className="safety-icon">{icons.bluecardIcon()}</div>
+            <div className="safety-icon">{icons.blueCardIcon()}</div>
           </Button>
           <div className="safety-info">
             <h3 className="safety-text">Safety</h3>
