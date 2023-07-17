@@ -58,6 +58,19 @@ const Signup = () => {
               })}
               error={errors.email?.message}
             />
+            <PasswordInput
+              placeholder="Enter 6 digits login passcode"
+              required
+              {...register("loginPasscode", {
+                required: "Login passcode is required",
+                pattern: {
+                  value: /^\d{6}$/,
+                  message: "Login passcode must be 6 digits",
+                },
+              })}
+              error={errors.loginPasscode?.message}
+            />
+
             <PhoneInput
               placeholder="Phone Number"
               required
@@ -70,18 +83,6 @@ const Signup = () => {
               })}
               error={errors.phoneNumber?.message}
               info="This would be your account number"
-            />
-            <PasswordInput
-              placeholder="Enter 6 digits login passcode"
-              required
-              {...register("loginPasscode", {
-                required: "Login passcode is required",
-                pattern: {
-                  value: /^\d{6}$/,
-                  message: "Login passcode must be 6 digits",
-                },
-              })}
-              error={errors.loginPasscode?.message}
             />
           </div>
 
