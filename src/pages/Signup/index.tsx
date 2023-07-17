@@ -23,6 +23,7 @@ const Signup = () => {
           <div className="form__input-list">
             <Input
               placeholder="First Name"
+              label="First Name"
               required
               {...register("firstName", {
                 required: "First Name is required",
@@ -32,6 +33,7 @@ const Signup = () => {
             />
             <Input
               placeholder="Last Name"
+              label="Last Name"
               required
               {...register("lastName", {
                 required: "Last Name is required",
@@ -41,6 +43,7 @@ const Signup = () => {
             />
             <Input
               placeholder="Middle Name"
+              label="Middle Name"
               {...register("middleName", {
                 minLength: { value: 3, message: "Middle Name must be 3 digits or more" },
               })}
@@ -48,6 +51,7 @@ const Signup = () => {
             />
             <Input
               placeholder="Email"
+              label="Email"
               required
               {...register("email", {
                 required: "Email is required",
@@ -60,6 +64,7 @@ const Signup = () => {
             />
             <PasswordInput
               placeholder="Enter 6 digits login passcode"
+              label="Login Passcode"
               required
               {...register("loginPasscode", {
                 required: "Login passcode is required",
@@ -72,6 +77,7 @@ const Signup = () => {
             />
             <PhoneInput
               placeholder="Phone Number"
+              label="Phone Number"
               required
               {...register("phoneNumber", {
                 required: "Phone number is required",
