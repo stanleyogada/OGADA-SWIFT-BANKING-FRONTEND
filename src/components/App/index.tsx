@@ -2,7 +2,7 @@ import { RouterProvider } from "react-router-dom";
 
 import useSplash from "./hooks/useSplash";
 import ROUTER from "./router";
-// import SplashScreen from "../SplashScreen/index";
+import SplashScreen from "../SplashScreen";
 
 function App() {
   // const { isAppLoading } = useSplash();
