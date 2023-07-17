@@ -114,12 +114,13 @@ const RewardWrapper = styled.div`
 
   .box-one {
     height: 230px;
-    width: 350px;
+    width: 90%;
     background-color: ${COLORS.white};
     position: absolute;
     top: 25px;
     left: 20px;
     z-index: 10;
+    padding: 0 10px;
     border-radius: 4px;
     box-shadow: 2px 2px 2px 1px ${COLORS.gray}, -2px 2px 2px 1px ${COLORS.gray};
 
@@ -227,10 +228,10 @@ const RewardWrapper = styled.div`
 
   .box-two {
     margin-top: 10rem;
-
+    padding: 0 10px;
     margin-left: 20px;
     height: 250px;
-    width: 353px;
+    width: 90%;
     background-color: ${COLORS.white};
     border-radius: 4px;
     box-shadow: 2px 2px 2px ${COLORS.gray}, -2px 2px 2px 2px ${COLORS.gray};
