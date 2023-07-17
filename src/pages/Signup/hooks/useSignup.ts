@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { LOCAL_STORAGE_KEYS } from "../../../constants";
-import { Navigate } from "react-router-dom";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
+import { useNavigate } from "react-router-dom";
 
 type TFormValues = {
   firstName: string;
@@ -14,6 +14,7 @@ type TFormValues = {
 };
 
 const useSignup = () => {
+  const navigate = useNavigate();
   // const signUpMutation = useMutation(postSignup, {
   //   onSuccess: () => {
   //     // ...
@@ -41,6 +42,7 @@ const useSignup = () => {
     register,
     handleSubmit: _handleSubmit,
     formState,
+    getValues,
   } = useForm<TFormValues>({
     defaultValues: {
       firstName: "Test",
@@ -56,15 +58,6 @@ const useSignup = () => {
   const handleSubmit = () => {
     return _handleSubmit((data: TFormValues) => {
       // signUpMutation.mutate(...)
-
-      localStorage.setItem(
-        LOCAL_STORAGE_KEYS.signupSuccess,
-        JSON.stringify({
-          // email: data.email, // TODO: uncomment this after adding mutation
-          email: "test@gmail.com", // TODO: remove this after adding mutation
-          time: new Date().getTime(),
-        })
-      );
     });
   };
 
@@ -90,6 +83,32 @@ const useSignup = () => {
 
   // TODO: Add useEffect for signUpMutationState.isSuccess
   // call another mutation to send email verification
+
+  // useEffect(()=> {
+  //   sendEmailVerification.mutate({
+  //     email: getValues("email"),
+  //   });
+
+  // }, [signInMutationState.isSuccess])
+
+  useEffect(() => {
+    //TODO: remove this when the signup mutation is implemented
+    if (formState.isSubmitSuccessful) {
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.signupSuccess,
+        JSON.stringify({
+          // email: data.email, // TODO: uncomment this after adding mutation
+          email: "test@gmail.com", // TODO: remove this after adding mutation
+          time: new Date().getTime(),
+        })
+      );
+
+      navigate(CLIENT_ROUTES.authEmail);
+    }
+  }, [
+    formState.isSubmitSuccessful, // TODO: remove this when the signup mutation is implemented
+    // signUpMutationState.isSuccess // TODO: uncomment this when the signup mutation is implemented
+  ]);
 
   return {
     // mutationState: signInMutationState,

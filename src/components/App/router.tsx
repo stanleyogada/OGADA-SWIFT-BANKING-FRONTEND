@@ -13,6 +13,7 @@ import Account from "../../pages/Account.tsx";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
 import Welcome from "../../pages/Welcome";
+import VerifyEmail from "../VerifyEmail";
 
 const ROUTER = createBrowserRouter([
   {
@@ -101,6 +102,15 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Signup />
+          </PageWrapper>
+        ),
+      },
+
+      {
+        path: CLIENT_ROUTES.authEmail,
+        element: (
+          <PageWrapper>
+            <VerifyEmail />
           </PageWrapper>
         ),
       },
