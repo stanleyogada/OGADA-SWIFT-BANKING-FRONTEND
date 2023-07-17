@@ -69,6 +69,7 @@ const Signup = () => {
                 },
               })}
               error={errors.phoneNumber?.message}
+              info="This would be your account number"
             />
             <PasswordInput
               placeholder="Enter 6 digits login passcode"

@@ -59,7 +59,7 @@ test("Render content of Signup page correctly", () => {
   const middleNameInput = screen.getByPlaceholderText(/middle name/i);
   const emailInput = screen.getByPlaceholderText(/email/i);
   const phoneInput = screen.getByPlaceholderText(/phone number/i);
-  // const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
+  const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
   const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
 
   const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
@@ -76,7 +76,7 @@ test("Render content of Signup page correctly", () => {
   expect(middleNameInput).toBeInTheDocument();
   expect(emailInput).toBeInTheDocument();
   expect(phoneInput).toBeInTheDocument();
-  // expect(phoneInputInfo).toBeInTheDocument(); // TODO: uncomment this line after adding this text to the page
+  expect(phoneInputInfo).toBeInTheDocument(); // TODO: uncomment this line after adding this text to the page
   expect(passwordInput).toBeInTheDocument();
   expect(clickToAgree).toBeInTheDocument();
   expect(termsAndConditions).toBeInTheDocument();
