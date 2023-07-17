@@ -5,11 +5,11 @@ import ROUTER from "./router";
 import SplashScreen from "../SplashScreen";
 
 function App() {
-  // const { isAppLoading } = useSplash();
+  const { isAppLoading } = useSplash();
 
-  // if (isAppLoading) {
-  //   return <SplashScreen />;
-  // }
+  if (isAppLoading) {
+    return <SplashScreen />;
+  }
 
   return <RouterProvider router={ROUTER} />;
 }
