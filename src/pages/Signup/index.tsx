@@ -30,7 +30,6 @@ const Signup = () => {
               })}
               error={errors.firstName?.message}
             />
-
             <Input
               placeholder="Last Name"
               required
@@ -40,7 +39,6 @@ const Signup = () => {
               })}
               error={errors.lastName?.message}
             />
-
             <Input
               placeholder="Middle Name"
               {...register("middleName", {
@@ -48,7 +46,6 @@ const Signup = () => {
               })}
               error={errors.middleName?.message}
             />
-
             <Input
               placeholder="Email"
               required
