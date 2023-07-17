@@ -42,7 +42,6 @@ const InputWrapper = styled.div`
 
           flex: 1;
 
-          border: none;
           background: none;
           padding: 11px;
           font-size: 15px;
