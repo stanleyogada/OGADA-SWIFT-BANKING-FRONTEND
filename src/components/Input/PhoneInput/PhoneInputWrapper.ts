@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const PhoneInputWrapper = styled.div`
-  border: solid blue;
-
   .country {
     display: flex;
     gap: 11px;
