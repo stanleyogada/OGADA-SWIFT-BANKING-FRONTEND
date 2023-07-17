@@ -70,7 +70,6 @@ const Signup = () => {
               })}
               error={errors.loginPasscode?.message}
             />
-
             <PhoneInput
               placeholder="Phone Number"
               required
