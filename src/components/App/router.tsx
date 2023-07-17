@@ -13,7 +13,7 @@ import Account from "../../pages/Account.tsx";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
 import Welcome from "../../pages/Welcome";
-import VerifyEmail from "../VerifyEmail";
+import VerifyEmail from "../../pages/VerifyEmail";
 
 const ROUTER = createBrowserRouter([
   {
