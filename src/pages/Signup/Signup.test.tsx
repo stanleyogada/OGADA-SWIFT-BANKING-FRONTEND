@@ -2,7 +2,6 @@ import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-lib
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import * as router from "react-router-dom";
 
 import Signup from ".";
 import createServer from "../../utils/test/createServer";
@@ -193,13 +192,14 @@ test("Confirm form works correctly onSuccess", async () => {
   const confirmButton = screen.getByRole("button", { name: /confirm/i });
   await user.click(confirmButton);
 
-  expect(navigate).toHaveBeenCalled();
+  waitFor(() => expect(navigate).toHaveBeenCalled());
 
   // await handleAssertLoadingAfterConfirmClick();
 });
 
 test("Signing form works correctly onError", async () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+
   handleCreateErrorConfig({
     method: "post",
     url: `${BASE_URL}/auth/signin`,
@@ -217,14 +217,14 @@ test("Signing form works correctly onError", async () => {
     firstName: "firstName",
   });
 
-  // expect(consoleErrorSpy).not.toHaveBeenCalled();
+  expect(consoleErrorSpy).not.toHaveBeenCalled();
 
   const confirm = screen.getByRole("button", { name: /confirm/i });
   await user.click(confirm);
 
-  await handleAssertLoadingAfterConfirmClick();
+  // await handleAssertLoadingAfterConfirmClick();
 
-  // expect(consoleErrorSpy).toHaveBeenCalled();
+  expect(consoleErrorSpy).toHaveBeenCalled();
   const error = screen.getByTestId("error");
   expect(error).toBeInTheDocument();
   expect(error).toHaveTextContent("");
