@@ -10,21 +10,7 @@ import type { TSignUpFormValues } from "../type";
 import { AxiosError } from "axios";
 
 const useSignup = () => {
-  const {
-    register,
-    handleSubmit: _handleSubmit,
-    formState,
-  } = useForm<TSignUpFormValues>({
-    defaultValues: {
-      firstName: "Test",
-      lastName: "User",
-      middleName: "Mid guy",
-      email: "test@gmail.com",
-      phoneNumber: "1234567890",
-      loginPasscode: "123456",
-      acceptTerms: true,
-    },
-  });
+  const { register, handleSubmit: _handleSubmit, formState } = useForm<TSignUpFormValues>({});
 
   const navigate = useNavigate();
   const sendEmailMutation = useMutation(postSendEmail, {
