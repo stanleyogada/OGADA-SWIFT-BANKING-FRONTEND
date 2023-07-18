@@ -17,6 +17,8 @@ const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => 
   return data.token as string;
 };
 
+// const fakePostRequest = () => new Promise((resolve) => setTimeout(resolve, 1000));
+
 const postSignup = async ({
   firstName,
   lastName,
@@ -25,7 +27,7 @@ const postSignup = async ({
   phoneNumber,
   loginPasscode,
 }: TSignUpFormValues) => {
-  const { data } = await axiosInstance({
+  await axiosInstance({
     method: "POST",
     url: ENDPOINTS.signUp,
     data: {
@@ -38,7 +40,23 @@ const postSignup = async ({
     },
   });
 
-  return { email: data.email as string };
+  // await fakePostRequest();
+
+  return { email };
 };
 
-export { postSignIn, postSignup };
+const postSendEmail = async (email: string) => {
+  await axiosInstance({
+    method: "POST",
+    url: ENDPOINTS.sendEmail,
+    data: {
+      email,
+    },
+  });
+
+  // await fakePostRequest();
+
+  return email;
+};
+
+export { postSignIn, postSignup, postSendEmail };

@@ -8,16 +8,11 @@ import PasswordInput from "../../components/Input/PasswordInput";
 import Input from "../../components/Input";
 
 const Signup = () => {
-  const {
-    handleSubmit,
-    register,
-    // mutationState,
-    errors,
-  } = useSignup();
+  const { handleSubmit, register, mutationState, errors } = useSignup();
 
   return (
     <SignupWrapper>
-      {/* {mutationState.isError && <p data-testid="error"></p>} */}
+      {mutationState.isError && <p data-testid="error"></p>}
 
       <header>
         <h1 className="page-title">Create a new account</h1>
@@ -114,13 +109,9 @@ const Signup = () => {
               </Link>
             </div>
 
-            <Button
-              type="submit"
-              // disabled={mutationState.isLoading}
-              className="form__actions-bottom"
-            >
+            <Button type="submit" disabled={mutationState.isLoading} className="form__actions-bottom">
               Confirm
-              {/* {mutationState.isLoading && <p data-testid="loading"></p>} */}
+              {mutationState.isLoading && <p data-testid="loading">Loading...</p>}
             </Button>
 
             <Link to="/auth/signin" className="form__link">

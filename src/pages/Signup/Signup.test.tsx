@@ -70,62 +70,99 @@ test("Render content of Signup page correctly", () => {
   const goToSignin = screen.getByRole("link", { name: /already have an account\? sign in/i });
   expect(goToSignin).toHaveAttribute("href", "/auth/signin");
 
-  expect(pageTitle).toBeInTheDocument();
-  expect(firstNameInput).toBeInTheDocument();
-  expect(lastNameInput).toBeInTheDocument();
-  expect(middleNameInput).toBeInTheDocument();
-  expect(emailInput).toBeInTheDocument();
-  expect(phoneInput).toBeInTheDocument();
-  expect(phoneInputInfo).toBeInTheDocument(); // TODO: uncomment this line after adding this text to the page
-  expect(passwordInput).toBeInTheDocument();
-  expect(clickToAgree).toBeInTheDocument();
-  expect(termsAndConditions).toBeInTheDocument();
-  expect(confirmButton).toBeInTheDocument();
-  expect(goToSignin).toBeInTheDocument();
+  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
+
+  const Elements = [
+    pageTitle,
+    firstNameInput,
+    lastNameInput,
+    middleNameInput,
+    emailInput,
+    phoneInput,
+    phoneInputInfo,
+    passwordInput,
+    clickToAgree,
+    termsAndConditions,
+    confirmButton,
+    goToSignin,
+  ];
+
+  for (let element of Elements) {
+    expect(element).toBeInTheDocument();
+  }
 });
 
-// const handleAssertTypeInForm = async (
-//   user: ReturnType<typeof userEvent.setup>,
-//   formData: { phone: string; loginPasscode: string }
-// ) => {
-//   const phoneInput = screen.getByPlaceholderText(/phone number/i);
-//   const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+const handleAssertTypeInForm = async (
+  user: ReturnType<typeof userEvent.setup>,
+  formData: {
+    phone: string;
+    loginPasscode: string;
+    email: string;
+    middleName: string;
+    lastName: string;
+    firstName: string;
+  }
+) => {
+  const phoneInput = screen.getByPlaceholderText(/phone number/i);
+  const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+  const email = screen.getByPlaceholderText(/email/i);
+  const middleName = screen.getByPlaceholderText(/middle name/i);
+  const lastName = screen.getByPlaceholderText(/last name/i);
+  const firstName = screen.getByPlaceholderText(/first name/i);
 
-//   await user.type(phoneInput, formData.phone);
-//   await user.type(loginPasscodeInput, formData.loginPasscode);
+  await user.type(phoneInput, formData.phone);
+  await user.type(loginPasscodeInput, formData.loginPasscode);
+  await user.type(email, formData.email);
+  await user.type(middleName, formData.middleName);
+  await user.type(lastName, formData.lastName);
+  await user.type(firstName, formData.firstName);
 
-//   expect(phoneInput).toHaveValue(formData.phone);
-//   expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
-// };
+  const Inputs = [
+    { input: loginPasscodeInput, data: formData.loginPasscode },
+    { input: email, data: formData.email },
+    { input: middleName, data: formData.middleName },
+    { input: lastName, data: formData.lastName },
+    { input: firstName, data: formData.firstName },
+  ];
 
-// const handleAssertLoadingAfterSubmitClick = async () => {
-//   const signInButton = screen.getByRole("button", { name: /sign in/i });
+  for (let input of Inputs) {
+    expect(input.input).toHaveValue(input.data);
+  }
+};
+const handleAssertLoadingAfterConfirmClick = async () => {
+  const signInButton = screen.getByRole("button", { name: /confirm/i });
 
-//   const getLoadingElement = () => screen.getByTestId("loading");
-//   expect(getLoadingElement()).toBeInTheDocument();
+  const getLoadingElement = () => screen.getByTestId("loading");
+  expect(getLoadingElement()).toBeInTheDocument();
 
-//   expect(signInButton).toBeDisabled();
-//   await waitForElementToBeRemoved(() => getLoadingElement());
+  expect(signInButton).toBeDisabled();
+  await waitForElementToBeRemoved(() => getLoadingElement());
 
-//   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-//   expect(signInButton).not.toBeDisabled();
-// };
+  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
+  expect(signInButton).not.toBeDisabled();
+};
 
-// test("Signing form works correctly onLoading", async () => {
-//   const user = userEvent.setup();
-//   renderComponent();
+test("Signup form works correctly onLoading", async () => {
+  const user = userEvent.setup();
+  renderComponent();
 
-//   await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  await handleAssertTypeInForm(user, {
+    phone: "1234567890",
+    loginPasscode: "123456",
+    email: "example@gmail.com",
+    middleName: "middleName",
+    lastName: "lastName",
+    firstName: "firstName",
+  });
+  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
 
-//   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
+  const signInButton = screen.getByRole("button", { name: /confirm/i });
+  expect(signInButton).not.toBeDisabled();
 
-//   const signInButton = screen.getByRole("button", { name: /sign in/i });
-//   expect(signInButton).not.toBeDisabled();
+  await user.click(signInButton);
 
-//   await user.click(signInButton);
-
-//   await handleAssertLoadingAfterSubmitClick();
-// });
+  await handleAssertLoadingAfterConfirmClick();
+});
 
 // test("Signing form works correctly onSuccess", async () => {
 //   const user = userEvent.setup();
