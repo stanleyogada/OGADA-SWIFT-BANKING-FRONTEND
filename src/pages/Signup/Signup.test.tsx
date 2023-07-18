@@ -1,11 +1,19 @@
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
+import * as router from "react-router-dom";
 
 import Signup from ".";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL } from "../../constants/services";
+
+const navigate = jest.fn() as jest.Mock;
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => navigate,
+}));
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -109,6 +117,7 @@ const handleAssertTypeInForm = async (
   const middleName = screen.getByPlaceholderText(/middle name/i);
   const lastName = screen.getByPlaceholderText(/last name/i);
   const firstName = screen.getByPlaceholderText(/first name/i);
+  const check = screen.getByRole("checkbox");
 
   await user.type(phoneInput, formData.phone);
   await user.type(loginPasscodeInput, formData.loginPasscode);
@@ -116,8 +125,10 @@ const handleAssertTypeInForm = async (
   await user.type(middleName, formData.middleName);
   await user.type(lastName, formData.lastName);
   await user.type(firstName, formData.firstName);
+  await user.click(check);
 
   const Inputs = [
+    { input: phoneInput, data: formData.phone },
     { input: loginPasscodeInput, data: formData.loginPasscode },
     { input: email, data: formData.email },
     { input: middleName, data: formData.middleName },
@@ -125,21 +136,23 @@ const handleAssertTypeInForm = async (
     { input: firstName, data: formData.firstName },
   ];
 
-  for (let input of Inputs) {
-    expect(input.input).toHaveValue(input.data);
+  for (let unit of Inputs) {
+    expect(unit.input).toHaveValue(unit.data);
   }
+
+  expect(check).toBeChecked;
 };
 const handleAssertLoadingAfterConfirmClick = async () => {
-  const signInButton = screen.getByRole("button", { name: /confirm/i });
+  const ConfirmButton = screen.getByRole("button", { name: /confirm/i });
 
   const getLoadingElement = () => screen.getByTestId("loading");
   expect(getLoadingElement()).toBeInTheDocument();
 
-  expect(signInButton).toBeDisabled();
+  expect(ConfirmButton).toBeDisabled();
   await waitForElementToBeRemoved(() => getLoadingElement());
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-  expect(signInButton).not.toBeDisabled();
+  expect(ConfirmButton).not.toBeDisabled();
 };
 
 test("Signup form works correctly onLoading", async () => {
@@ -156,53 +169,65 @@ test("Signup form works correctly onLoading", async () => {
   });
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
 
-  const signInButton = screen.getByRole("button", { name: /confirm/i });
-  expect(signInButton).not.toBeDisabled();
+  const confirmButton = screen.getByRole("button", { name: /confirm/i });
+  expect(confirmButton).not.toBeDisabled();
 
-  await user.click(signInButton);
+  await user.click(confirmButton);
 
   // await handleAssertLoadingAfterConfirmClick();
 });
 
-// test("Signing form works correctly onSuccess", async () => {
-//   const user = userEvent.setup();
-//   renderComponent();
+test("Confirm form works correctly onSuccess", async () => {
+  const user = userEvent.setup();
+  renderComponent();
 
-//   await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  await handleAssertTypeInForm(user, {
+    phone: "1234567890",
+    loginPasscode: "123456",
+    email: "example@gmail.com",
+    middleName: "middleName",
+    lastName: "lastName",
+    firstName: "firstName",
+  });
 
-//   expect(window.location.reload).not.toHaveBeenCalled();
+  const confirmButton = screen.getByRole("button", { name: /confirm/i });
+  await user.click(confirmButton);
 
-//   const signInButton = screen.getByRole("button", { name: /sign in/i });
-//   await user.click(signInButton);
+  expect(navigate).toHaveBeenCalled();
 
-//   await handleAssertLoadingAfterSubmitClick();
+  // await handleAssertLoadingAfterConfirmClick();
+});
 
-//   expect(window.location.reload).toHaveBeenCalled();
-// });
+test("Signing form works correctly onError", async () => {
+  const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+  handleCreateErrorConfig({
+    method: "post",
+    url: `${BASE_URL}/auth/signin`,
+    statusCode: 400,
+  });
+  const user = userEvent.setup();
+  renderComponent();
 
-// test("Signing form works correctly onError", async () => {
-//   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
-//   handleCreateErrorConfig({
-//     method: "post",
-//     url: `${BASE_URL}/auth/signin`,
-//     statusCode: 400,
-//   });
-//   const user = userEvent.setup();
-//   renderComponent();
+  await handleAssertTypeInForm(user, {
+    phone: "1234567890",
+    loginPasscode: "123456",
+    email: "example@gmail.com",
+    middleName: "middleName",
+    lastName: "lastName",
+    firstName: "firstName",
+  });
 
-//   await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  // expect(consoleErrorSpy).not.toHaveBeenCalled();
 
-//   expect(consoleErrorSpy).not.toHaveBeenCalled();
+  const confirm = screen.getByRole("button", { name: /confirm/i });
+  await user.click(confirm);
 
-//   const signInButton = screen.getByRole("button", { name: /sign in/i });
-//   await user.click(signInButton);
+  await handleAssertLoadingAfterConfirmClick();
 
-//   await handleAssertLoadingAfterSubmitClick();
+  // expect(consoleErrorSpy).toHaveBeenCalled();
+  const error = screen.getByTestId("error");
+  expect(error).toBeInTheDocument();
+  expect(error).toHaveTextContent("");
 
-//   expect(consoleErrorSpy).toHaveBeenCalled();
-//   const error = screen.getByTestId("error");
-//   expect(error).toBeInTheDocument();
-//   expect(error).toHaveTextContent("");
-
-//   consoleErrorSpy.mockRestore();
-// });
+  consoleErrorSpy.mockRestore();
+});
