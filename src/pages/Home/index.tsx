@@ -48,7 +48,7 @@ const Home = () => {
         {/* Below Card */}
         <div className="bottom-card">
           <Link to="/" className="bottom-card-link">
-            <Button icon={icons.addmoneyIcon()}>Add Money</Button>
+            <Button icon={icons.addMoneyIcon()}>Add Money</Button>
           </Link>
           <Link to="/" className="bottom-card-link">
             <Button icon={icons.transferIcon()}>Transfer</Button>

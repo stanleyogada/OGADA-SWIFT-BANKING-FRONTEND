@@ -10,6 +10,7 @@ import Finance from "../../pages/Finance";
 import Profile from "../../pages/Profile";
 import Cards from "./../../pages/Cards/index";
 import Account from "../../pages/Account.tsx";
+import Livechat from "../../pages/Livechat";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
 import Welcome from "../../pages/Welcome";
@@ -72,6 +73,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Account />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.liveChat,
+        element: (
+          <PageWrapper>
+            <Livechat />
           </PageWrapper>
         ),
       },

@@ -22,7 +22,7 @@ const SButton = styled.button`
 
   & span {
     margin-top: 5px;
-    color: ${COLORS.white};
+    color: currentColor;
   }
 `;
 
