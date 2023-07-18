@@ -47,14 +47,23 @@ const useSignup = () => {
     },
   });
 
-  const signUpMutationState = useMemo(
-    () => ({
-      isLoading: signUpMutation.isLoading,
-      error: signUpMutation.error as AxiosError,
-      isError: signUpMutation.isError,
-    }),
-    [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
-  );
+  const signUpMutationState = useMemo(() => {
+    const { isLoading, error, isError } = signUpMutation;
+    const { isLoading: isSendEmailLoading, error: sendEmailError, isError: isSendEmailError } = sendEmailMutation;
+
+    return {
+      isLoading: isLoading || isSendEmailLoading,
+      error: (error || sendEmailError) as AxiosError | undefined,
+      isError: isError || isSendEmailError,
+    };
+  }, [
+    signUpMutation.isLoading,
+    signUpMutation.error,
+    signUpMutation.isError,
+    sendEmailMutation.isLoading,
+    sendEmailMutation.error,
+    sendEmailMutation.isError,
+  ]);
 
   const handleSubmit = () => {
     return _handleSubmit((data: TSignUpFormValues) => {
@@ -72,7 +81,9 @@ const useSignup = () => {
 
   useEffect(() => {
     if (signUpMutationState.isError) {
-      handleToast("Invalid credentials. Please try again!");
+      const error = (signUpMutationState.error?.response?.data as { message: string })?.message;
+
+      handleToast(error || "Something went wrong");
     }
   }, [signUpMutationState.isError]);
 
