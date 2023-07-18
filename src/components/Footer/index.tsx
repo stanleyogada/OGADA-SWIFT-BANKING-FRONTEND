@@ -6,13 +6,13 @@ import { COLORS } from "../../constants";
 const Footer = () => {
   return (
     <FooterWrapper>
-      <IconWrapper>
+      <div>
         <i>{icons.supportAssistantIcon()}</i>
         <span>Advisor</span>
-      </IconWrapper>
+      </div>
 
       
-      <TextInput type="text" name="userMsg" id="001" placeholder="Please briefly describe your problem"></TextInput>
+      <input type="text" name="userMsg" id="001" placeholder="Please briefly describe your problem"></input>
       
     </FooterWrapper>
   );
@@ -39,16 +39,14 @@ const FooterWrapper = styled.footer`
   display: flex;
   justify-content: space-around;
 
-`;
+  div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 24px;
+  }
 
-const IconWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 24px;
-`;
-
-const TextInput = styled.input`
+  input{
   padding: 8px 16px;
   border-radius: 3rem;
   background-color: hsla(0, 0%, 81%, 1);
@@ -67,4 +65,7 @@ const TextInput = styled.input`
     color: ${COLORS.black};
     font-weight: 500;
   }
+}
+
 `;
+
