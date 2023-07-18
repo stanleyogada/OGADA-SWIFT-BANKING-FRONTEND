@@ -26,7 +26,7 @@ const Account = () => {
         <div className="account-section" role="account-section">
           <div className="header">
             <div className="navigation-section">
-              <div className="back-icon"> {icons.blueleftarrowIcon()}</div>
+              <div className="back-icon"> {icons.blueLeftArrowIcon()}</div>
               <div className="section-title">Account Details</div>
             </div>
 
@@ -38,7 +38,7 @@ const Account = () => {
 
             <div className="avatar">
               <Avatar />
-              <div className="right-icon">{icons.bluerightarrowIcon()}</div>
+              <div className="right-icon">{icons.blueRightArrowIcon()}</div>
             </div>
           </div>
 

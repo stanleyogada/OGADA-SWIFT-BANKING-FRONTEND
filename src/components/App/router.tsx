@@ -14,6 +14,7 @@ import Livechat from "../../pages/Livechat";
 import Signin from "../../pages/Signin";
 import Signup from "../../pages/Signup";
 import Welcome from "../../pages/Welcome";
+import Rewards from "./../../pages/Rewards/index";
 
 const ROUTER = createBrowserRouter([
   {
@@ -36,10 +37,10 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.cards,
+        path: CLIENT_ROUTES.rewards,
         element: (
           <PageWrapper>
-            <Cards />
+            <Rewards />
           </PageWrapper>
         ),
       },
