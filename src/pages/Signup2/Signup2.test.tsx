@@ -10,9 +10,20 @@ import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/
 import { TSignUpFormValues } from "./type";
 
 const navigate = jest.fn();
+let consoleInfoSpy: jest.SpyInstance;
+let consoleErrorSpy: jest.SpyInstance;
+let useNavigateSpy: jest.SpyInstance;
 
 beforeEach(() => {
-  jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
+  useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
+  consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
+  consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+});
+
+afterEach(() => {
+  useNavigateSpy.mockRestore();
+  consoleInfoSpy.mockRestore();
+  consoleErrorSpy.mockRestore();
 });
 
 const renderComponent = () => {
@@ -149,8 +160,6 @@ test("Render content of Signup page correctly", () => {
 });
 
 test("Sign up form works correctly onSuccess", async () => {
-  const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
-
   const user = userEvent.setup();
   renderComponent();
 
@@ -177,14 +186,10 @@ test("Sign up form works correctly onSuccess", async () => {
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
   expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.signUp);
   expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.sendEmail);
-
-  consoleInfoSpy.mockRestore();
 });
 
 describe("Errors correctly", () => {
   const handleAssertError = async () => {
-    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
-    const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
     const user = userEvent.setup();
 
     await handleAssertTypeInForm(user, {
@@ -208,12 +213,6 @@ describe("Errors correctly", () => {
     const error = screen.getByTestId("error");
     expect(error).toBeInTheDocument();
     // expect(error).toHaveTextContent(""); // TODO: uncomment this line after removing error message to the page
-
-    consoleErrorSpy.mockRestore();
-
-    return {
-      consoleInfoSpy,
-    };
   };
 
   test("On /signup network error", async () => {
@@ -224,11 +223,9 @@ describe("Errors correctly", () => {
     });
     renderComponent();
 
-    const { consoleInfoSpy } = await handleAssertError();
+    await handleAssertError();
 
     expect(consoleInfoSpy).not.toHaveBeenCalled();
-
-    consoleInfoSpy.mockRestore();
   });
 
   test("On /send-email-verification network error", async () => {
@@ -239,12 +236,10 @@ describe("Errors correctly", () => {
     });
     renderComponent();
 
-    const { consoleInfoSpy } = await handleAssertError();
+    await handleAssertError();
 
     expect(consoleInfoSpy).toHaveBeenCalled();
     expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.signUp);
-
-    consoleInfoSpy.mockRestore();
   });
 
   test("On both /signup and /send-email-verification network error", async () => {
@@ -261,19 +256,12 @@ describe("Errors correctly", () => {
     });
     renderComponent();
 
-    const { consoleInfoSpy } = await handleAssertError();
+    await handleAssertError();
 
     expect(consoleInfoSpy).not.toHaveBeenCalled();
-
-    consoleInfoSpy.mockRestore();
   });
 
   test("Display send-email and user-not-found error messages", async () => {
-    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
-
-    const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
-
-    // const spyAlert = jest.spyOn(window, "alert").mockImplementation()
     const sendEmailError = "sendEmailError";
     const signUp = "user not found";
 
@@ -323,8 +311,5 @@ describe("Errors correctly", () => {
     await handleAssertLoadingAfterSubmitClick();
 
     expect(screen.getByTestId("error")).toHaveTextContent(signUp);
-
-    consoleErrorSpy.mockRestore();
-    consoleInfoSpy.mockRestore();
   });
 });
