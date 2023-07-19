@@ -262,8 +262,11 @@ describe("Errors correctly", () => {
   });
 
   test("Display send-email and user-not-found error messages", async () => {
-    const spyConsole = jest.spyOn(console, "error").mockImplementation();
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
 
+    const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
+
+    // const spyAlert = jest.spyOn(window, "alert").mockImplementation()
     const sendEmailError = "sendEmailError";
     const signUp = "user not found";
 
@@ -313,6 +316,7 @@ describe("Errors correctly", () => {
 
     expect(screen.getByTestId("error")).toHaveTextContent(signUp);
 
-    spyConsole.mockRestore();
+    consoleErrorSpy.mockRestore();
+    consoleInfoSpy.mockRestore();
   });
 });
