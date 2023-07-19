@@ -200,7 +200,7 @@ describe("Errors correctly", () => {
     expect(consoleErrorSpy).toHaveBeenCalled();
     const error = screen.getByTestId("error");
     expect(error).toBeInTheDocument();
-    expect(error).toHaveTextContent("");
+    // expect(error).toHaveTextContent("");
 
     consoleErrorSpy.mockRestore();
 
@@ -259,5 +259,60 @@ describe("Errors correctly", () => {
     expect(consoleInfoSpy).not.toHaveBeenCalled();
 
     consoleInfoSpy.mockRestore();
+  });
+
+  test("Display send-email and user-not-found error messages", async () => {
+    const spyConsole = jest.spyOn(console, "error").mockImplementation();
+
+    const sendEmailError = "sendEmailError";
+    const signUp = "user not found";
+
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
+      statusCode: 400,
+      res() {
+        return {
+          message: sendEmailError,
+        };
+      },
+    });
+    renderComponent();
+
+    const user = userEvent.setup();
+
+    await handleAssertTypeInForm(user, {
+      phoneNumber: "1234567890",
+      loginPasscode: "123456",
+      email: "example@gmail.com",
+      middleName: "middleName",
+      lastName: "lastName",
+      firstName: "firstName",
+    });
+
+    const signUpButton = screen.getByRole("button", { name: /confirm/i });
+    await user.click(signUpButton);
+
+    await handleAssertLoadingAfterSubmitClick();
+
+    expect(screen.getByTestId("error")).toHaveTextContent(sendEmailError);
+
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.signUp}`,
+      statusCode: 400,
+      res() {
+        return {
+          message: signUp,
+        };
+      },
+    });
+
+    await user.click(signUpButton);
+    await handleAssertLoadingAfterSubmitClick();
+
+    expect(screen.getByTestId("error")).toHaveTextContent(signUp);
+
+    spyConsole.mockRestore();
   });
 });

@@ -18,14 +18,16 @@ const useSignin = () => {
     signUpMutation.mutate(formValues);
   };
 
-  const signUpMutationState = useMemo(
-    () => ({
+  const signUpMutationState = useMemo(() => {
+    const error = signUpMutation.error as AxiosError;
+    let message = (error?.response?.data as { message: string })?.message;
+
+    return {
       isLoading: signUpMutation.isLoading,
-      error: signUpMutation.error as AxiosError,
+      error: message,
       isError: signUpMutation.isError,
-    }),
-    [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
-  );
+    };
+  }, [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]);
 
   const {
     register,

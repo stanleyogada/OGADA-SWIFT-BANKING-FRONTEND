@@ -12,7 +12,7 @@ const Signup2 = () => {
 
   return (
     <Signup2Wrapper>
-      {mutationState.isError && <p data-testid="error"></p>}
+      {mutationState.isError && <p data-testid="error">{mutationState.error}</p>}
 
       <header>
         <h1 className="page-title">Create a new account</h1>
