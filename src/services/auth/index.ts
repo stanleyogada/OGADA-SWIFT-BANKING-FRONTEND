@@ -40,7 +40,7 @@ const postSignup = async ({
     },
   });
 
-  console.info("User signed up successfully");
+  console.info("TEST: User signed up successfully");
 
   await postSendEmail(email);
 
@@ -56,7 +56,7 @@ const postSendEmail = async (email: string) => {
     },
   });
 
-  console.info("Email sent successfully");
+  console.info("TEST: Email sent successfully");
 
   return email;
 };

@@ -165,6 +165,8 @@ const handleAssertLoadingAfterSubmitClick = async () => {
 };
 
 test("Sign up form works correctly onSuccess", async () => {
+  const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
+
   const user = userEvent.setup();
   renderComponent();
 
@@ -185,11 +187,19 @@ test("Sign up form works correctly onSuccess", async () => {
   await handleAssertLoadingAfterSubmitClick();
 
   expect(window.location.reload).toHaveBeenCalled();
+
+  expect(consoleInfoSpy).toHaveBeenCalled();
+  expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
+  expect(consoleInfoSpy).toHaveBeenCalledWith("TEST: User signed up successfully");
+  expect(consoleInfoSpy).toHaveBeenCalledWith("TEST: Email sent successfully");
+
+  consoleInfoSpy.mockRestore();
 });
 
 describe("Errors correctly", () => {
   const handleAssertError = async () => {
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+    const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
     const user = userEvent.setup();
 
     await handleAssertTypeInForm(user, {
@@ -214,6 +224,10 @@ describe("Errors correctly", () => {
     expect(error).toHaveTextContent("");
 
     consoleErrorSpy.mockRestore();
+
+    return {
+      consoleInfoSpy,
+    };
   };
 
   test("On /signup network error", async () => {
@@ -224,7 +238,11 @@ describe("Errors correctly", () => {
     });
     renderComponent();
 
-    await handleAssertError();
+    const { consoleInfoSpy } = await handleAssertError();
+
+    expect(consoleInfoSpy).not.toHaveBeenCalled();
+
+    consoleInfoSpy.mockRestore();
   });
 
   test("On /send-email-verification network error", async () => {
@@ -235,7 +253,12 @@ describe("Errors correctly", () => {
     });
     renderComponent();
 
-    await handleAssertError();
+    const { consoleInfoSpy } = await handleAssertError();
+
+    expect(consoleInfoSpy).toHaveBeenCalled();
+    expect(consoleInfoSpy).toHaveBeenCalledWith("TEST: User signed up successfully");
+
+    consoleInfoSpy.mockRestore();
   });
 
   test("On both /signup and /send-email-verification network error", async () => {
@@ -252,6 +275,10 @@ describe("Errors correctly", () => {
     });
     renderComponent();
 
-    await handleAssertError();
+    const { consoleInfoSpy } = await handleAssertError();
+
+    expect(consoleInfoSpy).not.toHaveBeenCalled();
+
+    consoleInfoSpy.mockRestore();
   });
 });
