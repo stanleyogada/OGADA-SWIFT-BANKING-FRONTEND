@@ -14,9 +14,7 @@ let consoleInfoSpy: jest.SpyInstance;
 let consoleErrorSpy: jest.SpyInstance;
 let useNavigateSpy: jest.SpyInstance;
 
-const mockGetItem = jest.fn();
 const mockSetItem = jest.fn();
-const mockRemoveItem = jest.fn();
 
 Object.defineProperty(window, "localStorage", {
   value: {
