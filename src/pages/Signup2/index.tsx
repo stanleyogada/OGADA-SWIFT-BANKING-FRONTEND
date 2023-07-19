@@ -90,13 +90,20 @@ const Signup2 = () => {
 
           <div className="form__actions">
             <div className="form__actions-top">
-              <label htmlFor="remember-login-passcode" className="form__checkbox">
-                <input type="checkbox" id="remember-login-passcode" />
-                Remember login passcode
+              <label htmlFor="click-to-confirm" className="form__checkbox">
+                <input
+                  type="checkbox"
+                  role="checkbox"
+                  id="click-to-confirm"
+                  {...register("acceptTerms", {
+                    required: "You must confirm",
+                  })}
+                />
+                Click “Confirm” to accept&nbsp;
               </label>
 
               <Link to="#" className="form__link">
-                Forgot login passcode?
+                Terms and Conditions.
               </Link>
             </div>
 
@@ -106,7 +113,7 @@ const Signup2 = () => {
             </Button>
 
             <Link to="/auth/signup" className="form__link">
-              Don't have an account? Sign Up
+              Already have an account? Sign in
             </Link>
           </div>
         </form>

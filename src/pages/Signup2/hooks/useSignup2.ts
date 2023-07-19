@@ -11,7 +11,11 @@ const useSignin = () => {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
-  } = useForm<TSignUpFormValues>();
+  } = useForm<TSignUpFormValues>({
+    defaultValues: {
+      acceptTerms: true,
+    },
+  });
 
   const handleSubmit = () => {
     return _handleSubmit((data: TSignUpFormValues) => {
