@@ -1,2 +1,1 @@
 import "./window";
-import "./navigate";
