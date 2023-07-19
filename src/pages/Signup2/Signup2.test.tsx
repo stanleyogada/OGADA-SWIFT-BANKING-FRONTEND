@@ -55,13 +55,13 @@ test("Render content of Signup page correctly", () => {
 
   const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
 
-  const firstNameInput = screen.getByPlaceholderText(/first name/i);
-  const lastNameInput = screen.getByPlaceholderText(/last name/i);
-  const middleNameInput = screen.getByPlaceholderText(/middle name/i);
-  const emailInput = screen.getByPlaceholderText(/email/i);
-  const phoneInput = screen.getByPlaceholderText(/phone number/i);
+  const firstNameInput = screen.getByLabelText(/first name/i);
+  const lastNameInput = screen.getByLabelText(/last name/i);
+  const middleNameInput = screen.getByLabelText(/middle name/i);
+  const emailInput = screen.getByLabelText(/email/i);
+  const phoneInput = screen.getByLabelText(/phone number/i);
   const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
-  const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+  const passwordInput = screen.getByLabelText(/enter 6 digits login passcode/i);
 
   const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
   const termsAndConditions = screen.getByRole("link", { name: /terms and conditions./i });
@@ -74,8 +74,20 @@ test("Render content of Signup page correctly", () => {
   expect(goToSignin).toHaveAttribute("href", "/auth/signin");
 
   expect(pageTitle).toBeInTheDocument();
+  expect(firstNameInput).toBeInTheDocument();
+  expect(lastNameInput).toBeInTheDocument();
+  expect(middleNameInput).toBeInTheDocument();
+  expect(emailInput).toBeInTheDocument();
   expect(phoneInput).toBeInTheDocument();
+  expect(phoneInputInfo).toBeInTheDocument();
   expect(passwordInput).toBeInTheDocument();
+
+  expect(clickToAgree).toBeInTheDocument();
+  expect(termsAndConditions).toBeInTheDocument();
+
+  expect(confirmButton).toBeInTheDocument();
+
+  expect(goToSignin).toBeInTheDocument();
 });
 
 const handleAssertTypeInForm = async (
@@ -84,27 +96,27 @@ const handleAssertTypeInForm = async (
 ) => {
   const inputList = [
     {
-      input: screen.getByPlaceholderText(/first name/i),
+      input: screen.getByLabelText(/first name/i),
       value: formData.firstName,
     },
     {
-      input: screen.getByPlaceholderText(/last name/i),
+      input: screen.getByLabelText(/last name/i),
       value: formData.lastName,
     },
     {
-      input: screen.getByPlaceholderText(/middle name/i),
+      input: screen.getByLabelText(/middle name/i),
       value: formData.middleName,
     },
     {
-      input: screen.getByPlaceholderText(/email/i),
+      input: screen.getByLabelText(/email/i),
       value: formData.email,
     },
     {
-      input: screen.getByPlaceholderText(/phone number/i),
+      input: screen.getByLabelText(/phone number/i),
       value: formData.phoneNumber,
     },
     {
-      input: screen.getByPlaceholderText(/enter 6 digits login passcode/i),
+      input: screen.getByLabelText(/enter 6 digits login passcode/i),
       value: formData.loginPasscode,
     },
   ];

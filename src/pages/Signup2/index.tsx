@@ -22,7 +22,6 @@ const Signup2 = () => {
         <form onSubmit={handleSubmit()} className="form">
           <div className="form__input-list">
             <Input
-              placeholder="First Name"
               label="First Name"
               required
               {...register("firstName", {
@@ -32,7 +31,6 @@ const Signup2 = () => {
               error={errors.firstName?.message}
             />
             <Input
-              placeholder="Last Name"
               label="Last Name"
               required
               {...register("lastName", {
@@ -42,7 +40,6 @@ const Signup2 = () => {
               error={errors.lastName?.message}
             />
             <Input
-              placeholder="Middle Name"
               label="Middle Name"
               {...register("middleName", {
                 minLength: { value: 3, message: "Middle Name must be 3 digits or more" },
@@ -50,7 +47,6 @@ const Signup2 = () => {
               error={errors.middleName?.message}
             />
             <Input
-              placeholder="Email"
               label="Email"
               required
               {...register("email", {
@@ -63,7 +59,7 @@ const Signup2 = () => {
               error={errors.email?.message}
             />
             <PhoneInput
-              placeholder="Phone Number"
+              label="Phone Number"
               required
               {...register("phoneNumber", {
                 required: "Phone number is required",
@@ -76,7 +72,7 @@ const Signup2 = () => {
               info="This would be your account number"
             />
             <PasswordInput
-              placeholder="Enter 6 digits login passcode"
+              label="Enter 6 digits login passcode"
               required
               {...register("loginPasscode", {
                 required: "Login passcode is required",
