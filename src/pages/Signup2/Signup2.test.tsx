@@ -239,7 +239,7 @@ describe("Errors correctly", () => {
     consoleErrorSpy.mockRestore();
   };
 
-  test("on /signup network error", async () => {
+  test("On /signup network error", async () => {
     handleCreateErrorConfig({
       method: "post",
       url: `${BASE_URL}${ENDPOINTS.signUp}`,
@@ -250,7 +250,7 @@ describe("Errors correctly", () => {
     await handleAssertError();
   });
 
-  test("on /send-email-verification network error", async () => {
+  test("On /send-email-verification network error", async () => {
     handleCreateErrorConfig({
       method: "post",
       url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
