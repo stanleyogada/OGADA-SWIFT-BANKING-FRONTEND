@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
 
-
 export const Header = styled.header`
-width: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-
-
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Nav = styled.nav`
@@ -51,18 +48,12 @@ export const Nav = styled.nav`
 `;
 
 export const List = styled.li`
-
-  a > span{
+  a > span {
     font-size: 1rem;
     text-decoration: none;
-
   }
 
-  a > i{
+  a > i {
     font-size: 1.5rem;
   }
-
 `;
-
-
-
