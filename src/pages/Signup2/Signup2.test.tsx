@@ -128,16 +128,16 @@ const handleAssertTypeInForm = async (
 };
 
 const handleAssertLoadingAfterSubmitClick = async () => {
-  const signInButton = screen.getByRole("button", { name: /confirm/i });
+  const signUpButton = screen.getByRole("button", { name: /confirm/i });
 
   const getLoadingElement = () => screen.getByTestId("loading");
   expect(getLoadingElement()).toBeInTheDocument();
 
-  expect(signInButton).toBeDisabled();
+  expect(signUpButton).toBeDisabled();
   await waitForElementToBeRemoved(() => getLoadingElement());
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-  expect(signInButton).not.toBeDisabled();
+  expect(signUpButton).not.toBeDisabled();
 };
 
 test("Sign up form works correctly onLoading", async () => {
@@ -155,10 +155,10 @@ test("Sign up form works correctly onLoading", async () => {
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
 
-  const signInButton = screen.getByRole("button", { name: /confirm/i });
-  expect(signInButton).not.toBeDisabled();
+  const signUpButton = screen.getByRole("button", { name: /confirm/i });
+  expect(signUpButton).not.toBeDisabled();
 
-  await user.click(signInButton);
+  await user.click(signUpButton);
 
   await handleAssertLoadingAfterSubmitClick();
 });
@@ -178,8 +178,8 @@ test("Sign up form works correctly onSuccess", async () => {
 
   expect(window.location.reload).not.toHaveBeenCalled();
 
-  const signInButton = screen.getByRole("button", { name: /confirm/i });
-  await user.click(signInButton);
+  const signUpButton = screen.getByRole("button", { name: /confirm/i });
+  await user.click(signUpButton);
 
   await handleAssertLoadingAfterSubmitClick();
 
@@ -207,8 +207,8 @@ test("Sign up form works correctly onError", async () => {
 
   expect(consoleErrorSpy).not.toHaveBeenCalled();
 
-  const signInButton = screen.getByRole("button", { name: /confirm/i });
-  await user.click(signInButton);
+  const signUpButton = screen.getByRole("button", { name: /confirm/i });
+  await user.click(signUpButton);
 
   await handleAssertLoadingAfterSubmitClick();
 
