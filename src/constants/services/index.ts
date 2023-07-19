@@ -8,7 +8,7 @@ const ENDPOINTS = {
   currentUser: "/users/me",
   signIn: "/auth/signin",
   signUp: "/auth/signup",
-  sendEmail: "auth/send-email-verification",
+  sendEmail: "/auth/send-email-verification",
 };
 
 export { QUERY_KEYS, ENDPOINTS, BASE_URL };

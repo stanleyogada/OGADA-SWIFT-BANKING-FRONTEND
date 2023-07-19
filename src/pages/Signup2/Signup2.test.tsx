@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import Signup2 from ".";
 import createServer from "../../utils/test/createServer";
-import { BASE_URL } from "../../constants/services";
+import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
 
 const renderComponent = () => {
@@ -45,6 +45,19 @@ const { handleCreateErrorConfig } = createServer([
           nickname: null,
           email: "test2@gmail.com",
           phone: "1234567890",
+        },
+      };
+    },
+  },
+  {
+    method: "post",
+    url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
+    res() {
+      return {
+        status: "success",
+        data: {
+          status: "success",
+          message: "One time password sent to your email address!",
         },
       };
     },

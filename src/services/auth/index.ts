@@ -27,20 +27,21 @@ const postSignup = async ({
   phoneNumber,
   loginPasscode,
 }: TSignUpFormValues) => {
-  await axiosInstance({
-    method: "POST",
-    url: ENDPOINTS.signUp,
-    data: {
-      first_name: firstName,
-      last_name: lastName,
-      phone: phoneNumber,
-      middle_name: middleName,
-      email: email,
-      login_passcode: loginPasscode,
-    },
-  });
-
-  // await fakePostRequest();
+  await Promise.all([
+    axiosInstance({
+      method: "POST",
+      url: ENDPOINTS.signUp,
+      data: {
+        first_name: firstName,
+        last_name: lastName,
+        phone: phoneNumber,
+        middle_name: middleName,
+        email: email,
+        login_passcode: loginPasscode,
+      },
+    }),
+    postSendEmail(email),
+  ]);
 
   return { email };
 };
