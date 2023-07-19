@@ -1,4 +1,4 @@
-import { ENDPOINTS } from "../../constants/services";
+import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { axiosInstance } from "../../utils/axiosInstance";
 
 import type { TSignInFormValues } from "../../pages/Signin/type";
@@ -40,7 +40,7 @@ const postSignup = async ({
     },
   });
 
-  console.info("TEST: User signed up successfully");
+  console.info(TEST_NETWORK_SUCCESS_INFO.signUp);
 
   await postSendEmail(email);
 
@@ -56,7 +56,7 @@ const postSendEmail = async (email: string) => {
     },
   });
 
-  console.info("TEST: Email sent successfully");
+  console.info(TEST_NETWORK_SUCCESS_INFO.sendEmail);
 
   return email;
 };

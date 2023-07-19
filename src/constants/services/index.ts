@@ -11,4 +11,9 @@ const ENDPOINTS = {
   sendEmail: "/auth/send-email-verification",
 };
 
-export { QUERY_KEYS, ENDPOINTS, BASE_URL };
+const TEST_NETWORK_SUCCESS_INFO = {
+  signUp: "TEST: User signed up successfully",
+  sendEmail: "TEST: Email sent successfully",
+};
+
+export { QUERY_KEYS, ENDPOINTS, BASE_URL, TEST_NETWORK_SUCCESS_INFO };

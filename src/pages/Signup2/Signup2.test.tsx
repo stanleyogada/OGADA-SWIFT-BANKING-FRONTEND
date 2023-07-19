@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import Signup2 from ".";
 import createServer from "../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS } from "../../constants/services";
+import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
 
 const renderComponent = () => {
@@ -33,43 +33,20 @@ const { handleCreateErrorConfig } = createServer([
     method: "post",
     url: `${BASE_URL}${ENDPOINTS.signUp}`,
     res() {
-      return {
-        status: "success",
-        data: {
-          id: 4,
-          created_at: "2023-06-21T17:05:11.518Z",
-          updated_at: "2023-06-21T17:05:11.518Z",
-          first_name: "Test2",
-          last_name: "Last2",
-          middle_name: "Hire",
-          nickname: null,
-          email: "test2@gmail.com",
-          phone: "1234567890",
-        },
-      };
+      return {};
     },
   },
   {
     method: "post",
     url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
     res() {
-      return {
-        status: "success",
-        data: {
-          status: "success",
-          message: "One time password sent to your email address!",
-        },
-      };
+      return {};
     },
   },
   {
     url: `${BASE_URL}/users/me`,
     res() {
-      return {
-        data: {
-          id: 1,
-        },
-      };
+      return {};
     },
   },
 ]);
@@ -180,6 +157,7 @@ test("Sign up form works correctly onSuccess", async () => {
   });
 
   expect(window.location.reload).not.toHaveBeenCalled();
+  expect(consoleInfoSpy).not.toHaveBeenCalled();
 
   const signUpButton = screen.getByRole("button", { name: /confirm/i });
   await user.click(signUpButton);
@@ -190,8 +168,8 @@ test("Sign up form works correctly onSuccess", async () => {
 
   expect(consoleInfoSpy).toHaveBeenCalled();
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
-  expect(consoleInfoSpy).toHaveBeenCalledWith("TEST: User signed up successfully");
-  expect(consoleInfoSpy).toHaveBeenCalledWith("TEST: Email sent successfully");
+  expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.signUp);
+  expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.sendEmail);
 
   consoleInfoSpy.mockRestore();
 });
@@ -212,6 +190,7 @@ describe("Errors correctly", () => {
     });
 
     expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(consoleInfoSpy).not.toHaveBeenCalled();
 
     const signUpButton = screen.getByRole("button", { name: /confirm/i });
     await user.click(signUpButton);
@@ -256,7 +235,7 @@ describe("Errors correctly", () => {
     const { consoleInfoSpy } = await handleAssertError();
 
     expect(consoleInfoSpy).toHaveBeenCalled();
-    expect(consoleInfoSpy).toHaveBeenCalledWith("TEST: User signed up successfully");
+    expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.signUp);
 
     consoleInfoSpy.mockRestore();
   });
