@@ -1,2 +1,2 @@
-import "./windowReload";
+import "./window";
 import "./navigate";
