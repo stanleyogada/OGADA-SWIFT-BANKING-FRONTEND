@@ -11,9 +11,10 @@ import Profile from "../../pages/Profile";
 import Cards from "./../../pages/Cards/index";
 import Account from "../../pages/Account.tsx";
 import Signin from "../../pages/Signin";
-import Signup from "../../pages/Signup";
+// import Signup from "../../pages/Signup";
 import Welcome from "../../pages/Welcome";
 import VerifyEmail from "../../pages/VerifyEmail";
+import Signup2 from "../../pages/Signup2";
 
 const ROUTER = createBrowserRouter([
   {
@@ -101,7 +102,7 @@ const ROUTER = createBrowserRouter([
         path: CLIENT_ROUTES.authSignup,
         element: (
           <PageWrapper>
-            <Signup />
+            <Signup2 />
           </PageWrapper>
         ),
       },
