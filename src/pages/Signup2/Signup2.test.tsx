@@ -31,7 +31,7 @@ const renderComponent = () => {
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
-    url: `${BASE_URL}/auth/signup`,
+    url: `${BASE_URL}${ENDPOINTS.signUp}`,
     res() {
       return {
         status: "success",
@@ -210,36 +210,54 @@ test("Sign up form works correctly onSuccess", async () => {
   expect(window.location.reload).toHaveBeenCalled();
 });
 
-test("Sign up form works correctly onError", async () => {
-  const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
-  handleCreateErrorConfig({
-    method: "post",
-    url: `${BASE_URL}/auth/signup`,
-    statusCode: 400,
+describe("Errors correctly", () => {
+  const handleAssertError = async () => {
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+    const user = userEvent.setup();
+
+    await handleAssertTypeInForm(user, {
+      phoneNumber: "1234567890",
+      loginPasscode: "123456",
+      email: "example@gmail.com",
+      middleName: "middleName",
+      lastName: "lastName",
+      firstName: "firstName",
+    });
+
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+
+    const signUpButton = screen.getByRole("button", { name: /confirm/i });
+    await user.click(signUpButton);
+
+    await handleAssertLoadingAfterSubmitClick();
+
+    expect(consoleErrorSpy).toHaveBeenCalled();
+    const error = screen.getByTestId("error");
+    expect(error).toBeInTheDocument();
+    expect(error).toHaveTextContent("");
+
+    consoleErrorSpy.mockRestore();
+  };
+
+  test("on /signup network error", async () => {
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.signUp}`,
+      statusCode: 400,
+    });
+    renderComponent();
+
+    await handleAssertError();
   });
-  const user = userEvent.setup();
-  renderComponent();
 
-  await handleAssertTypeInForm(user, {
-    phoneNumber: "1234567890",
-    loginPasscode: "123456",
-    email: "example@gmail.com",
-    middleName: "middleName",
-    lastName: "lastName",
-    firstName: "firstName",
+  test("on /send-email-verification network error", async () => {
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
+      statusCode: 400,
+    });
+    renderComponent();
+
+    await handleAssertError();
   });
-
-  expect(consoleErrorSpy).not.toHaveBeenCalled();
-
-  const signUpButton = screen.getByRole("button", { name: /confirm/i });
-  await user.click(signUpButton);
-
-  await handleAssertLoadingAfterSubmitClick();
-
-  expect(consoleErrorSpy).toHaveBeenCalled();
-  const error = screen.getByTestId("error");
-  expect(error).toBeInTheDocument();
-  expect(error).toHaveTextContent("");
-
-  consoleErrorSpy.mockRestore();
 });
