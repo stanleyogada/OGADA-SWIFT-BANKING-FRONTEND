@@ -49,7 +49,7 @@ const useSignin = () => {
     // toast.error(message, {
     //   position: "top-right",
     // }); // TODO: Fix toast
-console.log("alert")
+
     alert(message); // TODO: Remove this after fixing toast
   };
 
