@@ -1,3 +1,4 @@
+import * as router from "react-router";
 import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -8,31 +9,11 @@ import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
 
-// const navigate = jest.fn() as jest.Mock;
-
-// beforeEach(() => {
-//   jest.mock("react-router-dom", () => ({
-//     ...jest.requireActual("react-router-dom"),
-//     useNavigate: () => navigate,
-//   }));
-// });
-
-// afterEach(() => {
-//   navigate.mockClear();
-// });
-
-import * as router from "react-router";
-
 const navigate = jest.fn();
 
 beforeEach(() => {
   jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
 });
-
-// it('...', () => {
-//   ...
-//   expect(navigate).toHaveBeenCalledWith('/path')
-// })
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -76,46 +57,6 @@ const { handleCreateErrorConfig } = createServer([
     },
   },
 ]);
-
-test("Render content of Signup page correctly", () => {
-  renderComponent();
-
-  const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
-
-  const firstNameInput = screen.getByLabelText(/first name/i);
-  const lastNameInput = screen.getByLabelText(/last name/i);
-  const middleNameInput = screen.getByLabelText(/middle name/i);
-  const emailInput = screen.getByLabelText(/email/i);
-  const phoneInput = screen.getByLabelText(/phone number/i);
-  const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
-  const passwordInput = screen.getByLabelText(/enter 6 digits login passcode/i);
-
-  const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
-  const termsAndConditions = screen.getByRole("link", { name: /terms and conditions./i });
-
-  const confirmButton = screen.getByRole("button", { name: /confirm/i });
-
-  const goToSignin = screen.getByRole("link", { name: /already have an account\? sign in/i });
-  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
-
-  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
-
-  expect(pageTitle).toBeInTheDocument();
-  expect(firstNameInput).toBeInTheDocument();
-  expect(lastNameInput).toBeInTheDocument();
-  expect(middleNameInput).toBeInTheDocument();
-  expect(emailInput).toBeInTheDocument();
-  expect(phoneInput).toBeInTheDocument();
-  expect(phoneInputInfo).toBeInTheDocument();
-  expect(passwordInput).toBeInTheDocument();
-
-  expect(clickToAgree).toBeInTheDocument();
-  expect(termsAndConditions).toBeInTheDocument();
-
-  expect(confirmButton).toBeInTheDocument();
-
-  expect(goToSignin).toBeInTheDocument();
-});
 
 const handleAssertTypeInForm = async (
   user: ReturnType<typeof userEvent.setup>,
@@ -166,6 +107,46 @@ const handleAssertLoadingAfterSubmitClick = async () => {
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
   expect(signUpButton).not.toBeDisabled();
 };
+
+test("Render content of Signup page correctly", () => {
+  renderComponent();
+
+  const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
+
+  const firstNameInput = screen.getByLabelText(/first name/i);
+  const lastNameInput = screen.getByLabelText(/last name/i);
+  const middleNameInput = screen.getByLabelText(/middle name/i);
+  const emailInput = screen.getByLabelText(/email/i);
+  const phoneInput = screen.getByLabelText(/phone number/i);
+  const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
+  const passwordInput = screen.getByLabelText(/enter 6 digits login passcode/i);
+
+  const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
+  const termsAndConditions = screen.getByRole("link", { name: /terms and conditions./i });
+
+  const confirmButton = screen.getByRole("button", { name: /confirm/i });
+
+  const goToSignin = screen.getByRole("link", { name: /already have an account\? sign in/i });
+  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
+
+  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
+
+  expect(pageTitle).toBeInTheDocument();
+  expect(firstNameInput).toBeInTheDocument();
+  expect(lastNameInput).toBeInTheDocument();
+  expect(middleNameInput).toBeInTheDocument();
+  expect(emailInput).toBeInTheDocument();
+  expect(phoneInput).toBeInTheDocument();
+  expect(phoneInputInfo).toBeInTheDocument();
+  expect(passwordInput).toBeInTheDocument();
+
+  expect(clickToAgree).toBeInTheDocument();
+  expect(termsAndConditions).toBeInTheDocument();
+
+  expect(confirmButton).toBeInTheDocument();
+
+  expect(goToSignin).toBeInTheDocument();
+});
 
 test("Sign up form works correctly onSuccess", async () => {
   const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
@@ -226,7 +207,7 @@ describe("Errors correctly", () => {
     expect(consoleErrorSpy).toHaveBeenCalled();
     const error = screen.getByTestId("error");
     expect(error).toBeInTheDocument();
-    // expect(error).toHaveTextContent("");
+    // expect(error).toHaveTextContent(""); // TODO: uncomment this line after removing error message to the page
 
     consoleErrorSpy.mockRestore();
 
