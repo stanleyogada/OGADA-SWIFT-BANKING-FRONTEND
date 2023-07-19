@@ -1,16 +1,19 @@
 import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 
+import { useNavigate } from "react-router-dom";
 import type { TSignUpFormValues } from "../type";
 import { useMutation } from "react-query";
 import { postSignIn, postSignup } from "../../../services/auth";
 import { AxiosError } from "axios";
 
 const useSignin = () => {
+  const navigate = useNavigate();
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
       // localStorage.setItem("token", token.em); // TODO: remove this after fixing cookie issue on the backend
       window.location.reload();
+      navigate("/");
     },
   });
 

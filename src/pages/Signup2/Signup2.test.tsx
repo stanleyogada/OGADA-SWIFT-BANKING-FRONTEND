@@ -8,6 +8,32 @@ import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
 
+// const navigate = jest.fn() as jest.Mock;
+
+// beforeEach(() => {
+//   jest.mock("react-router-dom", () => ({
+//     ...jest.requireActual("react-router-dom"),
+//     useNavigate: () => navigate,
+//   }));
+// });
+
+// afterEach(() => {
+//   navigate.mockClear();
+// });
+
+import * as router from "react-router";
+
+const navigate = jest.fn();
+
+beforeEach(() => {
+  jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
+});
+
+// it('...', () => {
+//   ...
+//   expect(navigate).toHaveBeenCalledWith('/path')
+// })
+
 const renderComponent = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -156,7 +182,7 @@ test("Sign up form works correctly onSuccess", async () => {
     firstName: "firstName",
   });
 
-  expect(window.location.reload).not.toHaveBeenCalled();
+  expect(navigate).not.toHaveBeenCalled();
   expect(consoleInfoSpy).not.toHaveBeenCalled();
 
   const signUpButton = screen.getByRole("button", { name: /confirm/i });
@@ -164,7 +190,7 @@ test("Sign up form works correctly onSuccess", async () => {
 
   await handleAssertLoadingAfterSubmitClick();
 
-  expect(window.location.reload).toHaveBeenCalled();
+  expect(navigate).toHaveBeenCalled();
 
   expect(consoleInfoSpy).toHaveBeenCalled();
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
