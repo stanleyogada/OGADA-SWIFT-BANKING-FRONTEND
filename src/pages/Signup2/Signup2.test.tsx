@@ -266,6 +266,8 @@ describe("Errors correctly", () => {
 
     const consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
 
+    const alertSpy = jest.spyOn(window, "alert").mockImplementation();
+
     // const spyAlert = jest.spyOn(window, "alert").mockImplementation()
     const sendEmailError = "sendEmailError";
     const signUp = "user not found";
@@ -312,11 +314,13 @@ describe("Errors correctly", () => {
     });
 
     await user.click(signUpButton);
+    expect(alertSpy).toHaveBeenCalled();
     await handleAssertLoadingAfterSubmitClick();
 
     expect(screen.getByTestId("error")).toHaveTextContent(signUp);
 
     consoleErrorSpy.mockRestore();
     consoleInfoSpy.mockRestore();
+    alertSpy.mockRestore();
   });
 });
