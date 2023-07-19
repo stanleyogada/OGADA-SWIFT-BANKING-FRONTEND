@@ -31,10 +31,21 @@ const renderComponent = () => {
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
-    url: `${BASE_URL}/auth/signin`,
+    url: `${BASE_URL}/auth/signup`,
     res() {
       return {
-        token: "1234567890",
+        status: "success",
+        data: {
+          id: 4,
+          created_at: "2023-06-21T17:05:11.518Z",
+          updated_at: "2023-06-21T17:05:11.518Z",
+          first_name: "Test2",
+          last_name: "Last2",
+          middle_name: "Hire",
+          nickname: null,
+          email: "test2@gmail.com",
+          phone: "1234567890",
+        },
       };
     },
   },
@@ -190,7 +201,7 @@ test("Sign up form works correctly onError", async () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
   handleCreateErrorConfig({
     method: "post",
-    url: `${BASE_URL}/auth/signin`,
+    url: `${BASE_URL}/auth/signup`,
     statusCode: 400,
   });
   const user = userEvent.setup();

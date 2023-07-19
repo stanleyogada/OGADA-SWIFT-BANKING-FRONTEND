@@ -3,28 +3,28 @@ import { useForm } from "react-hook-form";
 
 import type { TSignUpFormValues } from "../type";
 import { useMutation } from "react-query";
-import { postSignIn } from "../../../services/auth";
+import { postSignIn, postSignup } from "../../../services/auth";
 import { AxiosError } from "axios";
 
 const useSignin = () => {
-  const signInMutation = useMutation(postSignIn, {
-    onSuccess: (token: string) => {
-      localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
+  const signUpMutation = useMutation(postSignup, {
+    onSuccess: ({ email }) => {
+      // localStorage.setItem("token", token.em); // TODO: remove this after fixing cookie issue on the backend
       window.location.reload();
     },
   });
 
-  const handleSignIn = (phoneNumber: string, loginPasscode: string) => {
-    signInMutation.mutate({ phoneNumber, loginPasscode });
+  const handleSignIn = (formValues: TSignUpFormValues) => {
+    signUpMutation.mutate(formValues);
   };
 
-  const signInMutationState = useMemo(
+  const signUpMutationState = useMemo(
     () => ({
-      isLoading: signInMutation.isLoading,
-      error: signInMutation.error as AxiosError,
-      isError: signInMutation.isError,
+      isLoading: signUpMutation.isLoading,
+      error: signUpMutation.error as AxiosError,
+      isError: signUpMutation.isError,
     }),
-    [signInMutation.isLoading, signInMutation.error, signInMutation.isError]
+    [signUpMutation.isLoading, signUpMutation.error, signUpMutation.isError]
   );
 
   const {
@@ -38,8 +38,8 @@ const useSignin = () => {
   });
 
   const handleSubmit = () => {
-    return _handleSubmit((data: TSignUpFormValues) => {
-      handleSignIn(data.phoneNumber, data.loginPasscode);
+    return _handleSubmit((formValues: TSignUpFormValues) => {
+      handleSignIn(formValues);
     });
   };
 
@@ -52,13 +52,13 @@ const useSignin = () => {
   };
 
   useEffect(() => {
-    if (signInMutationState.isError) {
+    if (signUpMutationState.isError) {
       handleToast("Invalid credentials. Please try again!");
     }
-  }, [signInMutationState.isError]);
+  }, [signUpMutationState.isError]);
 
   return {
-    mutationState: signInMutationState,
+    mutationState: signUpMutationState,
     errors,
     handleSubmit,
     register,
