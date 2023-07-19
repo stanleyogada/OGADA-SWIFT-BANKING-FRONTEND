@@ -73,6 +73,7 @@ const Signup2 = () => {
                 },
               })}
               error={errors.phoneNumber?.message}
+              info="This would be your account number"
             />
             <PasswordInput
               placeholder="Enter 6 digits login passcode"
@@ -112,7 +113,7 @@ const Signup2 = () => {
               {mutationState.isLoading && <p data-testid="loading"></p>}
             </Button>
 
-            <Link to="/auth/signup" className="form__link">
+            <Link to="/auth/signin" className="form__link">
               Already have an account? Sign in
             </Link>
           </div>

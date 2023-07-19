@@ -50,33 +50,33 @@ const { handleCreateErrorConfig } = createServer([
   },
 ]);
 
-// test("Render content of Signup page correctly", () => {
-//   renderComponent();
+test("Render content of Signup page correctly", () => {
+  renderComponent();
 
-//   const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
+  const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
 
-//   const firstNameInput = screen.getByPlaceholderText(/first name/i);
-//   const lastNameInput = screen.getByPlaceholderText(/last name/i);
-//   const middleNameInput = screen.getByPlaceholderText(/middle name/i);
-//   const emailInput = screen.getByPlaceholderText(/email/i);
-//   const phoneInput = screen.getByPlaceholderText(/phone number/i);
-//   const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
-//   const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+  const firstNameInput = screen.getByPlaceholderText(/first name/i);
+  const lastNameInput = screen.getByPlaceholderText(/last name/i);
+  const middleNameInput = screen.getByPlaceholderText(/middle name/i);
+  const emailInput = screen.getByPlaceholderText(/email/i);
+  const phoneInput = screen.getByPlaceholderText(/phone number/i);
+  const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
+  const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
 
-//   const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
-//   const termsAndConditions = screen.getByRole("link", { name: /terms and conditions./i });
+  const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
+  const termsAndConditions = screen.getByRole("link", { name: /terms and conditions./i });
 
-//   const confirmButton = screen.getByRole("button", { name: /confirm/i });
+  const confirmButton = screen.getByRole("button", { name: /confirm/i });
 
-//   const goToSignin = screen.getByRole("link", { name: /already have an account\? confirm/i });
-//   expect(goToSignin).toHaveAttribute("href", "/auth/signin");
+  const goToSignin = screen.getByRole("link", { name: /already have an account\? sign in/i });
+  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
 
-//   expect(goToSignin).toHaveAttribute("href", "/auth/signin");
+  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
 
-//   expect(pageTitle).toBeInTheDocument();
-//   expect(phoneInput).toBeInTheDocument();
-//   expect(passwordInput).toBeInTheDocument();
-// });
+  expect(pageTitle).toBeInTheDocument();
+  expect(phoneInput).toBeInTheDocument();
+  expect(passwordInput).toBeInTheDocument();
+});
 
 const handleAssertTypeInForm = async (
   user: ReturnType<typeof userEvent.setup>,
@@ -128,7 +128,7 @@ const handleAssertLoadingAfterSubmitClick = async () => {
   expect(signInButton).not.toBeDisabled();
 };
 
-test("Signing form works correctly onLoading", async () => {
+test("Sign up form works correctly onLoading", async () => {
   const user = userEvent.setup();
   renderComponent();
 
@@ -151,7 +151,7 @@ test("Signing form works correctly onLoading", async () => {
   await handleAssertLoadingAfterSubmitClick();
 });
 
-test("Signing form works correctly onSuccess", async () => {
+test("Sign up form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   renderComponent();
 
@@ -174,7 +174,7 @@ test("Signing form works correctly onSuccess", async () => {
   expect(window.location.reload).toHaveBeenCalled();
 });
 
-test("Signing form works correctly onError", async () => {
+test("Sign up form works correctly onError", async () => {
   const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
   handleCreateErrorConfig({
     method: "post",
