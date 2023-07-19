@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 import useAuth from "../../../hooks/useAuth";
 
-import type { TSignInFormValues } from "../type";
+import type { TSignUpFormValues } from "../type";
 
 const useSignin = () => {
   const { handleSignIn, signInMutationState } = useAuth();
@@ -11,10 +11,10 @@ const useSignin = () => {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
-  } = useForm<TSignInFormValues>();
+  } = useForm<TSignUpFormValues>();
 
   const handleSubmit = () => {
-    return _handleSubmit((data: TSignInFormValues) => {
+    return _handleSubmit((data: TSignUpFormValues) => {
       handleSignIn(data.phoneNumber, data.loginPasscode);
     });
   };

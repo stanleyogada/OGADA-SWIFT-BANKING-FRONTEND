@@ -5,6 +5,7 @@ import Signup2Wrapper from "./Signup2Wrapper";
 import Button from "../../components/Button";
 import PhoneInput from "../../components/Input/PhoneInput";
 import PasswordInput from "../../components/Input/PasswordInput";
+import Input from "../../components/Input";
 
 const Signup2 = () => {
   const { handleSubmit, register, mutationState, errors } = useSignup2();
@@ -14,14 +15,53 @@ const Signup2 = () => {
       {mutationState.isError && <p data-testid="error"></p>}
 
       <header>
-        <h1 className="page-title">Sign In</h1>
+        <h1 className="page-title">Create a new account</h1>
       </header>
 
       <main className="content">
-        <h2 className="sub-title">Welcome Back!</h2>
-
         <form onSubmit={handleSubmit()} className="form">
           <div className="form__input-list">
+            <Input
+              placeholder="First Name"
+              label="First Name"
+              required
+              {...register("firstName", {
+                required: "First Name is required",
+                minLength: { value: 3, message: "First Name must be 3 digits or more" },
+              })}
+              error={errors.firstName?.message}
+            />
+            <Input
+              placeholder="Last Name"
+              label="Last Name"
+              required
+              {...register("lastName", {
+                required: "Last Name is required",
+                minLength: { value: 3, message: "Last Name must be 3 digits or more" },
+              })}
+              error={errors.lastName?.message}
+            />
+            <Input
+              placeholder="Middle Name"
+              label="Middle Name"
+              {...register("middleName", {
+                minLength: { value: 3, message: "Middle Name must be 3 digits or more" },
+              })}
+              error={errors.middleName?.message}
+            />
+            <Input
+              placeholder="Email"
+              label="Email"
+              required
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Email is invalid",
+                },
+              })}
+              error={errors.email?.message}
+            />
             <PhoneInput
               placeholder="Phone Number"
               required
@@ -61,7 +101,7 @@ const Signup2 = () => {
             </div>
 
             <Button type="submit" disabled={mutationState.isLoading} className="form__actions-bottom">
-              Sign In
+              Confirm
               {mutationState.isLoading && <p data-testid="loading"></p>}
             </Button>
 
