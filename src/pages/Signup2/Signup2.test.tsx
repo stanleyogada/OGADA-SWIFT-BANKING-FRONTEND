@@ -14,10 +14,21 @@ let consoleInfoSpy: jest.SpyInstance;
 let consoleErrorSpy: jest.SpyInstance;
 let useNavigateSpy: jest.SpyInstance;
 
+const mockGetItem = jest.fn();
+const mockSetItem = jest.fn();
+const mockRemoveItem = jest.fn();
+
+Object.defineProperty(window, "localStorage", {
+  value: {
+    setItem: (params1: string, params2: string) => mockSetItem(params1, params2),
+  },
+});
+
 beforeEach(() => {
   useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
   consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
   consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+  mockSetItem.mockClear();
 });
 
 afterEach(() => {
@@ -180,6 +191,8 @@ test("Sign up form works correctly onSuccess", async () => {
 
   await handleAssertLoadingAfterSubmitClick();
 
+  mockSetItem.mockImplementation();
+  expect(mockSetItem).toHaveBeenCalledWith("token", "example@gmail.com");
   expect(navigate).toHaveBeenCalled();
 
   expect(consoleInfoSpy).toHaveBeenCalled();

@@ -11,7 +11,7 @@ const useSignin = () => {
   const navigate = useNavigate();
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
-      // localStorage.setItem("token", token.em); // TODO: remove this after fixing cookie issue on the backend
+      localStorage.setItem("token", email); // TODO: remove this after fixing cookie issue on the backend
       window.location.reload();
       navigate("/");
     },
