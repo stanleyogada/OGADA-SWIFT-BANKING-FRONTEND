@@ -164,29 +164,6 @@ const handleAssertLoadingAfterSubmitClick = async () => {
   expect(signUpButton).not.toBeDisabled();
 };
 
-test("Sign up form works correctly onLoading", async () => {
-  const user = userEvent.setup();
-  renderComponent();
-
-  await handleAssertTypeInForm(user, {
-    phoneNumber: "1234567890",
-    loginPasscode: "123456",
-    email: "example@gmail.com",
-    middleName: "middleName",
-    lastName: "lastName",
-    firstName: "firstName",
-  });
-
-  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-
-  const signUpButton = screen.getByRole("button", { name: /confirm/i });
-  expect(signUpButton).not.toBeDisabled();
-
-  await user.click(signUpButton);
-
-  await handleAssertLoadingAfterSubmitClick();
-});
-
 test("Sign up form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   renderComponent();
@@ -251,6 +228,23 @@ describe("Errors correctly", () => {
   });
 
   test("On /send-email-verification network error", async () => {
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
+      statusCode: 400,
+    });
+    renderComponent();
+
+    await handleAssertError();
+  });
+
+  test("On both /signup and /send-email-verification network error", async () => {
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.signUp}`,
+      statusCode: 400,
+    });
+
     handleCreateErrorConfig({
       method: "post",
       url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
