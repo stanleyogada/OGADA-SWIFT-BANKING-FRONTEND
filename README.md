@@ -9,7 +9,7 @@ An application solely for education purposes!
 1. First Run `node -v` if your version **< v12** Then update to the latest node version - https://nodejs.org/en/download/, Otherwise don't download the latest
 2. Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 3. Run `cd Opay-Demo-Frontend`
-4. Run `npm i --legacy-peer-deps`
+4. Run `npm i --force --legacy-peer-deps`
 5. Run `npm run dev`
 
 #
@@ -23,15 +23,15 @@ An application solely for education purposes!
 
 ## How to contribute
 
-1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main`
+1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main && npm i --force --legacy-peer-deps`
 2. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 3. Make your changes.
 4. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
 5. Repeat **step 3 and 4** until you're done with your ticket tasks.
-6. Pull from origin `main` branch to sync all changes online with your local branch `git pull origin main && npm i`.
+6. Pull from origin `main` branch to sync all changes online with your local branch `git pull origin main && npm i --force --legacy-peer-deps`.
 7. Fix all conflict/s if any (You might need to consult help from the Engineer responsible for causing the conflict/s).
 8. Push your changes on your current branch! eg. `git push origin ch-#5-add-pretier-configuration`
-9. Create a **PR** in GitHub.
+9. Create a **PR** in GitHub if you don't have any yet.
 10. If any change/s is requested by your Code Reviewers, repeat **step 3 to 8** until your **PR** is approved.
 11. Merge **PR**. 🚢
 
