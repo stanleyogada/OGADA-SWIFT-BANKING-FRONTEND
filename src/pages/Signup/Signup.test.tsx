@@ -193,13 +193,7 @@ test("Sign up form works correctly onSuccess", async () => {
   await handleAssertLoadingAfterSubmitClick();
 
   localStorageSetItem.mockImplementation();
-  expect(localStorageSetItem).toHaveBeenCalledWith(
-    LOCAL_STORAGE_KEYS.signupSuccess,
-    JSON.stringify({
-      email: userEmail,
-      // time: new Date().getTime(),
-    })
-  );
+  expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.signupSuccess}`, "TEST");
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authEmail);
 

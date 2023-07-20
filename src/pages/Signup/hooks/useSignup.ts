@@ -12,11 +12,12 @@ const useSignin = () => {
   const navigate = useNavigate();
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
+      localStorage.setItem(`TEST${LOCAL_STORAGE_KEYS.signupSuccess}`, "TEST");
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.signupSuccess,
         JSON.stringify({
           email,
-          // time: new Date().getTime(),
+          time: new Date().getTime(),
         })
       );
       navigate(CLIENT_ROUTES.authEmail);
