@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import type { TSignUpFormValues } from "../type";
 import { useMutation } from "react-query";
-import { postSignIn, postSignup } from "../../../services/auth";
+import { postSignup } from "../../../services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES } from "../../../constants";
 
