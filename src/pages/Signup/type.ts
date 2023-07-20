@@ -1,7 +1,7 @@
 type TSignUpFormValues = {
   firstName: string;
   lastName: string;
-  middleName: string;
+  middleName?: string;
   email: string;
   phoneNumber: string;
   loginPasscode: string;

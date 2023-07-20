@@ -111,7 +111,7 @@ const handleAssertTypeInForm = async (
   ];
 
   for (const { input, value } of inputList) {
-    await user.type(input, value);
+    await user.type(input, value as string);
     expect(input).toHaveValue(value);
   }
 };

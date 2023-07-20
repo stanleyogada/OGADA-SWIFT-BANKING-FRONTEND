@@ -40,11 +40,26 @@ const useSignin = () => {
   } = useForm<TSignUpFormValues>({
     defaultValues: {
       acceptTerms: true,
+
+      ...(() =>
+        process.env.NODE_ENV === "development"
+          ? {
+              firstName: "John",
+              lastName: "Doe",
+              email: "johnDoe@gmail.com",
+              phoneNumber: "9234567890",
+              loginPasscode: "123456",
+            }
+          : {})(),
     },
   });
 
   const handleSubmit = () => {
     return _handleSubmit((formValues: TSignUpFormValues) => {
+      if (!formValues.middleName) {
+        delete formValues.middleName;
+      }
+
       handleSignIn(formValues);
     });
   };
