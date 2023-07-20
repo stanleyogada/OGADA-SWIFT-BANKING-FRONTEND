@@ -1,6 +1,6 @@
 import BrandLogo from "../BrandLogo";
 
-import { SplashScreenWrapper } from "./SplashScreenStyle";
+import SplashScreenWrapper from "./SplashScreenStyle";
 
 export default function SplashScreen() {
   return (

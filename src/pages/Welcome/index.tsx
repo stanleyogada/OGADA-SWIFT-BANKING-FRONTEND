@@ -4,7 +4,7 @@ import { CLIENT_ROUTES } from "../../constants/routes";
 import Button from "../../components/Button";
 import Slider from "react-rc-carousel";
 import vector from "../../constants/images/vector";
-import { WelcomeWrapper } from "./WelcomeStyle";
+import WelcomeWrapper from "./WelcomeStyle";
 import { COLORS } from "../../constants";
 
 const Welcome = () => {

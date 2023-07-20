@@ -1,7 +1,7 @@
 import Navigation from "../../components/Navigation";
 import Reward from "./../../components/Reward/Reward";
 
-import { RewardsWrapper } from "./RewardStyle";
+import RewardsWrapper from "./RewardStyle";
 
 const Rewards = () => {
   return (

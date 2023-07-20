@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const WelcomeWrapper = styled.div`
+const WelcomeWrapper = styled.div`
   .slide-box {
     height: 80vh;
     display: flex;
@@ -82,3 +82,5 @@ export const WelcomeWrapper = styled.div`
     }
   }
 `;
+
+export default WelcomeWrapper;

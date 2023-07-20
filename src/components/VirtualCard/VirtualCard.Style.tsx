@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const VirtualWrapper = styled.div`
+const VirtualWrapper = styled.div`
   .virtual-card-img {
     width: 100%;
     display: flex;
@@ -114,3 +114,4 @@ export const VirtualWrapper = styled.div`
     }
   }
 `;
+export default VirtualWrapper;

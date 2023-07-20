@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const SplashScreenWrapper = styled.div`
+const SplashScreenWrapper = styled.div`
   background-color: ${COLORS.blue};
   width: 100%;
   height: 100vh;
@@ -39,3 +39,5 @@ export const SplashScreenWrapper = styled.div`
     }
   }
 `;
+
+export default SplashScreenWrapper;

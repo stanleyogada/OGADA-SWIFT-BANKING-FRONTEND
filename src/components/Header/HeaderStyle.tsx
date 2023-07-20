@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.header`
   width: 100%;
   height: 100px;
   min-height: min-content;
@@ -30,3 +30,4 @@ export const HeaderWrapper = styled.header`
     padding: 8px;
   }
 `;
+export default HeaderWrapper;

@@ -1,6 +1,6 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import { MainWrapper } from "./LiveStyle";
+import MainWrapper from "./LiveStyle";
 
 const Livechat = () => {
   return (

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const FooterWrapper = styled.footer`
+const FooterWrapper = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
@@ -48,3 +48,4 @@ export const FooterWrapper = styled.footer`
     }
   }
 `;
+export default FooterWrapper;

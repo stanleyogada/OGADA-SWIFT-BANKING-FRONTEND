@@ -3,7 +3,7 @@ import React from "react";
 import vector from "./../../constants/images/vector";
 import icons from "./../../constants/icons/index";
 import Button from "./../Button/index";
-import { PhysicalCardWrapper } from "./PhysicalStyle";
+import PhysicalCardWrapper from "./PhysicalStyle";
 
 function PhysicalCard() {
   return (

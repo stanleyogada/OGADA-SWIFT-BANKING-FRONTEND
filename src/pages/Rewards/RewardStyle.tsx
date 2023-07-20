@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const RewardsWrapper = styled.div`
+const RewardsWrapper = styled.div`
   width: 100%;
   height: 100%;
 
@@ -23,3 +23,4 @@ export const RewardsWrapper = styled.div`
     }
   }
 `;
+export default RewardsWrapper;

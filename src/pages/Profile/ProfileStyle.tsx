@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const ProfileWrapper = styled.div`
+const ProfileWrapper = styled.div`
   width: 100%;
   height: 100%;
   color: ${COLORS.black};
@@ -74,3 +74,4 @@ export const ProfileWrapper = styled.div`
     }
   }
 `;
+export default ProfileWrapper;

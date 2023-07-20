@@ -3,7 +3,7 @@ import icons from "../../constants/icons";
 import Navigation from "../../components/Navigation";
 import { Link } from "react-router-dom";
 import { CLIENT_ROUTES } from "../../constants";
-import { ProfileWrapper } from "./ProfileStyle";
+import ProfileWrapper from "./ProfileStyle";
 
 const Profile = () => {
   return (

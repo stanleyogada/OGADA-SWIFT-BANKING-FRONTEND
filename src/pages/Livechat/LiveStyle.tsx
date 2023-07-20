@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainWrapper = styled.main`
+const MainWrapper = styled.main`
   .chat.chat-container {
     width: calc(255rem / 16);
     max-width: fit-content;
@@ -23,3 +23,4 @@ export const MainWrapper = styled.main`
     font-size: 1.2rem;
   }
 `;
+export default MainWrapper;

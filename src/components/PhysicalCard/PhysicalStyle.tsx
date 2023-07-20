@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "./../../constants/colors/index";
 
-export const PhysicalCardWrapper = styled.div`
+const PhysicalCardWrapper = styled.div`
   .virtual-card-img {
     width: 100%;
     display: flex;
@@ -127,3 +127,5 @@ export const PhysicalCardWrapper = styled.div`
     }
   }
 `;
+
+export default PhysicalCardWrapper;

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Navigation from "../../components/Navigation";
 import { finances } from "./Finance";
-import { FinanceWrapper } from "./FinanceStyle";
+import FinanceWrapper from "./FinanceStyle";
 
 const Finance = () => {
   const [value, setValue] = useState(0);

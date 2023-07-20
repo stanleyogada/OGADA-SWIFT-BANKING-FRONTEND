@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const FinanceWrapper = styled.section`
+const FinanceWrapper = styled.section`
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -106,3 +106,5 @@ export const FinanceWrapper = styled.section`
     }
   }
 `;
+
+export default FinanceWrapper;
