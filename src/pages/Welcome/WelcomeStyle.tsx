@@ -12,6 +12,7 @@ const WelcomeWrapper = styled.div`
 
     .slide-image {
       border: 3px solid #2b2b2b27;
+
       width: 300px;
       height: 300px;
       border-radius: 50%;
