@@ -13,7 +13,6 @@ const useSignin = () => {
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
       localStorage.setItem("token", email); // TODO: remove this after fixing cookie issue on the backend
-      window.location.reload();
       navigate(CLIENT_ROUTES.authEmail);
     },
   });
