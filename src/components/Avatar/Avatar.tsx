@@ -1,21 +1,12 @@
-import styled from 'styled-components'
-import profilePic from '../../assets/profile-picture.png'
-
+import profilePic from "../../assets/profile-picture.png";
+import ImageWrapper from "./AvatarStyle";
 
 const Avatar = () => {
   return (
     <ImageWrapper>
-    <img src={profilePic} alt="" />
+      <img src={profilePic} alt="" />
     </ImageWrapper>
-  )
-}
+  );
+};
 
-export default Avatar
-
-const ImageWrapper = styled.section`
-    img{
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-`
+export default Avatar;

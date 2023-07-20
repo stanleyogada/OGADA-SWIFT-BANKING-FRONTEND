@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { COLORS } from "../../constants";
+import { SButton, LinkWrapper } from "./ButtonStyle";
 
 interface ButtonProps {
   icon?: ReactNode;
@@ -9,28 +8,6 @@ interface ButtonProps {
   link?: any;
 }
 
-const SButton = styled.button`
-  background-color: Transparent;
-  display: flex;
-  flex-direction: column;
-  background-repeat: no-repeat;
-  border: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-
-  & span {
-    margin-top: 5px;
-    color: currentColor;
-  }
-`;
-
-const LinkWrapper = styled.div`
-  & a {
-    text-decoration: none;
-  }
-`;
 const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
   const btn = (
     <SButton>
