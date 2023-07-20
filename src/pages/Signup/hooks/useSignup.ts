@@ -6,13 +6,19 @@ import type { TSignUpFormValues } from "../type";
 import { useMutation } from "react-query";
 import { postSignup } from "../../../services/auth";
 import { AxiosError } from "axios";
-import { CLIENT_ROUTES } from "../../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 
 const useSignin = () => {
   const navigate = useNavigate();
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
-      localStorage.setItem("token", email); // TODO: remove this after fixing cookie issue on the backend
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.signupSuccess,
+        JSON.stringify({
+          email,
+          // time: new Date().getTime(),
+        })
+      );
       navigate(CLIENT_ROUTES.authEmail);
     },
   });

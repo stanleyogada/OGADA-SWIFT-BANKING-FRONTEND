@@ -8,14 +8,14 @@ import Signup from ".";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
-import { CLIENT_ROUTES } from "../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
 
 const navigate = jest.fn();
 let consoleInfoSpy: jest.SpyInstance;
 let consoleErrorSpy: jest.SpyInstance;
 let useNavigateSpy: jest.SpyInstance;
 
-const mockSetItem = jest.fn();
+const localStorageSetItem = jest.fn();
 
 beforeEach(() => {
   useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
@@ -24,7 +24,7 @@ beforeEach(() => {
 
   Object.defineProperty(window, "localStorage", {
     value: {
-      setItem: (params1: string, params2: string) => mockSetItem(params1, params2),
+      setItem: (params1: string, params2: string) => localStorageSetItem(params1, params2),
     },
   });
 });
@@ -33,7 +33,7 @@ afterEach(() => {
   useNavigateSpy.mockRestore();
   consoleInfoSpy.mockRestore();
   consoleErrorSpy.mockRestore();
-  mockSetItem.mockClear();
+  localStorageSetItem.mockClear();
 });
 
 const renderComponent = () => {
@@ -173,10 +173,12 @@ test("Sign up form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   renderComponent();
 
+  const userEmail = "example@gmail.com";
+
   await handleAssertTypeInForm(user, {
     phoneNumber: "1234567890",
     loginPasscode: "123456",
-    email: "example@gmail.com",
+    email: userEmail,
     middleName: "middleName",
     lastName: "lastName",
     firstName: "firstName",
@@ -190,8 +192,14 @@ test("Sign up form works correctly onSuccess", async () => {
 
   await handleAssertLoadingAfterSubmitClick();
 
-  mockSetItem.mockImplementation();
-  expect(mockSetItem).toHaveBeenCalledWith("token", "example@gmail.com");
+  localStorageSetItem.mockImplementation();
+  expect(localStorageSetItem).toHaveBeenCalledWith(
+    LOCAL_STORAGE_KEYS.signupSuccess,
+    JSON.stringify({
+      email: userEmail,
+      // time: new Date().getTime(),
+    })
+  );
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authEmail);
 
