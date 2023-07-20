@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
-import Signup2 from ".";
+import Signup from ".";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
@@ -50,7 +50,7 @@ const renderComponent = () => {
     // @ts-ignore
     <QueryClientProvider client={queryClient}>
       <MemoryRouter>
-        <Signup2 />
+        <Signup />
       </MemoryRouter>
     </QueryClientProvider>
   );

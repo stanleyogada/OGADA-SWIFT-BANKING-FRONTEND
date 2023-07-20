@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 
-import useSignup2 from "./hooks/useSignup2";
-import Signup2Wrapper from "./Signup2Wrapper";
+import useSignup from "./hooks/useSignup";
+import SignupWrapper from "./SignupWrapper";
 import Button from "../../components/Button";
 import PhoneInput from "../../components/Input/PhoneInput";
 import PasswordInput from "../../components/Input/PasswordInput";
 import Input from "../../components/Input";
 
-const Signup2 = () => {
-  const { handleSubmit, register, mutationState, errors } = useSignup2();
+const Signup = () => {
+  const { handleSubmit, register, mutationState, errors } = useSignup();
 
   return (
-    <Signup2Wrapper>
+    <SignupWrapper>
       {mutationState.isError && <p data-testid="error">{mutationState.error}</p>}
 
       <header>
@@ -115,8 +115,8 @@ const Signup2 = () => {
           </div>
         </form>
       </main>
-    </Signup2Wrapper>
+    </SignupWrapper>
   );
 };
 
-export default Signup2;
+export default Signup;
