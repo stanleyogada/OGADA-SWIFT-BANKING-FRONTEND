@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-export const HomeInfoWrapper = styled.section`
+const HomeInfoWrapper = styled.section`
   .profile-head {
     display: flex;
     align-item: center;
@@ -45,7 +45,7 @@ export const HomeInfoWrapper = styled.section`
   }
 `;
 
-export const HeroWrapper = styled.section`
+const HeroWrapper = styled.section`
   background: ${COLORS.blue};
   width: 90vw;
   margin: 0 auto;
@@ -91,7 +91,7 @@ export const HeroWrapper = styled.section`
   }
 `;
 
-export const PaymentWrapper = styled.section`
+const PaymentWrapper = styled.section`
   width: 90vw;
   margin: 0 auto;
   margin-top: 0.75rem;
@@ -116,7 +116,7 @@ export const PaymentWrapper = styled.section`
   }
 `;
 
-export const NotifyWrapper = styled.section`
+const NotifyWrapper = styled.section`
   display: grid;
   align-items: center;
   gap: 0.5rem;
@@ -158,3 +158,4 @@ export const NotifyWrapper = styled.section`
     }
   }
 `;
+export { HomeInfoWrapper, NotifyWrapper, PaymentWrapper, HeroWrapper };
