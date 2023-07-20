@@ -8,6 +8,7 @@ import Signup2 from ".";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
+import { CLIENT_ROUTES } from "../../constants";
 
 const navigate = jest.fn();
 let consoleInfoSpy: jest.SpyInstance;
@@ -16,23 +17,23 @@ let useNavigateSpy: jest.SpyInstance;
 
 const mockSetItem = jest.fn();
 
-Object.defineProperty(window, "localStorage", {
-  value: {
-    setItem: (params1: string, params2: string) => mockSetItem(params1, params2),
-  },
-});
-
 beforeEach(() => {
   useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
   consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
   consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
-  mockSetItem.mockClear();
+
+  Object.defineProperty(window, "localStorage", {
+    value: {
+      setItem: (params1: string, params2: string) => mockSetItem(params1, params2),
+    },
+  });
 });
 
 afterEach(() => {
   useNavigateSpy.mockRestore();
   consoleInfoSpy.mockRestore();
   consoleErrorSpy.mockRestore();
+  mockSetItem.mockClear();
 });
 
 const renderComponent = () => {
@@ -192,6 +193,7 @@ test("Sign up form works correctly onSuccess", async () => {
   mockSetItem.mockImplementation();
   expect(mockSetItem).toHaveBeenCalledWith("token", "example@gmail.com");
   expect(navigate).toHaveBeenCalled();
+  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authEmail);
 
   expect(consoleInfoSpy).toHaveBeenCalled();
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
