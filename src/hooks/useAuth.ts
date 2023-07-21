@@ -22,7 +22,7 @@ const useAuth = () => {
   //
 
   const signInMutation = useMutation(postSignIn, {
-    onSuccess: (token: string) => {
+    onSuccess: ({ token }) => {
       localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
       window.location.reload();
     },

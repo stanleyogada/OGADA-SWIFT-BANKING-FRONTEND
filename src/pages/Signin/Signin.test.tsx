@@ -40,11 +40,7 @@ const { handleCreateErrorConfig } = createServer([
   {
     url: `${BASE_URL}${ENDPOINTS.currentUser}`,
     res() {
-      return {
-        data: {
-          id: 1,
-        },
-      };
+      return {};
     },
   },
 ]);

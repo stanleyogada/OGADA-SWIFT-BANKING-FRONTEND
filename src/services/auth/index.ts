@@ -14,7 +14,10 @@ const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => 
     },
   });
 
-  return data.token as string;
+  return {
+    token: data.token as string,
+    emailIsVerified: data.email_is_verified as boolean,
+  };
 };
 
 // const fakePostRequest = () => new Promise((resolve) => setTimeout(resolve, 1000));

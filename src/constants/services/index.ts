@@ -7,6 +7,7 @@ const QUERY_KEYS = {
 const ENDPOINTS = {
   currentUser: "/users/me",
   signIn: "/auth/signin",
+  signOut: "/auth/signout",
   signUp: "/auth/signup",
   sendEmail: "/auth/send-email-verification",
 };
