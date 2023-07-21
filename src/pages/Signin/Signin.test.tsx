@@ -6,6 +6,7 @@ import { MemoryRouter } from "react-router-dom";
 import Signin from "./";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../constants/services";
+import { TUser } from "../../services/users/types";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -27,23 +28,25 @@ const renderComponent = () => {
   );
 };
 
-const { handleCreateErrorConfig } = createServer([
-  {
-    method: "post",
-    url: `${BASE_URL}${ENDPOINTS.signIn}`,
-    res() {
-      return {
-        token: "1234567890",
-      };
+const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; token: string }) => {
+  const { handleCreateErrorConfig } = createServer([
+    {
+      method: "post",
+      url: `${BASE_URL}${ENDPOINTS.signIn}`,
+      res() {
+        return response;
+      },
     },
-  },
-  {
-    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-    res() {
-      return {};
+    {
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      res() {
+        return {};
+      },
     },
-  },
-]);
+  ]);
+
+  return handleCreateErrorConfig;
+};
 
 const handleAssertTypeInForm = async (
   user: ReturnType<typeof userEvent.setup>,
@@ -99,45 +102,60 @@ test("Render content of Signin page correctly", () => {
   expect(goToSignup).toBeInTheDocument();
 });
 
-test("Signing form works correctly onSuccess", async () => {
-  const user = userEvent.setup();
-  renderComponent();
+describe("When signin request failed ", () => {
+  const handleCreateErrorConfig = handleCreateSignInConfigSuccess({
+    token: "1234567890",
+  });
 
-  await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  test("Signing form works correctly onError", async () => {
+    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+    handleCreateErrorConfig({
+      method: "post",
+      url: `${BASE_URL}/auth/signin`,
+      statusCode: 400,
+    });
+    const user = userEvent.setup();
+    renderComponent();
 
-  expect(window.location.reload).not.toHaveBeenCalled();
+    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
-  const signInButton = screen.getByRole("button", { name: /sign in/i });
-  await user.click(signInButton);
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
 
-  await handleAssertLoadingAfterSubmitClick();
+    const signInButton = screen.getByRole("button", { name: /sign in/i });
+    await user.click(signInButton);
 
-  expect(window.location.reload).toHaveBeenCalled();
+    await handleAssertLoadingAfterSubmitClick();
+
+    expect(consoleErrorSpy).toHaveBeenCalled();
+    const error = screen.getByTestId("error");
+    expect(error).toBeInTheDocument();
+    expect(error).toHaveTextContent("");
+
+    consoleErrorSpy.mockRestore();
+  });
 });
 
-test("Signing form works correctly onError", async () => {
-  const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
-  handleCreateErrorConfig({
-    method: "post",
-    url: `${BASE_URL}/auth/signin`,
-    statusCode: 400,
+describe("When signin request is successful and ", () => {
+  handleCreateSignInConfigSuccess({
+    token: "1234567891",
+    data: {
+      email_is_verified: true,
+    },
   });
-  const user = userEvent.setup();
-  renderComponent();
 
-  await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+  test("Signing form works correctly onSuccess", async () => {
+    const user = userEvent.setup();
+    renderComponent();
 
-  expect(consoleErrorSpy).not.toHaveBeenCalled();
+    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
-  const signInButton = screen.getByRole("button", { name: /sign in/i });
-  await user.click(signInButton);
+    expect(window.location.reload).not.toHaveBeenCalled();
 
-  await handleAssertLoadingAfterSubmitClick();
+    const signInButton = screen.getByRole("button", { name: /sign in/i });
+    await user.click(signInButton);
 
-  expect(consoleErrorSpy).toHaveBeenCalled();
-  const error = screen.getByTestId("error");
-  expect(error).toBeInTheDocument();
-  expect(error).toHaveTextContent("");
+    await handleAssertLoadingAfterSubmitClick();
 
-  consoleErrorSpy.mockRestore();
+    expect(window.location.reload).toHaveBeenCalled();
+  });
 });

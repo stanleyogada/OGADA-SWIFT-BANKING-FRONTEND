@@ -4,7 +4,7 @@ import { setupServer } from "msw/node";
 import { Optional } from "../../types";
 
 type HandlerConfig = {
-  method?: "get" | "post" | "put" | "delete";
+  method?: "get" | "post" | "put" | "delete" | "patch" | "head" | "options";
   url: string;
   res: (req: any, res: any, ctx: any) => Object;
 };
