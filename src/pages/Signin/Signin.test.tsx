@@ -107,7 +107,7 @@ describe("When signin request failed ", () => {
     token: "1234567890",
   });
 
-  test("Signing form works correctly onError", async () => {
+  test("Signin form works correctly onError", async () => {
     const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
     handleCreateErrorConfig({
       method: "post",
@@ -135,52 +135,54 @@ describe("When signin request failed ", () => {
   });
 });
 
-describe("When signin request is successful and email has been verified", () => {
-  handleCreateSignInConfigSuccess({
-    token: "1234567890",
-    data: {
-      email_is_verified: true,
-    },
+describe("Signin form works correctly onSuccess", () => {
+  describe("When the user email has been verified", () => {
+    handleCreateSignInConfigSuccess({
+      token: "1234567890",
+      data: {
+        email_is_verified: true,
+      },
+    });
+
+    test("Signing form works correctly onSuccess", async () => {
+      const user = userEvent.setup();
+      renderComponent();
+
+      await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+      expect(window.location.reload).not.toHaveBeenCalled();
+
+      const signInButton = screen.getByRole("button", { name: /sign in/i });
+      await user.click(signInButton);
+
+      await handleAssertLoadingAfterSubmitClick();
+
+      expect(window.location.reload).toHaveBeenCalled();
+    });
   });
 
-  test("Signing form works correctly onSuccess", async () => {
-    const user = userEvent.setup();
-    renderComponent();
+  describe("When the user email has NOT been verified", () => {
+    handleCreateSignInConfigSuccess({
+      token: "1234567890",
+      data: {
+        email_is_verified: false,
+      },
+    });
 
-    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+    test("Signing form works correctly onSuccess", async () => {
+      const user = userEvent.setup();
+      renderComponent();
 
-    expect(window.location.reload).not.toHaveBeenCalled();
+      await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
 
-    const signInButton = screen.getByRole("button", { name: /sign in/i });
-    await user.click(signInButton);
+      expect(window.location.reload).not.toHaveBeenCalled();
 
-    await handleAssertLoadingAfterSubmitClick();
+      const signInButton = screen.getByRole("button", { name: /sign in/i });
+      await user.click(signInButton);
 
-    expect(window.location.reload).toHaveBeenCalled();
-  });
-});
+      await handleAssertLoadingAfterSubmitClick();
 
-describe("When signin request is successful and email has NOT been verified", () => {
-  handleCreateSignInConfigSuccess({
-    token: "1234567890",
-    data: {
-      email_is_verified: false,
-    },
-  });
-
-  test("Signing form works correctly onSuccess", async () => {
-    const user = userEvent.setup();
-    renderComponent();
-
-    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
-    expect(window.location.reload).not.toHaveBeenCalled();
-
-    const signInButton = screen.getByRole("button", { name: /sign in/i });
-    await user.click(signInButton);
-
-    await handleAssertLoadingAfterSubmitClick();
-
-    expect(window.location.reload).toHaveBeenCalled();
+      expect(window.location.reload).toHaveBeenCalled();
+    });
   });
 });

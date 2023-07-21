@@ -14,8 +14,6 @@ const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => 
     },
   });
 
-  console.log(data);
-
   return {
     token: data.token as string,
     emailIsVerified: data.email_is_verified as boolean,
