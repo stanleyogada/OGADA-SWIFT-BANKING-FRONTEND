@@ -4,8 +4,12 @@ import { useMutation } from "react-query";
 import useCurrentUser from "./useCurrentUser";
 import { postSignIn } from "../services/auth";
 import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
+import { CLIENT_ROUTES } from "../constants";
 
 const useAuth = () => {
+  const navigate = useNavigate();
+
   const { data: currentUser, isLoading } = useCurrentUser();
   const userIsAuthenticated = useMemo(() => {
     if (isLoading) {
@@ -21,10 +25,30 @@ const useAuth = () => {
   //
   //
 
+  // TODO: add this after fixing cookie issue on the backend
+  // const signOutMutation = useMutation(postSignOut, {
+  //   onSuccess: (redirectTo?: string) => {
+  //     if (redirectTo) {
+  //       navigate(redirectTo);
+  //       return;
+  //     }
+
+  //     window.location.reload();
+  //   },
+  // })
+
   const signInMutation = useMutation(postSignIn, {
-    onSuccess: ({ token }) => {
-      localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
-      window.location.reload();
+    onSuccess: ({ token, emailIsVerified }) => {
+      console.log({ emailIsVerified, token });
+
+      if (emailIsVerified) {
+        localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
+        window.location.reload(); // Signifies that the user is logged in successfully
+
+        return;
+      }
+
+      handleSignOut(CLIENT_ROUTES.authVerifyEmail); // Signs out but skips the reload
     },
   });
 
@@ -32,10 +56,16 @@ const useAuth = () => {
     signInMutation.mutate({ phoneNumber, loginPasscode });
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = (redirectTo?: string) => {
+    // signOutMutation.mutate(redirectTo); // Signs out but skips the reload // TODO: real implementation:: call the signOutMutation
+
+    // TODO: remove all code below after fixing cookie issue on the backend
     localStorage.removeItem("token"); // TODO: remove this after fixing cookie issue on the backend
 
-    // signOutMutation(); // TODO: real implementation:: call the signOutMutation
+    if (redirectTo) {
+      navigate(redirectTo);
+      return;
+    }
 
     window.location.reload();
   };

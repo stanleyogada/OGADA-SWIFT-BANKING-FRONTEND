@@ -63,3 +63,5 @@ const createServer = (handlerConfigs: THandlerConfig[]) => {
 };
 
 export default createServer;
+
+export type { THandlerConfig };

@@ -107,7 +107,7 @@ const ROUTER = createBrowserRouter([
       },
 
       {
-        path: CLIENT_ROUTES.authEmail,
+        path: CLIENT_ROUTES.authVerifyEmail,
         element: (
           <PageWrapper>
             <VerifyEmail />

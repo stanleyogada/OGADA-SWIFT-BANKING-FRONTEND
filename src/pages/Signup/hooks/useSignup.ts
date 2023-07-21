@@ -20,7 +20,7 @@ const useSignin = () => {
           time: new Date().getTime(),
         })
       );
-      navigate(CLIENT_ROUTES.authEmail);
+      navigate(CLIENT_ROUTES.authVerifyEmail);
     },
   });
 

@@ -1,3 +1,4 @@
+import * as router from "react-router";
 import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -7,6 +8,18 @@ import Signin from "./";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import { TUser } from "../../services/users/types";
+import { CLIENT_ROUTES } from "../../constants";
+
+const navigate = jest.fn();
+let useNavigateSpy: jest.SpyInstance;
+
+beforeEach(() => {
+  useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
+});
+
+afterEach(() => {
+  useNavigateSpy.mockRestore();
+});
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -40,7 +53,11 @@ const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; toke
     {
       url: `${BASE_URL}${ENDPOINTS.currentUser}`,
       res() {
-        return {};
+        return {
+          data: {
+            id: 1,
+          },
+        };
       },
     },
   ]);
@@ -144,12 +161,11 @@ describe("Signin form works correctly onSuccess", () => {
       },
     });
 
-    test("Signing form works correctly onSuccess", async () => {
+    test("Forces a reload at the end of the operation", async () => {
       const user = userEvent.setup();
       renderComponent();
 
       await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
       expect(window.location.reload).not.toHaveBeenCalled();
 
       const signInButton = screen.getByRole("button", { name: /sign in/i });
@@ -161,7 +177,7 @@ describe("Signin form works correctly onSuccess", () => {
     });
   });
 
-  describe("When the user email has NOT been verified", () => {
+  describe("When the user email has not been verified", () => {
     handleCreateSignInConfigSuccess({
       token: "1234567890",
       data: {
@@ -169,20 +185,20 @@ describe("Signin form works correctly onSuccess", () => {
       },
     });
 
-    test("Signing form works correctly onSuccess", async () => {
+    test("Forces a navigate at the end of the operation", async () => {
       const user = userEvent.setup();
       renderComponent();
 
       await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
-      expect(window.location.reload).not.toHaveBeenCalled();
+      expect(navigate).not.toHaveBeenCalled();
 
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
       await handleAssertLoadingAfterSubmitClick();
 
-      expect(window.location.reload).toHaveBeenCalled();
+      expect(window.location.reload).not.toHaveBeenCalled();
+      expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
     });
   });
 });
