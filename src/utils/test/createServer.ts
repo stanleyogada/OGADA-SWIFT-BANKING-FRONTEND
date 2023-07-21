@@ -3,13 +3,25 @@ import { setupServer } from "msw/node";
 
 import { Optional } from "../../types";
 
-type HandlerConfig = {
-  method?: "get" | "post" | "put" | "delete" | "patch" | "head" | "options";
+type THandlerConfigMethod = "get" | "post" | "put" | "delete" | "patch" | "head" | "options";
+type THandlerConfig = {
+  method?: THandlerConfigMethod;
   url: string;
-  res: (req: any, res: any, ctx: any) => Object;
+  res: (req: any, res: any, ctx: any) => object;
 };
 
-const createServer = (handlerConfigs: HandlerConfig[]) => {
+const createServer = (handlerConfigs: THandlerConfig[]) => {
+  handlerConfigs = [
+    ...handlerConfigs,
+    ...handlerConfigs.map((config) => ({
+      method: "options" as THandlerConfigMethod,
+      url: config.url,
+      res: () => ({}),
+    })),
+  ];
+
+  console.log(handlerConfigs);
+
   const handlers = handlerConfigs.map((config) =>
     rest[config.method || "get"](config.url, (req, res, ctx) => {
       return res(
@@ -27,7 +39,7 @@ const createServer = (handlerConfigs: HandlerConfig[]) => {
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
 
-  const handleCreateErrorConfig = (handlerConfig: Optional<HandlerConfig, "res"> & { statusCode?: number }) => {
+  const handleCreateErrorConfig = (handlerConfig: Optional<THandlerConfig, "res"> & { statusCode?: number }) => {
     server.use(
       rest[handlerConfig.method || "get"](handlerConfig.url, (req, res, ctx) => {
         return res(
