@@ -225,6 +225,8 @@ describe("Errors correctly", () => {
     await handleAssertLoadingAfterSubmitClick();
 
     expect(consoleErrorSpy).toHaveBeenCalled();
+    expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
+    expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Network Error");
     const error = screen.getByTestId("error");
     expect(error).toBeInTheDocument();
     // expect(error).toHaveTextContent(""); // TODO: uncomment this line after removing error message to the page
