@@ -135,11 +135,36 @@ describe("When signin request failed ", () => {
   });
 });
 
-describe("When signin request is successful and ", () => {
+describe("When signin request is successful and email has been verified", () => {
   handleCreateSignInConfigSuccess({
-    token: "1234567891",
+    token: "1234567890",
     data: {
       email_is_verified: true,
+    },
+  });
+
+  test("Signing form works correctly onSuccess", async () => {
+    const user = userEvent.setup();
+    renderComponent();
+
+    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+
+    expect(window.location.reload).not.toHaveBeenCalled();
+
+    const signInButton = screen.getByRole("button", { name: /sign in/i });
+    await user.click(signInButton);
+
+    await handleAssertLoadingAfterSubmitClick();
+
+    expect(window.location.reload).toHaveBeenCalled();
+  });
+});
+
+describe("When signin request is successful and email has NOT been verified", () => {
+  handleCreateSignInConfigSuccess({
+    token: "1234567890",
+    data: {
+      email_is_verified: false,
     },
   });
 

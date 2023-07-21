@@ -20,8 +20,6 @@ const createServer = (handlerConfigs: THandlerConfig[]) => {
     })),
   ];
 
-  console.log(handlerConfigs);
-
   const handlers = handlerConfigs.map((config) =>
     rest[config.method || "get"](config.url, (req, res, ctx) => {
       return res(

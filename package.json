@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "start": "vite preview",
-    "test": "jest --watchAll --no-cache"
+    "test": "npx jest --clearCache && jest --watchAll --no-cache"
   },
   "dependencies": {
     "@types/react-query": "^1.2.9",
