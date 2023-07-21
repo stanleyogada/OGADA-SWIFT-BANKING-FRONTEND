@@ -39,8 +39,6 @@ const useAuth = () => {
 
   const signInMutation = useMutation(postSignIn, {
     onSuccess: ({ token, emailIsVerified }) => {
-      console.log({ emailIsVerified, token });
-
       if (emailIsVerified) {
         localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
         window.location.reload(); // Signifies that the user is logged in successfully
