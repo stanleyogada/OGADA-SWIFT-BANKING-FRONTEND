@@ -1,2 +1,2 @@
 import "./window";
-import "./currentUserNetworkError";
+import "./consoleSpy";

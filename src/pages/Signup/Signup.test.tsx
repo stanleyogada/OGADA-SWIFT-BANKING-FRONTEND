@@ -9,18 +9,14 @@ import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { TSignUpFormValues } from "./type";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
+import { consoleErrorSpy, consoleInfoSpy } from "../../utils/test/mocks/consoleSpy";
 
 const navigate = jest.fn();
-let consoleInfoSpy: jest.SpyInstance;
-let consoleErrorSpy: jest.SpyInstance;
 let useNavigateSpy: jest.SpyInstance;
-
 const localStorageSetItem = jest.fn();
 
 beforeEach(() => {
   useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
-  consoleInfoSpy = jest.spyOn(console, "info").mockImplementation();
-  consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
 
   Object.defineProperty(window, "localStorage", {
     value: {
@@ -31,8 +27,6 @@ beforeEach(() => {
 
 afterEach(() => {
   useNavigateSpy.mockRestore();
-  consoleInfoSpy.mockRestore();
-  consoleErrorSpy.mockRestore();
   localStorageSetItem.mockClear();
 });
 

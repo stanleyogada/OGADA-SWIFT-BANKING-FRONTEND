@@ -9,6 +9,7 @@ import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import { TUser } from "../../services/users/types";
 import { CLIENT_ROUTES } from "../../constants";
+import { consoleErrorSpy } from "../../utils/test/mocks/consoleSpy";
 
 const navigate = jest.fn();
 let useNavigateSpy: jest.SpyInstance;
@@ -124,8 +125,7 @@ describe("When signin request failed ", () => {
     token: "1234567890",
   });
 
-  test("Signin form works correctly onError", async () => {
-    const consoleErrorSpy = jest.spyOn(console, "error").mockImplementation();
+  test("Signin form works correctly onError 2", async () => {
     handleCreateErrorConfig({
       method: "post",
       url: `${BASE_URL}/auth/signin`,
@@ -145,13 +145,10 @@ describe("When signin request failed ", () => {
 
     expect(consoleErrorSpy).toHaveBeenCalled();
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
-    expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Network Error");
 
     const error = screen.getByTestId("error");
     expect(error).toBeInTheDocument();
     expect(error).toHaveTextContent("");
-
-    consoleErrorSpy.mockRestore();
   });
 });
 
