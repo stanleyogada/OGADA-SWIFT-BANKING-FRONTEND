@@ -66,7 +66,7 @@ const { handleCreateErrorConfig } = createServer([
     },
   },
   {
-    url: `${BASE_URL}/users/me`,
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
     res() {
       return {};
     },
