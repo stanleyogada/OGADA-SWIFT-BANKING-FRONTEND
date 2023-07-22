@@ -8,7 +8,7 @@ import { postSignup } from "../../../services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 
-const useSignin = () => {
+const useSignup = () => {
   const navigate = useNavigate();
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
@@ -80,9 +80,9 @@ const useSignin = () => {
 
   useEffect(() => {
     if (signUpMutationState.isError) {
-      handleToast("Invalid credentials. Please try again!");
+      handleToast(signUpMutationState.error);
     }
-  }, [signUpMutationState.isError]);
+  }, [signUpMutationState.isError, signUpMutationState.error]);
 
   return {
     mutationState: signUpMutationState,
@@ -92,4 +92,4 @@ const useSignin = () => {
   };
 };
 
-export default useSignin;
+export default useSignup;

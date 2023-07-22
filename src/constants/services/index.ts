@@ -10,6 +10,7 @@ const ENDPOINTS = {
   signOut: "/auth/signout",
   signUp: "/auth/signup",
   sendEmail: "/auth/send-email-verification",
+  verifyEmail: "/auth/confirm-email-verification",
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {

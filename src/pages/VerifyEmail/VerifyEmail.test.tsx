@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import Signup from ".";
 import createServer from "../../utils/test/createServer";
-import { BASE_URL } from "../../constants/services";
+import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import VerifyEmail from ".";
 
 const renderComponent = () => {
@@ -31,7 +31,7 @@ const renderComponent = () => {
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
-    url: `${BASE_URL}/auth/signin`,
+    url: `${BASE_URL}${ENDPOINTS.verifyEmail}`,
     res() {
       return {
         token: "1234567890",
@@ -39,7 +39,7 @@ const { handleCreateErrorConfig } = createServer([
     },
   },
   {
-    url: `${BASE_URL}/users/me`,
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
     res() {
       return {
         data: {
@@ -50,8 +50,10 @@ const { handleCreateErrorConfig } = createServer([
   },
 ]);
 
-test("Render content of Signup page correctly", () => {
+test("Verifies email and redirects to login", async () => {
+  const user = userEvent.setup();
   renderComponent();
 
-  screen.getByRole("heading", { name: /Verify email address/i });
+  const codeInput = screen.getByPlaceholderText("Enter code");
+  const submitButton = screen.getByRole("button", { name: /verify/i });
 });

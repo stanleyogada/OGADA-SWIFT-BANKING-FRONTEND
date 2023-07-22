@@ -64,4 +64,11 @@ const postSendEmail = async (email: string) => {
   return email;
 };
 
-export { postSignIn, postSignup, postSendEmail };
+const postVerifyEmail = async (otp: string) => {
+  await axiosInstance({
+    method: "POST",
+    url: `${ENDPOINTS.verifyEmail}/${otp}`,
+  });
+};
+
+export { postSignIn, postSignup, postSendEmail, postVerifyEmail };
