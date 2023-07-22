@@ -1,5 +1,5 @@
 import * as router from "react-router";
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -10,6 +10,7 @@ import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/
 import { TSignUpFormValues } from "./type";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
 import { consoleErrorSpy, consoleInfoSpy } from "../../utils/test/mocks/consoleSpy";
+import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
 
 const navigate = jest.fn();
 let useNavigateSpy: jest.SpyInstance;
@@ -101,19 +102,6 @@ const handleAssertTypeInForm = async (
   }
 };
 
-const handleAssertLoadingAfterSubmitClick = async () => {
-  const signUpButton = screen.getByRole("button", { name: /confirm/i });
-
-  const getLoadingElement = () => screen.getByTestId("loading");
-  expect(getLoadingElement()).toBeInTheDocument();
-
-  expect(signUpButton).toBeDisabled();
-  await waitForElementToBeRemoved(() => getLoadingElement());
-
-  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-  expect(signUpButton).not.toBeDisabled();
-};
-
 test("Render content of Signup page correctly", () => {
   renderComponent();
 
@@ -175,7 +163,7 @@ test("Sign up form works correctly onSuccess", async () => {
   const signUpButton = screen.getByRole("button", { name: /confirm/i });
   await user.click(signUpButton);
 
-  await handleAssertLoadingAfterSubmitClick();
+  await handleAssertLoadingAfterSubmitClick(signUpButton);
 
   localStorageSetItem.mockImplementation();
   expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.signupSuccess}`, "TEST");
@@ -207,7 +195,7 @@ describe("Errors correctly", () => {
     const signUpButton = screen.getByRole("button", { name: /confirm/i });
     await user.click(signUpButton);
 
-    await handleAssertLoadingAfterSubmitClick();
+    await handleAssertLoadingAfterSubmitClick(signUpButton);
 
     expect(consoleErrorSpy).toHaveBeenCalled();
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
@@ -292,8 +280,7 @@ describe("Errors correctly", () => {
 
     const signUpButton = screen.getByRole("button", { name: /confirm/i });
     await user.click(signUpButton);
-
-    await handleAssertLoadingAfterSubmitClick();
+    await handleAssertLoadingAfterSubmitClick(signUpButton);
 
     expect(screen.getByTestId("error")).toHaveTextContent(sendEmailError);
 
@@ -310,7 +297,7 @@ describe("Errors correctly", () => {
 
     await user.click(signUpButton);
     expect(window.alert).toHaveBeenCalled();
-    await handleAssertLoadingAfterSubmitClick();
+    await handleAssertLoadingAfterSubmitClick(signUpButton);
 
     expect(screen.getByTestId("error")).toHaveTextContent(signUp);
   });
