@@ -1,11 +1,12 @@
-import { screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 
 const handleAssertLoadingAfterSubmitClick = async (signUpButton: HTMLElement) => {
-  const getLoadingElement = () => screen.getByTestId("loading");
-  expect(getLoadingElement()).toBeInTheDocument();
+  await waitForElementToBeRemoved(() => {
+    expect(screen.getByTestId("loading")).toBeInTheDocument();
+    expect(signUpButton).toBeDisabled();
 
-  expect(signUpButton).toBeDisabled();
-  await waitForElementToBeRemoved(() => getLoadingElement());
+    return screen.getByTestId("loading");
+  });
 
   expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
   expect(signUpButton).not.toBeDisabled();
