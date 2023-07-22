@@ -6,15 +6,10 @@ import { useMutation } from "react-query";
 import { postVerifyEmail } from "../../../services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
-import { TVerifyEmailFormValues } from "../type";
-
-type TResendDetails = {
-  email: string;
-  savedAtTime: string;
-  timeSecondsLeft: number;
-};
+import { TResendDetails, TVerifyEmailFormValues } from "../type";
 
 const RESEND_SECONDS = 30;
+const RESEND_BUTTON_ENABLED_TEXT = "You can resend now!";
 
 const useVerifyEmail = () => {
   const navigate = useNavigate();
@@ -65,9 +60,9 @@ const useVerifyEmail = () => {
 
   useEffect(() => {
     if (VerifyEmailMutationState.isError) {
-      handleToast("Invalid credentials. Please try again!");
+      handleToast(VerifyEmailMutationState.error);
     }
-  }, [VerifyEmailMutationState.isError]);
+  }, [VerifyEmailMutationState.isError, VerifyEmailMutationState.error]);
 
   const [resendDetails, setResendDetails] = useState<TResendDetails>({
     email: "",
@@ -110,3 +105,5 @@ const useVerifyEmail = () => {
 };
 
 export default useVerifyEmail;
+
+export { RESEND_SECONDS, RESEND_BUTTON_ENABLED_TEXT };

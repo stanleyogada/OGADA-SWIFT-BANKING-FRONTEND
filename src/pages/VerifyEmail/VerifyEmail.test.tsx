@@ -1,4 +1,4 @@
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -11,6 +11,9 @@ import { navigate } from "../../utils/test/mocks/navigate";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
 import { consoleErrorSpy } from "../../utils/test/mocks/consoleSpy";
 import { localStorageGetItem } from "../../utils/test/mocks/localStorage";
+import { RESEND_BUTTON_ENABLED_TEXT, RESEND_SECONDS } from "./hooks/useVerifyEmail";
+
+import type { TResendDetails } from "./type";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
@@ -81,20 +84,20 @@ test("Displays errors works correctly when the network request errors", async ()
 
 test("Displays resend button and works correctly", async () => {
   const now = new Date().getTime();
-  const resendInSeconds = 30;
-  const savedAtSeconds = 20;
+  const savedAtSeconds = 20; // 20 seconds ago
+
   const localStorageGetItemValue = JSON.stringify({
     email: "testResend@gmail.com",
-    // 20 seconds ago
-    savedAtTime: now - savedAtSeconds * 1000,
-  });
+    savedAtTime: now - savedAtSeconds * 1000, // 20 seconds ago
+  } as unknown as Omit<TResendDetails, "timeSecondsLeft">);
 
   localStorageGetItem.mockReturnValueOnce(localStorageGetItemValue);
   renderComponent();
 
   const resendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
   expect(resendButton).toBeDisabled();
-  expect(resendButton.textContent).toContain(`${resendInSeconds - savedAtSeconds}s`);
+  expect(resendButton.textContent).toContain(`${RESEND_SECONDS - savedAtSeconds}s`);
+  expect(resendButton.textContent).not.toContain(RESEND_BUTTON_ENABLED_TEXT);
 
   expect(localStorageGetItem).toHaveBeenCalled();
   expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.signupSuccess);
@@ -106,13 +109,13 @@ test("Displays resend button and works correctly", async () => {
   renderComponent();
   const user = userEvent.setup();
 
-  const resendButtonNew = screen.getByRole("button", { name: /didn't receive the code\?/i });
-  expect(resendButtonNew).toBeEnabled();
-  expect(resendButtonNew.textContent).toContain("You can resend now!");
+  const enabledResendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
+  expect(enabledResendButton).toBeEnabled();
+  expect(enabledResendButton.textContent).toContain(RESEND_BUTTON_ENABLED_TEXT);
 
   expect(navigate).not.toHaveBeenCalled();
 
-  await user.click(resendButtonNew);
+  await user.click(enabledResendButton);
 
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authResendEmail);

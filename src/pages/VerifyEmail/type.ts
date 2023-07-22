@@ -2,4 +2,10 @@ type TVerifyEmailFormValues = {
   code: string;
 };
 
-export type { TVerifyEmailFormValues };
+type TResendDetails = {
+  email: string;
+  savedAtTime: string;
+  timeSecondsLeft: number;
+};
+
+export type { TVerifyEmailFormValues, TResendDetails };

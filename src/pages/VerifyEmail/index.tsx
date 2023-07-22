@@ -1,7 +1,7 @@
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import VerifyEmailWrapper from "./VerifyEmailWrapper";
-import useVerifyEmail from "./hooks/useVerifyEmail";
+import useVerifyEmail, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useVerifyEmail";
 
 const VerifyEmail = () => {
   const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails } = useVerifyEmail();
@@ -11,7 +11,7 @@ const VerifyEmail = () => {
       return `Resend ${resendDetails.timeSecondsLeft}s`;
     }
 
-    return "You can resend now!";
+    return RESEND_BUTTON_ENABLED_TEXT;
   };
 
   return (
