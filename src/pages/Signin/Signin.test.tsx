@@ -42,9 +42,7 @@ const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; toke
         return response;
       },
     },
-    {
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-    },
+    `${BASE_URL}${ENDPOINTS.currentUser}`,
   ]);
 
   return handleCreateErrorConfig;

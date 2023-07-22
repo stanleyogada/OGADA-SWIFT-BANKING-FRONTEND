@@ -43,9 +43,7 @@ const { handleCreateErrorConfig } = createServer([
     method: "post",
     url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
   },
-  {
-    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-  },
+  `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
 const handleAssertTypeInForm = async (

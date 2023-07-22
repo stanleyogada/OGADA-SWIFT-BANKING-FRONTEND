@@ -4,13 +4,24 @@ import { setupServer } from "msw/node";
 import { Optional } from "../../types";
 
 type THandlerConfigMethod = "get" | "post" | "put" | "delete" | "patch" | "head" | "options";
+type TUrl = string;
 type THandlerConfig = {
   method?: THandlerConfigMethod;
-  url: string;
+  url: TUrl;
   res?: (req: any, res: any, ctx: any) => object;
 };
 
-const createServer = (handlerConfigs: THandlerConfig[]) => {
+const createServer = (_handlerConfigs: (THandlerConfig | string)[]) => {
+  let handlerConfigs = _handlerConfigs.map((config) => {
+    if (typeof config === "string") {
+      return {
+        url: config,
+      };
+    }
+
+    return config;
+  }) as THandlerConfig[];
+
   handlerConfigs = [
     ...handlerConfigs,
     ...handlerConfigs.map((config) => ({
@@ -18,7 +29,7 @@ const createServer = (handlerConfigs: THandlerConfig[]) => {
       url: config.url,
       res: () => ({}),
     })),
-  ];
+  ] as THandlerConfig[];
 
   const handlers = handlerConfigs.map((config) =>
     rest[config.method || "get"](config.url, (req, res, ctx) => {

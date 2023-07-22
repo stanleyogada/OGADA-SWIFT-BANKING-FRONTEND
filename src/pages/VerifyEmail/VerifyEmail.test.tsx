@@ -38,9 +38,7 @@ const { handleCreateErrorConfig } = createServer([
     method: "post",
     url: `${BASE_URL}${ENDPOINTS.verifyEmail}/${OTP}`,
   },
-  {
-    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-  },
+  `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
 test("Verifies email and redirects to login", async () => {
