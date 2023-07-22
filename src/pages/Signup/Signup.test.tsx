@@ -15,14 +15,7 @@ import { navigate } from "../../utils/test/mocks/navigate";
 import { localStorageSetItem } from "../../utils/test/mocks/localStorage";
 
 const renderComponent = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        // ✅ turns retries off
-        retry: false,
-      },
-    },
-  });
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
   render(
     // @ts-ignore

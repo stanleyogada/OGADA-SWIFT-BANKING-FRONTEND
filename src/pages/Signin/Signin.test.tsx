@@ -14,14 +14,7 @@ import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtil
 import { navigate } from "../../utils/test/mocks/navigate";
 
 const renderComponent = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        // ✅ turns retries off
-        retry: false,
-      },
-    },
-  });
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
 
   render(
     // @ts-ignore
