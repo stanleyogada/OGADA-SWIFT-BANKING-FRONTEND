@@ -11,6 +11,7 @@ const CLIENT_ROUTES = {
   authSignin: "/auth/signin",
   authSignup: "/auth/signup",
   authVerifyEmail: "/auth/verify-email",
+  authResendEmail: "/auth/resend-email",
 };
 
 export { CLIENT_ROUTES };

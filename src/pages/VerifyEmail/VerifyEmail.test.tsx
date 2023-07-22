@@ -104,8 +104,16 @@ test("Displays resend button and works correctly", async () => {
 
   localStorageGetItem.mockReturnValueOnce(null);
   renderComponent();
+  const user = userEvent.setup();
 
-  const resendButton2 = screen.getByRole("button", { name: /didn't receive the code\?/i });
-  expect(resendButton2).toBeEnabled();
-  expect(resendButton2.textContent).toContain("You can resend now!");
+  const resendButtonNew = screen.getByRole("button", { name: /didn't receive the code\?/i });
+  expect(resendButtonNew).toBeEnabled();
+  expect(resendButtonNew.textContent).toContain("You can resend now!");
+
+  expect(navigate).not.toHaveBeenCalled();
+
+  await user.click(resendButtonNew);
+
+  expect(navigate).toHaveBeenCalled();
+  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authResendEmail);
 });

@@ -4,7 +4,7 @@ import VerifyEmailWrapper from "./VerifyEmailWrapper";
 import useVerifyEmail from "./hooks/useVerifyEmail";
 
 const VerifyEmail = () => {
-  const { register, handleSubmit, mutationState, resendDetails } = useVerifyEmail();
+  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails } = useVerifyEmail();
 
   const renderResendSuffix = () => {
     if (resendDetails.timeSecondsLeft > 0) {
@@ -20,6 +20,8 @@ const VerifyEmail = () => {
 
       <h1 className="page-title">Verify email address</h1>
 
+      <p className="page-sub-title">Please enter code</p>
+
       <form onSubmit={handleSubmit()}>
         <Input
           placeholder="Enter code"
@@ -32,7 +34,7 @@ const VerifyEmail = () => {
           })}
         />
 
-        <Button type="button" disabled={resendDetails.timeSecondsLeft > 0}>
+        <Button type="button" disabled={resendDetails.timeSecondsLeft > 0} onClick={handleResendButtonClick}>
           Didn't receive the code? {renderResendSuffix()}
         </Button>
 

@@ -8,6 +8,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  navigate.mockClear();
   useNavigateSpy.mockRestore();
 });
 

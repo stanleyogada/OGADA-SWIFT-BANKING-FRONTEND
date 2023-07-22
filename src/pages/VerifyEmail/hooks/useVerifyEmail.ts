@@ -24,6 +24,10 @@ const useVerifyEmail = () => {
     },
   });
 
+  const handleResendButtonClick = () => {
+    navigate(CLIENT_ROUTES.authResendEmail);
+  };
+
   const handleVerifyEmail = (formValues: TVerifyEmailFormValues) => {
     VerifyEmailMutation.mutate(formValues.code);
   };
@@ -99,6 +103,7 @@ const useVerifyEmail = () => {
     mutationState: VerifyEmailMutationState,
     resendDetails,
     errors,
+    handleResendButtonClick,
     handleSubmit,
     register,
   };
