@@ -9,18 +9,10 @@ import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { TVerifyEmailFormValues } from "../type";
 
 const useVerifyEmail = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const VerifyEmailMutation = useMutation(postVerifyEmail, {
     onSuccess: () => {
-      // localStorage.setItem(`TEST${LOCAL_STORAGE_KEYS.VerifyEmailSuccess}`, "TEST");
-      // localStorage.setItem(
-      //   LOCAL_STORAGE_KEYS.VerifyEmailSuccess,
-      //   JSON.stringify({
-      //     email,
-      //     time: new Date().getTime(),
-      //   })
-      // );
-      // navigate(CLIENT_ROUTES.authVerifyEmail);
+      navigate(CLIENT_ROUTES.authSignin);
     },
   });
 

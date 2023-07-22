@@ -7,6 +7,8 @@ const VerifyEmail = () => {
 
   return (
     <VerifyEmailWrapper>
+      {mutationState.isError && <div data-testid="error"></div>}
+
       <h1 className="page-title">Verify email address</h1>
 
       <form onSubmit={handleSubmit()}>
