@@ -183,7 +183,7 @@ describe("Displays errors works correctly when the network request errors", () =
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Network Error");
     const error = screen.getByTestId("error");
     expect(error).toBeInTheDocument();
-    // expect(error).toHaveTextContent(""); // TODO: uncomment this line after removing error message to the page
+    // expect(error).toHaveTextContent(""); // TODO: uncomment this line after removing error message from the page
   };
 
   test("On /signup network error", async () => {
