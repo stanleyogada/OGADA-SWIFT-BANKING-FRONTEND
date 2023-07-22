@@ -96,7 +96,7 @@ describe("When signin request failed ", () => {
     token: "1234567890",
   });
 
-  test("Signin form works correctly onError 2", async () => {
+  test("Displays errors works correctly when the network request errors", async () => {
     handleCreateErrorConfig({
       method: "post",
       url: `${BASE_URL}/auth/signin`,

@@ -159,7 +159,7 @@ test("Sign up form works correctly onSuccess", async () => {
   expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_NETWORK_SUCCESS_INFO.sendEmail);
 });
 
-describe("Errors correctly", () => {
+describe("Displays errors works correctly when the network request errors", () => {
   const handleAssertError = async () => {
     const user = userEvent.setup();
 
