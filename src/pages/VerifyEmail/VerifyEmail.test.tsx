@@ -84,14 +84,14 @@ test("Displays errors works correctly when the network request errors", async ()
 
 test("Displays resend button and works correctly", async () => {
   const now = new Date().getTime();
-  const savedAtSeconds = 20; // 20 seconds ago
+  const getLocalStorageGetItemValue = (savedAtSeconds: number) =>
+    JSON.stringify({
+      email: "testResend@gmail.com",
+      savedAtTime: now - savedAtSeconds * 1000, // 20 seconds ago
+    } as unknown as Omit<TResendDetails, "timeSecondsLeft">);
 
-  const localStorageGetItemValue = JSON.stringify({
-    email: "testResend@gmail.com",
-    savedAtTime: now - savedAtSeconds * 1000, // 20 seconds ago
-  } as unknown as Omit<TResendDetails, "timeSecondsLeft">);
-
-  localStorageGetItem.mockReturnValueOnce(localStorageGetItemValue);
+  let savedAtSeconds = 20; // 20 seconds ago
+  localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
   renderComponent();
 
   const resendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
@@ -104,6 +104,22 @@ test("Displays resend button and works correctly", async () => {
 
   cleanup();
   localStorageGetItem.mockClear();
+
+  //
+  //
+
+  savedAtSeconds = 0; // now
+  localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
+  renderComponent();
+
+  const resendButtonNew = screen.getByRole("button", { name: /didn't receive the code\?/i });
+  expect(resendButtonNew.textContent).toContain(`${RESEND_SECONDS}s`);
+
+  cleanup();
+  localStorageGetItem.mockClear();
+
+  //
+  //
 
   localStorageGetItem.mockReturnValueOnce(null);
   renderComponent();
