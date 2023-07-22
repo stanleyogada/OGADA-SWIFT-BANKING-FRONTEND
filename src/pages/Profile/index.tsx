@@ -3,6 +3,8 @@ import Avatar from "../../components/Avatar/Avatar";
 import { COLORS } from "../../constants";
 import icons from "../../constants/icons";
 import Navigation from "../../components/Navigation";
+import { Link } from "react-router-dom";
+import { CLIENT_ROUTES } from "../../constants";
 
 const Profile = () => {
   return (
@@ -36,13 +38,15 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="profile-btn">
-            <div className="btn-icon">{icons.userIcon()}</div>
-            <div className="btn-content">
-              <p className="heading">Customer Service</p>
-              <p className="sub-heading">seek support from us</p>
+          <Link to={CLIENT_ROUTES.liveChat}>
+            <div className="profile-btn">
+              <div className="btn-icon">{icons.userIcon()}</div>
+              <div className="btn-content">
+                <p className="heading">Customer Service</p>
+                <p className="sub-heading">seek support from us</p>
+              </div>
             </div>
-          </div>
+          </Link>
 
           <div className="profile-btn">
             <div className="btn-icon">{icons.starIcon()}</div>
@@ -64,6 +68,10 @@ const ProfileWrapper = styled.div`
   width: 100%;
   height: 100%;
   color: ${COLORS.black};
+
+  a{
+    text-decoration: none;
+  }
 
   .top-profile-wrapper {
     width: 100%;

@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { useRef, useState } from "react";
+
 import icons from "../../constants/icons";
 import Avatar from "../../components/Avatar/Avatar";
 import { COLORS } from "../../constants";
-import { useRef, useState } from "react";
 
 const Account = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -26,7 +27,7 @@ const Account = () => {
         <div className="account-section" role="account-section">
           <div className="header">
             <div className="navigation-section">
-              <div className="back-icon"> {icons.blueleftarrowIcon()}</div>
+              <div className="back-icon"> {icons.blueLeftArrowIcon()}</div>
               <div className="section-title">Account Details</div>
             </div>
 
@@ -38,7 +39,7 @@ const Account = () => {
 
             <div className="avatar">
               <Avatar />
-              <div className="right-icon">{icons.bluerightarrowIcon()}</div>
+              <div className="right-icon">{icons.blueRightArrowIcon()}</div>
             </div>
           </div>
 
@@ -56,7 +57,10 @@ const Account = () => {
             <div className="info-wrapper">
               <div className="label">Email</div>
               <div className="info">
-                <button className="verified">Verified {icons.checkIcon()}</button>
+                <button className="verified">
+                  Verified
+                  {/* {icons.checkIcon()} // TODO: Add check icon */}
+                </button>
               </div>
             </div>
 
@@ -64,7 +68,7 @@ const Account = () => {
               <div className="show-wrapper">
                 <div className="show-wrapper-text">{isClicked ? "Show Less" : "Show More"}</div>
                 <div className="show-wrapper-icon" role="toggle" onClick={() => handleToggleIcon()}>
-                  {icons.blueDropdownIcon()}
+                  {/* {icons.blueDropdownIcon()} // TODO: Add dropdown icon */}
                 </div>
               </div>
             </div>

@@ -12,6 +12,7 @@ const CLIENT_ROUTES = {
   authSignup: "/auth/signup",
   authVerifyEmail: "/auth/verify-email",
   authResendEmail: "/auth/resend-email",
+  liveChat: "/livechat",
 };
 
 export { CLIENT_ROUTES };
