@@ -7,7 +7,7 @@ type THandlerConfigMethod = "get" | "post" | "put" | "delete" | "patch" | "head"
 type THandlerConfig = {
   method?: THandlerConfigMethod;
   url: string;
-  res: (req: any, res: any, ctx: any) => object;
+  res?: (req: any, res: any, ctx: any) => object;
 };
 
 const createServer = (handlerConfigs: THandlerConfig[]) => {
@@ -26,7 +26,7 @@ const createServer = (handlerConfigs: THandlerConfig[]) => {
         // Add a DELAY to the response to simulate network latency,
         // Otherwise we can't test loading states
         ctx.delay(1),
-        ctx.json(config.res(req, res, ctx))
+        ctx.json(config.res?.(req, res, ctx) || {})
       );
     })
   );
@@ -46,11 +46,9 @@ const createServer = (handlerConfigs: THandlerConfig[]) => {
           ctx.delay(1),
           ctx.status(handlerConfig.statusCode || 500),
           ctx.json(
-            handlerConfig.res
-              ? handlerConfig.res(req, res, ctx)
-              : {
-                  message: "Internal Server Error",
-                }
+            handlerConfig.res?.(req, res, ctx) || {
+              message: "Internal Server Error",
+            }
           )
         );
       })

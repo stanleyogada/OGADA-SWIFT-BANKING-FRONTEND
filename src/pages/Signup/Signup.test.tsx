@@ -54,22 +54,13 @@ const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
     url: `${BASE_URL}${ENDPOINTS.signUp}`,
-    res() {
-      return {};
-    },
   },
   {
     method: "post",
     url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
-    res() {
-      return {};
-    },
   },
   {
     url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-    res() {
-      return {};
-    },
   },
 ]);
 

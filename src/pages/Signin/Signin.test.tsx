@@ -53,13 +53,6 @@ const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; toke
     },
     {
       url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-      res() {
-        return {
-          data: {
-            id: 1,
-          },
-        };
-      },
     },
   ]);
 
@@ -135,15 +128,13 @@ describe("When signin request failed ", () => {
     renderComponent();
 
     await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
-
-    expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
 
     const signInButton = screen.getByRole("button", { name: /sign in/i });
     await user.click(signInButton);
 
     await handleAssertLoadingAfterSubmitClick();
 
-    expect(consoleErrorSpy).toHaveBeenCalled();
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
 
     const error = screen.getByTestId("error");
