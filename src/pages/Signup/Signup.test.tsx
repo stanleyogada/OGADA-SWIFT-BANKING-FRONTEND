@@ -11,14 +11,11 @@ import { TSignUpFormValues } from "./type";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
 import { consoleErrorSpy, consoleInfoSpy } from "../../utils/test/mocks/consoleSpy";
 import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
+import { navigate } from "../../utils/test/mocks/navigate";
 
-const navigate = jest.fn();
-let useNavigateSpy: jest.SpyInstance;
 const localStorageSetItem = jest.fn();
 
 beforeEach(() => {
-  useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
-
   Object.defineProperty(window, "localStorage", {
     value: {
       setItem: (params1: string, params2: string) => localStorageSetItem(params1, params2),
@@ -27,7 +24,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  useNavigateSpy.mockRestore();
   localStorageSetItem.mockClear();
 });
 

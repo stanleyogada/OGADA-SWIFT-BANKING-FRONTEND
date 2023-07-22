@@ -11,17 +11,7 @@ import { TUser } from "../../services/users/types";
 import { CLIENT_ROUTES } from "../../constants";
 import { consoleErrorSpy } from "../../utils/test/mocks/consoleSpy";
 import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
-
-const navigate = jest.fn();
-let useNavigateSpy: jest.SpyInstance;
-
-beforeEach(() => {
-  useNavigateSpy = jest.spyOn(router, "useNavigate").mockImplementation(() => navigate);
-});
-
-afterEach(() => {
-  useNavigateSpy.mockRestore();
-});
+import { navigate } from "../../utils/test/mocks/navigate";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
