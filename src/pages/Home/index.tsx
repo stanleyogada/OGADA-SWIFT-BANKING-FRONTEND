@@ -20,7 +20,7 @@ const Home = () => {
             <h3>Hello, Tega</h3>
           </div>
           <div className="profile-icons">
-            <div onClick={handleSignOut}>
+            <div onClick={() => handleSignOut()}>
               <Link to="/" className="notify">
                 <span className="cursor-pointer">{icons.blackUserIcon()}</span>
               </Link>
