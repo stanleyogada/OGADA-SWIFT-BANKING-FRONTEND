@@ -32,7 +32,7 @@ const PasswordInput = forwardRef((props: TInputProps, ref: ForwardedRef<HTMLInpu
         renderRight={() => (
           <Button type="button" onClick={handleTogglePasswordVisibility}>
             <div className="eye-icon" data-testid="eye-icon">
-              {isPasswordVisible ? icons.eyecloseIcon() : icons.eyeopenIcon()}
+              {isPasswordVisible ? icons.eyeCloseIcon() : icons.eyeOpenIcon()}
             </div>
           </Button>
         )}
