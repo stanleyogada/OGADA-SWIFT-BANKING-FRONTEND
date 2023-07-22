@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -8,8 +8,9 @@ import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import VerifyEmail from ".";
 import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
 import { navigate } from "../../utils/test/mocks/navigate";
-import { CLIENT_ROUTES } from "../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
 import { consoleErrorSpy } from "../../utils/test/mocks/consoleSpy";
+import { localStorageGetItem } from "../../utils/test/mocks/localStorage";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -83,4 +84,35 @@ test("Displays errors works correctly when the network request errors", async ()
   const error = screen.getByTestId("error");
   expect(error).toBeInTheDocument();
   expect(error).toHaveTextContent("");
+});
+
+test("Displays resend button and works correctly", async () => {
+  const now = new Date().getTime();
+  const resendInSeconds = 30;
+  const savedAtSeconds = 20;
+  const localStorageGetItemValue = JSON.stringify({
+    email: "testResend@gmail.com",
+    // 20 seconds ago
+    savedAtTime: now - savedAtSeconds * 1000,
+  });
+
+  localStorageGetItem.mockReturnValueOnce(localStorageGetItemValue);
+  renderComponent();
+
+  const resendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
+  expect(resendButton).toBeDisabled();
+  expect(resendButton.textContent).toContain(`${resendInSeconds - savedAtSeconds}s`);
+
+  expect(localStorageGetItem).toHaveBeenCalled();
+  expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.signupSuccess);
+
+  cleanup();
+  localStorageGetItem.mockClear();
+
+  localStorageGetItem.mockReturnValueOnce(null);
+  renderComponent();
+
+  const resendButton2 = screen.getByRole("button", { name: /didn't receive the code\?/i });
+  expect(resendButton2).toBeEnabled();
+  expect(resendButton2.textContent).toContain("You can resend now!");
 });

@@ -17,7 +17,7 @@ const useSignup = () => {
         LOCAL_STORAGE_KEYS.signupSuccess,
         JSON.stringify({
           email,
-          time: new Date().getTime(),
+          savedAtTime: new Date().getTime(),
         })
       );
       navigate(CLIENT_ROUTES.authVerifyEmail);

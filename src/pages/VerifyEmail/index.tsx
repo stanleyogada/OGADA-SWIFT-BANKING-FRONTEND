@@ -1,9 +1,18 @@
+import Button from "../../components/Button";
 import Input from "../../components/Input";
 import VerifyEmailWrapper from "./VerifyEmailWrapper";
 import useVerifyEmail from "./hooks/useVerifyEmail";
 
 const VerifyEmail = () => {
-  const { register, handleSubmit, mutationState } = useVerifyEmail();
+  const { register, handleSubmit, mutationState, resendDetails } = useVerifyEmail();
+
+  const renderResendSuffix = () => {
+    if (resendDetails.timeSecondsLeft > 0) {
+      return `Resend ${resendDetails.timeSecondsLeft}s`;
+    }
+
+    return "You can resend now!";
+  };
 
   return (
     <VerifyEmailWrapper>
@@ -23,10 +32,14 @@ const VerifyEmail = () => {
           })}
         />
 
-        <button type="submit" disabled={mutationState.isLoading}>
+        <Button type="button" disabled={resendDetails.timeSecondsLeft > 0}>
+          Didn't receive the code? {renderResendSuffix()}
+        </Button>
+
+        <Button type="submit" disabled={mutationState.isLoading}>
           Verify
           {mutationState.isLoading && <div data-testid="loading">Loading...</div>}
-        </button>
+        </Button>
       </form>
     </VerifyEmailWrapper>
   );

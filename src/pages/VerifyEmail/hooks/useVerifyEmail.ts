@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -7,6 +7,14 @@ import { postVerifyEmail } from "../../../services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { TVerifyEmailFormValues } from "../type";
+
+type TResendDetails = {
+  email: string;
+  savedAtTime: string;
+  timeSecondsLeft: number;
+};
+
+const RESEND_SECONDS = 30;
 
 const useVerifyEmail = () => {
   const navigate = useNavigate();
@@ -57,8 +65,39 @@ const useVerifyEmail = () => {
     }
   }, [VerifyEmailMutationState.isError]);
 
+  const [resendDetails, setResendDetails] = useState<TResendDetails>({
+    email: "",
+    savedAtTime: "",
+    timeSecondsLeft: 0,
+  });
+
+  useEffect(() => {
+    const item = localStorage.getItem(LOCAL_STORAGE_KEYS.signupSuccess);
+
+    let resendDetails: Omit<TResendDetails, "timeSecondsLeft"> | null = null;
+
+    if (typeof item === "string") {
+      resendDetails = JSON.parse(item) as Omit<TResendDetails, "timeSecondsLeft">;
+    }
+
+    if (resendDetails) {
+      setResendDetails({
+        ...resendDetails,
+        timeSecondsLeft:
+          RESEND_SECONDS - Math.floor((new Date().getTime() - new Date(resendDetails.savedAtTime).getTime()) / 1000),
+      });
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   if (!resendDetails.email) return;
+
+  //   console.log(resendDetails);
+  // }, [resendDetails.email]);
+
   return {
     mutationState: VerifyEmailMutationState,
+    resendDetails,
     errors,
     handleSubmit,
     register,
