@@ -12,20 +12,7 @@ import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
 import { consoleErrorSpy, consoleInfoSpy } from "../../utils/test/mocks/consoleSpy";
 import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
 import { navigate } from "../../utils/test/mocks/navigate";
-
-const localStorageSetItem = jest.fn();
-
-beforeEach(() => {
-  Object.defineProperty(window, "localStorage", {
-    value: {
-      setItem: (params1: string, params2: string) => localStorageSetItem(params1, params2),
-    },
-  });
-});
-
-afterEach(() => {
-  localStorageSetItem.mockClear();
-});
+import { localStorageSetItem } from "../../utils/test/mocks/localStorage";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
