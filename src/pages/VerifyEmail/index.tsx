@@ -34,14 +34,19 @@ const VerifyEmail = () => {
           })}
         />
 
-        <Button type="button" disabled={resendDetails.timeSecondsLeft > 0} onClick={handleResendButtonClick}>
+        <button
+          type="button"
+          disabled={resendDetails.timeSecondsLeft > 0}
+          onClick={handleResendButtonClick}
+          className="resend-button"
+        >
           Didn't receive the code? {renderResendSuffix()}
-        </Button>
+        </button>
 
-        <Button type="submit" disabled={mutationState.isLoading}>
+        <button type="submit" disabled={mutationState.isLoading}>
           Verify
           {mutationState.isLoading && <div data-testid="loading">Loading...</div>}
-        </Button>
+        </button>
       </form>
     </VerifyEmailWrapper>
   );

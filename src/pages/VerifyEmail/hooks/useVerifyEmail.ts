@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -8,7 +8,7 @@ import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { TResendDetails, TVerifyEmailFormValues } from "../type";
 
-const RESEND_SECONDS = 30;
+const RESEND_SECONDS = 45;
 const RESEND_BUTTON_ENABLED_TEXT = "You can resend now!";
 
 const useVerifyEmail = () => {
@@ -70,6 +70,8 @@ const useVerifyEmail = () => {
     timeSecondsLeft: 0,
   });
 
+  const resendDetailsTimeSecondsLeftIntervalId = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     const item = localStorage.getItem(LOCAL_STORAGE_KEYS.signupSuccess);
 
@@ -87,6 +89,30 @@ const useVerifyEmail = () => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (resendDetails.timeSecondsLeft !== -1 && resendDetails.timeSecondsLeft > 0) {
+      resendDetailsTimeSecondsLeftIntervalId.current = setInterval(() => {
+        setResendDetails((prev) => ({
+          ...prev,
+          timeSecondsLeft: prev.timeSecondsLeft - 1,
+        }));
+      }, 1000);
+    }
+
+    return () => {
+      if (resendDetailsTimeSecondsLeftIntervalId.current) {
+        clearInterval(resendDetailsTimeSecondsLeftIntervalId.current);
+      }
+    };
+  }, [resendDetails.timeSecondsLeft]);
+
+  useEffect(() => {
+    if (resendDetails.timeSecondsLeft !== 0 && resendDetails.savedAtTime) return;
+    if (resendDetailsTimeSecondsLeftIntervalId.current === null) return;
+
+    clearInterval(resendDetailsTimeSecondsLeftIntervalId.current);
+  }, [resendDetails.timeSecondsLeft, resendDetails.savedAtTime]);
 
   // useEffect(() => {
   //   if (!resendDetails.email) return;

@@ -64,6 +64,10 @@ const VerifyEmailWrapper = styled.div`
       }
     }
   } */
+
+  .resend-button {
+    color: ${COLORS.blue};
+  }
 `;
 
 export default VerifyEmailWrapper;
