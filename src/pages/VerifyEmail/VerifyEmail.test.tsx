@@ -6,6 +6,7 @@ import { MemoryRouter } from "react-router-dom";
 import createServer from "../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import VerifyEmail from ".";
+import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({
@@ -27,10 +28,12 @@ const renderComponent = () => {
   );
 };
 
+const OTP = "123456";
+
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
-    url: `${BASE_URL}${ENDPOINTS.verifyEmail}`,
+    url: `${BASE_URL}${ENDPOINTS.verifyEmail}/${OTP}`,
   },
   {
     url: `${BASE_URL}${ENDPOINTS.currentUser}`,
@@ -44,5 +47,8 @@ test("Verifies email and redirects to login", async () => {
   const codeInput = screen.getByPlaceholderText("Enter code");
   const submitButton = screen.getByRole("button", { name: /verify/i });
 
-  await user.type(codeInput, "123456");
+  await user.type(codeInput, OTP);
+  await user.click(submitButton);
+
+  await handleAssertLoadingAfterSubmitClick(submitButton);
 });

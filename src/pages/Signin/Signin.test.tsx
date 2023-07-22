@@ -10,6 +10,7 @@ import { BASE_URL, ENDPOINTS } from "../../constants/services";
 import { TUser } from "../../services/users/types";
 import { CLIENT_ROUTES } from "../../constants";
 import { consoleErrorSpy } from "../../utils/test/mocks/consoleSpy";
+import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
 
 const navigate = jest.fn();
 let useNavigateSpy: jest.SpyInstance;
@@ -73,19 +74,6 @@ const handleAssertTypeInForm = async (
   expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
 };
 
-const handleAssertLoadingAfterSubmitClick = async () => {
-  const signInButton = screen.getByRole("button", { name: /sign in/i });
-
-  const getLoadingElement = () => screen.getByTestId("loading");
-  expect(getLoadingElement()).toBeInTheDocument();
-
-  expect(signInButton).toBeDisabled();
-  await waitForElementToBeRemoved(() => getLoadingElement());
-
-  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-  expect(signInButton).not.toBeDisabled();
-};
-
 test("Render content of Signin page correctly", () => {
   renderComponent();
 
@@ -133,7 +121,7 @@ describe("When signin request failed ", () => {
     const signInButton = screen.getByRole("button", { name: /sign in/i });
     await user.click(signInButton);
 
-    await handleAssertLoadingAfterSubmitClick();
+    await handleAssertLoadingAfterSubmitClick(signInButton);
 
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
 
@@ -162,7 +150,7 @@ describe("Signin form works correctly onSuccess", () => {
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
-      await handleAssertLoadingAfterSubmitClick();
+      await handleAssertLoadingAfterSubmitClick(signInButton);
 
       expect(window.location.reload).toHaveBeenCalled();
     });
@@ -186,7 +174,7 @@ describe("Signin form works correctly onSuccess", () => {
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
-      await handleAssertLoadingAfterSubmitClick();
+      await handleAssertLoadingAfterSubmitClick(signInButton);
 
       expect(window.location.reload).not.toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);

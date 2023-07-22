@@ -9,10 +9,22 @@ const VerifyEmail = () => {
     <VerifyEmailWrapper>
       <h1 className="page-title">Verify email address</h1>
 
-      <form>
-        <Input placeholder="Enter code" />
+      <form onSubmit={handleSubmit()}>
+        <Input
+          placeholder="Enter code"
+          {...register("code", {
+            required: "Code is required",
+            minLength: {
+              value: 6,
+              message: "Code must be at least 6 characters",
+            },
+          })}
+        />
 
-        <button type="submit">Verify</button>
+        <button type="submit" disabled={mutationState.isLoading}>
+          Verify
+          {mutationState.isLoading && <div data-testid="loading">Loading...</div>}
+        </button>
       </form>
     </VerifyEmailWrapper>
   );
