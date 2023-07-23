@@ -65,6 +65,64 @@ const VerifyEmailWrapper = styled.div`
     }
   } */
 
+  .page-sub-title-wrapper {
+    width: 100%;
+    margin-bottom: 24px;
+
+    .page-sub-title {
+      color: #171717;
+      text-align: center;
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .page-sub-title-desc {
+      color: #000;
+      font-family: Inter;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      text-align: center;
+    }
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .resend-button {
+      color: #000;
+      font-family: Inter;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      background-color: transparent;
+      border: none;
+    }
+
+    .verify-button {
+      width: 90%;
+      height: 50px;
+      flex-shrink: 0;
+      background-color: #006fff;
+      border: none;
+      border-radius: 12px;
+      margin-top: 29px;
+      color: #fff;
+      font-family: Inter;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
   .resend-button {
     color: ${COLORS.blue};
   }

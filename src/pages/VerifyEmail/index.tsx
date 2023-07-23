@@ -20,8 +20,10 @@ const VerifyEmail = () => {
 
       <h1 className="page-title">Verify email address</h1>
 
-      <p className="page-sub-title">Please enter code</p>
-
+      <div className="page-sub-title-wrapper">
+        <p className="page-sub-title">Please enter code</p>
+        <p className="page-sub-title-desc">A verification code has been sent to your email address</p>
+      </div>
       <form onSubmit={handleSubmit()}>
         <Input
           placeholder="Enter code"
@@ -43,7 +45,7 @@ const VerifyEmail = () => {
           Didn't receive the code? {renderResendSuffix()}
         </button>
 
-        <button type="submit" disabled={mutationState.isLoading}>
+        <button className="verify-button" type="submit" disabled={mutationState.isLoading}>
           Verify
           {mutationState.isLoading && <div data-testid="loading">Loading...</div>}
         </button>
