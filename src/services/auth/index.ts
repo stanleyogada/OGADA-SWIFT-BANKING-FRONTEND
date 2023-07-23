@@ -1,8 +1,8 @@
 import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
 import { axiosInstance } from "../../utils/axiosInstance";
 
-import type { TSignInFormValues } from "../../pages/Signin/type";
-import type { TSignUpFormValues } from "../../pages/Signup/type";
+import type { TSignInFormValues } from "../../pages/Auth/Signin/type";
+import type { TSignUpFormValues } from "../../pages/Auth/Signup/type";
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
