@@ -80,13 +80,14 @@ test("Sign up form works correctly onSuccess", async () => {
 
   expect(navigate).not.toHaveBeenCalled();
   expect(consoleInfoSpy).not.toHaveBeenCalled();
+  expect(localStorageSetItem).not.toHaveBeenCalled();
 
   const signUpButton = screen.getByRole("button", { name: /confirm/i });
   await user.click(signUpButton);
 
   await handleAssertLoadingAfterSubmitClick(signUpButton);
 
-  expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.signupSuccess}`, "TEST");
+  expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.sendEmailCodeSuccess}`, "TEST");
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
 

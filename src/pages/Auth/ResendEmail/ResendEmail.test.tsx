@@ -5,10 +5,11 @@ import ResendEmail from ".";
 import createServer from "../../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../../constants/services";
 import { navigate } from "../../../utils/test/mocks/navigate";
-import { CLIENT_ROUTES } from "../../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
 import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
 import TestProviders from "../../../components/TestProviders";
+import { localStorageSetItem } from "../../../utils/test/mocks/localStorage";
 
 const { handleCreateErrorConfig } = createServer([
   {
@@ -28,6 +29,7 @@ test("Sends email and redirects to verify email code page", async () => {
   const submitButton = screen.getByRole("button", { name: /send/i });
 
   expect(navigate).not.toHaveBeenCalled();
+  expect(localStorageSetItem).not.toHaveBeenCalled();
 
   await user.type(emailInput, "test@gmail.com");
   await user.click(submitButton);
@@ -36,6 +38,7 @@ test("Sends email and redirects to verify email code page", async () => {
 
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
+  expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.sendEmailCodeSuccess}`, "TEST");
 });
 
 test("Displays errors works correctly when the network request errors", async () => {
@@ -54,6 +57,7 @@ test("Displays errors works correctly when the network request errors", async ()
   const submitButton = screen.getByRole("button", { name: /send/i });
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 402");
+  expect(screen.queryByTestId("error")).not.toBeInTheDocument();
 
   await user.type(emailInput, "test@gmail.com");
   await user.click(submitButton);

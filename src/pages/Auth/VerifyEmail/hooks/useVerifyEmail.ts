@@ -73,7 +73,7 @@ const useVerifyEmail = () => {
   const resendDetailsTimeSecondsLeftIntervalId = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const item = localStorage.getItem(LOCAL_STORAGE_KEYS.signupSuccess);
+    const item = localStorage.getItem(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
 
     let resendDetails: Omit<TResendDetails, "timeSecondsLeft"> | null = null;
 

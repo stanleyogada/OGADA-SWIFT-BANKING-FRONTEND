@@ -93,7 +93,7 @@ describe("Resend button works correctly", () => {
       expect(resendButton.textContent).not.toContain(RESEND_BUTTON_ENABLED_TEXT);
 
       expect(localStorageGetItem).toHaveBeenCalled();
-      expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.signupSuccess);
+      expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
     });
 
     test("When there's data from localStorage and it's now", async () => {
