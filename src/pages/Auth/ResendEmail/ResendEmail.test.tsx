@@ -72,4 +72,5 @@ test("Displays errors works correctly when the network request errors", async ()
 
   expect(navigate).not.toHaveBeenCalled();
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 402");
+  expect(screen.getByTestId("error")).toBeInTheDocument();
 });

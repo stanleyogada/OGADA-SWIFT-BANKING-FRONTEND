@@ -7,6 +7,8 @@ const ResendEmail = () => {
 
   return (
     <ResendEmailWrapper>
+      {mutationState.isError && <div data-testid="error"></div>}
+
       <h1 className="page-title">Resend email verification</h1>
       <h2 className="page-sub-title">Manually send email verification code</h2>
 
