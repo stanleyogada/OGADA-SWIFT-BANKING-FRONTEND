@@ -7,19 +7,15 @@ import { useMutation } from "react-query";
 import { postSignup } from "../../../../services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
+import useSendEmailCodeSuccess from "../../../../hooks/useSendEmailCodeSuccess";
 
 const useSignup = () => {
   const navigate = useNavigate();
+  const handleSendEmailCodeSuccess = useSendEmailCodeSuccess();
+
   const signUpMutation = useMutation(postSignup, {
     onSuccess: ({ email }) => {
-      localStorage.setItem(`TEST${LOCAL_STORAGE_KEYS.sendEmailCodeSuccess}`, "TEST");
-      localStorage.setItem(
-        LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
-        JSON.stringify({
-          email,
-          savedAtTime: new Date().getTime(),
-        })
-      );
+      handleSendEmailCodeSuccess(email);
       navigate(CLIENT_ROUTES.authVerifyEmail);
     },
   });
