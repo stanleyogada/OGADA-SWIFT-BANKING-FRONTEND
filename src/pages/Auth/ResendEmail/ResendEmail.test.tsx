@@ -1,28 +1,14 @@
-import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import ResendEmail from ".";
 import createServer from "../../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../../constants/services";
 import { navigate } from "../../../utils/test/mocks/navigate";
 import { CLIENT_ROUTES } from "../../../constants";
-import ResendEmail from ".";
 import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
 import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
-
-const renderComponent = () => {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-
-  render(
-    // @ts-ignore
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <ResendEmail />
-      </MemoryRouter>
-    </QueryClientProvider>
-  );
-};
+import TestProviders from "../../../components/TestProviders";
 
 const { handleCreateErrorConfig } = createServer([
   {
@@ -34,7 +20,9 @@ const { handleCreateErrorConfig } = createServer([
 
 test("Sends email and redirects to verify email code page", async () => {
   const user = userEvent.setup();
-  renderComponent();
+  render(<ResendEmail />, {
+    wrapper: TestProviders,
+  });
 
   const emailInput = screen.getByPlaceholderText(/email/i);
   const submitButton = screen.getByRole("button", { name: /send/i });
@@ -58,7 +46,9 @@ test("Displays errors works correctly when the network request errors", async ()
   });
 
   const user = userEvent.setup();
-  renderComponent();
+  render(<ResendEmail />, {
+    wrapper: TestProviders,
+  });
 
   const emailInput = screen.getByPlaceholderText(/email/i);
   const submitButton = screen.getByRole("button", { name: /send/i });

@@ -1,7 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
 
 import Signin from ".";
 import createServer from "../../../utils/test/createServer";
@@ -11,19 +9,7 @@ import { CLIENT_ROUTES } from "../../../constants";
 import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
 import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
 import { navigate } from "../../../utils/test/mocks/navigate";
-
-const renderComponent = () => {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-
-  render(
-    // @ts-ignore
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <Signin />
-      </MemoryRouter>
-    </QueryClientProvider>
-  );
-};
+import TestProviders from "../../../components/TestProviders";
 
 const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; token: string }) => {
   const { handleCreateErrorConfig } = createServer([
@@ -55,7 +41,9 @@ const handleAssertTypeInForm = async (
 };
 
 test("Render content of Signin page correctly", () => {
-  renderComponent();
+  render(<Signin />, {
+    wrapper: TestProviders,
+  });
 
   const pageTitle = screen.getByRole("heading", { name: /sign in/i });
   const subTitle = screen.getByRole("heading", { name: /welcome back/i });
@@ -93,7 +81,9 @@ describe("When signin request failed ", () => {
       statusCode: 400,
     });
     const user = userEvent.setup();
-    renderComponent();
+    render(<Signin />, {
+      wrapper: TestProviders,
+    });
 
     await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
@@ -122,7 +112,9 @@ describe("Signin form works correctly onSuccess", () => {
 
     test("Forces a reload at the end of the operation", async () => {
       const user = userEvent.setup();
-      renderComponent();
+      render(<Signin />, {
+        wrapper: TestProviders,
+      });
 
       await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
       expect(window.location.reload).not.toHaveBeenCalled();
@@ -146,7 +138,9 @@ describe("Signin form works correctly onSuccess", () => {
 
     test("Forces a navigate at the end of the operation", async () => {
       const user = userEvent.setup();
-      renderComponent();
+      render(<Signin />, {
+        wrapper: TestProviders,
+      });
 
       await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
       expect(navigate).not.toHaveBeenCalled();

@@ -1,7 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
 
 import VerifyEmail from ".";
 import createServer from "../../../utils/test/createServer";
@@ -14,19 +12,7 @@ import { localStorageGetItem } from "../../../utils/test/mocks/localStorage";
 import { RESEND_BUTTON_ENABLED_TEXT, RESEND_SECONDS } from "./hooks/useVerifyEmail";
 
 import type { TResendDetails } from "./type";
-
-const renderComponent = () => {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-
-  render(
-    // @ts-ignore
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <VerifyEmail />
-      </MemoryRouter>
-    </QueryClientProvider>
-  );
-};
+import TestProviders from "../../../components/TestProviders";
 
 const OTP = "123456";
 
@@ -40,7 +26,9 @@ const { handleCreateErrorConfig } = createServer([
 
 test("Verifies email and redirects to sign-in page", async () => {
   const user = userEvent.setup();
-  renderComponent();
+  render(<VerifyEmail />, {
+    wrapper: TestProviders,
+  });
 
   const codeInput = screen.getByPlaceholderText("Enter code");
   const submitButton = screen.getByRole("button", { name: /verify/i });
@@ -63,7 +51,9 @@ test("Displays errors works correctly when the network request errors", async ()
     statusCode: 400,
   });
   const user = userEvent.setup();
-  renderComponent();
+  render(<VerifyEmail />, {
+    wrapper: TestProviders,
+  });
 
   const codeInput = screen.getByPlaceholderText("Enter code");
   const submitButton = screen.getByRole("button", { name: /verify/i });
@@ -93,7 +83,9 @@ describe("Resend button works correctly", () => {
     test("When there's data from localStorage and it's 20 seconds ago", async () => {
       let savedAtSeconds = 20; // 20 seconds ago
       localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
-      renderComponent();
+      render(<VerifyEmail />, {
+        wrapper: TestProviders,
+      });
 
       const resendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
       expect(resendButton).toBeDisabled();
@@ -107,7 +99,9 @@ describe("Resend button works correctly", () => {
     test("When there's data from localStorage and it's now", async () => {
       const savedAtSeconds = 0; // now
       localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
-      renderComponent();
+      render(<VerifyEmail />, {
+        wrapper: TestProviders,
+      });
 
       const resendButtonNew = screen.getByRole("button", { name: /didn't receive the code\?/i });
       expect(resendButtonNew.textContent).toContain(`${RESEND_SECONDS}s`);
@@ -118,7 +112,9 @@ describe("Resend button works correctly", () => {
 
     test("When there's NO data from localStorage", async () => {
       localStorageGetItem.mockReturnValueOnce(null);
-      renderComponent();
+      render(<VerifyEmail />, {
+        wrapper: TestProviders,
+      });
       const user = userEvent.setup();
 
       const enabledResendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
@@ -154,7 +150,9 @@ describe("Resend button works correctly", () => {
 
       let savedAtSeconds = RESEND_SECONDS - 4; // only 4 before the resend button is enabled
       localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
-      renderComponent();
+      render(<VerifyEmail />, {
+        wrapper: TestProviders,
+      });
 
       const resendButton = screen.getByRole("button", { name: /didn't receive the code\?/i });
 

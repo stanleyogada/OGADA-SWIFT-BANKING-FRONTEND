@@ -1,8 +1,5 @@
-import * as router from "react-router";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { MemoryRouter } from "react-router-dom";
 
 import Signup from ".";
 import createServer from "../../../utils/test/createServer";
@@ -13,19 +10,7 @@ import { consoleErrorSpy, consoleInfoSpy } from "../../../utils/test/mocks/conso
 import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
 import { navigate } from "../../../utils/test/mocks/navigate";
 import { localStorageSetItem } from "../../../utils/test/mocks/localStorage";
-
-const renderComponent = () => {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-
-  render(
-    // @ts-ignore
-    <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <Signup />
-      </MemoryRouter>
-    </QueryClientProvider>
-  );
-};
+import TestProviders from "../../../components/TestProviders";
 
 const { handleCreateErrorConfig } = createServer([
   {
@@ -77,7 +62,9 @@ const handleAssertTypeInForm = async (
 };
 
 test("Render content of Signup page correctly", () => {
-  renderComponent();
+  render(<Signup />, {
+    wrapper: TestProviders,
+  });
 
   const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
 
@@ -118,7 +105,9 @@ test("Render content of Signup page correctly", () => {
 
 test("Sign up form works correctly onSuccess", async () => {
   const user = userEvent.setup();
-  renderComponent();
+  render(<Signup />, {
+    wrapper: TestProviders,
+  });
 
   const userEmail = "example@gmail.com";
 
@@ -184,7 +173,9 @@ describe("Displays errors works correctly when the network request errors", () =
       url: `${BASE_URL}${ENDPOINTS.signUp}`,
       statusCode: 400,
     });
-    renderComponent();
+    render(<Signup />, {
+      wrapper: TestProviders,
+    });
 
     await handleAssertError();
 
@@ -197,7 +188,9 @@ describe("Displays errors works correctly when the network request errors", () =
       url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
       statusCode: 400,
     });
-    renderComponent();
+    render(<Signup />, {
+      wrapper: TestProviders,
+    });
 
     await handleAssertError();
 
@@ -217,7 +210,9 @@ describe("Displays errors works correctly when the network request errors", () =
       url: `${BASE_URL}${ENDPOINTS.sendEmail}`,
       statusCode: 400,
     });
-    renderComponent();
+    render(<Signup />, {
+      wrapper: TestProviders,
+    });
 
     await handleAssertError();
 
@@ -238,7 +233,9 @@ describe("Displays errors works correctly when the network request errors", () =
         };
       },
     });
-    renderComponent();
+    render(<Signup />, {
+      wrapper: TestProviders,
+    });
 
     const user = userEvent.setup();
 
