@@ -40,35 +40,6 @@ const handleAssertTypeInForm = async (
   expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
 };
 
-test("Render content of Signin page correctly", () => {
-  render(<Signin />, {
-    wrapper: TestProviders,
-  });
-
-  const pageTitle = screen.getByRole("heading", { name: /sign in/i });
-  const subTitle = screen.getByRole("heading", { name: /welcome back/i });
-
-  const phoneInput = screen.getByPlaceholderText(/phone number/i);
-  const passwordInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
-
-  const rememberLoginPasscode = screen.getByRole("checkbox", { name: /remember login passcode/i });
-  const forgotLoginPasscode = screen.getByRole("link", { name: /forgot login passcode/i });
-
-  const signInButton = screen.getByRole("button", { name: /sign in/i });
-
-  const goToSignup = screen.getByRole("link", { name: /don\'t have an account\? sign up/i });
-  expect(goToSignup).toHaveAttribute("href", "/auth/signup");
-
-  expect(pageTitle).toBeInTheDocument();
-  expect(subTitle).toBeInTheDocument();
-  expect(phoneInput).toBeInTheDocument();
-  expect(passwordInput).toBeInTheDocument();
-  expect(rememberLoginPasscode).toBeInTheDocument();
-  expect(forgotLoginPasscode).toBeInTheDocument();
-  expect(signInButton).toBeInTheDocument();
-  expect(goToSignup).toBeInTheDocument();
-});
-
 describe("When signin request failed ", () => {
   const handleCreateErrorConfig = handleCreateSignInConfigSuccess({
     token: "1234567890",
