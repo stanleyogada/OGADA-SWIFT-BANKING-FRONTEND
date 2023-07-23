@@ -4,15 +4,13 @@ const useSendEmailCodeSuccess = () => {
   const handler = (email: string) => {
     const savedAtTime = Date.now();
 
-    const v = JSON.stringify({
-      email,
-      savedAtTime,
-    });
-
-    console.log("savedAtTime", savedAtTime);
-    console.log("v", v);
-
-    localStorage.setItem(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess, v);
+    localStorage.setItem(
+      LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+      JSON.stringify({
+        email,
+        savedAtTime,
+      })
+    );
   };
 
   return handler;
