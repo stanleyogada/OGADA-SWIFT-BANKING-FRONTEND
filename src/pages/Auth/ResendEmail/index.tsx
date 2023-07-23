@@ -8,6 +8,7 @@ const ResendEmail = () => {
   return (
     <ResendEmailWrapper>
       <h1 className="page-title">Resend email verification</h1>
+      <h2 className="page-sub-title">Manually send email verification code</h2>
 
       <form onSubmit={handleSubmit()}>
         <Input

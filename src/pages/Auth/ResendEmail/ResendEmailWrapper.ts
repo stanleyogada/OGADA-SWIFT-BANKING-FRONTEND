@@ -9,23 +9,12 @@ const ResendEmailWrapper = styled.div`
     font-weight: 400;
   }
 
-  .page-sub-title-wrapper {
-    width: 100%;
-    margin-bottom: 24px;
-
-    .page-sub-title {
-      color: ${COLORS.black};
-      text-align: center;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .page-sub-title-desc {
-      color: ${COLORS.black};
-      font-size: 11px;
-      font-weight: 400;
-      text-align: center;
-    }
+  .page-sub-title {
+    color: ${COLORS.black};
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 35px;
   }
 
   form {
@@ -35,25 +24,13 @@ const ResendEmailWrapper = styled.div`
     flex-direction: column;
     align-items: center;
 
-    .resend-button {
-      color: ${COLORS.blue};
-      text-decoration: underline;
-      font-size: 13px;
-      font-weight: 400;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      padding-top: 20px;
-    }
-
-    .verify-button {
+    .send-button {
       width: 100%;
       height: 50px;
       flex-shrink: 0;
       background-color: ${COLORS.blue};
       border: none;
       border-radius: 12px;
-      margin-top: 29px;
       color: ${COLORS.white};
       font-size: 15px;
       font-weight: 700;

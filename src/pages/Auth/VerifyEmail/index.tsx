@@ -21,7 +21,7 @@ const VerifyEmail = () => {
       <h1 className="page-title">Verify email address</h1>
 
       <div className="page-sub-title-wrapper">
-        <p className="page-sub-title">Please enter code</p>
+        <h2 className="page-sub-title">Please enter code</h2>
         <p className="page-sub-title-desc">A verification code has been sent to your email address</p>
       </div>
       <form onSubmit={handleSubmit()}>
