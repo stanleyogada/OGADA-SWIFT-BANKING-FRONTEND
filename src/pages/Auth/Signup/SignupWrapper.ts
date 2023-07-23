@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { COLORS } from "../../constants";
+import { COLORS } from "../../../constants";
 
 const SigninWrapper = styled.div`
   .page-title {

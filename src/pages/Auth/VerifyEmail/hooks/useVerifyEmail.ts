@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
-import { postVerifyEmail } from "../../../services/auth";
+import { postVerifyEmail } from "../../../../services/auth";
 import { AxiosError } from "axios";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
 import { TResendDetails, TVerifyEmailFormValues } from "../type";
 
 const RESEND_SECONDS = 45;

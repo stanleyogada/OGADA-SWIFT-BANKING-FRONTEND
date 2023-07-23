@@ -1,17 +1,16 @@
-import * as router from "react-router";
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
 import Signin from "./";
-import createServer from "../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS } from "../../constants/services";
-import { TUser } from "../../services/users/types";
-import { CLIENT_ROUTES } from "../../constants";
-import { consoleErrorSpy } from "../../utils/test/mocks/consoleSpy";
-import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
-import { navigate } from "../../utils/test/mocks/navigate";
+import createServer from "../../../utils/test/createServer";
+import { BASE_URL, ENDPOINTS } from "../../../constants/services";
+import { TUser } from "../../../services/users/types";
+import { CLIENT_ROUTES } from "../../../constants";
+import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
+import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
+import { navigate } from "../../../utils/test/mocks/navigate";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });

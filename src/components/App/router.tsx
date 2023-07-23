@@ -11,11 +11,12 @@ import Profile from "../../pages/Profile";
 import Cards from "./../../pages/Cards/index";
 import Account from "../../pages/Account.tsx";
 import Livechat from "../../pages/Livechat";
-import Signin from "../../pages/Signin";
-import Signup from "../../pages/Signup";
-import Welcome from "../../pages/Welcome";
-import VerifyEmail from "../../pages/VerifyEmail";
 import Rewards from "./../../pages/Rewards/index";
+
+import Welcome from "../../pages/Auth/Welcome";
+import Signin from "../../pages/Auth/Signin";
+import Signup from "../../pages/Auth/Signup";
+import VerifyEmail from "../../pages/Auth/VerifyEmail";
 
 const ROUTER = createBrowserRouter([
   {

@@ -5,14 +5,14 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
 import Signup from ".";
-import createServer from "../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
+import createServer from "../../../utils/test/createServer";
+import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../../constants/services";
 import { TSignUpFormValues } from "./type";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../constants";
-import { consoleErrorSpy, consoleInfoSpy } from "../../utils/test/mocks/consoleSpy";
-import { handleAssertLoadingAfterSubmitClick } from "../../utils/test/assertUtils";
-import { navigate } from "../../utils/test/mocks/navigate";
-import { localStorageSetItem } from "../../utils/test/mocks/localStorage";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
+import { consoleErrorSpy, consoleInfoSpy } from "../../../utils/test/mocks/consoleSpy";
+import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
+import { navigate } from "../../../utils/test/mocks/navigate";
+import { localStorageSetItem } from "../../../utils/test/mocks/localStorage";
 
 const renderComponent = () => {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
