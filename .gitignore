@@ -27,3 +27,4 @@ dist-ssr
 package-lock.json
 yarn.lock
 yarn-error.log
+*.lock
