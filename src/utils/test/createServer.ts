@@ -11,6 +11,8 @@ type THandlerConfig = {
   res?: (req: any, res: any, ctx: any) => object;
 };
 
+const RESPONSE_DELAY = 100;
+
 const createServer = (_handlerConfigs: (THandlerConfig | string)[]) => {
   let handlerConfigs = _handlerConfigs.map((config) => {
     if (typeof config === "string") {
@@ -36,7 +38,7 @@ const createServer = (_handlerConfigs: (THandlerConfig | string)[]) => {
       return res(
         // Add a DELAY to the response to simulate network latency,
         // Otherwise we can't test loading states
-        ctx.delay(100),
+        ctx.delay(RESPONSE_DELAY),
         ctx.json(config.res?.(req, res, ctx) || {})
       );
     })
@@ -54,7 +56,7 @@ const createServer = (_handlerConfigs: (THandlerConfig | string)[]) => {
         return res(
           // Add a DELAY to the response to simulate network latency,
           // Otherwise we can't test loading states
-          ctx.delay(100),
+          ctx.delay(RESPONSE_DELAY),
           ctx.status(handlerConfig.statusCode || 500),
           ctx.json(
             handlerConfig.res?.(req, res, ctx) || {
