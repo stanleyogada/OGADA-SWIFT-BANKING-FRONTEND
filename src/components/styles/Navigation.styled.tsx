@@ -54,11 +54,8 @@ export const List = styled.li`
   a > i {
     font-size: 1.5rem;
   }
-<<<<<<< HEAD
-=======
 
   a.active {
     color: ${COLORS.blue}; /*This affects the SVG icons inside also*/
   }
->>>>>>> c1c6a7e750df1f9776ba3adf3c29ca7e488c4d20
 `;
