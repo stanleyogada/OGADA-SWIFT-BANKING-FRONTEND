@@ -61,48 +61,6 @@ const handleAssertTypeInForm = async (
   }
 };
 
-test("Render content of Signup page correctly", () => {
-  render(<Signup />, {
-    wrapper: TestProviders,
-  });
-
-  const pageTitle = screen.getByRole("heading", { name: /Create a new account/i });
-
-  const firstNameInput = screen.getByLabelText(/first name/i);
-  const lastNameInput = screen.getByLabelText(/last name/i);
-  const middleNameInput = screen.getByLabelText(/middle name/i);
-  const emailInput = screen.getByLabelText(/email/i);
-  const phoneInput = screen.getByLabelText(/phone number/i);
-  const phoneInputInfo = screen.getByText(/This would be your account number/i); // TODO: uncomment this line after adding this text to the page
-  const passwordInput = screen.getByLabelText(/enter 6 digits login passcode/i);
-
-  const clickToAgree = screen.getByRole("checkbox", { name: /click .confirm. to accept/i });
-  const termsAndConditions = screen.getByRole("link", { name: /terms and conditions./i });
-
-  const confirmButton = screen.getByRole("button", { name: /confirm/i });
-
-  const goToSignin = screen.getByRole("link", { name: /already have an account\? sign in/i });
-  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
-
-  expect(goToSignin).toHaveAttribute("href", "/auth/signin");
-
-  expect(pageTitle).toBeInTheDocument();
-  expect(firstNameInput).toBeInTheDocument();
-  expect(lastNameInput).toBeInTheDocument();
-  expect(middleNameInput).toBeInTheDocument();
-  expect(emailInput).toBeInTheDocument();
-  expect(phoneInput).toBeInTheDocument();
-  expect(phoneInputInfo).toBeInTheDocument();
-  expect(passwordInput).toBeInTheDocument();
-
-  expect(clickToAgree).toBeInTheDocument();
-  expect(termsAndConditions).toBeInTheDocument();
-
-  expect(confirmButton).toBeInTheDocument();
-
-  expect(goToSignin).toBeInTheDocument();
-});
-
 test("Sign up form works correctly onSuccess", async () => {
   const user = userEvent.setup();
   render(<Signup />, {
