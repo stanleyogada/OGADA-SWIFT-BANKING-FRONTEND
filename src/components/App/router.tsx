@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Outlet, createBrowserRouter, redirect, useLocation } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
 import { CLIENT_ROUTES } from "../../constants";
 import PageWrapper from "./../PageWrapper/index";
@@ -17,6 +16,8 @@ import Welcome from "../../pages/Auth/Welcome";
 import Signin from "../../pages/Auth/Signin";
 import Signup from "../../pages/Auth/Signup";
 import VerifyEmail from "../../pages/Auth/VerifyEmail";
+import Redirect from "../Redirect";
+import ResendEmail from "../../pages/Auth/ResendEmail";
 
 const ROUTER = createBrowserRouter([
   {
@@ -90,7 +91,7 @@ const ROUTER = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <Redirect path={CLIENT_ROUTES.auth} />,
+    element: <Redirect path={CLIENT_ROUTES.auth} redirectTo={CLIENT_ROUTES.authWelcome} />,
     children: [
       {
         path: CLIENT_ROUTES.authWelcome,
@@ -116,7 +117,6 @@ const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
-
       {
         path: CLIENT_ROUTES.authVerifyEmail,
         element: (
@@ -125,19 +125,16 @@ const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
+      {
+        path: CLIENT_ROUTES.authResendEmail,
+        element: (
+          <PageWrapper>
+            <ResendEmail />
+          </PageWrapper>
+        ),
+      },
     ],
   },
 ]);
-
-function Redirect({ path }: { path: string }) {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    if (pathname !== path) return;
-    redirect(CLIENT_ROUTES.authSignin);
-  });
-
-  return <Outlet />;
-}
 
 export default ROUTER;

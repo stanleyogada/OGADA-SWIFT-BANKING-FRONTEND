@@ -27,7 +27,7 @@ const useVerifyEmail = () => {
     VerifyEmailMutation.mutate(formValues.code);
   };
 
-  const VerifyEmailMutationState = useMemo(() => {
+  const mutationState = useMemo(() => {
     const error = VerifyEmailMutation.error as AxiosError;
     let message = (error?.response?.data as { message: string })?.message;
 
@@ -59,10 +59,10 @@ const useVerifyEmail = () => {
   };
 
   useEffect(() => {
-    if (VerifyEmailMutationState.isError) {
-      handleToast(VerifyEmailMutationState.error);
+    if (mutationState.isError) {
+      handleToast(mutationState.error);
     }
-  }, [VerifyEmailMutationState.isError, VerifyEmailMutationState.error]);
+  }, [mutationState.isError, mutationState.error]);
 
   const [resendDetails, setResendDetails] = useState<TResendDetails>({
     email: "",
@@ -121,7 +121,7 @@ const useVerifyEmail = () => {
   // }, [resendDetails.email]);
 
   return {
-    mutationState: VerifyEmailMutationState,
+    mutationState,
     resendDetails,
     errors,
     handleResendButtonClick,

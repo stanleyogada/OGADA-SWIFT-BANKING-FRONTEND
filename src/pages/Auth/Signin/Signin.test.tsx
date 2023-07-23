@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
-import Signin from "./";
+import Signin from ".";
 import createServer from "../../../utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "../../../constants/services";
 import { TUser } from "../../../services/users/types";

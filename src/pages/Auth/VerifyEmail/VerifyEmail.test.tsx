@@ -38,7 +38,7 @@ const { handleCreateErrorConfig } = createServer([
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("Verifies email and redirects to login", async () => {
+test("Verifies email and redirects to sign-in page", async () => {
   const user = userEvent.setup();
   renderComponent();
 
