@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { COLORS } from "../../constants";
 
 const InputWrapper = styled.div`
+  width: 100%;
+
   .input {
     &__group {
       margin-bottom: 8px;

@@ -4,7 +4,7 @@ import VerifyEmailWrapper from "./VerifyEmailWrapper";
 import useVerifyEmail, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useVerifyEmail";
 
 const VerifyEmail = () => {
-  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails } = useVerifyEmail();
+  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } = useVerifyEmail();
 
   const renderResendSuffix = () => {
     if (resendDetails.timeSecondsLeft > 0) {
@@ -34,6 +34,7 @@ const VerifyEmail = () => {
               message: "Code must be at least 6 characters",
             },
           })}
+          error={errors.code?.message}
         />
 
         <button

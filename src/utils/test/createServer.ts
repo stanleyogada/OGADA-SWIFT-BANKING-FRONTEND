@@ -36,7 +36,7 @@ const createServer = (_handlerConfigs: (THandlerConfig | string)[]) => {
       return res(
         // Add a DELAY to the response to simulate network latency,
         // Otherwise we can't test loading states
-        ctx.delay(5),
+        ctx.delay(100),
         ctx.json(config.res?.(req, res, ctx) || {})
       );
     })
@@ -54,7 +54,7 @@ const createServer = (_handlerConfigs: (THandlerConfig | string)[]) => {
         return res(
           // Add a DELAY to the response to simulate network latency,
           // Otherwise we can't test loading states
-          ctx.delay(5),
+          ctx.delay(100),
           ctx.status(handlerConfig.statusCode || 500),
           ctx.json(
             handlerConfig.res?.(req, res, ctx) || {
