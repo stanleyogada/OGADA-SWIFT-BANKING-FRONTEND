@@ -26,7 +26,7 @@ const ResendEmail = () => {
 
         <button className="send-button" type="submit" disabled={mutationState.isLoading}>
           Send
-          {mutationState.isLoading && <div data-testid="loading">Loading...</div>}
+          {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
     </ResendEmailWrapper>

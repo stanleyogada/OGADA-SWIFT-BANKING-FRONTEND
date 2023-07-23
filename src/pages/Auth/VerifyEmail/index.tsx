@@ -48,7 +48,7 @@ const VerifyEmail = () => {
 
         <button className="verify-button" type="submit" disabled={mutationState.isLoading}>
           Verify
-          {mutationState.isLoading && <div data-testid="loading">Loading...</div>}
+          {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
     </VerifyEmailWrapper>
