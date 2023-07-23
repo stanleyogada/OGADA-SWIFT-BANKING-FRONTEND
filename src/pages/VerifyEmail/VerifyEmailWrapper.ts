@@ -14,7 +14,7 @@ const VerifyEmailWrapper = styled.div`
     margin-bottom: 24px;
 
     .page-sub-title {
-      color: #171717;
+      color: ${COLORS.black};
       text-align: center;
       font-size: 20px;
       font-weight: 700;
@@ -43,6 +43,7 @@ const VerifyEmailWrapper = styled.div`
       background-color: transparent;
       border: none;
       cursor: pointer;
+      padding-top: 20px;
     }
 
     .verify-button {
