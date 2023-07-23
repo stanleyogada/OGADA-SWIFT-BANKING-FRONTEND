@@ -31,14 +31,24 @@ test("Sends email and redirects to verify email code page", async () => {
   expect(navigate).not.toHaveBeenCalled();
   expect(localStorageSetItem).not.toHaveBeenCalled();
 
-  await user.type(emailInput, "test@gmail.com");
+  const email = "test@gmail.com";
+  await user.type(emailInput, email);
   await user.click(submitButton);
 
   await handleAssertLoadingAfterSubmitClick(submitButton);
 
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
-  expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.sendEmailCodeSuccess}`, "TEST");
+
+  expect(localStorageSetItem).toHaveBeenCalled();
+
+  expect(localStorageSetItem).toHaveBeenCalledWith(
+    LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+    JSON.stringify({
+      email,
+      savedAtTime: Date.now(),
+    })
+  );
 });
 
 test("Displays errors works correctly when the network request errors", async () => {

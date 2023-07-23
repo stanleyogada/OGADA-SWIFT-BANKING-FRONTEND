@@ -87,9 +87,15 @@ test("Sign up form works correctly onSuccess", async () => {
 
   await handleAssertLoadingAfterSubmitClick(signUpButton);
 
-  expect(localStorageSetItem).toHaveBeenCalledWith(`TEST${LOCAL_STORAGE_KEYS.sendEmailCodeSuccess}`, "TEST");
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
+  expect(localStorageSetItem).toHaveBeenCalledWith(
+    LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+    JSON.stringify({
+      email: userEmail,
+      savedAtTime: Date.now(),
+    })
+  );
 
   expect(consoleInfoSpy).toHaveBeenCalled();
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);

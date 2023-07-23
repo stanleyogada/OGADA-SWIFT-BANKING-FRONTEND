@@ -2,14 +2,17 @@ import { LOCAL_STORAGE_KEYS } from "../constants";
 
 const useSendEmailCodeSuccess = () => {
   const handler = (email: string) => {
-    localStorage.setItem(`TEST${LOCAL_STORAGE_KEYS.sendEmailCodeSuccess}`, "TEST");
-    localStorage.setItem(
-      LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
-      JSON.stringify({
-        email,
-        savedAtTime: new Date().getTime(),
-      })
-    );
+    const savedAtTime = Date.now();
+
+    const v = JSON.stringify({
+      email,
+      savedAtTime,
+    });
+
+    console.log("savedAtTime", savedAtTime);
+    console.log("v", v);
+
+    localStorage.setItem(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess, v);
   };
 
   return handler;
