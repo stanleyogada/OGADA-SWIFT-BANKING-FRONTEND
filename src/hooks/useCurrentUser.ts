@@ -29,13 +29,12 @@ const useCurrentUser = () => {
     retry: false,
 
     onError: (err: AxiosError) => {
-      // If the error is a 401 error, we want to set the current user to null.
-      // So RQ will cache that the current user is null and we won't keep trying
-
       if (err.code === "ERR_NETWORK" && err.message === "Network Error") {
         setIsMixedContentError(true);
       }
 
+      // If the error is a 401 error, we want to set the current user to null.
+      // So RQ will cache that the current user is null and we won't keep trying
       queryClient.setQueryData(QUERY_KEYS.currentUser, null);
     },
   });
@@ -79,8 +78,6 @@ const useCurrentUser = () => {
 
       ${document.body.innerHTML}
       `;
-
-      return;
     }
   }, [isMixedContentError]);
 
