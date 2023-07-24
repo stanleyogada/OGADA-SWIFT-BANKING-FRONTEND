@@ -13,7 +13,6 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -24,7 +23,8 @@ dist-ssr
 *.sw?
 
 
-# lock files
+# lock files and yarn error logs
 package-lock.json
 yarn.lock
 yarn-error.log
+*.lock

@@ -3,12 +3,12 @@ import icons from "../../constants/icons";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
-import useToken from "../../hooks/useToken";
+import useAuth from "../../hooks/useAuth";
 
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 
 const Home = () => {
-  const { handleSignout } = useToken();
+  const { handleSignOut } = useAuth();
 
   return (
     <>
@@ -20,7 +20,7 @@ const Home = () => {
             <h3>Hello, Tega</h3>
           </div>
           <div className="profile-icons">
-            <div onClick={handleSignout}>
+            <div onClick={() => handleSignOut()}>
               <Link to="/" className="notify">
                 <span className="cursor-pointer">{icons.blackUserIcon()}</span>
               </Link>

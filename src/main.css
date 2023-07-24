@@ -1,4 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  --blue: #006fff;
+  --white: #ffffff;
+  --black: #000000;
+  --purple: #3a00ff;
+  --lightPurple: #d7c9ff;
+  --gray: #e8e8e8;
+  --lightGray: #c0c0c0;
+  --darkGray: #5d5d5d;
+  --lightYellow: #ffddb5;
+  --yellow: #ff8800;
+  --lightPink: #ffe4fd;
+  --lightBlue: #b2d2f9;
+  --pink: #ff00dd;
+  --orange: #ff8800;
+  --lightOrange: #ffddb5;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -16,4 +35,23 @@ div.space-y-4 > :not(:last-child) {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+input {
+  outline: none;
+  border: 1px solid transparent;
+  transition: border 0.5s ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+button:hover {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
 }
