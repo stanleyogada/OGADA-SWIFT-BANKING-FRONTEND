@@ -26,7 +26,7 @@ const FinanceWrapper = styled.section`
 
     button {
       background: ${COLORS.purple};
-      color: ${COLORS.lightpurple};
+      color: ${COLORS.lightPurple};
       padding: 0.35rem 0.75rem 0.35rem 0.75rem;
       border: none;
       border-radius: 15px;

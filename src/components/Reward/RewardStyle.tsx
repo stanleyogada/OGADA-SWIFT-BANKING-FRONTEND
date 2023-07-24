@@ -127,7 +127,7 @@ const RewardWrapper = styled.div`
 
     .btn-wrapper {
       margin: 10px 5px auto auto;
-      background: ${COLORS.lightblue};
+      background: ${COLORS.lightBlue};
       text-align: center;
       display: flex;
       justify-content: center;

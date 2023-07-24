@@ -18,7 +18,7 @@ const VirtualWrapper = styled.div`
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: ${COLORS.lightblue};
+      background-color: ${COLORS.lightBlue};
       display: flex;
       justify-content: center;
       align-items: center;
@@ -48,7 +48,7 @@ const VirtualWrapper = styled.div`
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: ${COLORS.lightblue};
+      background-color: ${COLORS.lightBlue};
       display: flex;
       justify-content: center;
       align-items: center;
@@ -75,7 +75,7 @@ const VirtualWrapper = styled.div`
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: ${COLORS.lightblue};
+      background-color: ${COLORS.lightBlue};
       display: flex;
       justify-content: center;
       align-items: center;
