@@ -32,8 +32,6 @@ const useCurrentUser = () => {
       // If the error is a 401 error, we want to set the current user to null.
       // So RQ will cache that the current user is null and we won't keep trying
 
-      console.log(err.code);
-      console.log(err.message);
       if (err.code === "ERR_NETWORK" && err.message === "Network Error") {
         setIsMixedContentError(true);
       }
