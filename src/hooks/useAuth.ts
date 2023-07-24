@@ -68,14 +68,16 @@ const useAuth = () => {
     window.location.reload();
   };
 
-  const signInMutationState = useMemo(
-    () => ({
+  const signInMutationState = useMemo(() => {
+    const error = signInMutation.error as AxiosError;
+    let message = (error?.response?.data as { message: string })?.message;
+
+    return {
       isLoading: signInMutation.isLoading,
-      error: signInMutation.error as AxiosError,
+      error: message,
       isError: signInMutation.isError,
-    }),
-    [signInMutation.isLoading, signInMutation.error, signInMutation.isError]
-  );
+    };
+  }, [signInMutation.isLoading, signInMutation.error, signInMutation.isError]);
 
   return {
     currentUser,

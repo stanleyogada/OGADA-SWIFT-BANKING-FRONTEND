@@ -29,9 +29,9 @@ const useSignin = () => {
 
   useEffect(() => {
     if (signInMutationState.isError) {
-      handleToast("Invalid credentials. Please try again!");
+      handleToast(signInMutationState.error);
     }
-  }, [signInMutationState.isError]);
+  }, [signInMutationState.isError, signInMutationState.error]);
 
   return {
     mutationState: signInMutationState,
