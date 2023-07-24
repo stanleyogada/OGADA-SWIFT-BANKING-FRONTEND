@@ -6,6 +6,16 @@ import { AxiosError } from "axios";
 
 import promptErrorFixVideo from "../assets/prompt-error-fix.mp4";
 
+function isMobileDevice() {
+  var check = false;
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    check = true;
+  }
+
+  return check;
+}
+
 const useCurrentUser = () => {
   const queryClient = useQueryClient();
 
@@ -50,12 +60,21 @@ const useCurrentUser = () => {
           </div>
           <div class="modal__body">
             <p class="modal__text">Please confirm that you network connection is not disconnected. ᯤ 📶 🌐</p>
-            <p class="modal__text"><mark>If you network connection is fine, please follow the instructions in the video below to fix the issue.</mark></p>
 
-            <video controls autoplay loop muted class="modal__video">
-              <source src=${promptErrorFixVideo} type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+            ${
+              isMobileDevice()
+                ? `
+                <p class="modal__text"><mark>If you network connection is fine, please visit the website on a desktop computer to fix the issue.</mark></p>
+              `
+                : `
+                <p class="modal__text"><mark>If you network connection is fine, please follow the instructions in the video below to fix the issue.</mark></p>
+
+                <video controls autoplay loop muted class="modal__video">
+                  <source src=${promptErrorFixVideo} type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              `
+            }
           </div>
         </div>
       </div>
