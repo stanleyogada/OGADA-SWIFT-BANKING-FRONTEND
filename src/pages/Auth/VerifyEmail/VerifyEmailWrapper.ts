@@ -42,7 +42,6 @@ const VerifyEmailWrapper = styled.div`
       font-weight: 400;
       background-color: transparent;
       border: none;
-      cursor: pointer;
       padding-top: 20px;
     }
 
