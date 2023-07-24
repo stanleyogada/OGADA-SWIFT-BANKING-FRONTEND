@@ -96,7 +96,7 @@ export default Home;
 const HomeInfoWrapper = styled.section`
   .profile-head {
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: space-between;
     width: 90vw;
     margin: 0 auto;
@@ -104,7 +104,7 @@ const HomeInfoWrapper = styled.section`
 
     .profile-info {
       display: flex;
-      align-item: center;
+      align-items: center;
       justify-content: space-between;
       gap: 0.85rem;
 
@@ -116,7 +116,7 @@ const HomeInfoWrapper = styled.section`
     }
     .profile-icons {
       display: flex;
-      align-item: center;
+      align-items: center;
       justify-content: space-between;
       gap: 0.85rem;
       margin-top: 0.85rem;
@@ -213,11 +213,7 @@ const NotifyWrapper = styled.section`
   align-items: center;
   gap: 0.5rem;
   width: 90vw;
-  margin: 0 auto;
-  position: absolute;
-  left: 1rem;
-  bottom: 5rem;
-  right: 0;
+  margin: 1.3rem auto;
 
   .notify-1,
   .notify-2,
