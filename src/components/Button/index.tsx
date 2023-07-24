@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ButtonWrapper, LinkWrapper } from "./ButtonStyle";
+import { ButtonWrapper, LinkWrapper } from "./ButtonWrapper";
 
 interface ButtonProps {
   icon?: ReactNode;
