@@ -10,6 +10,8 @@ const CLIENT_ROUTES = {
   authWelcome: "/auth/welcome",
   authSignin: "/auth/signin",
   authSignup: "/auth/signup",
+  authVerifyEmail: "/auth/verify-email",
+  authResendEmail: "/auth/resend-email",
   liveChat: "/livechat",
 };
 

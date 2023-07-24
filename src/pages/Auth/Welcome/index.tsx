@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { COLORS } from "../../constants";
-import { CLIENT_ROUTES } from "../../constants/routes";
-import Button from "../../components/Button";
+import { COLORS } from "../../../constants";
+import { CLIENT_ROUTES } from "../../../constants/routes";
+import Button from "../../../components/Button";
 import Slider from "react-rc-carousel";
-import vector from "../../constants/images/vector";
+import vector from "../../../constants/images/vector";
 import styled from "styled-components";
 const Welcome = () => {
   return (

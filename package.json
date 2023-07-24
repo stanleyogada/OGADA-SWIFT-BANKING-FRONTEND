@@ -7,11 +7,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "start": "vite preview",
-    "test": "jest --watchAll --no-cache"
+    "test": "npx jest --clearCache && jest --watchAll --no-cache"
   },
   "dependencies": {
+    "@types/react-query": "^1.2.9",
+    "axios": "^1.4.0",
+    "msw": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.1",
+    "react-hot-toast": "^2.4.1",
+    "react-query": "3.19.2",
     "react-rc-carousel": "^4.0.7",
     "react-router-dom": "^6.13.0",
     "styled-components": "^5.3.6"
@@ -21,6 +27,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/axios": "^0.14.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",

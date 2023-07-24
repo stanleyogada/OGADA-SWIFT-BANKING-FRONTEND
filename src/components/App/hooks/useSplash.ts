@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import useCurrentUser from "../../../hooks/useCurrentUser";
 
 const useSplash = () => {
-  const [isAppLoading, setIsAppLoading] = useState<boolean>(true);
+  const { isLoading } = useCurrentUser();
 
-  useEffect(() => {
-    try {
-      setTimeout(() => setIsAppLoading(false), 1000);
-    } catch (e) {
-      console.log(e);
-      setIsAppLoading(false);
-    }
-  }, []);
+  const isAppLoading = useMemo(() => {
+    return isLoading;
+  }, [isLoading]);
 
   return {
     isAppLoading,
