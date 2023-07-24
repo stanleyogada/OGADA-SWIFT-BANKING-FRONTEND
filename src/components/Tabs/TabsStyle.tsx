@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
 
-const STabs = styled.section`
+const TabsWrapper = styled.section`
   .tabs_container {
     .tabs_header {
       display: flex;
@@ -56,4 +56,4 @@ const STabs = styled.section`
   }
 `;
 
-export default STabs;
+export default TabsWrapper;

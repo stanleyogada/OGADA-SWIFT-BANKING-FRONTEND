@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import STabs from "../components/Tabs/TabsStyle";
+import TabsWrapper from "../components/Tabs/TabsStyle";
 
 type TProps = {
   data: Array<{
@@ -32,7 +32,7 @@ const Tabs = ({ data, children, type2 }: TProps) => {
   const { activeId, handleChangeActiveId, getActiveIndex } = useTabs(data);
 
   return (
-    <STabs>
+    <TabsWrapper>
       <div className={!type2 ? "tabs_container" : " tabs_container--type2"}>
         <header className="tabs_header">
           {data.map((tab) => (
@@ -48,7 +48,7 @@ const Tabs = ({ data, children, type2 }: TProps) => {
 
         <div className="tabs_pane">{children[getActiveIndex()]}</div>
       </div>
-    </STabs>
+    </TabsWrapper>
   );
 };
 

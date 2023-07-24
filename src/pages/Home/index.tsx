@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import Avatar from "../../components/Avatar/Avatar";
 import useToken from "../../hooks/useToken";
 
-import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeStyle";
+import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 
 const Home = () => {
   const { handleSignout } = useToken();
