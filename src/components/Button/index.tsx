@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { SButton, LinkWrapper } from "./ButtonStyle";
+import { ButtonWrapper, LinkWrapper } from "./ButtonStyle";
 
 interface ButtonProps {
   icon?: ReactNode;
@@ -10,10 +10,10 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ icon, children, link }) => {
   const btn = (
-    <SButton>
+    <ButtonWrapper>
       {icon && <div data-testid="btn-icon">{icon}</div>}
       <span>{children}</span>
-    </SButton>
+    </ButtonWrapper>
   );
 
   return link ? (

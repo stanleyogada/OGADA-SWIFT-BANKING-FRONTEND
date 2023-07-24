@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-const SButton = styled.button`
+const ButtonWrapper = styled.button`
   background-color: Transparent;
   display: flex;
   flex-direction: column;
@@ -23,4 +23,4 @@ const LinkWrapper = styled.div`
     text-decoration: none;
   }
 `;
-export { SButton, LinkWrapper };
+export { ButtonWrapper, LinkWrapper };
