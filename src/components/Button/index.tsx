@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-import { COLORS } from "../../constants";
+import { ButtonWrapper, LinkWrapper } from "./ButtonWrapper";
 
 type TProps = {
   icon?: ReactNode;
@@ -14,16 +12,7 @@ type TProps = {
   onClick?: () => void;
 };
 
-const Button = ({
-  icon,
-  children,
-  link,
-  type,
-  disabled,
-  className,
-
-  onClick,
-}: TProps) => {
+const Button = ({ icon, children, link, type, disabled, className, onClick }: TProps) => {
   const btn = (
     <ButtonWrapper type={type} disabled={disabled} className={className} onClick={onClick}>
       {icon && <div data-testid="btn-icon">{icon}</div>}
@@ -41,28 +30,5 @@ const Button = ({
     btn
   );
 };
-
-const ButtonWrapper = styled.button`
-  background-color: Transparent;
-  display: flex;
-  flex-direction: column;
-  background-repeat: no-repeat;
-  border: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-
-  & span {
-    margin-top: 5px;
-    color: currentColor;
-  }
-`;
-
-const LinkWrapper = styled.div`
-  & a {
-    text-decoration: none;
-  }
-`;
 
 export default Button;
