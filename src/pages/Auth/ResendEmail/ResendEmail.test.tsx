@@ -9,7 +9,8 @@ import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
 import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
 import TestProviders from "../../../components/TestProviders";
-import { localStorageSetItem } from "../../../utils/test/mocks/localStorage";
+import { localStorageGetItem, localStorageSetItem } from "../../../utils/test/mocks/localStorage";
+import { TResendDetails } from "../VerifyEmail/type";
 
 const { handleCreateErrorConfig } = createServer([
   {
@@ -19,36 +20,81 @@ const { handleCreateErrorConfig } = createServer([
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("Sends email and redirects to verify email code page", async () => {
-  const user = userEvent.setup();
-  render(<ResendEmail />, {
-    wrapper: TestProviders,
+describe("Sends email and redirects to verify email code page", () => {
+  test("When the localStorage is empty", async () => {
+    // const now = new Date().getTime();
+    // const getLocalStorageGetItemValue = (savedAtSeconds: number) =>
+    //   JSON.stringify({
+    //     email: "test@gmail.com",
+    //   } as unknown as Omit<TResendDetails, "timeSecondsLeft">);
+
+    // localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
+    localStorageGetItem.mockReturnValueOnce(null);
+
+    const user = userEvent.setup();
+    render(<ResendEmail />, {
+      wrapper: TestProviders,
+    });
+
+    expect(navigate).not.toHaveBeenCalled();
+    expect(localStorageGetItem).toHaveBeenCalled();
+    expect(localStorageSetItem).not.toHaveBeenCalled();
+
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const submitButton = screen.getByRole("button", { name: /send/i });
+
+    const email = "test@gmail.com";
+    await user.type(emailInput, email);
+    await user.click(submitButton);
+
+    await handleAssertLoadingAfterSubmitClick(submitButton);
+
+    expect(navigate).toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
+
+    expect(localStorageSetItem).toHaveBeenCalled();
+
+    expect(localStorageSetItem).toHaveBeenCalledWith(
+      LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+      JSON.stringify({
+        email,
+        savedAtTime: Date.now(),
+      })
+    );
   });
 
-  const emailInput = screen.getByPlaceholderText(/email/i);
-  const submitButton = screen.getByRole("button", { name: /send/i });
+  test("When the localStorage is NOT empty", async () => {
+    const email = "test@gmail.com";
 
-  expect(navigate).not.toHaveBeenCalled();
-  expect(localStorageSetItem).not.toHaveBeenCalled();
+    localStorageGetItem.mockReturnValueOnce(
+      JSON.stringify({
+        email,
+      })
+    );
 
-  const email = "test@gmail.com";
-  await user.type(emailInput, email);
-  await user.click(submitButton);
+    const user = userEvent.setup();
+    render(<ResendEmail />, {
+      wrapper: TestProviders,
+    });
+    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
 
-  await handleAssertLoadingAfterSubmitClick(submitButton);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const submitButton = screen.getByRole("button", { name: /send/i });
 
-  expect(navigate).toHaveBeenCalled();
-  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
+    expect(emailInput).toHaveValue(email);
 
-  expect(localStorageSetItem).toHaveBeenCalled();
+    await user.click(submitButton);
 
-  expect(localStorageSetItem).toHaveBeenCalledWith(
-    LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
-    JSON.stringify({
-      email,
-      savedAtTime: Date.now(),
-    })
-  );
+    await handleAssertLoadingAfterSubmitClick(submitButton);
+
+    expect(localStorageSetItem).toHaveBeenCalledWith(
+      LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+      JSON.stringify({
+        email,
+        savedAtTime: Date.now(),
+      })
+    );
+  });
 });
 
 test("Displays errors works correctly when the network request errors", async () => {

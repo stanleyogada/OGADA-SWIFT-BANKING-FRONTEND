@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { useEffect, useMemo } from "react";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { CLIENT_ROUTES } from "../../../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
 import useSendEmailCodeSuccess from "../../../../hooks/useSendEmailCodeSuccess";
 
 const useResendEmail = () => {
@@ -17,7 +17,17 @@ const useResendEmail = () => {
     handleSubmit: _handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm<TResendEmailFormValues>();
+
+  useEffect(() => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
+    const email: string = data ? JSON.parse(data).email : "";
+
+    if (email) {
+      setValue("email", email);
+    }
+  }, []);
 
   const resendEmailMutation = useMutation(postSendEmail, {
     onSuccess: () => {
