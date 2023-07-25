@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Tabs from "../../hooks/Tabs";
+import Tabs from "./Tabs";
 import { MemoryRouter } from "react-router-dom";
 
 const user = userEvent.setup();
