@@ -1,4 +1,4 @@
-import Input from "../../../components/Input";
+import Input from "src/components/Input";
 import ResendEmailWrapper from "./ResendEmailWrapper";
 import useResendEmail from "./hooks/useResendEmail";
 
