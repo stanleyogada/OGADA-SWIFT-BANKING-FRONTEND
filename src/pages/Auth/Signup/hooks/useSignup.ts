@@ -1,13 +1,16 @@
 import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
-
-import { useNavigate } from "react-router-dom";
-import type { TSignUpFormValues } from "../type";
 import { useMutation } from "react-query";
-import { postSignup } from "../../../../services/auth";
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
-import useSendEmailCodeSuccess from "../../../../hooks/useSendEmailCodeSuccess";
+
+import { CLIENT_ROUTES } from "@constants/routes";
+
+import useSendEmailCodeSuccess from "@hooks/useSendEmailCodeSuccess";
+
+import { postSignup } from "@services/auth";
+
+import { TSignUpFormValues } from "../type";
 
 const useSignup = () => {
   const navigate = useNavigate();

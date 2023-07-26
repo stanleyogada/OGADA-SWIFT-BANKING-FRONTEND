@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { CLIENT_ROUTES } from "../../constants";
-import icons from "../../constants/icons";
-import { Header, Nav, List } from "../styles/Navigation.styled";
+
+import { Header, Nav, List } from "@components/styles/Navigation.styled";
+import { CLIENT_ROUTES } from "@constants/routes";
+import icons from "@constants/icons";
 
 const Navigation = () => {
   return (

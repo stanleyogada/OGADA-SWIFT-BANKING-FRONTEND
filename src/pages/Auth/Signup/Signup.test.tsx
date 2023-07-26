@@ -2,15 +2,20 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Signup from ".";
-import createServer from "../../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../../constants/services";
+
+import createServer from "@utils/test/createServer";
+import { navigate } from "@utils/test/mocks/navigate";
+import { consoleErrorSpy, consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
+import { localStorageSetItem } from "@utils/test/mocks/localStorage";
+import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+
+import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
+
+import { CLIENT_ROUTES } from "@constants/routes";
+import { LOCAL_STORAGE_KEYS } from "@constants/index";
+
 import { TSignUpFormValues } from "./type";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
-import { consoleErrorSpy, consoleInfoSpy } from "../../../utils/test/mocks/consoleSpy";
-import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
-import { navigate } from "../../../utils/test/mocks/navigate";
-import { localStorageSetItem } from "../../../utils/test/mocks/localStorage";
-import TestProviders from "../../../components/TestProviders";
+import TestProviders from "@components/TestProviders";
 
 const { handleCreateErrorConfig } = createServer([
   {

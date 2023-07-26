@@ -1,5 +1,5 @@
+import { COLORS } from "@constants/colors";
 import styled from "styled-components";
-import { COLORS } from "../../constants";
 
 const VirtualWrapper = styled.div`
   .virtual-card-img {

@@ -1,8 +1,9 @@
 import { ForwardedRef, forwardRef } from "react";
 
+import icons from "../../../constants/icons";
+
 import Input from "..";
 import PhoneInputWrapper from "./PhoneInputWrapper";
-import icons from "../../../constants/icons";
 
 import type { TInputProps } from "../types";
 

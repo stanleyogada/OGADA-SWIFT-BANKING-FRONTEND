@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "./../../constants/colors/index";
+import { COLORS } from "@constants/colors";
 
 const RewardWrapper = styled.div`
   width: 100%;

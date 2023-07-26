@@ -1,6 +1,5 @@
+import { COLORS } from "@constants/colors";
 import styled from "styled-components";
-
-import { COLORS } from "../../../constants/colors/index";
 
 const VerifyEmailWrapper = styled.div`
   .page-title {
