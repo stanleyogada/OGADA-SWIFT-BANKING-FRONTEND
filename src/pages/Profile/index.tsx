@@ -1,9 +1,12 @@
-import Avatar from "../../components/Avatar/Avatar";
-import icons from "../../constants/icons";
-import Navigation from "../../components/Navigation";
 import { Link } from "react-router-dom";
-import { CLIENT_ROUTES } from "../../constants";
+
 import ProfileWrapper from "./ProfileStyle";
+
+import icons from "@constants/icons";
+import { CLIENT_ROUTES } from "@constants/routes";
+
+import Navigation from "@components/Navigation";
+import Avatar from "@components/Avatar/Avatar";
 
 const Profile = () => {
   return (

@@ -1,8 +1,7 @@
+import { CLIENT_ROUTES } from "@constants/routes";
+import useAuth from "@hooks/useAuth";
 import { useCallback, useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
-import { CLIENT_ROUTES } from "../../../constants";
-import useAuth from "../../../hooks/useAuth";
 
 const usePageWrapper = () => {
   const navigate = useNavigate();

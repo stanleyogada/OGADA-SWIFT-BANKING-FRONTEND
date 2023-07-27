@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../constants";
+import { COLORS } from "@constants/colors";
 
 const SplashScreenWrapper = styled.div`
   background-color: ${COLORS.blue};

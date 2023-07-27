@@ -1,9 +1,10 @@
 import { ForwardedRef, forwardRef, useState } from "react";
 
-import Input from "..";
+import icons from "@constants/icons";
+
 import PasswordInputWrapper from "./PasswordInputWrapper";
-import Button from "../../Button";
-import icons from "../../../constants/icons";
+import Input from "..";
+import Button from "@components/Button";
 
 import type { TInputProps } from "../types";
 

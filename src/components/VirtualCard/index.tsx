@@ -1,9 +1,9 @@
-import React from "react";
+import icons from "@constants/icons";
+import vector from "@constants/images/vector";
 
-import icons from "./../../constants/icons/index";
-import vector from "../../constants/images/vector";
-import Button from "./../Button/index";
 import VirtualWrapper from "./VirtualCard.Style";
+
+import Button from "@components/Button";
 
 const VirtualCard = () => {
   return (

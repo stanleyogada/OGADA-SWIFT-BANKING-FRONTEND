@@ -1,5 +1,7 @@
 import Input from "@components/Input";
+
 import ResendEmailWrapper from "./ResendEmailWrapper";
+
 import useResendEmail from "./hooks/useResendEmail";
 
 const ResendEmail = () => {

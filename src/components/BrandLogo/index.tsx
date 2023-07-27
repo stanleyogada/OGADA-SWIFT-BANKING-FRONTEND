@@ -1,5 +1,5 @@
-import logoRoundSvg from "../../assets/opay-logo-round.svg";
-import logoSvg from "../../assets/opay-logo.svg";
+import logoRoundSvg from "@assets/opay-logo-round.svg";
+import logoSvg from "@assets/opay-logo.svg";
 
 type TProps = {
   isRound?: boolean;

@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
-import { COLORS } from "../../../constants";
-import { CLIENT_ROUTES } from "../../../constants/routes";
-import Button from "../../../components/Button";
 import Slider from "react-rc-carousel";
-import vector from "../../../constants/images/vector";
+
 import WelcomeWrapper from "./WelcomeStyle";
+
+import { COLORS } from "@constants/colors";
+import vector from "@constants/images/vector";
+import { CLIENT_ROUTES } from "@constants/routes";
+
+import Button from "@components/Button";
 
 const Welcome = () => {
   return (

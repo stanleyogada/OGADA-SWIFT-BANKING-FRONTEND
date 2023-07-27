@@ -1,8 +1,10 @@
 import React from "react";
 
-import vector from "./../../constants/images/vector";
-import icons from "./../../constants/icons/index";
-import Button from "./../Button/index";
+import icons from "@constants/icons";
+import vector from "@constants/images/vector";
+
+import Button from "@components/Button";
+
 import PhysicalCardWrapper from "./PhysicalStyle";
 
 function PhysicalCard() {

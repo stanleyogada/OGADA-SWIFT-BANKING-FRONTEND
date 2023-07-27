@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEYS } from "../constants";
+import { LOCAL_STORAGE_KEYS } from "@constants/index";
 
 const useSendEmailCodeSuccess = () => {
   const handler = (email: string) => {

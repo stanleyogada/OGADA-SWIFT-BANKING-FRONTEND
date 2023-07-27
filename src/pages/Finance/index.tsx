@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import Navigation from "../../components/Navigation";
+import Navigation from "@components/Navigation";
+
 import { finances } from "./Finance";
 import FinanceWrapper from "./FinanceStyle";
 

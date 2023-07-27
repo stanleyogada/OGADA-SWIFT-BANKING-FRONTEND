@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import TabsWrapper from "../components/Tabs/TabsStyle";
+import TabsWrapper from "@components/Tabs/TabsStyle";
 
 type TProps = {
   data: Array<{
