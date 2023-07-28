@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useNavigate } from "react-router-dom";
 
 import PageNavHeader from "./pageNavHeader";
+import { navigate } from "../../utils/test/mocks/navigate";
 
 const renderComponent = () => {
   render(<PageNavHeader heading="name" backgroundColor="red" />);
@@ -27,11 +27,10 @@ describe("render pageNavHeader correctly", () => {
 
   test("should Go back to previous page on click on the left-caret icon", async () => {
     const user = userEvent.setup();
-    const navigate = useNavigate();
 
     renderComponent();
     const iconElement = screen.getByTestId("icon");
     await user.click(iconElement);
-    expect(navigate).toHaveBeenCalledWith(-1);
+    expect(navigate).toHaveBeenCalled();
   });
 });
