@@ -31,6 +31,7 @@ describe("render pageNavHeader correctly", () => {
     renderComponent();
     const iconElement = screen.getByTestId("icon");
     await user.click(iconElement);
-    expect(navigate).toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalledWith(-1);
+    console.log(navigate);
   });
 });
