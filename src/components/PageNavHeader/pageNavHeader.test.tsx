@@ -29,8 +29,10 @@ describe("render pageNavHeader correctly", () => {
     const user = userEvent.setup();
 
     renderComponent();
+
     const iconElement = screen.getByTestId("icon");
     await user.click(iconElement);
+
     expect(navigate).toHaveBeenCalledWith(-1);
     console.log(navigate);
   });
