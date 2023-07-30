@@ -18,6 +18,7 @@ import Signup from "../../pages/Auth/Signup";
 import VerifyEmail from "../../pages/Auth/VerifyEmail";
 import Redirect from "../Redirect";
 import ResendEmail from "../../pages/Auth/ResendEmail";
+import ForgetPassword from "../../pages/Auth/ForgetPassword";
 
 const ROUTER = createBrowserRouter([
   {
@@ -130,6 +131,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <ResendEmail />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.forgetPasscode,
+        element: (
+          <PageWrapper>
+            <ForgetPassword />
           </PageWrapper>
         ),
       },

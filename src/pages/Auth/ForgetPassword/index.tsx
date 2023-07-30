@@ -1,10 +1,15 @@
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
-import VerifyEmailWrapper from "./VerifyEmailWrapper";
-import useVerifyEmail, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useVerifyEmail";
+// import Button from "../../../components/Button";
+// import Input from "../../../components/Input";
+// import VerifyEmailWrapper from "./VerifyEmailWrapper";
 
-const VerifyEmail = () => {
-  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } = useVerifyEmail();
+import Input from "../../../components/Input";
+import ForgetPasswordWrapper from "./ForgetPasswordWrapper";
+import useForgetPassCode, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks";
+
+// import useForgetPassCode from "./hooks";
+
+const ForgetPassword = () => {
+  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } = useForgetPassCode();
 
   const renderResendSuffix = () => {
     if (resendDetails.timeSecondsLeft > 0) {
@@ -15,17 +20,17 @@ const VerifyEmail = () => {
   };
 
   return (
-    <VerifyEmailWrapper>
+    <ForgetPasswordWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
-      <h1 className="page-title">Verify email address</h1>
+      <h1 className="page-title">Forgot Password</h1>
 
       <div className="page-sub-title-wrapper">
-        <h2 className="page-sub-title">Please enter code</h2>
-        <p className="page-sub-title-desc">A verification code has been sent to your email address</p>
+        <h2 className="page-sub-title">Please enter your email</h2>
+        <p className="page-sub-title-desc">An OTP will be sent to your email address</p>
       </div>
       <form onSubmit={handleSubmit()}>
         <Input
-          placeholder="Enter code"
+          placeholder="Email address"
           {...register("code", {
             required: "Code is required",
             minLength: {
@@ -50,8 +55,8 @@ const VerifyEmail = () => {
           {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
-    </VerifyEmailWrapper>
+    </ForgetPasswordWrapper>
   );
 };
 
-export default VerifyEmail;
+export default ForgetPassword;
