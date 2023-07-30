@@ -71,11 +71,14 @@ const postVerifyEmail = async (otp: string) => {
   });
 };
 
-const postForgetPasword = async () => {
+const postForgetPassword = async (email: string) => {
   await axiosInstance({
     method: "POST",
     url: `${ENDPOINTS.forgetPasscode}`,
+    data: {
+      email,
+    },
   });
 };
 
-export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgetPasword };
+export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgetPassword };

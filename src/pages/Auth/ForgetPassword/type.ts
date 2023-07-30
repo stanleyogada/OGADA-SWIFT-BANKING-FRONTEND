@@ -1,5 +1,5 @@
 type TForgetLoginPasscode = {
-  code: string;
+  email: string;
 };
 
 type TResendDetails = {

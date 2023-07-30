@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
-import { postForgetPasword, postVerifyEmail } from "../../../../services/auth";
+import { postForgetPassword, postVerifyEmail } from "../../../../services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
 import { TVerifyEmailFormValues } from "../../VerifyEmail/type";
@@ -15,7 +15,7 @@ const RESEND_BUTTON_ENABLED_TEXT = "You can resend now!";
 
 const useForgetPassCode = () => {
   const navigate = useNavigate();
-  const forgetPasscodeMutation = useMutation(postForgetPasword, {
+  const forgetPasscodeMutation = useMutation(postForgetPassword, {
     onSuccess: () => {
       navigate(CLIENT_ROUTES.authSignin);
     },
@@ -25,8 +25,8 @@ const useForgetPassCode = () => {
     navigate(CLIENT_ROUTES.authResendEmail);
   };
 
-  const handleVerifyEmail = () => {
-    forgetPasscodeMutation.mutate();
+  const handleForgetPassword = (email: string) => {
+    forgetPasscodeMutation.mutate(email);
   };
 
   const mutationState = useMemo(() => {
@@ -44,11 +44,11 @@ const useForgetPassCode = () => {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
-  } = useForm<TVerifyEmailFormValues>();
+  } = useForm<TForgetLoginPasscode>();
 
   const handleSubmit = () => {
-    return _handleSubmit(() => {
-      handleVerifyEmail();
+    return _handleSubmit((config: TForgetLoginPasscode) => {
+      handleForgetPassword(config.email);
     });
   };
 
