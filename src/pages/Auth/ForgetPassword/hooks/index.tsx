@@ -25,8 +25,8 @@ const useForgetPassCode = () => {
     navigate(CLIENT_ROUTES.authResendEmail);
   };
 
-  const handleForgetPassword = (email: string) => {
-    forgetPasscodeMutation.mutate(email);
+  const handleForgetPassword = (formValues: TForgetLoginPasscode) => {
+    forgetPasscodeMutation.mutate(formValues);
   };
 
   const mutationState = useMemo(() => {
@@ -47,8 +47,8 @@ const useForgetPassCode = () => {
   } = useForm<TForgetLoginPasscode>();
 
   const handleSubmit = () => {
-    return _handleSubmit((config: TForgetLoginPasscode) => {
-      handleForgetPassword(config.email);
+    return _handleSubmit((formValues: TForgetLoginPasscode) => {
+      handleForgetPassword(formValues);
     });
   };
 

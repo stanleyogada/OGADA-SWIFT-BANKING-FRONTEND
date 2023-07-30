@@ -1,4 +1,5 @@
 import Input from "../../../components/Input";
+import PhoneInput from "../../../components/Input/PhoneInput";
 import ForgetPasswordWrapper from "./ForgetPasswordWrapper";
 import useForgetPassCode, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks";
 
@@ -23,18 +24,32 @@ const ForgetPassword = () => {
         <p className="page-sub-title-desc">An OTP will be sent to your email address</p>
       </div>
       <form onSubmit={handleSubmit()}>
-        <Input
-          label="Email"
+        <PhoneInput
+          label="Phone Number"
           required
-          {...register("email", {
+          {...register("phone", {
             required: "Phone number is required",
             pattern: {
               value: /^\d{10}$/,
               message: "Phone number must be 10 digits",
             },
           })}
+          error={errors.phone?.message}
+          info=""
+        />
+
+        <Input
+          label="Email"
+          required
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /\S+@\S+\.\S+/,
+              message: "Email is invalid",
+            },
+          })}
           error={errors.email?.message}
-          info="This would be your account number"
+          info="OTP will be sent to your email address"
         />
 
         <button

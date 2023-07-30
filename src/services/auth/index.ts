@@ -3,6 +3,7 @@ import { axiosInstance } from "../../utils/axiosInstance";
 
 import type { TSignInFormValues } from "../../pages/Auth/Signin/type";
 import type { TSignUpFormValues } from "../../pages/Auth/Signup/type";
+import { TForgetLoginPasscode } from "../../pages/Auth/ForgetPassword/type";
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
@@ -71,11 +72,12 @@ const postVerifyEmail = async (otp: string) => {
   });
 };
 
-const postForgetPassword = async (email: string) => {
+const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
   await axiosInstance({
     method: "POST",
     url: `${ENDPOINTS.forgetPasscode}`,
     data: {
+      phone,
       email,
     },
   });
