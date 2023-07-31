@@ -22,13 +22,6 @@ const { handleCreateErrorConfig } = createServer([
 
 describe("Sends email and redirects to verify email code page", () => {
   test("When the localStorage is empty", async () => {
-    // const now = new Date().getTime();
-    // const getLocalStorageGetItemValue = (savedAtSeconds: number) =>
-    //   JSON.stringify({
-    //     email: "test@gmail.com",
-    //   } as unknown as Omit<TResendDetails, "timeSecondsLeft">);
-
-    // localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
     localStorageGetItem.mockReturnValueOnce(null);
 
     const user = userEvent.setup();
