@@ -92,7 +92,9 @@ describe("asserts that user is navigated to sign in on success ", () => {
 
     await user.click(submitButton);
 
+    expect(localStorageSetItem).toHaveBeenCalledTimes(4);
     await handleAssertLoadingAfterSubmitClick(submitButton);
+    expect(localStorageSetItem).toHaveBeenCalledTimes(4);
 
     expect(localStorageSetItem).toHaveBeenCalledWith(
       LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess,
@@ -127,7 +129,9 @@ test("Displays errors works correctly when the network request errors", async ()
   await user.type(email, "test@example.com");
   await user.click(resendOtpButton);
 
+  expect(localStorageSetItem).toHaveBeenCalledTimes(3);
   await handleAssertLoadingAfterSubmitClick(resendOtpButton);
+  expect(localStorageSetItem).toHaveBeenCalledTimes(3);
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
   const error = screen.getByTestId("error");
