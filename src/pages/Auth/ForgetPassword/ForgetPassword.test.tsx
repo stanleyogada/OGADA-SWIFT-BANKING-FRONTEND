@@ -9,13 +9,10 @@ import { navigate } from "../../../utils/test/mocks/navigate";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
 import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
 import { localStorageGetItem } from "../../../utils/test/mocks/localStorage";
-// import { RESEND_BUTTON_ENABLED_TEXT, RESEND_SECONDS } from "./hooks/useFor";
 
 import type { TResendDetails } from "./type";
 import TestProviders from "../../../components/TestProviders";
 import { RESEND_BUTTON_ENABLED_TEXT, RESEND_SECONDS } from "./hooks";
-
-const OTP = "123456";
 
 const { handleCreateErrorConfig } = createServer([
   {
@@ -24,26 +21,6 @@ const { handleCreateErrorConfig } = createServer([
   },
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
-
-// test("Verifies email and redirects to sign-in page", async () => {
-//   const user = userEvent.setup();
-//   render(<For />, {
-//     wrapper: TestProviders,
-//   });
-
-//   const codeInput = screen.getByPlaceholderText("Enter code");
-//   const submitButton = screen.getByRole("button", { name: /verify/i });
-
-//   expect(navigate).not.toHaveBeenCalled();
-
-//   await user.type(codeInput, OTP);
-//   await user.click(submitButton);
-
-//   await handleAssertLoadingAfterSubmitClick(submitButton);
-
-//   expect(navigate).toHaveBeenCalled();
-//   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authSignin);
-// });
 
 test("assert that content displays correctly", async () => {
   render(<ForgetPassword />, {
