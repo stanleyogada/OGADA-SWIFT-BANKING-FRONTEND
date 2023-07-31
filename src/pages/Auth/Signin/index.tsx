@@ -57,7 +57,7 @@ const Signin = () => {
                 Remember login passcode
               </label>
 
-              <Link to={CLIENT_ROUTES.forgetPasscode} className="form__link">
+              <Link to={CLIENT_ROUTES.authForgetPasscode} className="form__link">
                 Forgot login passcode?
               </Link>
             </div>

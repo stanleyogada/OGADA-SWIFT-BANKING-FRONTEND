@@ -53,7 +53,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     await handleAssertLoadingAfterSubmitClick(resendOtpButton);
 
     expect(navigate).toHaveBeenCalled();
-    expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.resetPasscode);
+    expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authResetPasscode);
 
     expect(localStorageSetItem).toHaveBeenCalled();
     expect(localStorageSetItem).toHaveBeenCalledWith(

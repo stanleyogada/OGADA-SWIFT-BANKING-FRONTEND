@@ -38,7 +38,7 @@ const useForgetPasscode = () => {
           savedAtTime: Date.now(),
         })
       );
-      navigate(CLIENT_ROUTES.resetPasscode);
+      navigate(CLIENT_ROUTES.authResetPasscode);
     },
   });
 

@@ -135,7 +135,7 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.forgetPasscode,
+        path: CLIENT_ROUTES.authForgetPasscode,
         element: (
           <PageWrapper>
             <ForgetPassword />
