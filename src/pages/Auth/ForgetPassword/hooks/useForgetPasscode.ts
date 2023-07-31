@@ -30,16 +30,12 @@ const useForgetPasscode = () => {
 
   const forgetPasscodeMutation = useMutation(postForgetPassword, {
     onSuccess: () => {
-      const savedAtTime = Date.now();
-
-      console.log(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess, getValues().phone, getValues().email, savedAtTime);
-
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess,
         JSON.stringify({
           phone: getValues().phone,
           email: getValues().email,
-          savedAtTime,
+          savedAtTime: Date.now(),
         })
       );
       navigate(CLIENT_ROUTES.resetPasscode);
