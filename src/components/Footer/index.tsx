@@ -1,4 +1,5 @@
-import icons from "../../constants/icons/index";
+import icons from "@constants/icons";
+
 import FooterWrapper from "./FooterStyle";
 
 const Footer = () => {

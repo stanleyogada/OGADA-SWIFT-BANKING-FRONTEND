@@ -1,8 +1,7 @@
-import React from "react";
-import Navigation from "../../components/Navigation";
-import VirtualCard from "./../../components/VirtualCard/index";
-import PhysicalCard from "../../components/PhysicalCard";
-import Tabs from "../../components/Tabs/Tabs";
+import PhysicalCard from "@components/PhysicalCard";
+import Tabs from "@components/Tabs/Tabs";
+import VirtualCard from "@components/VirtualCard";
+import Navigation from "@components/Navigation";
 import CardsWrapper from "./CardsStyle";
 
 const CardName = [

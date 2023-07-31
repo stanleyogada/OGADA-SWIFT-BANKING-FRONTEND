@@ -1,5 +1,5 @@
-import TabsWrapper from "./TabsStyle";
-import useTabs from "../../hooks/useTabs";
+import TabsWrapper from "@components/Tabs/TabsStyle";
+import useTabs from "@hooks/useTabs";
 
 export type TProps = {
   data: Array<{

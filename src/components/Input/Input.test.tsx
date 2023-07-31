@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 
 import Input from ".";
-import { COLORS } from "../../constants";
+import { COLORS } from "@constants/colors";
 
 test("Displays error message when error is passed", () => {
   render(<Input error="This is an error" />);

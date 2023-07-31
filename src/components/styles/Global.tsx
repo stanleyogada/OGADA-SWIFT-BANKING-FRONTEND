@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS } from "../../constants/colors";
-
+import { COLORS } from "@constants/colors";
 
 const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Open+Sans:wght@400;600&display=swap');
@@ -27,6 +26,6 @@ const GlobalStyles = createGlobalStyle`
   color: inherit;
 }
 
-`
+`;
 
 export default GlobalStyles;

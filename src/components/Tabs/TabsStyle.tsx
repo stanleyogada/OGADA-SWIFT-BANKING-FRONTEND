@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../constants/colors";
+import { COLORS } from "@constants/colors";
 
 const TabsWrapper = styled.section`
   .tabs_container {

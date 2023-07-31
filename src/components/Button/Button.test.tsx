@@ -1,7 +1,8 @@
 import { screen, render, cleanup } from "@testing-library/react";
-import icons from "../../constants/icons";
-import Button from "../Button";
 import { MemoryRouter } from "react-router-dom";
+
+import icons from "@constants/icons";
+import Button from ".";
 
 const mockedUseHerf = jest.fn();
 

@@ -2,17 +2,22 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import VerifyEmail from ".";
-import createServer from "../../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS } from "../../../constants/services";
-import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
-import { navigate } from "../../../utils/test/mocks/navigate";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
-import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
-import { localStorageGetItem } from "../../../utils/test/mocks/localStorage";
+
 import { RESEND_BUTTON_ENABLED_TEXT, RESEND_SECONDS } from "./hooks/useVerifyEmail";
 
+import createServer from "@utils/test/createServer";
+import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
+import { navigate } from "@utils/test/mocks/navigate";
+import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { localStorageGetItem } from "@utils/test/mocks/localStorage";
+
+import { LOCAL_STORAGE_KEYS } from "@constants/index";
+import { BASE_URL, ENDPOINTS } from "@constants/services";
+import { CLIENT_ROUTES } from "@constants/routes";
+
+import TestProviders from "@components/TestProviders";
+
 import type { TResendDetails } from "./type";
-import TestProviders from "../../../components/TestProviders";
 
 const OTP = "123456";
 

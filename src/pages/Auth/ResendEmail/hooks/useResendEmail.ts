@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
-import { TResendEmailFormValues } from "../type";
-import { postSendEmail } from "../../../../services/auth";
 import { useMutation } from "react-query";
 import { useEffect, useMemo } from "react";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
-import useSendEmailCodeSuccess from "../../../../hooks/useSendEmailCodeSuccess";
+
+import useSendEmailCodeSuccess from "@hooks/useSendEmailCodeSuccess";
+
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "@constants/index";
+
+import { postSendEmail } from "@services/auth";
+
+import { TResendEmailFormValues } from "../type";
 
 const useResendEmail = () => {
   const navigate = useNavigate();

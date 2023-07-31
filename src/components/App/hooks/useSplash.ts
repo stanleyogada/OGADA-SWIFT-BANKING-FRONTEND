@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import useCurrentUser from "../../../hooks/useCurrentUser";
+
+import useCurrentUser from "@hooks/useCurrentUser";
 
 const useSplash = () => {
   const { isLoading } = useCurrentUser();

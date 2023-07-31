@@ -1,5 +1,5 @@
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
+import Input from "@components/Input";
+
 import VerifyEmailWrapper from "./VerifyEmailWrapper";
 import useVerifyEmail, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useVerifyEmail";
 

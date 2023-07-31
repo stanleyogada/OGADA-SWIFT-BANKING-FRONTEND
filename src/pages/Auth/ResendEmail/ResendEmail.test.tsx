@@ -2,14 +2,20 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import ResendEmail from ".";
-import createServer from "../../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS } from "../../../constants/services";
-import { navigate } from "../../../utils/test/mocks/navigate";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
-import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
-import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
-import TestProviders from "../../../components/TestProviders";
-import { localStorageGetItem, localStorageSetItem } from "../../../utils/test/mocks/localStorage";
+
+import createServer from "@utils/test/createServer";
+import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { localStorageGetItem, localStorageSetItem } from "@utils/test/mocks/localStorage";
+
+import TestProviders from "@components/TestProviders";
+
+import { CLIENT_ROUTES } from "@constants/routes";
+import { LOCAL_STORAGE_KEYS } from "@constants/index";
+import { BASE_URL, ENDPOINTS } from "@constants/services";
+
+import { navigate } from "@utils/test/mocks/navigate";
+import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
+
 import { TResendDetails } from "../VerifyEmail/type";
 
 const { handleCreateErrorConfig } = createServer([
