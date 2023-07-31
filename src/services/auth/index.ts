@@ -1,8 +1,11 @@
-import { TSignInFormValues } from "@pages/Auth/Signin/type";
-import { axiosInstance } from "@utils/axiosInstance";
+import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from '@constants/services';
+import { axiosInstance } from '@utils/axiosInstance';
 
-import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
-import { TSignUpFormValues } from "@pages/Auth/Signup/type";
+import type { TSignUpFormValues } from '@pages/Auth/Signup/type';
+import type { TSignInFormValues } from '@pages/Auth/Signin/type';
+import type { TForgetLoginPasscode } from '@pages/Auth/ForgetPassword/type';
+
+
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
@@ -19,8 +22,6 @@ const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => 
     emailIsVerified: data.data.email_is_verified as boolean,
   };
 };
-
-// const fakePostRequest = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
 const postSignup = async ({
   firstName,
@@ -71,4 +72,15 @@ const postVerifyEmail = async (otp: string) => {
   });
 };
 
-export { postSignIn, postSignup, postSendEmail, postVerifyEmail };
+const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
+  await axiosInstance({
+    method: "POST",
+    url: `${ENDPOINTS.forgetPasscode}`,
+    data: {
+      phone,
+      email,
+    },
+  });
+};
+
+export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgetPassword };
