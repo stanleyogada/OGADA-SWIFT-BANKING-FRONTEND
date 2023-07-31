@@ -5,6 +5,7 @@ const LOCAL_STORAGE_KEYS = {
   token: "token",
   sendEmailCodeSuccess: "signup-success",
   sendOTPSuccess: "otp-success",
+  sendForgetPasscodeOTPSuccess: "forget-passcode-otp-success",
 };
 
 export { COLORS, CLIENT_ROUTES, LOCAL_STORAGE_KEYS };

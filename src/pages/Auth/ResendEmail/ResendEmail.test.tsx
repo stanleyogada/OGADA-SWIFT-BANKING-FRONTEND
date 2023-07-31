@@ -45,7 +45,6 @@ describe("Sends email and redirects to verify email code page", () => {
     expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
 
     expect(localStorageSetItem).toHaveBeenCalled();
-
     expect(localStorageSetItem).toHaveBeenCalledWith(
       LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
       JSON.stringify({

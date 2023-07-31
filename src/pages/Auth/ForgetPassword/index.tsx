@@ -1,10 +1,10 @@
 import Input from "../../../components/Input";
 import PhoneInput from "../../../components/Input/PhoneInput";
 import ForgetPasswordWrapper from "./ForgetPasswordWrapper";
-import useForgetPassCode from "./hooks";
+import useForgetPasscode from "./hooks/useForgetPasscode";
 
 const ForgetPassword = () => {
-  const { register, handleSubmit, mutationState, errors } = useForgetPassCode();
+  const { register, handleSubmit, mutationState, errors } = useForgetPasscode();
 
   return (
     <ForgetPasswordWrapper>

@@ -8,7 +8,7 @@ import { AxiosError } from "axios";
 import { CLIENT_ROUTES } from "../../../../constants";
 import { TForgetLoginPasscode } from "../type";
 
-const useForgetPassCode = () => {
+const useForgetPasscode = () => {
   const navigate = useNavigate();
   const forgetPasscodeMutation = useMutation(postForgetPassword, {
     onSuccess: () => {
@@ -65,4 +65,4 @@ const useForgetPassCode = () => {
   };
 };
 
-export default useForgetPassCode;
+export default useForgetPasscode;
