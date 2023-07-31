@@ -1,18 +1,10 @@
 import Input from "../../../components/Input";
 import PhoneInput from "../../../components/Input/PhoneInput";
 import ForgetPasswordWrapper from "./ForgetPasswordWrapper";
-import useForgetPassCode, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks";
+import useForgetPassCode from "./hooks";
 
 const ForgetPassword = () => {
-  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } = useForgetPassCode();
-
-  const renderResendSuffix = () => {
-    if (resendDetails.timeSecondsLeft > 0) {
-      return `Resend ${resendDetails.timeSecondsLeft}s`;
-    }
-
-    return RESEND_BUTTON_ENABLED_TEXT;
-  };
+  const { register, handleSubmit, mutationState, errors } = useForgetPassCode();
 
   return (
     <ForgetPasswordWrapper>
@@ -52,17 +44,8 @@ const ForgetPassword = () => {
           info="OTP will be sent to your email address"
         />
 
-        <button
-          type="button"
-          disabled={resendDetails.timeSecondsLeft > 0}
-          onClick={handleResendButtonClick}
-          className="resend-button"
-        >
-          Didn't receive the code? {renderResendSuffix()}
-        </button>
-
         <button className="verify-button" type="submit" disabled={mutationState.isLoading}>
-          Resend OTP
+          Send
           {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
