@@ -63,6 +63,46 @@ describe("asserts that user is navigated to sign in on success ", () => {
       })
     );
   });
+
+  test("When the localStorage is NOT empty", async () => {
+    const formValues = {
+      phone: "1234567890",
+      email: "test1@gmail.com",
+    };
+
+    localStorageGetItem.mockReturnValueOnce(
+      JSON.stringify({
+        phone: formValues.phone,
+        email: formValues.email,
+      })
+    );
+
+    const user = userEvent.setup();
+    render(<ForgetPassword />, {
+      wrapper: TestProviders,
+    });
+    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
+
+    const phoneInput = screen.getByPlaceholderText(/phone number/i);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const submitButton = screen.getByRole("button", { name: /send/i });
+
+    expect(emailInput).toHaveValue(formValues.email);
+    expect(phoneInput).toHaveValue(formValues.phone);
+
+    await user.click(submitButton);
+
+    await handleAssertLoadingAfterSubmitClick(submitButton);
+
+    expect(localStorageSetItem).toHaveBeenCalledWith(
+      LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+      JSON.stringify({
+        phone: formValues.phone,
+        email: formValues.email,
+        savedAtTime: Date.now(),
+      })
+    );
+  });
 });
 
 test("Displays errors works correctly when the network request errors", async () => {
