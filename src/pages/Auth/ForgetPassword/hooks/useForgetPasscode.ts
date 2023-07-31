@@ -24,8 +24,8 @@ const useForgetPasscode = () => {
     const phone: string = data ? JSON.parse(data).phone : "";
     const email: string = data ? JSON.parse(data).email : "";
 
-    if (email) setValue("email", email);
     if (phone) setValue("phone", phone);
+    if (email) setValue("email", email);
   }, []);
 
   const forgetPasscodeMutation = useMutation(postForgetPassword, {
