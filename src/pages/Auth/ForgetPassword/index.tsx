@@ -1,5 +1,7 @@
-import Input from "../../../components/Input";
-import PhoneInput from "../../../components/Input/PhoneInput";
+
+import Input from "@components/Input";
+import PhoneInput from "@components/Input/PhoneInput";
+
 import ForgetPasswordWrapper from "./ForgetPasswordWrapper";
 import useForgetPasscode from "./hooks/useForgetPasscode";
 
