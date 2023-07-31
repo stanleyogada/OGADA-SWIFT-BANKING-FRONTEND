@@ -10,7 +10,6 @@ import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertU
 import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
 import TestProviders from "../../../components/TestProviders";
 import { localStorageGetItem, localStorageSetItem } from "../../../utils/test/mocks/localStorage";
-import { TResendDetails } from "../VerifyEmail/type";
 
 const { handleCreateErrorConfig } = createServer([
   {

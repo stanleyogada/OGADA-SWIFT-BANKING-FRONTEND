@@ -19,26 +19,28 @@ const { handleCreateErrorConfig } = createServer([
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("asserts that user is navigated to sign in on success ", async () => {
-  userEvent.setup();
-  render(<ForgetPassword />, {
-    wrapper: TestProviders,
+describe("asserts that user is navigated to sign in on success ", () => {
+  test("When the localStorage is empty", async () => {
+    userEvent.setup();
+    render(<ForgetPassword />, {
+      wrapper: TestProviders,
+    });
+
+    const phoneInput = screen.getByLabelText(/phone number/i);
+    const email = screen.getByLabelText(/email/i);
+    const resendOtpButton = screen.getByRole("button", {
+      name: /send/i,
+    });
+
+    await userEvent.type(phoneInput, "1234567890");
+    await userEvent.type(email, "test1@gmail.com");
+    await userEvent.click(resendOtpButton);
+
+    expect(navigate).not.toHaveBeenCalled();
+    await handleAssertLoadingAfterSubmitClick(resendOtpButton);
+    expect(navigate).toHaveBeenCalled();
+    expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.resetPasscode);
   });
-
-  const phoneInput = screen.getByLabelText(/phone number/i);
-  const email = screen.getByLabelText(/email/i);
-  const resendOtpButton = screen.getByRole("button", {
-    name: /send/i,
-  });
-
-  await userEvent.type(phoneInput, "1234567890");
-  await userEvent.type(email, "test1@gmail.com");
-  await userEvent.click(resendOtpButton);
-
-  expect(navigate).not.toHaveBeenCalled();
-  await handleAssertLoadingAfterSubmitClick(resendOtpButton);
-  expect(navigate).toHaveBeenCalled();
-  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.resetPasscode);
 });
 
 test("Displays errors works correctly when the network request errors", async () => {
