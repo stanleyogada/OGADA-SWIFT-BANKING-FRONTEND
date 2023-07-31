@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { COLORS } from "@constants/colors";
 
-const VerifyEmailWrapper = styled.div`
+const ResetPasswordWrapper = styled.div`
   .page-title {
     padding: 27px 46px 81px;
     font-size: 15px;
@@ -60,4 +60,4 @@ const VerifyEmailWrapper = styled.div`
   }
 `;
 
-export default VerifyEmailWrapper;
+export default ResetPasswordWrapper;

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import VerifyEmail from ".";
+import ResetPassword from ".";
 
 import { RESEND_BUTTON_ENABLED_TEXT, RESEND_SECONDS } from "./hooks/useResetPassword";
 
@@ -31,7 +31,7 @@ const { handleCreateErrorConfig } = createServer([
 
 test("Verifies email and redirects to sign-in page", async () => {
   const user = userEvent.setup();
-  render(<VerifyEmail />, {
+  render(<ResetPassword />, {
     wrapper: TestProviders,
   });
 
@@ -56,7 +56,7 @@ test("Displays errors works correctly when the network request errors", async ()
     statusCode: 400,
   });
   const user = userEvent.setup();
-  render(<VerifyEmail />, {
+  render(<ResetPassword />, {
     wrapper: TestProviders,
   });
 
@@ -88,7 +88,7 @@ describe("Resend button works correctly", () => {
     test("When there's data from localStorage and it's 20 seconds ago", async () => {
       let savedAtSeconds = 20; // 20 seconds ago
       localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
-      render(<VerifyEmail />, {
+      render(<ResetPassword />, {
         wrapper: TestProviders,
       });
 
@@ -104,7 +104,7 @@ describe("Resend button works correctly", () => {
     test("When there's data from localStorage and it's now", async () => {
       const savedAtSeconds = 0; // now
       localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
-      render(<VerifyEmail />, {
+      render(<ResetPassword />, {
         wrapper: TestProviders,
       });
 
@@ -117,7 +117,7 @@ describe("Resend button works correctly", () => {
 
     test("When there's NO data from localStorage", async () => {
       localStorageGetItem.mockReturnValueOnce(null);
-      render(<VerifyEmail />, {
+      render(<ResetPassword />, {
         wrapper: TestProviders,
       });
       const user = userEvent.setup();
@@ -155,7 +155,7 @@ describe("Resend button works correctly", () => {
 
       let savedAtSeconds = RESEND_SECONDS - 4; // only 4 before the resend button is enabled
       localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
-      render(<VerifyEmail />, {
+      render(<ResetPassword />, {
         wrapper: TestProviders,
       });
 

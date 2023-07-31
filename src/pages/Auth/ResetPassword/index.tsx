@@ -1,6 +1,6 @@
 import Input from "@components/Input";
 
-import VerifyEmailWrapper from "./VerifyEmailWrapper";
+import ResetPasswordWrapper from "./ResetPasswordWrapper";
 import { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useResetPassword";
 import useResetPassword from "./hooks/useResetPassword";
 
@@ -16,7 +16,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <VerifyEmailWrapper>
+    <ResetPasswordWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
 
       <h1 className="page-title">Verify email address</h1>
@@ -52,7 +52,7 @@ const ResetPassword = () => {
           {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
-    </VerifyEmailWrapper>
+    </ResetPasswordWrapper>
   );
 };
 
