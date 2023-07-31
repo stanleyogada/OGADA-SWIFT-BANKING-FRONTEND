@@ -34,6 +34,5 @@ describe("render pageNavHeader correctly", () => {
     await user.click(iconElement);
 
     expect(navigate).toHaveBeenCalledWith(-1);
-    console.log(navigate);
   });
 });
