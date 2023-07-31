@@ -19,7 +19,7 @@ const ResetPassword = () => {
     <ResetPasswordWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
 
-      <h1 className="page-title">Verify email address</h1>
+      <h1 className="page-title">Reset Login Passcode</h1>
 
       <div className="page-sub-title-wrapper">
         <h2 className="page-sub-title">Please enter code</h2>
