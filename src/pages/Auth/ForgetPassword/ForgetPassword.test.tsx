@@ -20,6 +20,8 @@ const { handleCreateErrorConfig } = createServer([
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
+const MSW_SET_ITEM_CALL_COUNT = 3;
+
 describe("asserts that user is navigated to sign in on success ", () => {
   test("When the localStorage is empty", async () => {
     localStorageGetItem.mockReturnValueOnce(null);
@@ -92,9 +94,9 @@ describe("asserts that user is navigated to sign in on success ", () => {
 
     await user.click(submitButton);
 
-    expect(localStorageSetItem).toHaveBeenCalledTimes(4);
+    expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT);
     await handleAssertLoadingAfterSubmitClick(submitButton);
-    expect(localStorageSetItem).toHaveBeenCalledTimes(4);
+    expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT + 1);
 
     expect(localStorageSetItem).toHaveBeenCalledWith(
       LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess,
@@ -129,9 +131,9 @@ test("Displays errors works correctly when the network request errors", async ()
   await user.type(email, "test@example.com");
   await user.click(resendOtpButton);
 
-  expect(localStorageSetItem).toHaveBeenCalledTimes(3);
+  expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT);
   await handleAssertLoadingAfterSubmitClick(resendOtpButton);
-  expect(localStorageSetItem).toHaveBeenCalledTimes(3);
+  expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT + 0);
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
   const error = screen.getByTestId("error");
