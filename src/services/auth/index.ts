@@ -1,5 +1,6 @@
 import { TSignInFormValues } from "@pages/Auth/Signin/type";
-import { axiosInstance } from "../../utils/axiosInstance";
+import { axiosInstance } from "@utils/axiosInstance";
+
 import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
 import { TSignUpFormValues } from "@pages/Auth/Signup/type";
 
