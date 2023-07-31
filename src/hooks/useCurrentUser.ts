@@ -1,9 +1,8 @@
 import { useQuery, useQueryClient } from "react-query";
-
-import { QUERY_KEYS } from "@constants/services";
-
 import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
+
+import { QUERY_KEYS } from "@constants/services";
 import { getCurrentUser } from "@services/users";
 
 import promptErrorFixVideo from "../assets/prompt-error-fix.mp4";
