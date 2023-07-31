@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constants/services";
+import { BASE_URL } from "@constants/services";
 
 // get token from cookies
 // let token = "";

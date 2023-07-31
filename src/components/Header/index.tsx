@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
-import icons from "../../constants/icons/index";
-import { CLIENT_ROUTES } from "../../constants";
+
+import { CLIENT_ROUTES } from "@constants/routes";
+import icons from "@constants/icons";
+
 import HeaderWrapper from "./HeaderStyle";
 
 const Header = () => {

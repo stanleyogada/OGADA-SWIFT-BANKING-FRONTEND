@@ -1,4 +1,4 @@
-import profilePic from "../../assets/profile-picture.png";
+import profilePic from "@assets/profile-picture.png";
 import ImageWrapper from "./AvatarStyle";
 
 const Avatar = () => {

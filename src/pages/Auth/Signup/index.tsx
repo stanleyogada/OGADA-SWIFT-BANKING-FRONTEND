@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
 import useSignup from "./hooks/useSignup";
+
 import SignupWrapper from "./SignupWrapper";
-import Button from "../../../components/Button";
-import PhoneInput from "../../../components/Input/PhoneInput";
-import PasswordInput from "../../../components/Input/PasswordInput";
-import Input from "../../../components/Input";
+
+import Input from "@components/Input";
+import PhoneInput from "@components/Input/PhoneInput";
+import PasswordInput from "@components/Input/PasswordInput";
+import Button from "@components/Button";
 
 const Signup = () => {
   const { handleSubmit, register, mutationState, errors } = useSignup();

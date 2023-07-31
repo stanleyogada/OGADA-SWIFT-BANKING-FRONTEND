@@ -1,9 +1,11 @@
-import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "../../constants/services";
-import { axiosInstance } from "../../utils/axiosInstance";
+import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from '@constants/services';
+import { axiosInstance } from '@utils/axiosInstance';
 
-import type { TSignInFormValues } from "../../pages/Auth/Signin/type";
-import type { TSignUpFormValues } from "../../pages/Auth/Signup/type";
-import { TForgetLoginPasscode } from "../../pages/Auth/ForgetPassword/type";
+import type { TSignUpFormValues } from '@pages/Auth/Signup/type';
+import type { TSignInFormValues } from '@pages/Auth/Signin/type';
+import type { TForgetLoginPasscode } from '@pages/Auth/ForgetPassword/type';
+
+
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
@@ -20,8 +22,6 @@ const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => 
     emailIsVerified: data.data.email_is_verified as boolean,
   };
 };
-
-// const fakePostRequest = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
 const postSignup = async ({
   firstName,

@@ -1,5 +1,6 @@
-import Button from "./../Button/index";
-import icons from "./../../constants/icons/index";
+import icons from "@constants/icons";
+import Button from "@components/Button";
+
 import RewardWrapper from "./RewardStyle";
 
 export default function Reward() {

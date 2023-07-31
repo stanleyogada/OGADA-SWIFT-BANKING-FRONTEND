@@ -1,5 +1,5 @@
-import { ENDPOINTS } from "../../constants/services";
-import { axiosInstance } from "../../utils/axiosInstance";
+import { axiosInstance } from "@utils/axiosInstance";
+import { ENDPOINTS } from "@constants/services";
 import { TUser } from "./types";
 
 const getCurrentUser = async (): Promise<TUser> => {

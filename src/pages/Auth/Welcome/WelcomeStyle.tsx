@@ -1,5 +1,5 @@
+import { COLORS } from "@constants/colors";
 import styled from "styled-components";
-import { COLORS } from "../../../constants";
 
 const WelcomeWrapper = styled.div`
   .slide-box {

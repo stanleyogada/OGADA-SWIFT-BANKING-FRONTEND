@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useRef, useState } from "react";
 
-import icons from "../../constants/icons";
-import Avatar from "../../components/Avatar/Avatar";
-import { COLORS } from "../../constants";
+import icons from "@constants/icons";
+import Avatar from "@components/Avatar/Avatar";
+import { COLORS } from "@constants/colors";
 
 const Account = () => {
   const [isClicked, setIsClicked] = useState(false);

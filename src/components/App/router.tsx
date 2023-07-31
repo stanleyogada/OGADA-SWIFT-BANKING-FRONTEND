@@ -1,24 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { CLIENT_ROUTES } from "../../constants";
-import PageWrapper from "./../PageWrapper/index";
+import { CLIENT_ROUTES } from "@constants/routes";
+import PageWrapper from "@components/PageWrapper";
 
-import Home from "../../pages/Home";
-import About from "../../pages/About";
-import Finance from "../../pages/Finance";
-import Profile from "../../pages/Profile";
-import Cards from "./../../pages/Cards/index";
-import Account from "../../pages/Account.tsx";
-import Livechat from "../../pages/Livechat";
-import Rewards from "./../../pages/Rewards/index";
+import Home from "@pages/Home";
+import About from "@pages/About";
+import Rewards from "@pages/Rewards";
+import Finance from "@pages/Finance";
+import Profile from "@pages/Profile";
+import Cards from "@pages/Cards";
+import Account from "@pages/Account.tsx";
+import Livechat from "@pages/Livechat";
+import Redirect from "@components/Redirect";
 
-import Welcome from "../../pages/Auth/Welcome";
-import Signin from "../../pages/Auth/Signin";
-import Signup from "../../pages/Auth/Signup";
-import VerifyEmail from "../../pages/Auth/VerifyEmail";
-import Redirect from "../Redirect";
-import ResendEmail from "../../pages/Auth/ResendEmail";
-import ForgetPassword from "../../pages/Auth/ForgetPassword";
+import Welcome from "@pages/Auth/Welcome";
+import Signin from "@pages/Auth/Signin";
+import Signup from "@pages/Auth/Signup";
+import VerifyEmail from "@pages/Auth/VerifyEmail";
+import ResendEmail from "@pages/Auth/ResendEmail";
+import ForgetPassword from "@pages/Auth/ForgetPassword";
 
 const ROUTER = createBrowserRouter([
   {
