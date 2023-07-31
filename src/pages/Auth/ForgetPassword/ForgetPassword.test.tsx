@@ -81,10 +81,10 @@ describe("asserts that user is navigated to sign in on success ", () => {
     render(<ForgetPassword />, {
       wrapper: TestProviders,
     });
-    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
+    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess);
 
-    const phoneInput = screen.getByPlaceholderText(/phone number/i);
-    const emailInput = screen.getByPlaceholderText(/email/i);
+    const phoneInput = screen.getByLabelText(/phone number/i);
+    const emailInput = screen.getByLabelText(/email/i);
     const submitButton = screen.getByRole("button", { name: /send/i });
 
     expect(emailInput).toHaveValue(formValues.email);
@@ -95,7 +95,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     await handleAssertLoadingAfterSubmitClick(submitButton);
 
     expect(localStorageSetItem).toHaveBeenCalledWith(
-      LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
+      LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess,
       JSON.stringify({
         phone: formValues.phone,
         email: formValues.email,

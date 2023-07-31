@@ -5,13 +5,43 @@ import { useMutation } from "react-query";
 
 import { postForgetPassword } from "../../../../services/auth";
 import { AxiosError } from "axios";
-import { CLIENT_ROUTES } from "../../../../constants";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../../constants";
 import { TForgetLoginPasscode } from "../type";
 
 const useForgetPasscode = () => {
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit: _handleSubmit,
+    formState: { errors },
+    setValue,
+    getValues,
+  } = useForm<TForgetLoginPasscode>();
+
+  useEffect(() => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess);
+    const phone: string = data ? JSON.parse(data).phone : "";
+    const email: string = data ? JSON.parse(data).email : "";
+
+    if (email) setValue("email", email);
+    if (phone) setValue("phone", phone);
+  }, []);
+
   const forgetPasscodeMutation = useMutation(postForgetPassword, {
     onSuccess: () => {
+      const savedAtTime = Date.now();
+
+      console.log(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess, getValues().phone, getValues().email, savedAtTime);
+
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess,
+        JSON.stringify({
+          phone: getValues().phone,
+          email: getValues().email,
+          savedAtTime,
+        })
+      );
       navigate(CLIENT_ROUTES.resetPasscode);
     },
   });
@@ -30,12 +60,6 @@ const useForgetPasscode = () => {
       isError: forgetPasscodeMutation.isError,
     };
   }, [forgetPasscodeMutation.isLoading, forgetPasscodeMutation.error, forgetPasscodeMutation.isError]);
-
-  const {
-    register,
-    handleSubmit: _handleSubmit,
-    formState: { errors },
-  } = useForm<TForgetLoginPasscode>();
 
   const handleSubmit = () => {
     return _handleSubmit((formValues: TForgetLoginPasscode) => {
