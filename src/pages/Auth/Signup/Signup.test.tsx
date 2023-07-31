@@ -10,11 +10,11 @@ import { localStorageSetItem } from "@utils/test/mocks/localStorage";
 import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
 
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
-
 import { CLIENT_ROUTES } from "@constants/routes";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
 
 import { TSignUpFormValues } from "./type";
+
 import TestProviders from "@components/TestProviders";
 
 const { handleCreateErrorConfig } = createServer([
