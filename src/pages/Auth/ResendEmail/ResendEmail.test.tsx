@@ -16,8 +16,6 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { navigate } from "@utils/test/mocks/navigate";
 import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
 
-import { TResendDetails } from "../VerifyEmail/type";
-
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
@@ -28,13 +26,6 @@ const { handleCreateErrorConfig } = createServer([
 
 describe("Sends email and redirects to verify email code page", () => {
   test("When the localStorage is empty", async () => {
-    // const now = new Date().getTime();
-    // const getLocalStorageGetItemValue = (savedAtSeconds: number) =>
-    //   JSON.stringify({
-    //     email: "test@gmail.com",
-    //   } as unknown as Omit<TResendDetails, "timeSecondsLeft">);
-
-    // localStorageGetItem.mockReturnValueOnce(getLocalStorageGetItemValue(savedAtSeconds));
     localStorageGetItem.mockReturnValueOnce(null);
 
     const user = userEvent.setup();
@@ -59,7 +50,6 @@ describe("Sends email and redirects to verify email code page", () => {
     expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
 
     expect(localStorageSetItem).toHaveBeenCalled();
-
     expect(localStorageSetItem).toHaveBeenCalledWith(
       LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
       JSON.stringify({
