@@ -38,7 +38,7 @@ test("asserts that user is navigated to sign in on success ", async () => {
   expect(navigate).not.toHaveBeenCalled();
   await handleAssertLoadingAfterSubmitClick(resendOtpButton);
   expect(navigate).toHaveBeenCalled();
-  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authSignin);
+  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.resetPasscode);
 });
 
 test("Displays errors works correctly when the network request errors", async () => {

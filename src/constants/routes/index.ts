@@ -13,6 +13,7 @@ const CLIENT_ROUTES = {
   authVerifyEmail: "/auth/verify-email",
   authResendEmail: "/auth/resend-email",
   forgetPasscode: "/auth/forget-passcode",
+  resetPasscode: "/auth/reset-passcode",
   liveChat: "/livechat",
 };
 

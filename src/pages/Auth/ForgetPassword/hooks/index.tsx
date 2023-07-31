@@ -12,7 +12,7 @@ const useForgetPassCode = () => {
   const navigate = useNavigate();
   const forgetPasscodeMutation = useMutation(postForgetPassword, {
     onSuccess: () => {
-      navigate(CLIENT_ROUTES.authSignin);
+      navigate(CLIENT_ROUTES.resetPasscode);
     },
   });
 
