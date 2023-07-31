@@ -2,15 +2,15 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import ForgetPassword from ".";
-import createServer from "../../../utils/test/createServer";
-import { BASE_URL, ENDPOINTS } from "../../../constants/services";
-import { handleAssertLoadingAfterSubmitClick } from "../../../utils/test/assertUtils";
-import { navigate } from "../../../utils/test/mocks/navigate";
-import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "../../../constants";
-import { consoleErrorSpy } from "../../../utils/test/mocks/consoleSpy";
+import createServer from "@utils/test/createServer";
+import { BASE_URL, ENDPOINTS } from "@constants/services";
+import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { navigate } from "@utils/test/mocks/navigate";
+import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "@constants/index";
+import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
 
-import TestProviders from "../../../components/TestProviders";
-import { localStorageGetItem, localStorageSetItem } from "../../../utils/test/mocks/localStorage";
+import TestProviders from "@components/TestProviders";
+import { localStorageGetItem, localStorageSetItem } from "@utils/test/mocks/localStorage";
 
 const { handleCreateErrorConfig } = createServer([
   {
