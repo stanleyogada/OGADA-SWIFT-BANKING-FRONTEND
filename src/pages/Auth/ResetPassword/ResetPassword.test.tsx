@@ -37,7 +37,7 @@ test("Verifies email and redirects to sign-in page", async () => {
 
   const codeInput = screen.getByPlaceholderText("Enter code");
   const newPasscodeInput = screen.getByPlaceholderText("Enter new passcode");
-  const submitButton = screen.getByRole("button", { name: /verify/i });
+  const submitButton = screen.getByRole("button", { name: /reset login passcode/i });
 
   expect(navigate).not.toHaveBeenCalled();
 
@@ -64,7 +64,7 @@ test("Displays errors works correctly when the network request errors", async ()
 
   const codeInput = screen.getByPlaceholderText("Enter code");
   const newPasscodeInput = screen.getByPlaceholderText("Enter new passcode");
-  const submitButton = screen.getByRole("button", { name: /verify/i });
+  const submitButton = screen.getByRole("button", { name: /reset login passcode/i });
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
 

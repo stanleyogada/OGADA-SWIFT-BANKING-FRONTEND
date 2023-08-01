@@ -21,10 +21,6 @@ const ResetPassword = () => {
 
       <h1 className="page-title">Reset Login Passcode</h1>
 
-      <div className="page-sub-title-wrapper">
-        <h2 className="page-sub-title">Please enter code</h2>
-        <p className="page-sub-title-desc">A verification code has been sent to your email address</p>
-      </div>
       <form onSubmit={handleSubmit()}>
         <Input
           placeholder="Enter code"
@@ -59,7 +55,7 @@ const ResetPassword = () => {
         </button>
 
         <button className="verify-button" type="submit" disabled={mutationState.isLoading}>
-          Verify
+          Reset Login Passcode
           {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>

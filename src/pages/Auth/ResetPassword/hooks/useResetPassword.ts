@@ -117,12 +117,6 @@ const useResetPassword = () => {
     clearInterval(resendDetailsTimeSecondsLeftIntervalId.current);
   }, [resendDetails.timeSecondsLeft, resendDetails.savedAtTime]);
 
-  // useEffect(() => {
-  //   if (!resendDetails.email) return;
-
-  //   console.log(resendDetails);
-  // }, [resendDetails.email]);
-
   return {
     mutationState,
     resendDetails,
