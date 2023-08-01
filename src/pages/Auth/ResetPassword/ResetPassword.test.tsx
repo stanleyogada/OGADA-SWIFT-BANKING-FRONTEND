@@ -19,12 +19,10 @@ import TestProviders from "@components/TestProviders";
 
 import type { TResendDetails } from "./type";
 
-const OTP = "123456";
-
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
-    url: `${BASE_URL}${ENDPOINTS.verifyEmail}/${OTP}`,
+    url: `${BASE_URL}${ENDPOINTS.resetLoginPasscode}`,
   },
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
@@ -41,7 +39,7 @@ test("Resets login passcode and redirects to sign-in page", async () => {
 
   expect(navigate).not.toHaveBeenCalled();
 
-  await user.type(codeInput, OTP);
+  await user.type(codeInput, "123456");
   await user.type(newPasscodeInput, "123456");
   await user.click(submitButton);
 
@@ -54,7 +52,7 @@ test("Resets login passcode and redirects to sign-in page", async () => {
 test("Displays errors works correctly when the network request errors", async () => {
   handleCreateErrorConfig({
     method: "post",
-    url: `${BASE_URL}${ENDPOINTS.verifyEmail}/${OTP}`,
+    url: `${BASE_URL}${ENDPOINTS.resetLoginPasscode}`,
     statusCode: 400,
   });
   const user = userEvent.setup();
@@ -68,7 +66,7 @@ test("Displays errors works correctly when the network request errors", async ()
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
 
-  await user.type(codeInput, OTP);
+  await user.type(codeInput, "123456");
   await user.type(newPasscodeInput, "123456");
 
   await user.click(submitButton);
