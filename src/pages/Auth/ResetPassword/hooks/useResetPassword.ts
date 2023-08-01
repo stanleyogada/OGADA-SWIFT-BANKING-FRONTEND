@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { AxiosError } from "axios";
 
-import { postVerifyEmail } from "@services/auth";
-
+import { postResetLoginPasscode } from "@services/auth";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
 import { CLIENT_ROUTES } from "@constants/routes";
 
@@ -16,7 +15,7 @@ const RESEND_BUTTON_ENABLED_TEXT = "You can resend now!";
 
 const useResetPassword = () => {
   const navigate = useNavigate();
-  const ResetPasswordMutation = useMutation(postVerifyEmail, {
+  const ResetPasswordMutation = useMutation(postResetLoginPasscode, {
     onSuccess: () => {
       navigate(CLIENT_ROUTES.authSignin);
     },
@@ -27,7 +26,10 @@ const useResetPassword = () => {
   };
 
   const handleResetPassword = (formValues: TResetPasswordFormValues) => {
-    ResetPasswordMutation.mutate(formValues.code);
+    ResetPasswordMutation.mutate({
+      code: formValues.code,
+      newPasscode: formValues.newPasscode,
+    });
   };
 
   const mutationState = useMemo(() => {

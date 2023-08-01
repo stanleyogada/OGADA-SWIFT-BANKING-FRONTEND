@@ -85,7 +85,7 @@ const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
 const postResetLoginPasscode = async ({ code, newPasscode }: TResetPasswordFormValues) => {
   await axiosInstance({
     method: "POST",
-    url: `${ENDPOINTS.verifyEmail}/${code}`,
+    url: `${ENDPOINTS.resetLoginPasscode}`,
     data: {
       new_login_passcode: newPasscode,
       one_time_password: code,
