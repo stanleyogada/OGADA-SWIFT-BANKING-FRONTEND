@@ -15,7 +15,9 @@ function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {
         <div data-testid="icon" onClick={() => navigate(-1)}>
           {icons.blueLeftArrowIcon()}
         </div>
-        <div className="heading">{heading}</div>
+        <div className="heading" data-testid="heading">
+          {heading}
+        </div>
       </div>
     </PageNavHeaderWrapper>
   );

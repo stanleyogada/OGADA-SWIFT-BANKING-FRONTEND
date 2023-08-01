@@ -11,18 +11,18 @@ const renderComponent = () => {
 describe("render pageNavHeader correctly", () => {
   test("should display the header correctly", () => {
     renderComponent();
-    const headingElement = screen.getByRole("heading");
+    const headingElement = screen.getByTestId("heading");
     const arrowElement = screen.getByTitle("left-caret");
 
     expect(arrowElement).toBeInTheDocument();
     expect(headingElement).toBeInTheDocument();
   });
 
-  test("should Have the padding styles provided correctly", () => {
+  test("should Have the background styles provided correctly", () => {
     renderComponent();
     const divElement = screen.getByTitle("left-caret");
 
-    expect(divElement.parentNode).toHaveStyle("padding: 50px 0px 15px 29px");
+    expect(divElement.parentNode).toHaveStyle({ backgroundColor: "red" });
   });
 
   test("should Go back to previous page on click on the left-caret icon", async () => {
