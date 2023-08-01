@@ -3,9 +3,12 @@ import userEvent from "@testing-library/user-event";
 
 import PageNavHeader from "./pageNavHeader";
 import { navigate } from "../../utils/test/mocks/navigate";
+import TestProviders from "@components/TestProviders";
 
 const renderComponent = () => {
-  render(<PageNavHeader heading="name" backgroundColor="red" />);
+  render(<PageNavHeader heading="name" backgroundColor="red" />, {
+    wrapper: TestProviders,
+  });
 };
 
 describe("render pageNavHeader correctly", () => {
