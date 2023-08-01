@@ -1,11 +1,10 @@
-import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from '@constants/services';
-import { axiosInstance } from '@utils/axiosInstance';
+import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
+import { axiosInstance } from "@utils/axiosInstance";
 
-import type { TSignUpFormValues } from '@pages/Auth/Signup/type';
-import type { TSignInFormValues } from '@pages/Auth/Signin/type';
-import type { TForgetLoginPasscode } from '@pages/Auth/ForgetPassword/type';
-
-
+import type { TSignUpFormValues } from "@pages/Auth/Signup/type";
+import type { TSignInFormValues } from "@pages/Auth/Signin/type";
+import type { TForgetLoginPasscode } from "@pages/Auth/ForgetPassword/type";
+import type { TResetPasswordFormValues } from "@pages/Auth/ResetPassword/type";
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
@@ -83,4 +82,15 @@ const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
   });
 };
 
-export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgetPassword };
+const postResetLoginPasscode = async ({ code, newPasscode }: TResetPasswordFormValues) => {
+  await axiosInstance({
+    method: "POST",
+    url: `${ENDPOINTS.verifyEmail}/${code}`,
+    data: {
+      new_login_passcode: newPasscode,
+      one_time_password: code,
+    },
+  });
+};
+
+export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgetPassword, postResetLoginPasscode };
