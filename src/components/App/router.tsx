@@ -18,7 +18,7 @@ import Signin from "@pages/Auth/Signin";
 import Signup from "@pages/Auth/Signup";
 import VerifyEmail from "@pages/Auth/VerifyEmail";
 import ResendEmail from "@pages/Auth/ResendEmail";
-import ForgetPassword from "@pages/Auth/ForgetPassword";
+import ForgotLoginPasscode from "@pages/Auth/ForgotLoginPasscode";
 import ResetLoginPasscode from "@pages/Auth/ResetLoginPasscode";
 
 const ROUTER = createBrowserRouter([
@@ -139,7 +139,7 @@ const ROUTER = createBrowserRouter([
         path: CLIENT_ROUTES.authForgetPasscode,
         element: (
           <PageWrapper>
-            <ForgetPassword />
+            <ForgotLoginPasscode />
           </PageWrapper>
         ),
       },

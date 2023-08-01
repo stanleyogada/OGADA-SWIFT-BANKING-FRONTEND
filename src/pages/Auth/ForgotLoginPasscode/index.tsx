@@ -1,15 +1,14 @@
-
 import Input from "@components/Input";
 import PhoneInput from "@components/Input/PhoneInput";
 
-import ForgetPasswordWrapper from "./ForgetPasswordWrapper";
-import useForgetPasscode from "./hooks/useForgetPasscode";
+import ForgotLoginPasscodeWrapper from "./ForgotLoginPasscodeWrapper";
+import useForgetPasscode from "./hooks/useForgotLoginPasscode";
 
-const ForgetPassword = () => {
+const ForgotLoginPasscode = () => {
   const { register, handleSubmit, mutationState, errors } = useForgetPasscode();
 
   return (
-    <ForgetPasswordWrapper>
+    <ForgotLoginPasscodeWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
       <h1 className="page-title">Forgot Password</h1>
 
@@ -51,8 +50,8 @@ const ForgetPassword = () => {
           {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
-    </ForgetPasswordWrapper>
+    </ForgotLoginPasscodeWrapper>
   );
 };
 
-export default ForgetPassword;
+export default ForgotLoginPasscode;
