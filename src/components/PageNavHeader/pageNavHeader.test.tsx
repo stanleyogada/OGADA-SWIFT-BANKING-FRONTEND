@@ -1,41 +1,50 @@
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import PageNavHeader from "./pageNavHeader";
 import { navigate } from "../../utils/test/mocks/navigate";
 import TestProviders from "@components/TestProviders";
 
-const renderComponent = () => {
-  render(<PageNavHeader heading="name" backgroundColor="red" />, {
+const renderComponent = (
+  props = {
+    heading: "name",
+    backgroundColor: "red",
+  }
+) => {
+  render(<PageNavHeader {...props} />, {
     wrapper: TestProviders,
   });
 };
 
-describe("render pageNavHeader correctly", () => {
-  test("should display the header correctly", () => {
-    renderComponent();
-    const headingElement = screen.getByTestId("heading");
-    const arrowElement = screen.getByTitle("left-caret");
-
-    expect(arrowElement).toBeInTheDocument();
-    expect(headingElement).toBeInTheDocument();
+test("Props are passed are wired up correctly", () => {
+  renderComponent({
+    heading: "name",
+    backgroundColor: "red",
   });
+  let headingElement = screen.getByRole("heading", { name: /name/i });
 
-  test("should Have the background styles provided correctly", () => {
-    renderComponent();
-    const divElement = screen.getByTitle("left-caret");
+  expect(headingElement).toBeInTheDocument();
+  expect(headingElement.parentElement).toHaveStyle({ backgroundColor: "red" });
 
-    expect(divElement.parentNode).toHaveStyle({ backgroundColor: "red" });
+  cleanup();
+
+  renderComponent({
+    heading: "Account",
+    backgroundColor: "blue",
   });
+  headingElement = screen.getByRole("heading", { name: /account/i });
 
-  test("should Go back to previous page on click on the left-caret icon", async () => {
-    const user = userEvent.setup();
+  expect(headingElement).toBeInTheDocument();
+  expect(headingElement.parentElement).toHaveStyle({ backgroundColor: "blue" });
+});
 
-    renderComponent();
+test("should Go back to previous page on click on the left-caret icon", async () => {
+  const user = userEvent.setup();
+  renderComponent();
 
-    const iconElement = screen.getByTestId("icon");
-    await user.click(iconElement);
+  const iconElement = screen.getByTestId("icon");
 
-    expect(navigate).toHaveBeenCalledWith(-1);
-  });
+  expect(navigate).not.toHaveBeenCalled();
+  await user.click(iconElement);
+  expect(navigate).toHaveBeenCalledWith(-1);
 });

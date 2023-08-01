@@ -11,14 +11,13 @@ function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {
   const navigate = useNavigate();
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>
-      <div title="left-caret">
-        <div data-testid="icon" onClick={() => navigate(-1)}>
-          {icons.blueLeftArrowIcon()}
-        </div>
-        <div className="heading" data-testid="heading">
-          {heading}
-        </div>
+      <div data-testid="icon" onClick={() => navigate(-1)}>
+        {icons.blueLeftArrowIcon()}
       </div>
+
+      <h1 className="heading" data-testid="heading">
+        {heading}
+      </h1>
     </PageNavHeaderWrapper>
   );
 }
