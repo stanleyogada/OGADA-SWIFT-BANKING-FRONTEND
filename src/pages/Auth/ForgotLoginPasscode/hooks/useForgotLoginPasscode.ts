@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
-import { postForgetPassword } from "@services/auth";
+import { postForgotLoginPasscode } from "@services/auth";
 import { AxiosError } from "axios";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "@constants/index";
-import { TForgetLoginPasscode } from "../type";
+import { TForgetLoginPasscodeFormValues } from "../type";
 
 const useForgetPasscode = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const useForgetPasscode = () => {
     formState: { errors },
     setValue,
     getValues,
-  } = useForm<TForgetLoginPasscode>();
+  } = useForm<TForgetLoginPasscodeFormValues>();
 
   useEffect(() => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess);
@@ -28,7 +28,7 @@ const useForgetPasscode = () => {
     if (email) setValue("email", email);
   }, []);
 
-  const forgetPasscodeMutation = useMutation(postForgetPassword, {
+  const forgetPasscodeMutation = useMutation(postForgotLoginPasscode, {
     onSuccess: () => {
       localStorage.setItem(
         LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess,
@@ -38,11 +38,11 @@ const useForgetPasscode = () => {
           savedAtTime: Date.now(),
         })
       );
-      navigate(CLIENT_ROUTES.resetPasscode);
+      navigate(CLIENT_ROUTES.authResetPasscode);
     },
   });
 
-  const handleForgetPassword = (formValues: TForgetLoginPasscode) => {
+  const handleForgotLoginPasscode = (formValues: TForgetLoginPasscodeFormValues) => {
     forgetPasscodeMutation.mutate(formValues);
   };
 
@@ -58,8 +58,8 @@ const useForgetPasscode = () => {
   }, [forgetPasscodeMutation.isLoading, forgetPasscodeMutation.error, forgetPasscodeMutation.isError]);
 
   const handleSubmit = () => {
-    return _handleSubmit((formValues: TForgetLoginPasscode) => {
-      handleForgetPassword(formValues);
+    return _handleSubmit((formValues: TForgetLoginPasscodeFormValues) => {
+      handleForgotLoginPasscode(formValues);
     });
   };
 

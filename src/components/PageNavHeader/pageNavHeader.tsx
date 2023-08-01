@@ -2,12 +2,12 @@ import { useNavigate } from "react-router-dom";
 import PageNavHeaderWrapper from "./PageNavHeaderWrapper";
 import icons from "../../constants/icons";
 
-type pageNavHeaderProps = {
+type TpageNavHeaderProps = {
   heading: string;
   backgroundColor: string;
 };
 
-function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {
+function PageNavHeader({ heading, backgroundColor }: TpageNavHeaderProps) {
   const navigate = useNavigate();
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>

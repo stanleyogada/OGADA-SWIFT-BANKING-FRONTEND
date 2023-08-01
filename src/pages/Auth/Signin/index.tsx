@@ -6,8 +6,9 @@ import SigninWrapper from "./SigninWrapper";
 import PhoneInput from "@components/Input/PhoneInput";
 import PasswordInput from "@components/Input/PasswordInput";
 import Button from "@components/Button";
+import { CLIENT_ROUTES } from "@constants/routes";
 import PageNavHeader from "@components/PageNavHeader/pageNavHeader";
-import { COLORS } from "./../../../constants/colors/index";
+import { COLORS } from "@constants/colors";
 
 const Signin = () => {
   const { handleSubmit, register, mutationState, errors } = useSignin();
@@ -58,7 +59,7 @@ const Signin = () => {
                 Remember login passcode
               </label>
 
-              <Link to="#" className="form__link">
+              <Link to={CLIENT_ROUTES.authForgetPasscode} className="form__link">
                 Forgot login passcode?
               </Link>
             </div>
