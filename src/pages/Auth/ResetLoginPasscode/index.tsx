@@ -1,11 +1,12 @@
 import Input from "@components/Input";
 
-import ResetPasswordWrapper from "./ResetPasswordWrapper";
-import { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useResetPassword";
-import useResetPassword from "./hooks/useResetPassword";
+import ResetLoginPasscodeWrapper from "./ResetLoginPasscodeWrapper";
+import { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useResetLoginPasscode";
+import useResetLoginPasscode from "./hooks/useResetLoginPasscode";
 
-const ResetPassword = () => {
-  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } = useResetPassword();
+const ResetLoginPasscode = () => {
+  const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } =
+    useResetLoginPasscode();
 
   const renderResendSuffix = () => {
     if (resendDetails.timeSecondsLeft > 0) {
@@ -16,7 +17,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <ResetPasswordWrapper>
+    <ResetLoginPasscodeWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
 
       <h1 className="page-title">Reset Login Passcode</h1>
@@ -59,8 +60,8 @@ const ResetPassword = () => {
           {mutationState.isLoading && <div data-testid="loading"></div>}
         </button>
       </form>
-    </ResetPasswordWrapper>
+    </ResetLoginPasscodeWrapper>
   );
 };
 
-export default ResetPassword;
+export default ResetLoginPasscode;

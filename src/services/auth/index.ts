@@ -4,7 +4,7 @@ import { axiosInstance } from "@utils/axiosInstance";
 import type { TSignUpFormValues } from "@pages/Auth/Signup/type";
 import type { TSignInFormValues } from "@pages/Auth/Signin/type";
 import type { TForgetLoginPasscode } from "@pages/Auth/ForgetPassword/type";
-import type { TResetPasswordFormValues } from "@pages/Auth/ResetPassword/type";
+import { TResetLoginPasscodeFormValues } from "@pages/Auth/ResetLoginPasscode/type";
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
@@ -82,7 +82,7 @@ const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
   });
 };
 
-const postResetLoginPasscode = async ({ code, newPasscode }: TResetPasswordFormValues) => {
+const postResetLoginPasscode = async ({ code, newPasscode }: TResetLoginPasscodeFormValues) => {
   await axiosInstance({
     method: "POST",
     url: `${ENDPOINTS.resetLoginPasscode}`,

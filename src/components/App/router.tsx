@@ -19,7 +19,7 @@ import Signup from "@pages/Auth/Signup";
 import VerifyEmail from "@pages/Auth/VerifyEmail";
 import ResendEmail from "@pages/Auth/ResendEmail";
 import ForgetPassword from "@pages/Auth/ForgetPassword";
-import ResetPassword from "@pages/Auth/ResetPassword";
+import ResetLoginPasscode from "@pages/Auth/ResetLoginPasscode";
 
 const ROUTER = createBrowserRouter([
   {
@@ -147,7 +147,7 @@ const ROUTER = createBrowserRouter([
         path: CLIENT_ROUTES.authResetPasscode,
         element: (
           <PageWrapper>
-            <ResetPassword />
+            <ResetLoginPasscode />
           </PageWrapper>
         ),
       },

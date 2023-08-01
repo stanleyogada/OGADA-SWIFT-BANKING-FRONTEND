@@ -1,4 +1,4 @@
-type TResetPasswordFormValues = {
+type TResetLoginPasscodeFormValues = {
   code: string;
   newPasscode: string;
 };
@@ -9,4 +9,4 @@ type TResendDetails = {
   timeSecondsLeft: number;
 };
 
-export type { TResetPasswordFormValues, TResendDetails };
+export type { TResetLoginPasscodeFormValues, TResendDetails };

@@ -8,14 +8,14 @@ import { postResetLoginPasscode } from "@services/auth";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
 import { CLIENT_ROUTES } from "@constants/routes";
 
-import { TResendDetails, TResetPasswordFormValues } from "../type";
+import { TResendDetails, TResetLoginPasscodeFormValues } from "../type";
 
 const RESEND_SECONDS = 45;
 const RESEND_BUTTON_ENABLED_TEXT = "You can resend now!";
 
-const useResetPassword = () => {
+const useResetLoginPasscode = () => {
   const navigate = useNavigate();
-  const ResetPasswordMutation = useMutation(postResetLoginPasscode, {
+  const ResetLoginPasscodeMutation = useMutation(postResetLoginPasscode, {
     onSuccess: () => {
       navigate(CLIENT_ROUTES.authSignin);
     },
@@ -25,33 +25,33 @@ const useResetPassword = () => {
     navigate(CLIENT_ROUTES.authResendEmail);
   };
 
-  const handleResetPassword = (formValues: TResetPasswordFormValues) => {
-    ResetPasswordMutation.mutate({
+  const handleResetLoginPasscode = (formValues: TResetLoginPasscodeFormValues) => {
+    ResetLoginPasscodeMutation.mutate({
       code: formValues.code,
       newPasscode: formValues.newPasscode,
     });
   };
 
   const mutationState = useMemo(() => {
-    const error = ResetPasswordMutation.error as AxiosError;
+    const error = ResetLoginPasscodeMutation.error as AxiosError;
     let message = (error?.response?.data as { message: string })?.message;
 
     return {
-      isLoading: ResetPasswordMutation.isLoading,
+      isLoading: ResetLoginPasscodeMutation.isLoading,
       error: message,
-      isError: ResetPasswordMutation.isError,
+      isError: ResetLoginPasscodeMutation.isError,
     };
-  }, [ResetPasswordMutation.isLoading, ResetPasswordMutation.error, ResetPasswordMutation.isError]);
+  }, [ResetLoginPasscodeMutation.isLoading, ResetLoginPasscodeMutation.error, ResetLoginPasscodeMutation.isError]);
 
   const {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
-  } = useForm<TResetPasswordFormValues>();
+  } = useForm<TResetLoginPasscodeFormValues>();
 
   const handleSubmit = () => {
-    return _handleSubmit((formValues: TResetPasswordFormValues) => {
-      handleResetPassword(formValues);
+    return _handleSubmit((formValues: TResetLoginPasscodeFormValues) => {
+      handleResetLoginPasscode(formValues);
     });
   };
 
@@ -129,6 +129,6 @@ const useResetPassword = () => {
   };
 };
 
-export default useResetPassword;
+export default useResetLoginPasscode;
 
 export { RESEND_SECONDS, RESEND_BUTTON_ENABLED_TEXT };
