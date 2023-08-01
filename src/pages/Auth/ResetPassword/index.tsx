@@ -37,6 +37,17 @@ const ResetPassword = () => {
           })}
           error={errors.code?.message}
         />
+        <Input
+          placeholder="Enter new passcode"
+          {...register("newPasscode", {
+            required: "New passcode is required",
+            pattern: {
+              value: /^\d{6}$/,
+              message: "New passcode must be 6 digits",
+            },
+          })}
+          error={errors.newPasscode?.message}
+        />
 
         <button
           type="button"

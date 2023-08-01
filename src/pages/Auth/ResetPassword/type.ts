@@ -1,5 +1,6 @@
 type TResetPasswordFormValues = {
   code: string;
+  newPasscode: string;
 };
 
 type TResendDetails = {
