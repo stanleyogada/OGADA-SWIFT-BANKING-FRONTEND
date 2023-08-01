@@ -29,7 +29,7 @@ const { handleCreateErrorConfig } = createServer([
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("Verifies email and redirects to sign-in page", async () => {
+test("Resets login passcode and redirects to sign-in page", async () => {
   const user = userEvent.setup();
   render(<ResetPassword />, {
     wrapper: TestProviders,
