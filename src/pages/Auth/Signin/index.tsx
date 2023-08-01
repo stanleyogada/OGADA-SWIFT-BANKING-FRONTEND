@@ -7,7 +7,6 @@ import PhoneInput from "@components/Input/PhoneInput";
 import PasswordInput from "@components/Input/PasswordInput";
 import Button from "@components/Button";
 import PageNavHeader from "@components/PageNavHeader/pageNavHeader";
-import { COLORS } from "./../../../constants/colors/index";
 
 const Signin = () => {
   const { handleSubmit, register, mutationState, errors } = useSignin();
@@ -15,10 +14,8 @@ const Signin = () => {
   return (
     <SigninWrapper>
       {mutationState.isError && <p data-testid="error"></p>}
-      <PageNavHeader heading="Account" backgroundColor={`${COLORS.gray}`} />
-      <header>
-        <h1 className="page-title">Sign In</h1>
-      </header>
+
+      <PageNavHeader heading="Sign in" />
 
       <main className="content">
         <h2 className="sub-title">Welcome Back!</h2>

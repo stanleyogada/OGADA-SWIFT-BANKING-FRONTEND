@@ -4,7 +4,7 @@ import icons from "../../constants/icons";
 
 type pageNavHeaderProps = {
   heading: string;
-  backgroundColor: string;
+  backgroundColor?: string;
 };
 
 function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {

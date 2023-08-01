@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { COLORS } from "../../constants";
 
 type pagenavheaderProps = {
-  backgroundColor: string;
+  backgroundColor?: string;
 };
 
 const PageNavHeaderWrapper = styled.div<pagenavheaderProps>`
   color: ${COLORS.black};
   padding: 25px 0px 20px 29px;
-  background-color: ${(props) => props.backgroundColor};
+  ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
 
   div {
     gap: 18px;
