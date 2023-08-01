@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { COLORS } from "@constants/colors";
 
-const ForgetPasswordWrapper = styled.div`
+const ResetLoginPasscodeWrapper = styled.div`
   .page-title {
     padding: 27px 46px 81px;
     font-size: 15px;
@@ -60,4 +60,4 @@ const ForgetPasswordWrapper = styled.div`
   }
 `;
 
-export default ForgetPasswordWrapper;
+export default ResetLoginPasscodeWrapper;
