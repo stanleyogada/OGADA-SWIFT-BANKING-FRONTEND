@@ -1,16 +1,23 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-const PageNavHeaderWrapper = styled.div`
-  color: ${COLORS.white};
-  padding: 50px 0px 15px 29px;
+type pagenavheaderProps = {
+  backgroundColor: string;
+};
+
+const PageNavHeaderWrapper = styled.div<pagenavheaderProps>`
+  color: ${COLORS.black};
+  padding: 25px 0px 20px 29px;
+  background-color: ${(props) => props.backgroundColor};
 
   div {
-    gap: 20px;
+    gap: 18px;
     display: flex;
     align-items: center;
-    h3 {
-      font-size: 20px;
+
+    .heading {
+      font-size: 16px;
+      font-weight: 500;
     }
   }
 `;

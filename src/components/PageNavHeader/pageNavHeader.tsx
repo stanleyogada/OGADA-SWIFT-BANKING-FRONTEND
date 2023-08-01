@@ -10,12 +10,12 @@ type pageNavHeaderProps = {
 function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {
   const navigate = useNavigate();
   return (
-    <PageNavHeaderWrapper style={{ backgroundColor: `${backgroundColor}` }}>
+    <PageNavHeaderWrapper backgroundColor={backgroundColor}>
       <div title="left-caret">
-        <span data-testid="icon" onClick={() => navigate(-1)}>
-          {icons.blackLeftArrowIcon()}
-        </span>
-        <h3>{heading}</h3>
+        <div data-testid="icon" onClick={() => navigate(-1)}>
+          {icons.blueLeftArrowIcon()}
+        </div>
+        <div className="heading">{heading}</div>
       </div>
     </PageNavHeaderWrapper>
   );
