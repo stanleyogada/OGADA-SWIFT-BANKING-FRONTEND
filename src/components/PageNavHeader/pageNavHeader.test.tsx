@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import PageNavHeader from "./pageNavHeader";
-import { navigate } from "../../utils/test/mocks/navigate";
+import { navigate } from "@utils/test/mocks/navigate";
 import TestProviders from "@components/TestProviders";
 
 const renderComponent = () => {

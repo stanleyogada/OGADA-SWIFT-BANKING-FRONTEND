@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+
 import PageNavHeaderWrapper from "./PageNavHeaderWrapper";
-import icons from "../../constants/icons";
+import icons from "@constants/icons";
 
 type TpageNavHeaderProps = {
   heading: string;
