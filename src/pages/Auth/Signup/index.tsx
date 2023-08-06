@@ -86,6 +86,19 @@ const Signup = () => {
               })}
               error={errors.loginPasscode?.message}
             />
+
+            <Input
+              label="Tranfer Pin"
+              type="number"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\d{4}$/,
+                  message: "Email is invalid",
+                },
+              })}
+              error={errors.email?.message}
+            />
           </div>
 
           <div className="form__actions">

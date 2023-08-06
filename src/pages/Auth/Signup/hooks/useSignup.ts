@@ -23,7 +23,7 @@ const useSignup = () => {
     },
   });
 
-  const handleSignIn = (formValues: TSignUpFormValues) => {
+  const handleSignup = (formValues: TSignUpFormValues) => {
     signUpMutation.mutate(formValues);
   };
 
@@ -65,7 +65,7 @@ const useSignup = () => {
         delete formValues.middleName;
       }
 
-      handleSignIn(formValues);
+      handleSignup(formValues);
     });
   };
 
