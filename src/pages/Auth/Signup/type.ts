@@ -6,7 +6,7 @@ type TSignUpFormValues = {
   phoneNumber: string;
   loginPasscode: string;
   acceptTerms: boolean;
-  transferPin: number;
+  transferPin: string;
 };
 
 export type { TSignUpFormValues };

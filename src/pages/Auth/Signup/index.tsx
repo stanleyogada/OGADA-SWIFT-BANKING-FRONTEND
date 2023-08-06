@@ -89,7 +89,6 @@ const Signup = () => {
 
             <Input
               label="Tranfer Pin"
-              type="number"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
