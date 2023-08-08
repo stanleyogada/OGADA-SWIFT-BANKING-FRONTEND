@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants";
 
-type pagenavheaderProps = {
+type TProps = {
   backgroundColor?: string;
 };
 
-const PageNavHeaderWrapper = styled.div<pagenavheaderProps>`
+const PageNavHeaderWrapper = styled.div<TProps>`
   display: flex;
   align-items: center;
   gap: 18px;

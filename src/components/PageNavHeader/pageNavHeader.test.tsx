@@ -1,9 +1,9 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import PageNavHeader from "./pageNavHeader";
-import { navigate } from "../../utils/test/mocks/navigate";
+import PageNavHeader from "./PageNavHeader";
 import TestProviders from "@components/TestProviders";
+import { navigate } from "@utils/test/mocks/navigate";
 
 const renderComponent = (
   props = {

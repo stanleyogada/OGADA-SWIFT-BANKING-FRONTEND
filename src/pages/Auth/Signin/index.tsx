@@ -6,7 +6,7 @@ import SigninWrapper from "./SigninWrapper";
 import PhoneInput from "@components/Input/PhoneInput";
 import PasswordInput from "@components/Input/PasswordInput";
 import Button from "@components/Button";
-import PageNavHeader from "@components/PageNavHeader/pageNavHeader";
+import PageNavHeader from "@components/PageNavHeader/PageNavHeader";
 
 const Signin = () => {
   const { handleSubmit, register, mutationState, errors } = useSignin();
