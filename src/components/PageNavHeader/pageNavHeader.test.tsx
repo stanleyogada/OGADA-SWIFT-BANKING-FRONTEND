@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import PageNavHeader from "./PageNavHeader";
+import PageNavHeader from ".";
 import TestProviders from "@components/TestProviders";
 import { navigate } from "@utils/test/mocks/navigate";
 
