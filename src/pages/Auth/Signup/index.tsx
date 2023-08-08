@@ -87,16 +87,17 @@ const Signup = () => {
               error={errors.loginPasscode?.message}
             />
 
-            <Input
-              label="Tranfer Pin"
-              {...register("email", {
-                required: "Email is required",
+            <PasswordInput
+              label="Transfer Pin"
+              required
+              {...register("transferPin", {
+                required: "Transfer Pin is required",
                 pattern: {
                   value: /^\d{4}$/,
-                  message: "Email is invalid",
+                  message: "Transfer Pin must be 4 digits",
                 },
               })}
-              error={errors.email?.message}
+              error={errors.transferPin?.message}
             />
           </div>
 
