@@ -86,6 +86,19 @@ const Signup = () => {
               })}
               error={errors.loginPasscode?.message}
             />
+
+            <PasswordInput
+              label="Transfer Pin"
+              required
+              {...register("transferPin", {
+                required: "Transfer Pin is required",
+                pattern: {
+                  value: /^\d{4}$/,
+                  message: "Transfer Pin must be 4 digits",
+                },
+              })}
+              error={errors.transferPin?.message}
+            />
           </div>
 
           <div className="form__actions">

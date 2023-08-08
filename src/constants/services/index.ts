@@ -12,6 +12,7 @@ const ENDPOINTS = {
   sendEmail: "/auth/send-email-verification",
   verifyEmail: "/auth/confirm-email-verification",
   forgetPasscode: "/auth/forgot-login-passcode",
+  resetLoginPasscode: "/auth/reset-login-passcode",
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {

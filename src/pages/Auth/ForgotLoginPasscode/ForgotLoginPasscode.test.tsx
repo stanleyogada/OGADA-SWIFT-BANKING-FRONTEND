@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import ForgetPassword from ".";
+import ForgotLoginPasscode from ".";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
@@ -27,7 +27,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     localStorageGetItem.mockReturnValueOnce(null);
 
     userEvent.setup();
-    render(<ForgetPassword />, {
+    render(<ForgotLoginPasscode />, {
       wrapper: TestProviders,
     });
 
@@ -53,7 +53,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     await handleAssertLoadingAfterSubmitClick(resendOtpButton);
 
     expect(navigate).toHaveBeenCalled();
-    expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.resetPasscode);
+    expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authResetPasscode);
 
     expect(localStorageSetItem).toHaveBeenCalled();
     expect(localStorageSetItem).toHaveBeenCalledWith(
@@ -80,7 +80,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     );
 
     const user = userEvent.setup();
-    render(<ForgetPassword />, {
+    render(<ForgotLoginPasscode />, {
       wrapper: TestProviders,
     });
     expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess);
@@ -116,7 +116,7 @@ test("Displays errors works correctly when the network request errors", async ()
     statusCode: 400,
   });
   const user = userEvent.setup();
-  render(<ForgetPassword />, {
+  render(<ForgotLoginPasscode />, {
     wrapper: TestProviders,
   });
   const phoneInput = screen.getByLabelText(/phone number/i);

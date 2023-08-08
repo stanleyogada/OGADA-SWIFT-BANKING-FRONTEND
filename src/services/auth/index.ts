@@ -1,11 +1,10 @@
-import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from '@constants/services';
-import { axiosInstance } from '@utils/axiosInstance';
+import { ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
+import { axiosInstance } from "@utils/axiosInstance";
 
-import type { TSignUpFormValues } from '@pages/Auth/Signup/type';
-import type { TSignInFormValues } from '@pages/Auth/Signin/type';
-import type { TForgetLoginPasscode } from '@pages/Auth/ForgetPassword/type';
-
-
+import type { TSignUpFormValues } from "@pages/Auth/Signup/type";
+import type { TSignInFormValues } from "@pages/Auth/Signin/type";
+import type { TForgetLoginPasscodeFormValues } from "@pages/Auth/ForgotLoginPasscode/type";
+import { TResetLoginPasscodeFormValues } from "@pages/Auth/ResetLoginPasscode/type";
 
 const postSignIn = async ({ phoneNumber, loginPasscode }: TSignInFormValues) => {
   const { data } = await axiosInstance({
@@ -30,6 +29,7 @@ const postSignup = async ({
   email,
   phoneNumber,
   loginPasscode,
+  transferPin,
 }: TSignUpFormValues) => {
   await axiosInstance({
     method: "POST",
@@ -41,6 +41,7 @@ const postSignup = async ({
       middle_name: middleName,
       email: email,
       login_passcode: loginPasscode,
+      transfer_pin: transferPin,
     },
   });
 
@@ -72,7 +73,7 @@ const postVerifyEmail = async (otp: string) => {
   });
 };
 
-const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
+const postForgotLoginPasscode = async ({ phone, email }: TForgetLoginPasscodeFormValues) => {
   await axiosInstance({
     method: "POST",
     url: `${ENDPOINTS.forgetPasscode}`,
@@ -83,4 +84,15 @@ const postForgetPassword = async ({ phone, email }: TForgetLoginPasscode) => {
   });
 };
 
-export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgetPassword };
+const postResetLoginPasscode = async ({ code, newPasscode }: TResetLoginPasscodeFormValues) => {
+  await axiosInstance({
+    method: "POST",
+    url: `${ENDPOINTS.resetLoginPasscode}`,
+    data: {
+      new_login_passcode: newPasscode,
+      one_time_password: code,
+    },
+  });
+};
+
+export { postSignIn, postSignup, postSendEmail, postVerifyEmail, postForgotLoginPasscode, postResetLoginPasscode };

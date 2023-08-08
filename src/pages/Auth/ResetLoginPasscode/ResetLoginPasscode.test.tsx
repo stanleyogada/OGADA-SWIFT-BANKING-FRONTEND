@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import VerifyEmail from ".";
+import ResetLoginPasscode from ".";
 
 import createServer from "@utils/test/createServer";
 import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
@@ -13,28 +13,28 @@ import { CLIENT_ROUTES } from "@constants/routes";
 
 import TestProviders from "@components/TestProviders";
 
-const OTP = "123456";
-
 const { handleCreateErrorConfig } = createServer([
   {
     method: "post",
-    url: `${BASE_URL}${ENDPOINTS.verifyEmail}/${OTP}`,
+    url: `${BASE_URL}${ENDPOINTS.resetLoginPasscode}`,
   },
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("Verifies email and redirects to sign-in page", async () => {
+test("Resets login passcode and redirects to sign-in page", async () => {
   const user = userEvent.setup();
-  render(<VerifyEmail />, {
+  render(<ResetLoginPasscode />, {
     wrapper: TestProviders,
   });
 
   const codeInput = screen.getByPlaceholderText("Enter code");
-  const submitButton = screen.getByRole("button", { name: /verify/i });
+  const newPasscodeInput = screen.getByPlaceholderText("Enter new passcode");
+  const submitButton = screen.getByRole("button", { name: /reset login passcode/i });
 
   expect(navigate).not.toHaveBeenCalled();
 
-  await user.type(codeInput, OTP);
+  await user.type(codeInput, "123456");
+  await user.type(newPasscodeInput, "123456");
   await user.click(submitButton);
 
   await handleAssertLoadingAfterSubmitClick(submitButton);
@@ -46,20 +46,23 @@ test("Verifies email and redirects to sign-in page", async () => {
 test("Displays errors works correctly when the network request errors", async () => {
   handleCreateErrorConfig({
     method: "post",
-    url: `${BASE_URL}${ENDPOINTS.verifyEmail}/${OTP}`,
+    url: `${BASE_URL}${ENDPOINTS.resetLoginPasscode}`,
     statusCode: 400,
   });
   const user = userEvent.setup();
-  render(<VerifyEmail />, {
+  render(<ResetLoginPasscode />, {
     wrapper: TestProviders,
   });
 
   const codeInput = screen.getByPlaceholderText("Enter code");
-  const submitButton = screen.getByRole("button", { name: /verify/i });
+  const newPasscodeInput = screen.getByPlaceholderText("Enter new passcode");
+  const submitButton = screen.getByRole("button", { name: /reset login passcode/i });
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
 
-  await user.type(codeInput, OTP);
+  await user.type(codeInput, "123456");
+  await user.type(newPasscodeInput, "123456");
+
   await user.click(submitButton);
 
   await handleAssertLoadingAfterSubmitClick(submitButton);

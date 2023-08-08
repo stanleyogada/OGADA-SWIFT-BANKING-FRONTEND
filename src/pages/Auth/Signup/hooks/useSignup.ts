@@ -23,7 +23,7 @@ const useSignup = () => {
     },
   });
 
-  const handleSignIn = (formValues: TSignUpFormValues) => {
+  const handleSignup = (formValues: TSignUpFormValues) => {
     signUpMutation.mutate(formValues);
   };
 
@@ -54,6 +54,7 @@ const useSignup = () => {
               email: "johnDoe@gmail.com",
               phoneNumber: "9234567890",
               loginPasscode: "123456",
+              transferPin: "1234",
             }
           : {})(),
     },
@@ -65,7 +66,7 @@ const useSignup = () => {
         delete formValues.middleName;
       }
 
-      handleSignIn(formValues);
+      handleSignup(formValues);
     });
   };
 
