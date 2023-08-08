@@ -6,19 +6,21 @@ type pagenavheaderProps = {
 };
 
 const PageNavHeaderWrapper = styled.div<pagenavheaderProps>`
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
   color: ${COLORS.black};
   padding: 25px 0px 20px 29px;
   ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
 
-  div {
-    gap: 18px;
-    display: flex;
-    align-items: center;
+  button {
+    padding: 0 5px;
+  }
 
-    .heading {
-      font-size: 16px;
-      font-weight: 500;
-    }
+  .heading {
+    font-size: 15px;
+    font-weight: 500;
   }
 `;
 export default PageNavHeaderWrapper;

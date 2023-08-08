@@ -42,9 +42,9 @@ test("should Go back to previous page on click on the left-caret icon", async ()
   const user = userEvent.setup();
   renderComponent();
 
-  const iconElement = screen.getByTestId("icon");
+  const button = screen.getByRole("button");
 
   expect(navigate).not.toHaveBeenCalled();
-  await user.click(iconElement);
+  await user.click(button);
   expect(navigate).toHaveBeenCalledWith(-1);
 });
