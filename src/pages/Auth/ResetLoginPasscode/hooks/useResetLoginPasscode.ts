@@ -78,7 +78,7 @@ const useResetLoginPasscode = () => {
   const resendDetailsTimeSecondsLeftIntervalId = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const item = localStorage.getItem(LOCAL_STORAGE_KEYS.sendEmailCodeSuccess);
+    const item = localStorage.getItem(LOCAL_STORAGE_KEYS.sendForgetPasscodeOTPSuccess);
 
     let resendDetails: Omit<TResendDetails, "timeSecondsLeft"> | null = null;
 
