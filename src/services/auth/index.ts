@@ -29,6 +29,7 @@ const postSignup = async ({
   email,
   phoneNumber,
   loginPasscode,
+  transferPin,
 }: TSignUpFormValues) => {
   await axiosInstance({
     method: "POST",
@@ -40,6 +41,7 @@ const postSignup = async ({
       middle_name: middleName,
       email: email,
       login_passcode: loginPasscode,
+      transfer_pin: transferPin,
     },
   });
 

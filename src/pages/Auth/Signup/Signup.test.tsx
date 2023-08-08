@@ -58,6 +58,10 @@ const handleAssertTypeInForm = async (
       input: screen.getByLabelText(/enter 6 digits login passcode/i),
       value: formData.loginPasscode,
     },
+    {
+      input: screen.getByLabelText(/Transfer Pin/),
+      value: formData.transferPin,
+    },
   ];
 
   for (const { input, value } of inputList) {
@@ -81,6 +85,7 @@ test("Sign up form works correctly onSuccess", async () => {
     middleName: "middleName",
     lastName: "lastName",
     firstName: "firstName",
+    transferPin: "1234",
   });
 
   expect(navigate).not.toHaveBeenCalled();
@@ -119,6 +124,7 @@ describe("Displays errors works correctly when the network request errors", () =
       middleName: "middleName",
       lastName: "lastName",
       firstName: "firstName",
+      transferPin: "1234",
     });
 
     expect(consoleErrorSpy).not.toHaveBeenCalled();
@@ -216,6 +222,7 @@ describe("Displays errors works correctly when the network request errors", () =
       middleName: "middleName",
       lastName: "lastName",
       firstName: "firstName",
+      transferPin: "1234",
     });
 
     const signUpButton = screen.getByRole("button", { name: /confirm/i });
