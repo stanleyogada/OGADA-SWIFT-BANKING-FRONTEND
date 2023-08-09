@@ -20,6 +20,7 @@ import VerifyEmail from "@pages/Auth/VerifyEmail";
 import ResendEmail from "@pages/Auth/ResendEmail";
 import ForgotLoginPasscode from "@pages/Auth/ForgotLoginPasscode";
 import ResetLoginPasscode from "@pages/Auth/ResetLoginPasscode";
+import Transaction from "@pages/TransactionPage";
 
 const ROUTER = createBrowserRouter([
   {
@@ -86,6 +87,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <Livechat />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.transactionPage,
+        element: (
+          <PageWrapper>
+            <Transaction />
           </PageWrapper>
         ),
       },
