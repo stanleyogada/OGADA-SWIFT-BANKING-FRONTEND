@@ -1,0 +1,332 @@
+{
+  "cashback": [
+    {
+      "type": "cashback",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 50,
+      "createdAt": "12-7-2022",
+      "T_id": 2,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 75,
+      "createdAt": "2-15-2023",
+      "T_id": 6,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 120,
+      "createdAt": "3-21-2023",
+      "T_id": 7,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 90,
+      "createdAt": "5-8-2023",
+      "T_id": 8,
+      "is_success": true,
+      "is_deposit": true
+    }
+  ],
+  "inhouse": [
+    {
+      "type": "inhouse",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 75,
+      "createdAt": "11-8-2022",
+      "T_id": 3,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 110,
+      "createdAt": "3-1-2023",
+      "T_id": 9,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 60,
+      "createdAt": "4-25-2023",
+      "T_id": 10,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 85,
+      "createdAt": "7-12-2023",
+      "T_id": 11,
+      "is_success": true,
+      "is_deposit": true
+    }
+  ],
+  "bank": [
+    {
+      "type": "bank",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 120,
+      "createdAt": "12-6-2022",
+      "T_id": 4,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 90,
+      "createdAt": "4-2-2023",
+      "T_id": 12,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 150,
+      "createdAt": "6-18-2023",
+      "T_id": 13,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 70,
+      "createdAt": "8-5-2023",
+      "T_id": 14,
+      "is_success": true,
+      "is_deposit": true
+    }
+  ],
+  "mobile": [
+    {
+      "type": "mobile",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 60,
+      "createdAt": "11-9-2022",
+      "T_id": 5,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 80,
+      "createdAt": "3-28-2023",
+      "T_id": 15,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 110,
+      "createdAt": "5-14-2023",
+      "T_id": 16,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 95,
+      "createdAt": "7-30-2023",
+      "T_id": 17,
+      "is_success": true,
+      "is_deposit": true
+    }
+  ],
+  "trans": [
+    {
+      "type": "cashback",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 50,
+      "createdAt": "12-7-2022",
+      "T_id": 2,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 75,
+      "createdAt": "2-15-2023",
+      "T_id": 6,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 120,
+      "createdAt": "3-21-2023",
+      "T_id": 7,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "cashback",
+      "amount": 90,
+      "createdAt": "5-8-2023",
+      "T_id": 8,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 75,
+      "createdAt": "11-8-2022",
+      "T_id": 3,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 110,
+      "createdAt": "3-1-2023",
+      "T_id": 9,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 60,
+      "createdAt": "4-25-2023",
+      "T_id": 10,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "inhouse",
+      "amount": 85,
+      "createdAt": "7-12-2023",
+      "T_id": 11,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 120,
+      "createdAt": "12-6-2022",
+      "T_id": 4,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 90,
+      "createdAt": "4-2-2023",
+      "T_id": 12,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 150,
+      "createdAt": "6-18-2023",
+      "T_id": 13,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "bank",
+      "amount": 70,
+      "createdAt": "8-5-2023",
+      "T_id": 14,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 100,
+      "createdAt": "10-5-2022",
+      "T_id": 1,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 60,
+      "createdAt": "11-9-2022",
+      "T_id": 5,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 80,
+      "createdAt": "3-28-2023",
+      "T_id": 15,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 110,
+      "createdAt": "5-14-2023",
+      "T_id": 16,
+      "is_success": true,
+      "is_deposit": true
+    },
+    {
+      "type": "mobile",
+      "amount": 95,
+      "createdAt": "7-30-2023",
+      "T_id": 17,
+      "is_success": true,
+      "is_deposit": true
+    }
+  ]
+}

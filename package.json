@@ -7,11 +7,13 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "start": "vite preview",
-    "test": "npx jest --clearCache && jest --watchAll --no-cache"
+    "test": "npx jest --clearCache && jest --watchAll --no-cache",
+    "server": "json-server --watch db.json --port 8000"
   },
   "dependencies": {
     "@types/react-query": "^1.2.9",
     "axios": "^1.4.0",
+    "json-server": "^0.17.3",
     "msw": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
