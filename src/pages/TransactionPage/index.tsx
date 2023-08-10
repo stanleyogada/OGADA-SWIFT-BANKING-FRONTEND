@@ -1,6 +1,5 @@
-import { useInfiniteQuery } from "react-query";
-import { Fragment, useState } from "react";
-import { getTransactions } from "@services/transaction";
+import { Fragment } from "react";
+
 import useTransaction from "./hooks";
 
 const Transaction = () => {
