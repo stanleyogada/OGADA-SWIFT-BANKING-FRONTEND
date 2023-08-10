@@ -1,25 +1,10 @@
 import { useInfiniteQuery } from "react-query";
 import { Fragment, useState } from "react";
 import { getTransactions } from "@services/transaction";
-const Transaction = () => {
-  const [pageParams, setPageParam] = useState(1);
+import useTransaction from "./hooks";
 
-  let { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
-    ["transaction"],
-    () => getTransactions({ pageNumber: pageParams }),
-    {
-      getNextPageParam: (_lastPage, page) => {
-        if (page.length < 6) {
-          console.log();
-          return page.length + 1;
-        } else {
-          return undefined;
-        }
-      },
-      enabled: true,
-      refetchOnWindowFocus: false,
-    }
-  );
+const Transaction = () => {
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, setPageParam } = useTransaction();
 
   return (
     <div>
