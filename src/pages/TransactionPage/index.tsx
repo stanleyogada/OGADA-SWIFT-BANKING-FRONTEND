@@ -10,12 +10,14 @@ const Transaction = () => {
     {
       getNextPageParam: (_lastPage, page) => {
         if (page.length < 6) {
+          console.log();
           return page.length + 1;
         } else {
           return undefined;
         }
       },
-      refetchOnWindowFocus: true,
+      enabled: true,
+      refetchOnWindowFocus: false,
     }
   );
 
