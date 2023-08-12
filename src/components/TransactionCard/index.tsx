@@ -34,7 +34,7 @@ const TransactionCard = ({ amount, createdAt, is_success, type }: TProps) => {
   };
 
   return (
-    <div className="transaction-card">
+    <div className="transaction-card" data-testid="card">
       <div className="transaction-info">
         <div className="trans-icon">{getTransferIcon(type)?.icon}</div>
         <div className="info-wrapper">
@@ -42,7 +42,6 @@ const TransactionCard = ({ amount, createdAt, is_success, type }: TProps) => {
           <div className="trans-date">{createdAt}</div>
         </div>
       </div>
-
       <div className="transaction-details">
         <p className="amount">+N{amount}</p>
         <p className="status">{is_success ? "successful" : "failed"}</p>

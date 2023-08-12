@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 
 const useTransaction = () => {
-  const [pageParams, setPageParam] = useState(1);
+  const [pageParams, setPageParam] = useState(0);
 
-  let { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery(
+  let { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage, refetch } = useInfiniteQuery(
     ["transaction"],
     () => getTransactions({ pageNumber: pageParams }),
     {
       getNextPageParam: (_lastPage, page) => {
-        if (page.length < 6) {
+        if (page.length < 4) {
           return page.length + 1;
         } else {
           return undefined;
@@ -21,9 +21,9 @@ const useTransaction = () => {
     }
   );
 
-  let isNextPage = hasNextPage;
   useEffect(() => {
-    isNextPage = true;
+    refetch();
+    setPageParam((page) => page + 1);
   }, []);
 
   return {
