@@ -1,5 +1,5 @@
 import { getTransactions } from "@services/transaction";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 
 const useTransaction = () => {
@@ -16,10 +16,15 @@ const useTransaction = () => {
           return undefined;
         }
       },
-      enabled: true,
+      enabled: false,
       refetchOnWindowFocus: false,
     }
   );
+
+  let isNextPage = hasNextPage;
+  useEffect(() => {
+    isNextPage = true;
+  }, []);
 
   return {
     data,

@@ -1,7 +1,7 @@
 import useTransaction from "./hooks";
 
 import PageNavHeader from "@components/PageNavHeader";
-import TransactionCard from "@components/TransactionCard";
+import TransactionCard, { TProps } from "@components/TransactionCard";
 
 import TransactionWrapper from "./TransactionStyle";
 
@@ -23,13 +23,28 @@ const Transaction = () => {
         </div>
 
         {data?.pages.map((datas) => {
-          return datas.data.map((data: { T_id: number; type: string }) => {
-            return <TransactionCard />;
+          return datas.data.map((data: TProps) => {
+            console.log(data);
+            return (
+              <TransactionCard
+                type={data.type}
+                amount={data.amount}
+                createdAt={data.createdAt}
+                is_success={data.is_success}
+              />
+            );
           });
         })}
 
         <div className="btn-wrapper">
-          <button onClick={() => fetchNextPage()}>{hasNextPage ? "load more" : "no more data"}</button>
+          <button
+            onClick={() => {
+              fetchNextPage();
+              setPageParam((page) => page + 1);
+            }}
+          >
+            Load more
+          </button>
         </div>
       </div>
     </TransactionWrapper>
