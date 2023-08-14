@@ -1,30 +1,40 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
+type TPage = {
+  data: {
+    is_success: boolean;
+    createdAt: string;
+    T_id: number;
+    type: string;
+    amount: number;
+    is_deposit: boolean;
+  }[];
+};
+
 type TConfig = {
   url?: string;
   status: number;
-  resBody: {
-    pages: [
-      {
-        data: {
-          is_success: boolean;
-          createdAt: string;
-          T_id: number;
-          type: string;
-        }[];
-      }
-    ];
+  resBody: () => {
+    pages: TPage[];
   };
 };
 
 const createGetServer = (reqConfigs: TConfig[]) => {
   let restReqConfigs = reqConfigs.map((config) => {
     return rest.get(config.url as string, (req, res, ctx) => {
-      const _limit = req.url.searchParams.get("_limit");
-      const _page = req.url.searchParams.get("_page");
-      console.log(_limit, _page);
-      return res(ctx.status(config.status), ctx.json(config.resBody));
+      const pageParam = req.url.searchParams.get("_page");
+      const _limit = 2;
+      let startIndex = pageParam ? Number(pageParam) * _limit : 0;
+      let startIndexInData = startIndex * _limit;
+      let endIndexInData = startIndexInData + _limit;
+
+      console.log(pageParam);
+      let store = config.resBody().pages[0].data.slice(startIndexInData, endIndexInData);
+
+      // console.log(config.resBody());
+
+      return res(ctx.status(200), ctx.json(store));
     });
   });
 
@@ -42,7 +52,7 @@ const createGetServer = (reqConfigs: TConfig[]) => {
 
   const createGetErrorConfig = () => {
     let handlers = reqConfigs.map((config) => {
-      return rest.get("http://localhost:8000", (req, res, ctx) => {
+      return rest.get("http://localhost:8000/trans", (req, res, ctx) => {
         return res(
           ctx.status(500),
           ctx.json({

@@ -9,22 +9,20 @@ const Transaction = () => {
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, setPageParam } = useTransaction();
 
   const mapData = () => {
-    let _datas = data?.pages.map((page) => {
-      return page.data;
-    });
-
-    let _single_data = _datas?.map((page) => {
-      return (
+    let _datas = data?.pages.map((page) =>
+      page.data.map((item: TProps) => (
         <TransactionCard
-          type={page.type}
-          amount={page.amount}
-          createdAt={page.createdAt}
-          is_success={page.is_success}
+          amount={item.amount}
+          createdAt={item.createdAt}
+          type={item.type}
+          is_success={item.is_success}
         />
-      );
-    });
-    return _single_data;
+      ))
+    );
+    return _datas;
   };
+
+  console.log(data);
   return (
     <TransactionWrapper>
       <div className="transaction-container">
@@ -35,12 +33,19 @@ const Transaction = () => {
             <p>Any status</p>
           </div>
         </div>
-
         <div className="date">
           <p> 2022/12/19 - 2023/02/17 </p>
         </div>
-        {mapData()}
-
+        {data?.pages.map((page) =>
+          page.data.map((item: TProps) => (
+            <TransactionCard
+              amount={item.amount}
+              createdAt={item.createdAt}
+              type={item.type}
+              is_success={item.is_success}
+            />
+          ))
+        )}
         <div className="btn-wrapper">
           <button
             onClick={() => {
@@ -51,7 +56,6 @@ const Transaction = () => {
             Load more
           </button>
         </div>
-
         <p data-testid="loading">{isFetching ? "loading" : ""}</p>
       </div>
     </TransactionWrapper>

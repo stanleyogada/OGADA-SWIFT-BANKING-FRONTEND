@@ -1,10 +1,11 @@
 import { screen, render, waitForElementToBeRemoved, waitFor } from "@testing-library/react";
 import { QueryClient } from "react-query";
 import { QueryClientProvider } from "react-query";
-import Transaction from ".";
+
 // import TestProviders from "@components/TestProviders";
 // import createServer from "@utils/test/createServer";
 import createGetServer from "@utils/test/createGetServer";
+import Transaction from ".";
 
 let Client = new QueryClient({
   defaultOptions: {
@@ -16,7 +17,7 @@ let Client = new QueryClient({
 
 const { createGetErrorConfig } = createGetServer([
   {
-    resBody: {
+    resBody: () => ({
       pages: [
         {
           data: [
@@ -25,17 +26,21 @@ const { createGetErrorConfig } = createGetServer([
               is_success: true,
               type: "cashback",
               T_id: 1,
+              amount: 40,
+              is_deposit: false,
             },
             {
               createdAt: "2015-06-2022",
               is_success: true,
               type: "cashback",
               T_id: 1,
+              amount: 100,
+              is_deposit: true,
             },
           ],
         },
       ],
-    },
+    }),
     status: 200,
     url: `http://localhost:8000/trans`,
   },
@@ -48,12 +53,9 @@ test("shows two card on first render", async () => {
       <Transaction />
     </QueryClientProvider>
   );
-
-  await pause();
   screen.debug();
-});
 
-const pause = () =>
-  new Promise((resolve) => {
-    setTimeout(resolve, 1000);
-  });
+  const element = await screen.findAllByTestId("card");
+
+  // expect(element).toHaveLength(1);
+});

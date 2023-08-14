@@ -3,7 +3,7 @@ import { getTransactions } from "@services/transaction";
 
 export type TProps = {
   type: string;
-  amount: 90;
+  amount: number;
   createdAt: string;
   is_success: boolean;
 };
