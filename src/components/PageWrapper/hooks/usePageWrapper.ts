@@ -12,7 +12,7 @@ const usePageWrapper = () => {
 
   const handleRedirect = useCallback(() => {
     if (!isAuthPage && !userIsAuthenticated) {
-      navigate(CLIENT_ROUTES.authSignin);
+      // navigate(CLIENT_ROUTES.authSignin);
     } else if (isAuthPage && userIsAuthenticated) {
       navigate(CLIENT_ROUTES.home);
     }

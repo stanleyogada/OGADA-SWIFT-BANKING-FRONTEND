@@ -7,9 +7,10 @@ import icons from "@constants/icons";
 type TpageNavHeaderProps = {
   heading: string;
   backgroundColor?: string;
+  text?: string;
 };
 
-function PageNavHeader({ heading, backgroundColor }: TpageNavHeaderProps) {
+function PageNavHeader({ heading, backgroundColor, text }: TpageNavHeaderProps) {
   const navigate = useNavigate();
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>
@@ -18,6 +19,7 @@ function PageNavHeader({ heading, backgroundColor }: TpageNavHeaderProps) {
       <h1 className="heading" data-testid="heading">
         {heading}
       </h1>
+      <div className="text">{text}</div>
     </PageNavHeaderWrapper>
   );
 }
