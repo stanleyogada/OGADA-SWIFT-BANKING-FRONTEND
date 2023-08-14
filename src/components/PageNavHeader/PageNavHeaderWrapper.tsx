@@ -11,7 +11,7 @@ const PageNavHeaderWrapper = styled.div<TProps>`
   gap: 18px;
 
   color: ${COLORS.black};
-  padding: 25px 0px 20px 29px;
+  padding: 25px 0px 20px 4px;
   ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
 
   button {
