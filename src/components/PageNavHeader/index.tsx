@@ -4,12 +4,13 @@ import PageNavHeaderWrapper from "./PageNavHeaderWrapper";
 import Button from "@components/Button";
 import icons from "@constants/icons";
 
-type pageNavHeaderProps = {
+type TpageNavHeaderProps = {
   heading: string;
   backgroundColor?: string;
+  text?: string;
 };
 
-function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {
+function PageNavHeader({ heading, backgroundColor, text }: TpageNavHeaderProps) {
   const navigate = useNavigate();
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>
@@ -18,6 +19,7 @@ function PageNavHeader({ heading, backgroundColor }: pageNavHeaderProps) {
       <h1 className="heading" data-testid="heading">
         {heading}
       </h1>
+      <div className="text">{text}</div>
     </PageNavHeaderWrapper>
   );
 }
