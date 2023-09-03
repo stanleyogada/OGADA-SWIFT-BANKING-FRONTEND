@@ -22,7 +22,6 @@ An application solely for education purposes!
 - Install `vscode-styled-components` extension
 
 #
-
 ## How to contribute
 
 1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main && npm i --force --legacy-peer-deps`
