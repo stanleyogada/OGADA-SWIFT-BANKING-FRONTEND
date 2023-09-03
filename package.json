@@ -10,8 +10,8 @@
     "test:watch": "npx jest --clearCache && jest --watchAll --no-cache",
     "test": "npx jest --clearCache && jest --no-cache",
     "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev --host",
-    "pm2:stop": "pm2 stop index",
-    "pm2:restart": "pm2 start index && pm2 logs index"
+    "pm2:stop": "pm2 stop 0",
+    "pm2:restart": "pm2 start 0 && pm2 logs 0"
   },
   "dependencies": {
     "@types/react-query": "^1.2.9",
