@@ -4,12 +4,12 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "start": "vite preview --port 80",
     "test:watch": "npx jest --clearCache && jest --watchAll --no-cache",
     "test": "npx jest --clearCache && jest --no-cache",
-    "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev --host && pm2 logs 0",
+    "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev && pm2 logs 0",
     "pm2:stop": "pm2 delete 0"
   },
   "dependencies": {
