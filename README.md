@@ -2,7 +2,7 @@
 
 An application solely for education purposes!
 
-**There are no env files for the projects**
+**There are no .env files for the projects**
 
 #
 
