@@ -27,4 +27,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["react-rc"],
   },
+  server: {
+    port: 80,
+  },
 });
