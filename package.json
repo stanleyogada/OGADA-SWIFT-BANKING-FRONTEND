@@ -49,17 +49,3 @@
     "vite": "^4.4.9"
   }
 }
-
-
-#!/bin/bash
-
-echo "Running post-merge automation................."
-echo "Installing dependencies................"
-yarn install-cmd
-
-echo "Stopping running server on pm2..................."
-yarn pm2:stop
-
-echo "Starting back server on pm2......................"
-yarn pm2:start
-pm2 save
