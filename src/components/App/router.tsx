@@ -12,6 +12,7 @@ import Cards from "@pages/Cards";
 import Account from "@pages/Account.tsx";
 import Livechat from "@pages/Livechat";
 import Redirect from "@components/Redirect";
+import EditAccount from "@pages/EditAccount";
 
 import Welcome from "@pages/Auth/Welcome";
 import Signin from "@pages/Auth/Signin";
@@ -98,6 +99,14 @@ const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
+      {
+        path: CLIENT_ROUTES.editAccount,
+        element: (
+          <PageWrapper>
+            <EditAccount />
+          </PageWrapper>
+        ),
+      },
     ],
   },
   {
@@ -144,6 +153,7 @@ const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
+
       {
         path: CLIENT_ROUTES.authForgetPasscode,
         element: (

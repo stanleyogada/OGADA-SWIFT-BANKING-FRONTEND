@@ -2,11 +2,13 @@
 
 An application solely for education purposes!
 
+**There are no .env files for the projects**
+
 #
 
 ## Usage
 
-1. First Run `node -v` if your version **< v12** Then update to the latest node version - https://nodejs.org/en/download/, Otherwise don't download the latest
+1. First Run `node -v` if your version **< v12** Then update to the latest node version - https://nodejs.org/en/download/, Don't download the latest
 2. Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 3. Run `cd Opay-Demo-Frontend`
 4. Run `npm i --force --legacy-peer-deps`
@@ -23,7 +25,7 @@ An application solely for education purposes!
 
 ## How to contribute
 
-1. Checkout to main branch and pull lastest changes `git checkout main && git pull origin main && npm i --force --legacy-peer-deps`
+1. Checkout to main branch and pull latest changes `git checkout main && git pull origin main && npm i --force --legacy-peer-deps`
 2. Create your branch with the of your current ticket e.g `git checkout -b ch-#675-add-pretier-configuration`.
 3. Make your changes.
 4. Stage and commit your changes. e.g. `git add . && git commit -m "ch-#675: setup prettier configuration"`.
@@ -49,7 +51,7 @@ An application solely for education purposes!
 #### Format
 
 - The **PR** title. eg. `[#675] Add prettier configuration`.
-- The **PR** body: this should be the link to the ticket on Trello. eg. `Trello: https://trello.com/c/XEv0yeTA`.
+- The **PR** body: This should be the link to the ticket on Trello. eg. `Trello: https://trello.com/c/XEv0yeTA`.
 - **Below is screenshot example of the perfect PR**: take a look=>https://github.com/stanleyogada/Opay-Demo-Frontend/pull/3
   ![image](https://user-images.githubusercontent.com/104577296/221747744-f5a893cf-ae75-4a63-ba69-9016798e47a9.png)
 

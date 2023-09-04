@@ -11,7 +11,7 @@ const PageNavHeaderWrapper = styled.div<TProps>`
   gap: 18px;
 
   color: ${COLORS.black};
-  padding: 25px 0px 20px 29px;
+  padding: 25px 0px 20px 4px;
   ${({ backgroundColor }) => `background-color: ${backgroundColor}`};
 
   button {
@@ -21,6 +21,13 @@ const PageNavHeaderWrapper = styled.div<TProps>`
   .heading {
     font-size: 15px;
     font-weight: 500;
+  }
+  .text {
+    color: ${COLORS.blue};
+    width: 50%;
+    text-align: end;
+    font-weight: 500;
+    font-size: 17px;
   }
 `;
 export default PageNavHeaderWrapper;

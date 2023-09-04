@@ -17,7 +17,7 @@ const Home = () => {
         <div className="profile-head">
           <div className="profile-info">
             <Avatar />
-            <h3>Hello, Tega</h3>
+            <h3>Hello, RichCode Dev Team</h3>
           </div>
           <div className="profile-icons">
             <div onClick={() => handleSignOut()}>
