@@ -9,78 +9,46 @@ import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
 const response = [
   {
     transaction_id: 21,
-    created_at: "2023-09-02T21:57:18.999Z",
-    transaction_number: "TRX-202392225718-135-1693691838998",
-    is_success: true,
-    type: "cashback",
+    created_at: new Date().toISOString(),
+    transaction_type: "in-house",
     amount: "280.00",
-    charge: "0.00",
+    is_success: true,
     account_id: 19,
-    transactions_banks_id: 1,
-    bank_account_full_name: "Bank User Full Name",
-    bank_account_number: "1234567890",
-    bank_name: "Bank Name",
-    session_id: "SES-202392225718-531-1693691838998",
-    remark: "Send money to my costumer's bank",
-    sender_account_full_name: "Offer MoneyMan2",
     sender_account_number: "9012345619",
+    receiver_account_number: "n/a",
+    is_deposit: true,
+  },
+  {
+    transaction_id: 21,
+    created_at: "2023-09-02T21:57:18.999Z",
+    transaction_type: "banks",
+    amount: "280.00",
+    is_success: false,
+    account_id: 19,
+    sender_account_number: "9012345619",
+    receiver_account_number: "n/a",
     is_deposit: false,
   },
   {
     transaction_id: 21,
     created_at: "2023-09-02T21:57:18.999Z",
-    transaction_number: "TRX-202392225718-135-1693691838998",
-    is_success: true,
-    type: "transfer",
+    transaction_type: "banks",
     amount: "280.00",
-    charge: "0.00",
+    is_success: true,
     account_id: 19,
-    transactions_banks_id: 1,
-    bank_account_full_name: "Bank User Full Name",
-    bank_account_number: "1234567890",
-    bank_name: "Bank Name",
-    session_id: "SES-202392225718-531-1693691838998",
-    remark: "Send money to my costumer's bank",
-    sender_account_full_name: "Offer MoneyMan2",
     sender_account_number: "9012345619",
+    receiver_account_number: "n/a",
     is_deposit: false,
   },
   {
     transaction_id: 21,
     created_at: "2023-09-02T21:57:18.999Z",
-    transaction_number: "TRX-202392225718-135-1693691838998",
-    is_success: true,
-    type: "data",
+    transaction_type: "banks",
     amount: "280.00",
-    charge: "0.00",
-    account_id: 19,
-    transactions_banks_id: 1,
-    bank_account_full_name: "Bank User Full Name",
-    bank_account_number: "1234567890",
-    bank_name: "Bank Name",
-    session_id: "SES-202392225718-531-1693691838998",
-    remark: "Send money to my costumer's bank",
-    sender_account_full_name: "Offer MoneyMan2",
-    sender_account_number: "9012345619",
-    is_deposit: false,
-  },
-  {
-    transaction_id: 21,
-    created_at: "2023-09-02T21:57:18.999Z",
-    transaction_number: "TRX-202392225718-135-1693691838998",
     is_success: true,
-    type: "deposit",
-    amount: "280.00",
-    charge: "0.00",
     account_id: 19,
-    transactions_banks_id: 1,
-    bank_account_full_name: "Bank User Full Name",
-    bank_account_number: "1234567890",
-    bank_name: "Bank Name",
-    session_id: "SES-202392225718-531-1693691838998",
-    remark: "Send money to my costumer's bank",
-    sender_account_full_name: "Offer MoneyMan2",
     sender_account_number: "9012345619",
+    receiver_account_number: "n/a",
     is_deposit: false,
   },
 ];
@@ -105,10 +73,24 @@ test("Renders two cards on load and fetches more data on button click", async ()
   const initialCards = await screen.findAllByTestId("transaction-card");
   expect(initialCards).toHaveLength(4);
 
-  for (let i = 0; i < initialCards.length; i++) {
-    expect(initialCards[i]).toHaveTextContent(new RegExp(response[i].type, "i"));
-    expect(initialCards[i]).toHaveTextContent(new RegExp(response[i].created_at, "i"));
+  for (let i = 0; i < response.length; i++) {
+    expect(initialCards[i]).toHaveTextContent(new RegExp(`Daily ${response[i].transaction_type}`));
+
+    if (!response[i].is_deposit) {
+      expect(initialCards[i]).toHaveTextContent(new RegExp("-N280.00"));
+    } else {
+      expect(initialCards[i]).toHaveTextContent(new RegExp("N280.00"));
+    }
+
+    if (response[i].is_success) {
+      expect(initialCards[i]).toHaveTextContent(/successful/);
+    } else {
+      expect(initialCards[i]).toHaveTextContent("failed");
+    }
   }
+
+  expect(initialCards[0]).toHaveTextContent(/Daily in-house/);
+  expect(initialCards[0]).toHaveTextContent(/successful/);
 
   const user = userEvent.setup();
 

@@ -3,24 +3,24 @@ import vector from "@constants/images/vector";
 const switches = {
   getTransactionIcon: (type: string) => {
     switch (type) {
-      case "transfer":
+      case "in-houses":
         return {
           icon: vector.transfer_icon(),
           url: "http://localhost:3000/transaction/transfer",
         };
-      case "data":
+      case "mobiles":
         return {
           icon: vector.data(),
           url: "http://localhost:3000/transaction/transfer",
         };
 
-      case "cashback":
+      case "rewards":
         return {
           icon: vector.cashback(),
           url: "http://localhost:3000/transaction/transfer",
         };
 
-      case "deposit":
+      case "banks":
         return {
           icon: vector.deposit(),
           url: "http://localhost:3000/transaction/transfer",

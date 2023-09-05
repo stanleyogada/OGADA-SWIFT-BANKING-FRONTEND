@@ -27,8 +27,9 @@ const Transaction = () => {
               key={item.charge}
               amount={item.amount}
               created_at={item.created_at}
-              type={item.type}
+              transaction_type={item.transaction_type}
               is_success={item.is_success}
+              is_deposit={item.is_deposit}
             />
           ))
         )}
