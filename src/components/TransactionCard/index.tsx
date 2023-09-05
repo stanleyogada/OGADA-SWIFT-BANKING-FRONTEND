@@ -1,6 +1,6 @@
-import vector from "@constants/images/vector";
-import { getTransactions } from "@services/transaction";
 import switches from "@utils/getIcons";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 
 export type TProps = {
   transaction_type: string;
@@ -12,6 +12,12 @@ export type TProps = {
 };
 
 const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit }: TProps) => {
+  const [day, setDay] = useState<string | null>(null);
+  useEffect(() => {
+    const data = dayjs(created_at).format("MMM D, YYYY h:mm A");
+    setDay(data);
+  }, []);
+
   return (
     <div className="transaction-card" data-testid="transaction-card">
       <div className="transaction-info">
@@ -20,7 +26,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
           <div className="title" data-testid="transaction-type">
             Daily {transaction_type}
           </div>
-          <div className="trans-date">{created_at}</div>
+          <div className="trans-date">{day}</div>
         </div>
       </div>
       <div className="transaction-details">

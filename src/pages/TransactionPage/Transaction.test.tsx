@@ -9,7 +9,7 @@ import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
 const response = [
   {
     transaction_id: 21,
-    created_at: new Date().toISOString(),
+    created_at: "2023-09-02T21:57:18.999Z",
     transaction_type: "in-house",
     amount: "280.00",
     is_success: true,
@@ -75,6 +75,8 @@ test("Renders two cards on load and fetches more data on button click", async ()
 
   for (let i = 0; i < response.length; i++) {
     expect(initialCards[i]).toHaveTextContent(new RegExp(`Daily ${response[i].transaction_type}`));
+    //TODO: will remove this after fixing date test
+    //  expect(initialCards[i]).toHaveTextContent(/sep 2,  2023 10:57 PM/);
 
     if (!response[i].is_deposit) {
       expect(initialCards[i]).toHaveTextContent(new RegExp("-N280.00"));
