@@ -8,21 +8,6 @@ import TransactionWrapper from "./TransactionStyle";
 const Transaction = () => {
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, setPageParam } = useTransaction();
 
-  const mapData = () => {
-    let _datas = data?.pages.map((page) =>
-      page.data.map((item: TProps) => (
-        <TransactionCard
-          amount={item.amount}
-          createdAt={item.createdAt}
-          type={item.type}
-          is_success={item.is_success}
-        />
-      ))
-    );
-    return _datas;
-  };
-
-  console.log(data);
   return (
     <TransactionWrapper>
       <div className="transaction-container">
@@ -37,10 +22,11 @@ const Transaction = () => {
           <p> 2022/12/19 - 2023/02/17 </p>
         </div>
         {data?.pages.map((page) =>
-          page.data.map((item: TProps) => (
+          page.map((item: TProps) => (
             <TransactionCard
+              key={item.charge}
               amount={item.amount}
-              createdAt={item.createdAt}
+              created_at={item.created_at}
               type={item.type}
               is_success={item.is_success}
             />
@@ -52,11 +38,12 @@ const Transaction = () => {
               fetchNextPage();
               setPageParam((page) => page + 1);
             }}
+            disabled={isFetching}
           >
             Load more
           </button>
         </div>
-        <p data-testid="loading">{isFetching ? "loading" : ""}</p>
+        {isFetching && <p data-testid="loading">loading</p>}
       </div>
     </TransactionWrapper>
   );
