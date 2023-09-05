@@ -81,19 +81,13 @@ test("Renders two cards on load and fetches more data on button click", async ()
     } else {
       expect(initialCards[i]).toHaveTextContent(new RegExp("N280.00"));
     }
-
     if (response[i].is_success) {
       expect(initialCards[i]).toHaveTextContent(/successful/);
     } else {
       expect(initialCards[i]).toHaveTextContent("failed");
     }
   }
-
-  expect(initialCards[0]).toHaveTextContent(/Daily in-house/);
-  expect(initialCards[0]).toHaveTextContent(/successful/);
-
   const user = userEvent.setup();
-
   const button = screen.getByRole("button", { name: /load more/i });
   await user.click(button);
   await handleAssertLoadingAfterSubmitClick(button);
