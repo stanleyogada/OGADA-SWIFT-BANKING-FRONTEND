@@ -2,7 +2,6 @@ import useTransaction from "./hooks";
 
 import PageNavHeader from "@components/PageNavHeader";
 import TransactionCard, { TProps } from "@components/TransactionCard";
-
 import TransactionWrapper from "./TransactionStyle";
 
 const Transaction = () => {

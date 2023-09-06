@@ -2,6 +2,7 @@ import switches from "@utils/getIcons";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import useCheckDate from "./hook/useCheckDate";
+import { useNavigate } from "react-router-dom";
 
 export type TProps = {
   transaction_type: string;
@@ -13,6 +14,7 @@ export type TProps = {
 };
 
 const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit }: TProps) => {
+  const navigate = useNavigate();
   const [day, setDay] = useState<string | null>(null);
   const { switchOnDay, switchOnMonth } = useCheckDate();
 
@@ -31,7 +33,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
   }, []);
 
   return (
-    <div className="transaction-card" data-testid="transaction-card">
+    <div className="transaction-card" onClick={() => navigate("/details")} data-testid="transaction-card">
       <div className="transaction-info">
         <div className="trans-icon">{switches.getTransactionIcon(transaction_type)?.icon}</div>
         <div className="info-wrapper">

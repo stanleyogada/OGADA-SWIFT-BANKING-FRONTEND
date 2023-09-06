@@ -99,6 +99,11 @@ const TransactionWrapper = styled.div`
         }
       }
     }
+
+    .transaction-card:hover {
+      cursor: pointer;
+    }
+
     .btn-wrapper {
       width: 100%;
       height: 100px;

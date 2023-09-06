@@ -5,7 +5,7 @@ import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
-import dayjs from "dayjs";
+import { navigate } from "@utils/test/mocks/navigate";
 
 const response = [
   {
@@ -89,4 +89,7 @@ test("Renders two cards on load and fetches more data on button click", async ()
   await user.click(button);
   await handleAssertLoadingAfterSubmitClick(button);
   expect(await screen.findAllByTestId("transaction-card")).toHaveLength(8);
+
+  await user.click(initialCards[0]);
+  expect(navigate).toHaveBeenCalled();
 });
