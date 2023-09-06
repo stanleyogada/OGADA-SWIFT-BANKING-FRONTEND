@@ -1,6 +1,7 @@
 import switches from "@utils/getIcons";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import useCheckDate from "./hook/useCheckDate";
 
 export type TProps = {
   transaction_type: string;
@@ -13,11 +14,20 @@ export type TProps = {
 
 const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit }: TProps) => {
   const [day, setDay] = useState<string | null>(null);
+  const { switchOnDay, switchOnMonth } = useCheckDate();
+
+  const formatDate = (date: string) => {
+    const currentDate = new Date(date);
+    const getDay = currentDate.getDay();
+    const getMonth = currentDate.getMonth();
+    const getFullYear = currentDate.getFullYear();
+
+    return `${switchOnDay(getDay)}, ${switchOnMonth(getMonth)} ${getFullYear}`;
+  };
 
   useEffect(() => {
-    // TODO: I will remove this comment below after mocking dayjs to error
-    // const data = dayjs(created_at).format("MMM D, YYYY h:mm A");
-    // // setDay(data);
+    const date = formatDate(created_at);
+    setDay(date);
   }, []);
 
   return (
@@ -28,7 +38,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
           <div className="title" data-testid="transaction-type">
             Daily {transaction_type}
           </div>
-          <div className="trans-date">{day}</div>nnm
+          <div className="trans-date">{day}</div>
         </div>
       </div>
       <div className="transaction-details">
