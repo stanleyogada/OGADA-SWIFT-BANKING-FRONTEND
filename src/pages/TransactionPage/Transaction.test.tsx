@@ -5,11 +5,12 @@ import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import dayjs from "dayjs";
 
 const response = [
   {
     transaction_id: 21,
-    created_at: "2023-09-02T21:57:18.999Z",
+    created_at: new Date().toISOString(),
     transaction_type: "in-house",
     amount: "280.00",
     is_success: true,
@@ -73,10 +74,11 @@ test("Renders two cards on load and fetches more data on button click", async ()
   const initialCards = await screen.findAllByTestId("transaction-card");
   expect(initialCards).toHaveLength(4);
 
+  //TODO: will remove this after fixing date test
+  //  expect(initialCards[i]).toHaveTextContent(/sep 2,  2023 10:57 PM/);
+
   for (let i = 0; i < response.length; i++) {
     expect(initialCards[i]).toHaveTextContent(new RegExp(`Daily ${response[i].transaction_type}`));
-    //TODO: will remove this after fixing date test
-    //  expect(initialCards[i]).toHaveTextContent(/sep 2,  2023 10:57 PM/);
 
     if (!response[i].is_deposit) {
       expect(initialCards[i]).toHaveTextContent(new RegExp("-N280.00"));
@@ -89,7 +91,9 @@ test("Renders two cards on load and fetches more data on button click", async ()
       expect(initialCards[i]).toHaveTextContent("failed");
     }
   }
+
   const user = userEvent.setup();
+
   const button = screen.getByRole("button", { name: /load more/i });
   await user.click(button);
   await handleAssertLoadingAfterSubmitClick(button);

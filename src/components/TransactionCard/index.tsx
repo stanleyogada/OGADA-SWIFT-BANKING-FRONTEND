@@ -13,9 +13,11 @@ export type TProps = {
 
 const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit }: TProps) => {
   const [day, setDay] = useState<string | null>(null);
+
   useEffect(() => {
-    const data = dayjs(created_at).format("MMM D, YYYY h:mm A");
-    setDay(data);
+    // TODO: I will remove this comment below after mocking dayjs to error
+    // const data = dayjs(created_at).format("MMM D, YYYY h:mm A");
+    // // setDay(data);
   }, []);
 
   return (
@@ -26,7 +28,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
           <div className="title" data-testid="transaction-type">
             Daily {transaction_type}
           </div>
-          <div className="trans-date">{day}</div>
+          <div className="trans-date">{day}</div>nnm
         </div>
       </div>
       <div className="transaction-details">
