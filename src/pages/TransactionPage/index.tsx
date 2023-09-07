@@ -7,6 +7,8 @@ import TransactionWrapper from "./TransactionStyle";
 const Transaction = () => {
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, setPageParam } = useTransaction();
 
+  console.log(data);
+
   return (
     <TransactionWrapper>
       <div className="transaction-container">

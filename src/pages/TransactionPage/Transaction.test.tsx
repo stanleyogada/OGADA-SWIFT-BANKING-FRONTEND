@@ -56,9 +56,11 @@ const response = [
 
 createServer([
   {
-    url: "http://localhost:8000/trans",
+    url: `${BASE_URL}${ENDPOINTS.transactionAll}`,
     res() {
-      return response;
+      return {
+        data: response,
+      };
     },
   },
   `${BASE_URL}${ENDPOINTS.currentUser}`,
