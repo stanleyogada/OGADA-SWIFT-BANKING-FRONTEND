@@ -15,6 +15,15 @@ const getAliases = () => {
   return aliases;
 };
 
+const getDevPort = (() =>
+  process.env.NODE_ENV === "production"
+    ? {
+        server: {
+          port: 80,
+        },
+      }
+    : {})();
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -27,7 +36,6 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["react-rc"],
   },
-  server: {
-    port: 80,
-  },
+
+  ...getDevPort,
 });
