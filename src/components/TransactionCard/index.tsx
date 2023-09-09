@@ -1,8 +1,7 @@
-import switches from "@utils/getIcons";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getExactDay, getExactMonth } from "@utils/getDate";
+import getIcon from "@utils/getIcons";
 
 export type TProps = {
   transaction_type: string;
@@ -34,10 +33,10 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
   return (
     <div className="transaction-card" onClick={() => navigate("/details")} data-testid="transaction-card">
       <div className="transaction-info">
-        <div className="trans-icon">{switches.getTransactionIcon(transaction_type)?.icon}</div>
+        <div className="trans-icon">{getIcon(transaction_type)?.icon}</div>
         <div className="info-wrapper">
           <div className="title" data-testid="transaction-type">
-            Daily {transaction_type}
+            {transaction_type}
           </div>
           <div className="trans-date">{day}</div>
         </div>

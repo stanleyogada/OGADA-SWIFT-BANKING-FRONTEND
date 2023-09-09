@@ -33,16 +33,16 @@ const vector = {
     return <img src={physical} />;
   },
 
-  rewards() {
+  rewardsIcon() {
     return <img src={cashback} />;
   },
-  inHouse() {
+  inHousesIcon() {
     return <img src={transfer_icon} />;
   },
-  mobile() {
+  mobileIcon() {
     return <img src={data} />;
   },
-  banks() {
+  banksIcon() {
     return <img src={deposit} />;
   },
 };

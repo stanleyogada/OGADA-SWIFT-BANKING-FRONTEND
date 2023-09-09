@@ -75,12 +75,12 @@ test("Renders two cards on load and fetches more data on button click", async ()
 
   const initialCards = await screen.findAllByTestId("transaction-card");
   expect(initialCards).toHaveLength(4);
-  expect(initialCards[0]).toHaveTextContent(new RegExp(`Daily in-house`));
+  expect(initialCards[0]).toHaveTextContent(new RegExp(`in-house`));
   expect(initialCards[0]).toHaveTextContent(/saturday, sep 2023/i);
   expect(initialCards[0]).toHaveTextContent(/\+N280.00/);
   expect(initialCards[0]).toHaveTextContent(/successful/);
 
-  expect(initialCards[1]).toHaveTextContent(new RegExp(`Daily banks`));
+  expect(initialCards[1]).toHaveTextContent(new RegExp(`banks`));
   expect(initialCards[1]).toHaveTextContent(/monday, sep 2023/i);
   expect(initialCards[1]).toHaveTextContent(/-N280.00/);
   expect(initialCards[1]).toHaveTextContent(/failed/);

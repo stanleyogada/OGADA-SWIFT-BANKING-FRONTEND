@@ -1,87 +1,65 @@
 const getExactDay = (day: number) => {
-  let exactDay: string;
-
   switch (day) {
     case 0:
-      exactDay = "Sunday";
-      return exactDay;
+      return "Sunday";
 
     case 1:
-      exactDay = "Monday";
-      return exactDay;
+      return "Monday";
 
     case 2:
-      exactDay = "Tuesday";
-      return exactDay;
+      return "Tuesday";
 
     case 3:
-      exactDay = "Wednesday";
-      return exactDay;
+      return "Wednesday";
 
     case 4:
-      exactDay = "Thursday";
-      return exactDay;
+      return "Thursday";
 
     case 5:
-      exactDay = "Friday";
-      return exactDay;
+      return "Friday";
 
     case 6:
-      exactDay = "Saturday";
-      return exactDay;
+      return "Saturday";
   }
 };
 
 const getExactMonth = (month: number) => {
-  let exactMonth: string;
   switch (month) {
     case 0:
-      exactMonth = "Jan";
-      return exactMonth;
+      return "Jan";
 
     case 1:
-      exactMonth = "Feb";
-      return exactMonth;
+      return "Feb";
 
     case 2:
-      exactMonth = "Mar";
-      return exactMonth;
+      return "Mar";
 
     case 3:
-      exactMonth = "Apr";
-      return exactMonth;
+      return "Apr";
 
     case 4:
-      exactMonth = "May";
-      return exactMonth;
+      return "May";
 
     case 5:
-      exactMonth = "June";
-      return exactMonth;
+      return "June";
 
     case 6:
-      exactMonth = "July";
-      return exactMonth;
+      return "July";
 
     case 7:
-      exactMonth = "Aug";
-      return exactMonth;
+      return "Aug";
 
     case 8:
-      exactMonth = "Sep";
-      return exactMonth;
+      return "Sep";
 
     case 9:
-      exactMonth = "Oct";
-      return exactMonth;
+      return "Oct";
 
     case 10:
-      exactMonth = "Nov";
-      return exactMonth;
+      return "Nov";
 
     case 11:
-      exactMonth = "Dec";
-      return exactMonth;
+      return "Dec";
   }
 };
 

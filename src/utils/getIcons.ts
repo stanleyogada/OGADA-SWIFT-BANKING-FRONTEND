@@ -4,25 +4,21 @@ const getIcon = (type: string) => {
   switch (type) {
     case "in-houses":
       return {
-        icon: vector.inHouse(),
-        url: "http://localhost:3000/transaction/transfer",
+        icon: vector.inHousesIcon(),
       };
     case "mobiles":
       return {
-        icon: vector.mobile(),
-        url: "http://localhost:3000/transaction/transfer",
+        icon: vector.mobileIcon(),
       };
 
     case "rewards":
       return {
-        icon: vector.rewards(),
-        url: "http://localhost:3000/transaction/transfer",
+        icon: vector.rewardsIcon(),
       };
 
     case "banks":
       return {
-        icon: vector.banks(),
-        url: "http://localhost:3000/transaction/transfer",
+        icon: vector.banksIcon(),
       };
   }
 };

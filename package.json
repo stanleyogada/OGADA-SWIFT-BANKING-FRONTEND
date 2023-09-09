@@ -17,7 +17,6 @@
   "dependencies": {
     "@types/react-query": "^1.2.9",
     "axios": "^1.4.0",
-    "dayjs": "^1.11.9",
     "json-server": "^0.17.3",
     "mockdate": "^3.0.5",
     "msw": "^1.2.2",
