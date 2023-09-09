@@ -28,10 +28,8 @@ const useTransaction = () => {
 
   return {
     data,
-    hasNextPage,
     fetchNextPage,
     isFetching,
-    isFetchingNextPage,
     setPageParam,
   };
 };

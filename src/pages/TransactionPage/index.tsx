@@ -5,7 +5,7 @@ import TransactionCard, { TProps } from "@components/TransactionCard";
 import TransactionWrapper from "./TransactionStyle";
 
 const Transaction = () => {
-  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, setPageParam } = useTransaction();
+  const { data, fetchNextPage, isFetching, setPageParam } = useTransaction();
 
   return (
     <TransactionWrapper>
