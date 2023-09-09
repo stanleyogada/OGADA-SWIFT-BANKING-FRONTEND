@@ -1,39 +1,30 @@
 import vector from "@constants/images/vector";
 
-const switches = {
-  getTransactionIcon: (type: string) => {
-    switch (type) {
-      case "in-houses":
-        return {
-          icon: vector.transfer_icon(),
-          url: "http://localhost:3000/transaction/transfer",
-        };
-      case "mobiles":
-        return {
-          icon: vector.data(),
-          url: "http://localhost:3000/transaction/transfer",
-        };
+const getIcon = (type: string) => {
+  switch (type) {
+    case "in-houses":
+      return {
+        icon: vector.inHouse(),
+        url: "http://localhost:3000/transaction/transfer",
+      };
+    case "mobiles":
+      return {
+        icon: vector.mobile(),
+        url: "http://localhost:3000/transaction/transfer",
+      };
 
-      case "rewards":
-        return {
-          icon: vector.cashback(),
-          url: "http://localhost:3000/transaction/transfer",
-        };
+    case "rewards":
+      return {
+        icon: vector.rewards(),
+        url: "http://localhost:3000/transaction/transfer",
+      };
 
-      case "banks":
-        return {
-          icon: vector.deposit(),
-          url: "http://localhost:3000/transaction/transfer",
-        };
-    }
-  },
-  parseDate: (created_at: string) => {
-    const date = new Date(created_at);
-    let month = date.getMonth();
-    let year = date.getFullYear();
-    let day = date.getDay();
-    // TODO: remove this line after creating a function that parses date
-  },
+    case "banks":
+      return {
+        icon: vector.banks(),
+        url: "http://localhost:3000/transaction/transfer",
+      };
+  }
 };
 
-export default switches;
+export default getIcon;

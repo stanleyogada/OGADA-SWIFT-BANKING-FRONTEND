@@ -1,8 +1,8 @@
 import switches from "@utils/getIcons";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import useCheckDate from "./hook/useCheckDate";
 import { useNavigate } from "react-router-dom";
+import { getExactDay, getExactMonth } from "@utils/getDate";
 
 export type TProps = {
   transaction_type: string;
@@ -16,7 +16,6 @@ export type TProps = {
 const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit }: TProps) => {
   const navigate = useNavigate();
   const [day, setDay] = useState<string | null>(null);
-  const { switchOnDay, switchOnMonth } = useCheckDate();
 
   const formatDate = (date: string) => {
     const currentDate = new Date(date);
@@ -24,7 +23,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
     const getMonth = currentDate.getMonth();
     const getFullYear = currentDate.getFullYear();
 
-    return `${switchOnDay(getDay)}, ${switchOnMonth(getMonth)} ${getFullYear}`;
+    return `${getExactDay(getDay)}, ${getExactMonth(getMonth)} ${getFullYear}`;
   };
 
   useEffect(() => {
