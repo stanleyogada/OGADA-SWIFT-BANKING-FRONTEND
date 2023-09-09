@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "react-query";
 const useTransaction = () => {
   const [pageParams, setPageParam] = useState(0);
 
-  let { data, hasNextPage, fetchNextPage, isFetching, isFetchingNextPage, refetch } = useInfiniteQuery(
+  let { data, fetchNextPage, isFetching, refetch } = useInfiniteQuery(
     ["transaction"],
     () => getTransactions({ pageNumber: pageParams }),
     {
