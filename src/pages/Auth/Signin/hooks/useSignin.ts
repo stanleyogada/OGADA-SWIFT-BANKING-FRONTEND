@@ -11,7 +11,17 @@ const useSignin = () => {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
-  } = useForm<TSignInFormValues>();
+  } = useForm<TSignInFormValues>({
+    defaultValues: {
+      ...(() =>
+        process.env.NODE_ENV === "development"
+          ? {
+              phoneNumber: "9234567890",
+              loginPasscode: "123456",
+            }
+          : {})(),
+    },
+  });
 
   const handleSubmit = () => {
     return _handleSubmit((data: TSignInFormValues) => {

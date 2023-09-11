@@ -11,11 +11,14 @@
     "test": "npx jest --clearCache && jest --no-cache",
     "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev --host && pm2 logs 0",
     "pm2:stop": "pm2 delete 0",
-    "install-cmd": "yarn && yarn add -D @vitejs/plugin-react"
+    "install-cmd": "yarn && yarn add -D @vitejs/plugin-react",
+    "json:server": "json-server --watch db.json --port 8000"
   },
   "dependencies": {
     "@types/react-query": "^1.2.9",
     "axios": "^1.4.0",
+    "json-server": "^0.17.3",
+    "mockdate": "^3.0.5",
     "msw": "^1.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

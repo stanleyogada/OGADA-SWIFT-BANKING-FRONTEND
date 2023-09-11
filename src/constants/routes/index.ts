@@ -16,6 +16,8 @@ const CLIENT_ROUTES = {
   authForgetPasscode: "/auth/forget-passcode",
   authResetPasscode: "/auth/reset-passcode",
   liveChat: "/livechat",
+  transactionPage: "/trans",
+  details: "/details",
 };
 
 export { CLIENT_ROUTES };

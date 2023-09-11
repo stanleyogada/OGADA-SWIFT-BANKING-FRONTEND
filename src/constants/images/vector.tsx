@@ -5,6 +5,10 @@ import transfer from "@assets/transfer.svg";
 import board from "@assets/Opay-board.svg";
 import virtual from "@assets/virtual-card.svg";
 import physical from "@assets/physical-card.svg";
+import cashback from "@assets/cashback-icon.svg";
+import transfer_icon from "@assets/transfer-icon.svg";
+import data from "@assets/data-icon.svg";
+import deposit from "@assets/deposit-icon.svg";
 
 const vector = {
   stats() {
@@ -27,6 +31,19 @@ const vector = {
   },
   physical() {
     return <img src={physical} />;
+  },
+
+  rewardsIcon() {
+    return <img src={cashback} />;
+  },
+  inHousesIcon() {
+    return <img src={transfer_icon} />;
+  },
+  mobileIcon() {
+    return <img src={data} />;
+  },
+  banksIcon() {
+    return <img src={deposit} />;
   },
 };
 
