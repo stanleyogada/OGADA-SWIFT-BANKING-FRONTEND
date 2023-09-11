@@ -20,9 +20,7 @@ const Home = () => {
             <h3>Hello, RichCode Dev Team</h3>
           </div>
           <div className="profile-icons">
-            <div
-            // onClick={() => handleSignOut()}
-            >
+            <div onClick={() => handleSignOut()} data-testid="sign-out-button">
               <span className="cursor-pointer">{icons.blackUserIcon()}</span>
             </div>
 
