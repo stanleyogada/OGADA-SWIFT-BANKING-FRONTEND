@@ -12,14 +12,19 @@ const useSignin = () => {
     handleSubmit: _handleSubmit,
     formState: { errors },
   } = useForm<TSignInFormValues>({
+    // defaultValues: {
+    //   ...(() =>
+    //     process.env.NODE_ENV === "development"
+    //       ? {
+    //           phoneNumber: "9234567890",
+    //           loginPasscode: "123456",
+    //         }
+    //       : {})(),
+    // },
     defaultValues: {
-      ...(() =>
-        process.env.NODE_ENV === "development"
-          ? {
-              phoneNumber: "9234567890",
-              loginPasscode: "123456",
-            }
-          : {})(),
+        phoneNumber: "9234567890",
+        loginPasscode: "123456",
+      }
     },
   });
 
