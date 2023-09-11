@@ -22,10 +22,9 @@ const useSignin = () => {
     //       : {})(),
     // },
     defaultValues: {
-        phoneNumber: "9234567890",
-        loginPasscode: "123456",
-      }
-    },
+      phoneNumber: "9234567890",
+      loginPasscode: "123456",
+    }
   });
 
   const handleSubmit = () => {
