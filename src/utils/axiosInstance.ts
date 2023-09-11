@@ -19,8 +19,4 @@ const axiosInstance = axios.create({
   },
 });
 
-const transactionInstance = axios.create({
-  baseURL: `http://localhost:8000`,
-});
-
-export { axiosInstance, transactionInstance };
+export { axiosInstance};
