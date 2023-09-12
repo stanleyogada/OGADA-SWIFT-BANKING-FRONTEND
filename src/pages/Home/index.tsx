@@ -10,10 +10,39 @@ import { CLIENT_ROUTES } from "@constants/routes";
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 import useCurrentUserAccounts from "@hooks/useCurrentUserAccounts";
 import formatToCurrency from "@utils/formatToCurrency";
+import { useState } from "react";
+
+const useHome = () => {
+  const { handleSignOut, currentUser } = useAuth();
+  const { getOneAccount, getAccountNumber, isLoading } = useCurrentUserAccounts();
+
+  const [isShowBalance, setIsShowBalance] = useState(true);
+
+  const handleShowBalanceToggle = () => {
+    setIsShowBalance((prev) => !prev);
+  };
+
+  return {
+    handleSignOut,
+    currentUser,
+    getOneAccount,
+    getAccountNumber,
+    isLoading,
+    isShowBalance,
+    handleShowBalanceToggle,
+  };
+};
 
 const Home = () => {
-  const { handleSignOut, currentUser } = useAuth();
-  const { getAccount, isLoading } = useCurrentUserAccounts();
+  const {
+    handleSignOut,
+    currentUser,
+    getOneAccount,
+    getAccountNumber,
+    isLoading,
+    isShowBalance,
+    handleShowBalanceToggle,
+  } = useHome();
 
   return (
     <>
@@ -22,7 +51,10 @@ const Home = () => {
         <div className="profile-head">
           <div className="profile-info">
             <Avatar src={currentUser?.avatar} alt={currentUser?.fullName} />
-            <h3>Hello, {currentUser?.nickname ? currentUser.nickname : currentUser?.fullName}</h3>
+            <div className="profile-info-details">
+              <h3>Hello, {currentUser?.nickname ? currentUser.nickname : currentUser?.fullName}</h3>
+              <p>{getAccountNumber()}</p>
+            </div>
           </div>
           <div className="profile-icons">
             <div onClick={() => handleSignOut()} data-testid="sign-out-button" className="cursor-pointer">
@@ -41,7 +73,12 @@ const Home = () => {
           <div className="top-card-1">
             <div className="card-1">
               <h5>Normal Balance</h5>
-              <Button icon={icons.eyeOpenIcon()} />
+              <Button
+                className="eye-icon"
+                onClick={handleShowBalanceToggle}
+                icon={icons.eyeOpenIcon()}
+                data-testid="hide-balance-button"
+              />
             </div>
             <Button link={CLIENT_ROUTES.transactionPage}>Transaction History &gt;</Button>
           </div>
@@ -50,15 +87,17 @@ const Home = () => {
             <div className="top-card-2" data-testid="home-loading-state">
               Loading...
             </div>
-          ) : (
+          ) : isShowBalance ? (
             <>
-              <div className="top-card-2">{formatToCurrency(getAccount("NORMAL")?.balance)}</div>
+              <div className="top-card-2">{formatToCurrency(getOneAccount("NORMAL")?.balance)}</div>
 
               <div>
                 + CASHBACK &gt;&nbsp;
-                {formatToCurrency(getAccount("CASHBACK")?.balance)}
+                {formatToCurrency(getOneAccount("CASHBACK")?.balance)}
               </div>
             </>
+          ) : (
+            <div className="top-card-2">****</div>
           )}
         </div>
         {/* Below Card */}

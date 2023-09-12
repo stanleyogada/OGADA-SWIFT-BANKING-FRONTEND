@@ -88,10 +88,11 @@ test("Have all links wired up correctly", async () => {
   }
 });
 
-const balance = {
+const BALANCE = {
   normal: "10500000.00",
   cashback: "900.00",
 };
+const ACCOUNT_NUMBER = "9012345639";
 
 const handleCreateServer = (nickname?: string, avatar?: string) => {
   const allConfig = [
@@ -114,13 +115,13 @@ const handleCreateServer = (nickname?: string, avatar?: string) => {
       res: () => ({
         data: [
           {
-            account_number: "9012345639",
-            balance: balance.normal,
+            account_number: ACCOUNT_NUMBER,
+            balance: BALANCE.normal,
             type: "NORMAL",
           },
           {
-            account_number: "9012345639",
-            balance: balance.cashback,
+            account_number: ACCOUNT_NUMBER,
+            balance: BALANCE.cashback,
             type: "CASHBACK",
           },
         ],
@@ -143,6 +144,8 @@ describe("When user has a nickname and has an avatar", () => {
     await screen.findByRole("heading", {
       name: /hello, the best programmer/i,
     });
+
+    screen.getByText(ACCOUNT_NUMBER);
 
     const img = screen.getByRole("img", {
       name: /john doe/i,
@@ -174,12 +177,37 @@ describe("When user has NO nickname and NO avatar", () => {
     expect(img).toBeInTheDocument();
     expect(img).toHaveAttribute("src", DEFAULT_USER_AVATAR);
 
-    const getBalance = async () => {
-      await screen.findByText(formatToCurrency(balance.normal));
-      await screen.findByText(/\+ cashback > /i);
-      await screen.findByText(new RegExp(formatToCurrency(balance.cashback), "i"));
+    const getBalance = async (isHidden?: boolean) => {
+      const normalBalance = await screen[isHidden ? "queryByText" : "findByText"](formatToCurrency(BALANCE.normal));
+      const cashBackText = await screen[isHidden ? "queryByText" : "findByText"](/\+ cashback > /i);
+      const cashbackBalance = await screen[isHidden ? "queryByText" : "findByText"](
+        new RegExp(formatToCurrency(BALANCE.cashback), "i")
+      );
+
+      if (!isHidden) {
+        expect(normalBalance).toBeInTheDocument();
+        expect(cashBackText).toBeInTheDocument();
+        expect(cashbackBalance).toBeInTheDocument();
+        expect(screen.queryByText(/\*{4,4}/i)).not.toBeInTheDocument();
+
+        return;
+      }
+
+      expect(screen.getByText(/\*{4,4}/i)).toBeInTheDocument();
+
+      expect(normalBalance).not.toBeInTheDocument();
+      expect(cashBackText).not.toBeInTheDocument();
+      expect(cashbackBalance).not.toBeInTheDocument();
     };
 
+    await getBalance();
+
+    const hideBalanceButton = screen.getByTestId("hide-balance-button");
+    await user.click(hideBalanceButton);
+
+    await getBalance(true);
+
+    await user.click(hideBalanceButton);
     await getBalance();
   });
 });

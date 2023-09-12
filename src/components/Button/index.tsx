@@ -20,12 +20,11 @@ const Button = ({
   type,
   disabled,
   className,
-
   "data-testid": dataTestId = "btn-link",
   onClick,
 }: TProps) => {
   const btn = (
-    <ButtonWrapper type={type} disabled={disabled} className={className} onClick={onClick}>
+    <ButtonWrapper type={type} disabled={disabled} className={className} onClick={onClick} data-testid={dataTestId}>
       {icon && <div data-testid="btn-icon">{icon}</div>}
       <span>{children}</span>
     </ButtonWrapper>

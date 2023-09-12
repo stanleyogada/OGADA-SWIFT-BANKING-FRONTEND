@@ -14,7 +14,7 @@ const useCurrentUserAccounts = () => {
     }
   }, [isError]);
 
-  const getAccount = (accountType: TUserAccountType): TUserAccount | undefined => {
+  const getOneAccount = (accountType: TUserAccountType): TUserAccount | undefined => {
     if (!data) {
       return undefined;
     }
@@ -24,10 +24,18 @@ const useCurrentUserAccounts = () => {
     return account;
   };
 
+  const getAccountNumber = (): string | undefined => {
+    if (!data) {
+      return undefined;
+    }
+
+    return getOneAccount("NORMAL")?.account_number;
+  };
+
   return {
-    data,
     isLoading,
-    getAccount,
+    getOneAccount,
+    getAccountNumber,
   };
 };
 
