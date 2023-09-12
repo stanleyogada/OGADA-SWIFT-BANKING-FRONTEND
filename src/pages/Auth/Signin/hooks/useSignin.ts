@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "@hooks/useAuth";
 
 import { TSignInFormValues } from "../type";
+import { DEFAULT_LOGIN } from "@constants/pages";
 
 const useSignin = () => {
   const { handleSignIn, signInMutationState } = useAuth();
@@ -12,15 +13,16 @@ const useSignin = () => {
     handleSubmit: _handleSubmit,
     formState: { errors },
   } = useForm<TSignInFormValues>({
-    defaultValues: {
-      ...(() =>
-        process.env.NODE_ENV === "development"
-          ? {
-              phoneNumber: "9234567890",
-              loginPasscode: "123456",
-            }
-          : {})(),
-    },
+    // defaultValues: {
+    //   ...(() =>
+    //     process.env.NODE_ENV === "development"
+    //       ? {
+    //           phoneNumber: "9234567890",
+    //           loginPasscode: "123456",
+    //         }
+    //       : {})(),
+    // },
+    defaultValues: DEFAULT_LOGIN,
   });
 
   const handleSubmit = () => {

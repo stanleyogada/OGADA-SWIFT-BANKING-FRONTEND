@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getExactDay, getExactMonth } from "@utils/getDate";
-import getIcon from "@utils/getIcons";
+import getTransactionIcon from "@utils/getTransactionIcon";
+import { ETransactionAllType } from "@services/transaction/types";
 
-export type TProps = {
+type TProps = {
   transaction_type: string;
-  amount: number;
+  amount: string;
   created_at: string;
   is_success: boolean;
-  charge?: number;
   is_deposit?: boolean;
-  transaction_id: 21;
+  transaction_id: number;
 };
 
 const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit, transaction_id }: TProps) => {
@@ -38,7 +38,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
       data-testid="transaction-card"
     >
       <div className="transaction-info">
-        <div className="trans-icon">{getIcon(transaction_type)?.icon}</div>
+        <div className="trans-icon">{getTransactionIcon(transaction_type as ETransactionAllType)}</div>
         <div className="info-wrapper">
           <div className="title" data-testid="transaction-type">
             {transaction_type}

@@ -4,11 +4,9 @@ import { MemoryRouter } from "react-router-dom";
 import icons from "@constants/icons";
 import Button from ".";
 
-const mockedUseHerf = jest.fn();
-
 jest.mock("react-router-dom", () => ({
   ...(jest.requireActual("react-router-dom") as any),
-  useHref: () => mockedUseHerf,
+  useHref: () => jest.fn(),
 }));
 
 describe("Button", () => {

@@ -1,15 +1,32 @@
 import { screen, waitForElementToBeRemoved } from "@testing-library/react";
 
-const handleAssertLoadingAfterSubmitClick = async (button: HTMLElement) => {
-  await waitForElementToBeRemoved(() => {
-    expect(screen.getByTestId("loading")).toBeInTheDocument();
-    expect(button).toBeDisabled();
+function handleAssertLoadingState(button: HTMLElement): Promise<void>;
+function handleAssertLoadingState(loadingElementDataTestId: string): Promise<void>;
 
-    return screen.getByTestId("loading");
+async function handleAssertLoadingState(x: unknown) {
+  const getLoadingElement = (isQueryBy?: boolean) => {
+    if (typeof x === "object") {
+      return screen[isQueryBy ? "queryByTestId" : "getByTestId"]("loading");
+    }
+
+    return screen[isQueryBy ? "queryByTestId" : "getByTestId"](x as string);
+  };
+
+  await waitForElementToBeRemoved(() => {
+    expect(getLoadingElement()).toBeInTheDocument();
+
+    if (typeof x === "object") {
+      expect(x).toBeDisabled();
+    }
+
+    return getLoadingElement();
   });
 
-  expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
-  expect(button).not.toBeDisabled();
-};
+  expect(getLoadingElement(true)).not.toBeInTheDocument();
 
-export { handleAssertLoadingAfterSubmitClick };
+  if (typeof x === "object") {
+    expect(x).not.toBeDisabled();
+  }
+}
+
+export { handleAssertLoadingState };

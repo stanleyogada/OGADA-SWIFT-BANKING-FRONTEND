@@ -9,6 +9,7 @@ import cashback from "@assets/cashback-icon.svg";
 import transfer_icon from "@assets/transfer-icon.svg";
 import data from "@assets/data-icon.svg";
 import deposit from "@assets/deposit-icon.svg";
+import logout from "@assets/logout-icon.png";
 
 const vector = {
   stats() {
@@ -44,6 +45,18 @@ const vector = {
   },
   banksIcon() {
     return <img src={deposit} />;
+  },
+  logoutIcon() {
+    return (
+      <img
+        src={logout}
+        width={25}
+        height={25}
+        style={{
+          marginTop: "-3px",
+        }}
+      />
+    );
   },
 };
 

@@ -18,6 +18,10 @@ const CLIENT_ROUTES = {
   liveChat: "/livechat",
   transactionPage: "/trans",
   details: "/details/:id",
+  addMoney: "/add-money",
+  sendMoneyInHouse: "/send-money/In-house",
+  sendMoneyBank: "/send-money/bank",
+  sendMoneyMobile: "/send-money/mobile",
 };
 
 export { CLIENT_ROUTES };

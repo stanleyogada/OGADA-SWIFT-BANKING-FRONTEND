@@ -1,4 +1,4 @@
-import { getTransactions } from "@services/transaction";
+import { geTTransactionAlls } from "@services/transaction";
 import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 
@@ -7,7 +7,7 @@ const useTransaction = () => {
 
   let { data, fetchNextPage, isFetching, refetch } = useInfiniteQuery(
     ["transaction"],
-    () => getTransactions({ pageNumber: pageParams }),
+    () => geTTransactionAlls({ pageNumber: pageParams }),
     {
       getNextPageParam: (_lastPage, page) => {
         if (page.length < 16) {

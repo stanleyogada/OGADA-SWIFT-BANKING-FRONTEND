@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import ResendEmail from ".";
 
 import createServer from "@utils/test/createServer";
-import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { localStorageGetItem, localStorageSetItem } from "@utils/test/mocks/localStorage";
 
 import TestProviders from "@components/TestProviders";
@@ -44,7 +44,7 @@ describe("Sends email and redirects to verify email code page", () => {
     await user.type(emailInput, email);
     await user.click(submitButton);
 
-    await handleAssertLoadingAfterSubmitClick(submitButton);
+    await handleAssertLoadingState(submitButton);
 
     expect(navigate).toHaveBeenCalled();
     expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
@@ -81,7 +81,7 @@ describe("Sends email and redirects to verify email code page", () => {
 
     await user.click(submitButton);
 
-    await handleAssertLoadingAfterSubmitClick(submitButton);
+    await handleAssertLoadingState(submitButton);
 
     expect(localStorageSetItem).toHaveBeenCalledWith(
       LOCAL_STORAGE_KEYS.sendEmailCodeSuccess,
@@ -114,7 +114,7 @@ test("Displays errors works correctly when the network request errors", async ()
   await user.type(emailInput, "test@gmail.com");
   await user.click(submitButton);
 
-  await handleAssertLoadingAfterSubmitClick(submitButton);
+  await handleAssertLoadingState(submitButton);
 
   expect(navigate).not.toHaveBeenCalled();
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 402");
