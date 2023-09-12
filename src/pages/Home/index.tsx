@@ -10,7 +10,9 @@ import { CLIENT_ROUTES } from "@constants/routes";
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 
 const Home = () => {
-  const { handleSignOut } = useAuth();
+  const { handleSignOut, currentUser } = useAuth();
+
+  console.log(currentUser);
 
   return (
     <>
@@ -19,7 +21,10 @@ const Home = () => {
         <div className="profile-head">
           <div className="profile-info">
             <Avatar />
-            <h3>Hello, RichCode Dev Team</h3>
+            <h3>
+              Hello,{" "}
+              {currentUser?.nickname ? currentUser.nickname : `${currentUser?.first_name} ${currentUser?.last_name}`}
+            </h3>
           </div>
           <div className="profile-icons">
             <div onClick={() => handleSignOut()} data-testid="sign-out-button" className="cursor-pointer">

@@ -8,7 +8,7 @@ const getCurrentUser = async (): Promise<TUser> => {
     url: ENDPOINTS.currentUser,
   });
 
-  return data;
+  return data.data;
 };
 
 export { getCurrentUser };

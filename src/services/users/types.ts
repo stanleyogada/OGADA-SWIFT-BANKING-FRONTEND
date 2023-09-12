@@ -4,8 +4,8 @@ type TUser = {
   updated_at: string;
   first_name: string;
   last_name: string;
-  middle_name: string;
-  nickname: string;
+  middle_name?: string;
+  nickname?: string;
   email: string;
   email_is_verified: boolean;
   phone: string;
