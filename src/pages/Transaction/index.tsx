@@ -1,7 +1,7 @@
 import useTransaction from "./hooks";
 
 import PageNavHeader from "@components/PageNavHeader";
-import TransactionCard, { TProps } from "@components/TransactionCard";
+import TransactionCard from "@components/TransactionCard";
 import TransactionWrapper from "./TransactionStyle";
 
 const Transaction = () => {
@@ -21,9 +21,9 @@ const Transaction = () => {
           <p> 2022/12/19 - 2023/02/17 </p>
         </div>
         {data?.pages.map((page) =>
-          page.map((item: TProps) => (
+          page.map((item) => (
             <TransactionCard
-              key={item.charge}
+              key={item.transaction_id}
               amount={item.amount}
               created_at={item.created_at}
               transaction_type={item.transaction_type}

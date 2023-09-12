@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
 import Navigation from "@components/Navigation";
 import icons from "@constants/icons";
 import Button from "@components/Button";
@@ -6,11 +8,13 @@ import Avatar from "@components/Avatar/Avatar";
 import useAuth from "@hooks/useAuth";
 import vector from "@constants/images/vector";
 import { CLIENT_ROUTES } from "@constants/routes";
-
-import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 import useCurrentUserAccounts from "@hooks/useCurrentUserAccounts";
 import formatToCurrency from "@utils/formatToCurrency";
-import { useState } from "react";
+import BrandLogo from "@components/BrandLogo";
+import getTransactionIcon from "@utils/getTransactionIcon";
+
+import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
+import { ETransactionAllType } from "@services/transaction/types";
 
 const useHome = () => {
   const { handleSignOut, currentUser } = useAuth();
@@ -113,17 +117,17 @@ const Home = () => {
       </HeroWrapper>
       {/* Payment Section */}
       <PaymentWrapper>
-        <h1>Payment</h1>
+        <h1>Transfer Money</h1>
         <div className="icons">
-          <Button icon={icons.phoneIcon()} link={CLIENT_ROUTES.sendMoneyInHouse}>
+          <Button icon={<BrandLogo isRound sm />} link={CLIENT_ROUTES.sendMoneyInHouse}>
             Opay
           </Button>
 
-          <Button icon={icons.phoneIcon()} link={CLIENT_ROUTES.sendMoneyBank}>
+          <Button icon={getTransactionIcon(ETransactionAllType.BANKS)} link={CLIENT_ROUTES.sendMoneyBank}>
             Bank
           </Button>
 
-          <Button icon={icons.worldIcon()} link={CLIENT_ROUTES.sendMoneyMobile}>
+          <Button icon={icons.phoneIcon()} link={CLIENT_ROUTES.sendMoneyMobile}>
             Mobile
           </Button>
         </div>

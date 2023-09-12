@@ -13,16 +13,7 @@ type TProps = {
   "data-testid"?: string;
 };
 
-const Button = ({
-  icon,
-  children,
-  link,
-  type,
-  disabled,
-  className,
-  "data-testid": dataTestId = "btn-link",
-  onClick,
-}: TProps) => {
+const Button = ({ icon, children, link, type, disabled, className, "data-testid": dataTestId, onClick }: TProps) => {
   const btn = (
     <ButtonWrapper type={type} disabled={disabled} className={className} onClick={onClick} data-testid={dataTestId}>
       {icon && <div data-testid="btn-icon">{icon}</div>}
@@ -32,7 +23,7 @@ const Button = ({
 
   return link ? (
     <LinkWrapper>
-      <Link data-testid={dataTestId} to={link}>
+      <Link data-testid="btn-link" to={link}>
         {btn}
       </Link>
     </LinkWrapper>

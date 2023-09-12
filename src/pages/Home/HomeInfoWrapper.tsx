@@ -128,9 +128,14 @@ const PaymentWrapper = styled.section`
 
   .icons {
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
+
+    button span {
+      color: ${COLORS.black};
+      font-weight: 500;
+    }
   }
 
   @media screen and (min-width: 400px) {
