@@ -6,6 +6,7 @@ import Avatar from "../../components/Avatar/Avatar";
 import useAuth from "../../hooks/useAuth";
 
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
+import vector from "@constants/images/vector";
 
 const Home = () => {
   const { handleSignOut } = useAuth();
@@ -20,8 +21,8 @@ const Home = () => {
             <h3>Hello, RichCode Dev Team</h3>
           </div>
           <div className="profile-icons">
-            <div onClick={() => handleSignOut()} data-testid="sign-out-button">
-              <span className="cursor-pointer">{icons.blackUserIcon()}</span>
+            <div onClick={() => handleSignOut()} data-testid="sign-out-button" className="cursor-pointer">
+              {vector.logoutIcon()}
             </div>
 
             <Link to="/" className="notify">
@@ -38,7 +39,7 @@ const Home = () => {
               <h5>Total Balance</h5>
               <Button icon={icons.eyeOpenIcon()} />
             </div>
-            <h5>Transact...n History</h5>
+            <h5>Transaction History</h5>
           </div>
 
           <div className="top-card-2">0,00</div>

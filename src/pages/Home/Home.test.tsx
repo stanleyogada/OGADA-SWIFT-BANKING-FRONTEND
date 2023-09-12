@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Home from ".";
 import TestProviders from "@components/TestProviders";
@@ -10,6 +10,11 @@ test("Have Sign out button working", async () => {
   });
 
   const signOutButton = screen.getByTestId("sign-out-button");
+  const icon = within(signOutButton).getByRole("img");
+  expect(icon).toBeInTheDocument();
+  expect(icon).toHaveAttribute("width", "25");
+  expect(icon).toHaveAttribute("height", "25");
+
   const user = userEvent.setup();
 
   await user.click(signOutButton);
