@@ -1,13 +1,13 @@
-import Navigation from "../../components/Navigation";
-import icons from "../../constants/icons";
+import Navigation from "@components/Navigation";
+import icons from "@constants/icons";
 import { Link } from "react-router-dom";
-import Button from "../../components/Button";
-import Avatar from "../../components/Avatar/Avatar";
-import useAuth from "../../hooks/useAuth";
-
-import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
+import Button from "@components/Button";
+import Avatar from "@components/Avatar/Avatar";
+import useAuth from "@hooks/useAuth";
 import vector from "@constants/images/vector";
 import { CLIENT_ROUTES } from "@constants/routes";
+
+import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 
 const Home = () => {
   const { handleSignOut } = useAuth();
