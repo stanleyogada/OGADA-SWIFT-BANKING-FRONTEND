@@ -1,14 +1,16 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Home from ".";
 import TestProviders from "@components/TestProviders";
 import { localStorageRemoveItem } from "@utils/test/mocks/localStorage";
 import { CLIENT_ROUTES } from "@constants/routes";
-
-import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
-import { TUser } from "@services/users/types";
+
+import Home from ".";
+
+import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
+import type { TUser } from "@services/users/types";
+
 let user: UserEvent;
 
 beforeEach(() => {

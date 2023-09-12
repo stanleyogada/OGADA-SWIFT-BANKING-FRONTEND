@@ -9,6 +9,7 @@ type TUser = {
   email: string;
   email_is_verified: boolean;
   phone: string;
+  avatar?: string;
 };
 
 export type { TUser };

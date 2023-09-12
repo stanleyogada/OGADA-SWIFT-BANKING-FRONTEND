@@ -1,6 +1,7 @@
 import { axiosInstance } from "@utils/axiosInstance";
 import { ENDPOINTS } from "@constants/services";
-import { TUser } from "./types";
+
+import type { TUser } from "./types";
 
 const getCurrentUser = async (): Promise<TUser> => {
   const { data } = await axiosInstance({
@@ -8,7 +9,7 @@ const getCurrentUser = async (): Promise<TUser> => {
     url: ENDPOINTS.currentUser,
   });
 
-  return data.data;
+  return data.data as TUser;
 };
 
 export { getCurrentUser };
