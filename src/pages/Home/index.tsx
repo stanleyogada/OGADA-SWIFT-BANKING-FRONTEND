@@ -21,11 +21,8 @@ const Home = () => {
         {/* Header Info */}
         <div className="profile-head">
           <div className="profile-info">
-            <Avatar />
-            <h3>
-              Hello,{" "}
-              {currentUser?.nickname ? currentUser.nickname : `${currentUser?.first_name} ${currentUser?.last_name}`}
-            </h3>
+            <Avatar src={currentUser?.avatar} alt={currentUser?.fullName} />
+            <h3>Hello, {currentUser?.nickname ? currentUser.nickname : currentUser?.fullName}</h3>
           </div>
           <div className="profile-icons">
             <div onClick={() => handleSignOut()} data-testid="sign-out-button" className="cursor-pointer">

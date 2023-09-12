@@ -12,6 +12,7 @@ import type { UserEvent } from "@testing-library/user-event/dist/types/setup/set
 import { S } from "msw/lib/glossary-de6278a9";
 import formatToCurrency from "@utils/formatToCurrency";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
+import { DEFAULT_USER_AVATAR } from "@constants/index";
 
 let user: UserEvent;
 
@@ -92,7 +93,7 @@ const balance = {
   cashback: "900.00",
 };
 
-const handleCreateServer = (nickname?: string) => {
+const handleCreateServer = (nickname?: string, avatar?: string) => {
   const allConfig = [
     {
       url: `${BASE_URL}${ENDPOINTS.currentUser}`,
@@ -101,6 +102,7 @@ const handleCreateServer = (nickname?: string) => {
           first_name: "John",
           last_name: "Doe",
           nickname,
+          avatar,
 
           // login_passcode: "$2b$10$PVLvS0iw0FZA/RNOEx7XKOJzW3gzjizVJgWp2dM7IqCUpiDrua7Oe", // TODO: Remove this from the backend endpoint
           // transfer_pin: "$2b$10$S.Tw3vvZwtd0aUUJAhDukOr95gxo8n5mqzmNziow2oFVtkNFHIFtu", // TODO: Remove this from the backend endpoint
@@ -129,8 +131,9 @@ const handleCreateServer = (nickname?: string) => {
   createServer(allConfig as THandlerConfig[]);
 };
 
-describe("When user has a nickname", () => {
-  handleCreateServer("the best programmer");
+describe("When user has a nickname and has an avatar", () => {
+  const avatar = "https://avatars.githubusercontent.com/u/47280571?v=4";
+  handleCreateServer("the best programmer", avatar);
 
   test("Displays the user's nickname", async () => {
     render(<Home />, {
@@ -140,10 +143,19 @@ describe("When user has a nickname", () => {
     await screen.findByRole("heading", {
       name: /hello, the best programmer/i,
     });
+
+    const img = screen.getByRole("img", {
+      name: /john doe/i,
+    });
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute("src", avatar);
+    expect(img).toHaveAttribute("width", "50");
+    expect(img).toHaveAttribute("height", "50");
+    expect(img).toHaveStyle("border-radius: 50%");
   });
 });
 
-describe("When user has NO nickname", () => {
+describe("When user has NO nickname and NO avatar", () => {
   handleCreateServer();
 
   test("Displays the user's information with the First and Last Name", async () => {
@@ -156,6 +168,11 @@ describe("When user has NO nickname", () => {
     await screen.findByRole("heading", {
       name: /hello, john doe/i,
     });
+    const img = screen.getByRole("img", {
+      name: /john doe/i,
+    });
+    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute("src", DEFAULT_USER_AVATAR);
 
     const getBalance = async () => {
       await screen.findByText(formatToCurrency(balance.normal));

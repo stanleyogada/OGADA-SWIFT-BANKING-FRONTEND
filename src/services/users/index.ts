@@ -9,7 +9,10 @@ const getCurrentUser = async (): Promise<TUser> => {
     url: ENDPOINTS.currentUser,
   });
 
-  return data.data as TUser;
+  return {
+    ...data.data,
+    fullName: `${data.data.first_name} ${data.data.last_name}`,
+  } as TUser;
 };
 
 const getCurrentUserAccounts = async (): Promise<TUserAccount[]> => {

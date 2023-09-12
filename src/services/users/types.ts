@@ -4,6 +4,7 @@ type TUser = {
   updated_at: string;
   first_name: string;
   last_name: string;
+  fullName: string;
   middle_name?: string;
   nickname?: string;
   email: string;
