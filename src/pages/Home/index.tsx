@@ -1,14 +1,52 @@
-import Navigation from "../../components/Navigation";
-import icons from "../../constants/icons";
 import { Link } from "react-router-dom";
-import Button from "../../components/Button";
-import Avatar from "../../components/Avatar/Avatar";
-import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+
+import Navigation from "@components/Navigation";
+import icons from "@constants/icons";
+import Button from "@components/Button";
+import Avatar from "@components/Avatar/Avatar";
+import useAuth from "@hooks/useAuth";
+import vector from "@constants/images/vector";
+import { CLIENT_ROUTES } from "@constants/routes";
+import useCurrentUserAccounts from "@hooks/useCurrentUserAccounts";
+import formatToCurrency from "@utils/formatToCurrency";
+import BrandLogo from "@components/BrandLogo";
+import getTransactionIcon from "@utils/getTransactionIcon";
 
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
+import { ETransactionAllType } from "@services/transaction/types";
+
+const useHome = () => {
+  const { handleSignOut, currentUser } = useAuth();
+  const { getOneAccount, getAccountNumber, isLoading } = useCurrentUserAccounts();
+
+  const [isShowBalance, setIsShowBalance] = useState(true);
+
+  const handleShowBalanceToggle = () => {
+    setIsShowBalance((prev) => !prev);
+  };
+
+  return {
+    handleSignOut,
+    currentUser,
+    getOneAccount,
+    getAccountNumber,
+    isLoading,
+    isShowBalance,
+    handleShowBalanceToggle,
+  };
+};
 
 const Home = () => {
-  const { handleSignOut } = useAuth();
+  const {
+    handleSignOut,
+    currentUser,
+    getOneAccount,
+    getAccountNumber,
+    isLoading,
+    isShowBalance,
+    handleShowBalanceToggle,
+  } = useHome();
 
   return (
     <>
@@ -16,14 +54,15 @@ const Home = () => {
         {/* Header Info */}
         <div className="profile-head">
           <div className="profile-info">
-            <Avatar />
-            <h3>Hello, RichCode Dev Team</h3>
+            <Avatar src={currentUser?.avatar} alt={currentUser?.fullName} />
+            <div className="profile-info-details">
+              <h3>Hello, {currentUser?.nickname ? currentUser.nickname : currentUser?.fullName}</h3>
+              <p>{getAccountNumber()}</p>
+            </div>
           </div>
           <div className="profile-icons">
-            <div onClick={() => handleSignOut()}>
-              <Link to="/" className="notify">
-                <span className="cursor-pointer">{icons.blackUserIcon()}</span>
-              </Link>
+            <div onClick={() => handleSignOut()} data-testid="sign-out-button" className="cursor-pointer">
+              {vector.logoutIcon()}
             </div>
 
             <Link to="/" className="notify">
@@ -37,31 +76,60 @@ const Home = () => {
         <div className="top-card">
           <div className="top-card-1">
             <div className="card-1">
-              <h5>Total Balance</h5>
-              <Button icon={icons.eyeOpenIcon()} />
+              <h5>Normal Balance</h5>
+              <Button
+                className="eye-icon"
+                onClick={handleShowBalanceToggle}
+                icon={icons.eyeOpenIcon()}
+                data-testid="hide-balance-button"
+              />
             </div>
-            <h5>Transact...n History</h5>
+            <Button link={CLIENT_ROUTES.transactionPage}>Transaction History &gt;</Button>
           </div>
 
-          <div className="top-card-2">0,00</div>
+          {isLoading ? (
+            <div className="top-card-2" data-testid="home-loading-state">
+              Loading...
+            </div>
+          ) : isShowBalance ? (
+            <>
+              <div className="top-card-2">{formatToCurrency(getOneAccount("NORMAL")?.balance)}</div>
+
+              <div>
+                + CASHBACK &gt;&nbsp;
+                {formatToCurrency(getOneAccount("CASHBACK")?.balance)}
+              </div>
+            </>
+          ) : (
+            <div className="top-card-2">****</div>
+          )}
         </div>
         {/* Below Card */}
         <div className="bottom-card">
-          <Link to="/" className="bottom-card-link">
-            <Button icon={icons.addMoneyIcon()}>Add Money</Button>
-          </Link>
-          <Link to="/" className="bottom-card-link">
-            <Button icon={icons.transferIcon()}>Transfer</Button>
-          </Link>
+          <Button icon={icons.addMoneyIcon()} link={CLIENT_ROUTES.addMoney} className="bottom-card-link">
+            Add Money
+          </Button>
+
+          <Button icon={icons.transferIcon()} link={CLIENT_ROUTES.sendMoneyInHouse} className="bottom-card-link">
+            Transfer
+          </Button>
         </div>
       </HeroWrapper>
       {/* Payment Section */}
       <PaymentWrapper>
-        <h1>Payment</h1>
+        <h1>Transfer Money</h1>
         <div className="icons">
-          <Button icon={icons.phoneIcon()}>Airtime</Button>
-          <Button icon={icons.phoneIcon()}>Data</Button>
-          <Button icon={icons.worldIcon()}>Internet</Button>
+          <Button icon={<BrandLogo isRound sm />} link={CLIENT_ROUTES.sendMoneyInHouse}>
+            Opay
+          </Button>
+
+          <Button icon={getTransactionIcon(ETransactionAllType.BANKS)} link={CLIENT_ROUTES.sendMoneyBank}>
+            Bank
+          </Button>
+
+          <Button icon={icons.phoneIcon()} link={CLIENT_ROUTES.sendMoneyMobile}>
+            Mobile
+          </Button>
         </div>
       </PaymentWrapper>
       {/* Home Notification */}

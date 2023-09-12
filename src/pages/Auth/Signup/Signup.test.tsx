@@ -7,7 +7,7 @@ import createServer from "@utils/test/createServer";
 import { navigate } from "@utils/test/mocks/navigate";
 import { consoleErrorSpy, consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
 import { localStorageSetItem } from "@utils/test/mocks/localStorage";
-import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 
 import { BASE_URL, ENDPOINTS, TEST_NETWORK_SUCCESS_INFO } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
@@ -95,7 +95,7 @@ test("Sign up form works correctly onSuccess", async () => {
   const signUpButton = screen.getByRole("button", { name: /confirm/i });
   await user.click(signUpButton);
 
-  await handleAssertLoadingAfterSubmitClick(signUpButton);
+  await handleAssertLoadingState(signUpButton);
 
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
@@ -133,7 +133,7 @@ describe("Displays errors works correctly when the network request errors", () =
     const signUpButton = screen.getByRole("button", { name: /confirm/i });
     await user.click(signUpButton);
 
-    await handleAssertLoadingAfterSubmitClick(signUpButton);
+    await handleAssertLoadingState(signUpButton);
 
     expect(consoleErrorSpy).toHaveBeenCalled();
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
@@ -227,7 +227,7 @@ describe("Displays errors works correctly when the network request errors", () =
 
     const signUpButton = screen.getByRole("button", { name: /confirm/i });
     await user.click(signUpButton);
-    await handleAssertLoadingAfterSubmitClick(signUpButton);
+    await handleAssertLoadingState(signUpButton);
 
     expect(screen.getByTestId("error")).toHaveTextContent(sendEmailError);
 
@@ -244,7 +244,7 @@ describe("Displays errors works correctly when the network request errors", () =
 
     await user.click(signUpButton);
     expect(window.alert).toHaveBeenCalled();
-    await handleAssertLoadingAfterSubmitClick(signUpButton);
+    await handleAssertLoadingState(signUpButton);
 
     expect(screen.getByTestId("error")).toHaveTextContent(signUp);
   });

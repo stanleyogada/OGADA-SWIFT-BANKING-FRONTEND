@@ -4,7 +4,7 @@ import styled from "styled-components";
 const HomeInfoWrapper = styled.section`
   .profile-head {
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: space-between;
     width: 90vw;
     margin: 0 auto;
@@ -12,21 +12,31 @@ const HomeInfoWrapper = styled.section`
 
     .profile-info {
       display: flex;
-      align-item: center;
+      align-items: center;
       justify-content: space-between;
       gap: 0.85rem;
 
-      h3 {
-        justify-self: center;
-        align-self: center;
-        font-size: 1.2rem;
+      &-details {
+        display: flex;
+        gap: 3px;
+        flex-direction: column;
+
+        h3 {
+          font-size: 1.2rem;
+        }
+
+        p {
+          font-size: 0.95rem;
+          font-weight: 600;
+          font-style: italic;
+        }
       }
     }
     .profile-icons {
       display: flex;
-      align-item: center;
+      align-items: center;
+      gap: 10px;
       justify-content: space-between;
-      gap: 0.85rem;
       margin-top: 0.85rem;
 
       a .notify {
@@ -56,6 +66,16 @@ const HeroWrapper = styled.section`
   padding: 1rem;
   color: ${COLORS.white};
 
+  .eye-icon {
+    filter: brightness(0) invert(1);
+    transform: translateY(5px);
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
   .top-card {
     display: grid;
     gap: 0.75rem;
@@ -71,6 +91,11 @@ const HeroWrapper = styled.section`
         justify-content: space-between;
         gap: 1rem;
       }
+    }
+
+    .top-card-2 {
+      font-size: 1.5rem;
+      font-weight: bold;
     }
   }
 
@@ -103,9 +128,14 @@ const PaymentWrapper = styled.section`
 
   .icons {
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
+
+    button span {
+      color: ${COLORS.black};
+      font-weight: 500;
+    }
   }
 
   @media screen and (min-width: 400px) {

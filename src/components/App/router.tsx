@@ -21,7 +21,7 @@ import VerifyEmail from "@pages/Auth/VerifyEmail";
 import ResendEmail from "@pages/Auth/ResendEmail";
 import ForgotLoginPasscode from "@pages/Auth/ForgotLoginPasscode";
 import ResetLoginPasscode from "@pages/Auth/ResetLoginPasscode";
-import Transaction from "@pages/TransactionPage";
+import Transaction from "@pages/Transaction";
 import Details from "@pages/Details";
 
 const ROUTER = createBrowserRouter([

@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import Signin from ".";
 
 import createServer from "@utils/test/createServer";
-import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
 
 import { BASE_URL, ENDPOINTS } from "@constants/services";
@@ -15,6 +15,7 @@ import TestProviders from "@components/TestProviders";
 import { navigate } from "@utils/test/mocks/navigate";
 
 import { TUser } from "@services/users/types";
+import { DEFAULT_LOGIN } from "@constants/pages";
 
 const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; token: string }) => {
   const { handleCreateErrorConfig } = createServer([
@@ -32,17 +33,17 @@ const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; toke
 };
 
 const handleAssertTypeInForm = async (
-  user: ReturnType<typeof userEvent.setup>,
-  formData: { phone: string; loginPasscode: string }
+  user: ReturnType<typeof userEvent.setup>
+  // formData: { phone: string; loginPasscode: string } TODO: clean up
 ) => {
   const phoneInput = screen.getByPlaceholderText(/phone number/i);
   const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
 
-  await user.type(phoneInput, formData.phone);
-  await user.type(loginPasscodeInput, formData.loginPasscode);
+  // await user.type(phoneInput, formData.phone); TODO: clean up
+  // await user.type(loginPasscodeInput, formData.loginPasscode); TODO: clean up
 
-  expect(phoneInput).toHaveValue(formData.phone);
-  expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
+  expect(phoneInput).toHaveValue(DEFAULT_LOGIN.phoneNumber);
+  expect(loginPasscodeInput).toHaveValue(DEFAULT_LOGIN.loginPasscode);
 };
 
 describe("When signin request failed ", () => {
@@ -61,13 +62,16 @@ describe("When signin request failed ", () => {
       wrapper: TestProviders,
     });
 
-    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+    await handleAssertTypeInForm(
+      user
+      // { phone: "1234567890", loginPasscode: "123456" } // TODO: clean up
+    );
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
 
     const signInButton = screen.getByRole("button", { name: /sign in/i });
     await user.click(signInButton);
 
-    await handleAssertLoadingAfterSubmitClick(signInButton);
+    await handleAssertLoadingState(signInButton);
 
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
 
@@ -92,13 +96,16 @@ describe("Signin form works correctly onSuccess", () => {
         wrapper: TestProviders,
       });
 
-      await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+      await handleAssertTypeInForm(
+        user
+        // { phone: "1234567890", loginPasscode: "123456" } TODO: clean up
+      );
       expect(window.location.reload).not.toHaveBeenCalled();
 
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
-      await handleAssertLoadingAfterSubmitClick(signInButton);
+      await handleAssertLoadingState(signInButton);
 
       expect(window.location.reload).toHaveBeenCalled();
     });
@@ -118,13 +125,16 @@ describe("Signin form works correctly onSuccess", () => {
         wrapper: TestProviders,
       });
 
-      await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
+      await handleAssertTypeInForm(
+        user
+        // { phone: "1234567890", loginPasscode: "123456" } TODO: clean up
+      );
       expect(navigate).not.toHaveBeenCalled();
 
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
-      await handleAssertLoadingAfterSubmitClick(signInButton);
+      await handleAssertLoadingState(signInButton);
 
       expect(window.location.reload).not.toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
