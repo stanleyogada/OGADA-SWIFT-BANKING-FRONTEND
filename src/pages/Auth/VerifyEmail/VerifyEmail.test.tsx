@@ -6,7 +6,7 @@ import VerifyEmail from ".";
 import createServer from "@utils/test/createServer";
 import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
 import { navigate } from "@utils/test/mocks/navigate";
-import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
@@ -37,7 +37,7 @@ test("Verifies email and redirects to sign-in page", async () => {
   await user.type(codeInput, OTP);
   await user.click(submitButton);
 
-  await handleAssertLoadingAfterSubmitClick(submitButton);
+  await handleAssertLoadingState(submitButton);
 
   expect(navigate).toHaveBeenCalled();
   expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authSignin);
@@ -62,7 +62,7 @@ test("Displays errors works correctly when the network request errors", async ()
   await user.type(codeInput, OTP);
   await user.click(submitButton);
 
-  await handleAssertLoadingAfterSubmitClick(submitButton);
+  await handleAssertLoadingState(submitButton);
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
 

@@ -3,13 +3,15 @@ import userEvent from "@testing-library/user-event";
 import TestProviders from "@components/TestProviders";
 import { localStorageRemoveItem } from "@utils/test/mocks/localStorage";
 import { CLIENT_ROUTES } from "@constants/routes";
-import createServer from "@utils/test/createServer";
+import createServer, { THandlerConfig } from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 
 import Home from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import type { TUser } from "@services/users/types";
+import { S } from "msw/lib/glossary-de6278a9";
+import formatToCurrency from "@utils/formatToCurrency";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 
 let user: UserEvent;
 
@@ -23,6 +25,7 @@ test("Have Sign out button working", async () => {
   });
 
   const signOutButton = screen.getByTestId("sign-out-button");
+
   const icon = within(signOutButton).getByRole("img");
   expect(icon).toBeInTheDocument();
   expect(icon).toHaveAttribute("width", "25");
@@ -84,47 +87,47 @@ test("Have all links wired up correctly", async () => {
   }
 });
 
-const handleCreateServer = (nickname?: string) => {
-  createServer([
-    {
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-      res: () =>
-        ({
-          status: "success",
-          data: {
-            id: 1,
-            created_at: "2023-09-03T02:17:07.441Z",
-            updated_at: "2023-09-03T02:17:07.441Z",
-            first_name: "John",
-            last_name: "Doe",
-            nickname,
-            email: "johnDoe@gmail.com",
-            email_is_verified: true,
-            phone: "9234567890",
-            // login_passcode: "$2b$10$PVLvS0iw0FZA/RNOEx7XKOJzW3gzjizVJgWp2dM7IqCUpiDrua7Oe", // TODO: Remove this from the backend endpoint
-            // transfer_pin: "$2b$10$S.Tw3vvZwtd0aUUJAhDukOr95gxo8n5mqzmNziow2oFVtkNFHIFtu", // TODO: Remove this from the backend endpoint
-          },
-        } as {
-          status: string;
-          data: TUser;
-        }),
-    },
-  ]);
+const balance = {
+  normal: "10500000.00",
+  cashback: "900.00",
 };
 
-describe("When user has NO nickname", () => {
-  handleCreateServer();
+const handleCreateServer = (nickname?: string) => {
+  const allConfig = [
+    {
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      res: () => ({
+        data: {
+          first_name: "John",
+          last_name: "Doe",
+          nickname,
 
-  test("Displays the user's information with the First and Last Name", async () => {
-    render(<Home />, {
-      wrapper: TestProviders,
-    });
+          // login_passcode: "$2b$10$PVLvS0iw0FZA/RNOEx7XKOJzW3gzjizVJgWp2dM7IqCUpiDrua7Oe", // TODO: Remove this from the backend endpoint
+          // transfer_pin: "$2b$10$S.Tw3vvZwtd0aUUJAhDukOr95gxo8n5mqzmNziow2oFVtkNFHIFtu", // TODO: Remove this from the backend endpoint
+        },
+      }),
+    },
+    {
+      url: `${BASE_URL}${ENDPOINTS.currentUserAccounts}`,
+      res: () => ({
+        data: [
+          {
+            account_number: "9012345639",
+            balance: balance.normal,
+            type: "NORMAL",
+          },
+          {
+            account_number: "9012345639",
+            balance: balance.cashback,
+            type: "CASHBACK",
+          },
+        ],
+      }),
+    },
+  ];
 
-    await screen.findByRole("heading", {
-      name: /hello, john doe/i,
-    });
-  });
-});
+  createServer(allConfig as THandlerConfig[]);
+};
 
 describe("When user has a nickname", () => {
   handleCreateServer("the best programmer");
@@ -137,5 +140,29 @@ describe("When user has a nickname", () => {
     await screen.findByRole("heading", {
       name: /hello, the best programmer/i,
     });
+  });
+});
+
+describe("When user has NO nickname", () => {
+  handleCreateServer();
+
+  test("Displays the user's information with the First and Last Name", async () => {
+    render(<Home />, {
+      wrapper: TestProviders,
+    });
+
+    await handleAssertLoadingState("home-loading-state");
+
+    await screen.findByRole("heading", {
+      name: /hello, john doe/i,
+    });
+
+    const getBalance = async () => {
+      await screen.findByText(formatToCurrency(balance.normal));
+      await screen.findByText(/\+ cashback > /i);
+      await screen.findByText(new RegExp(formatToCurrency(balance.cashback), "i"));
+    };
+
+    await getBalance();
   });
 });

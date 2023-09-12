@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import Signin from ".";
 
 import createServer from "@utils/test/createServer";
-import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
 
 import { BASE_URL, ENDPOINTS } from "@constants/services";
@@ -71,7 +71,7 @@ describe("When signin request failed ", () => {
     const signInButton = screen.getByRole("button", { name: /sign in/i });
     await user.click(signInButton);
 
-    await handleAssertLoadingAfterSubmitClick(signInButton);
+    await handleAssertLoadingState(signInButton);
 
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");
 
@@ -105,7 +105,7 @@ describe("Signin form works correctly onSuccess", () => {
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
-      await handleAssertLoadingAfterSubmitClick(signInButton);
+      await handleAssertLoadingState(signInButton);
 
       expect(window.location.reload).toHaveBeenCalled();
     });
@@ -134,7 +134,7 @@ describe("Signin form works correctly onSuccess", () => {
       const signInButton = screen.getByRole("button", { name: /sign in/i });
       await user.click(signInButton);
 
-      await handleAssertLoadingAfterSubmitClick(signInButton);
+      await handleAssertLoadingState(signInButton);
 
       expect(window.location.reload).not.toHaveBeenCalled();
       expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);

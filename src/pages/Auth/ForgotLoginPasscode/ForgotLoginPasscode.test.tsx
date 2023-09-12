@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import ForgotLoginPasscode from ".";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
-import { handleAssertLoadingAfterSubmitClick } from "@utils/test/assertUtils";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { navigate } from "@utils/test/mocks/navigate";
 import { CLIENT_ROUTES, LOCAL_STORAGE_KEYS } from "@constants/index";
 import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
@@ -50,7 +50,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     await userEvent.type(emailInput, formValues.email);
     await userEvent.click(resendOtpButton);
 
-    await handleAssertLoadingAfterSubmitClick(resendOtpButton);
+    await handleAssertLoadingState(resendOtpButton);
 
     expect(navigate).toHaveBeenCalled();
     expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authResetPasscode);
@@ -95,7 +95,7 @@ describe("asserts that user is navigated to sign in on success ", () => {
     await user.click(submitButton);
 
     expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT);
-    await handleAssertLoadingAfterSubmitClick(submitButton);
+    await handleAssertLoadingState(submitButton);
     expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT + 1);
 
     expect(localStorageSetItem).toHaveBeenCalledWith(
@@ -132,7 +132,7 @@ test("Displays errors works correctly when the network request errors", async ()
   await user.click(resendOtpButton);
 
   expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT);
-  await handleAssertLoadingAfterSubmitClick(resendOtpButton);
+  await handleAssertLoadingState(resendOtpButton);
   expect(localStorageSetItem).toHaveBeenCalledTimes(MSW_SET_ITEM_CALL_COUNT + 0);
 
   expect(JSON.stringify(consoleErrorSpy.mock.calls)).toContain("Request failed with status code 400");

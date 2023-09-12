@@ -12,4 +12,17 @@ type TUser = {
   avatar?: string;
 };
 
-export type { TUser };
+type TUserAccount = {
+  user_id: number;
+  created_at: string;
+  email: string;
+  account_number: string;
+  account_id: number;
+  balance: TUserAccountType;
+  type: string;
+  full_name: string;
+};
+
+type TUserAccountType = "NORMAL" | "CASHBACK";
+
+export type { TUser, TUserAccount, TUserAccountType };

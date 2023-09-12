@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import Navigation from "@components/Navigation";
 import icons from "@constants/icons";
-import { Link } from "react-router-dom";
 import Button from "@components/Button";
 import Avatar from "@components/Avatar/Avatar";
 import useAuth from "@hooks/useAuth";
@@ -8,9 +8,12 @@ import vector from "@constants/images/vector";
 import { CLIENT_ROUTES } from "@constants/routes";
 
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
+import useCurrentUserAccounts from "@hooks/useCurrentUserAccounts";
+import formatToCurrency from "@utils/formatToCurrency";
 
 const Home = () => {
   const { handleSignOut, currentUser } = useAuth();
+  const { getAccount, isLoading } = useCurrentUserAccounts();
 
   return (
     <>
@@ -40,13 +43,26 @@ const Home = () => {
         <div className="top-card">
           <div className="top-card-1">
             <div className="card-1">
-              <h5>Total Balance</h5>
+              <h5>Normal Balance</h5>
               <Button icon={icons.eyeOpenIcon()} />
             </div>
             <Button link={CLIENT_ROUTES.transactionPage}>Transaction History &gt;</Button>
           </div>
 
-          <div className="top-card-2">0,00</div>
+          {isLoading ? (
+            <div className="top-card-2" data-testid="home-loading-state">
+              Loading...
+            </div>
+          ) : (
+            <>
+              <div className="top-card-2">{formatToCurrency(getAccount("NORMAL")?.balance)}</div>
+
+              <div className="top-card-2">
+                + CASHBACK &gt;&nbsp;
+                {formatToCurrency(getAccount("CASHBACK")?.balance)}
+              </div>
+            </>
+          )}
         </div>
         {/* Below Card */}
         <div className="bottom-card">
