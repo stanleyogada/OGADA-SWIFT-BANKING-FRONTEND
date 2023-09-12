@@ -23,6 +23,7 @@ const Transaction = () => {
         {data?.pages.map((page) =>
           page.map((item: TProps) => (
             <TransactionCard
+            transaction_id={item.transaction_id}
               key={item.charge}
               amount={item.amount}
               created_at={item.created_at}

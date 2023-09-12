@@ -10,9 +10,10 @@ export type TProps = {
   is_success: boolean;
   charge?: number;
   is_deposit?: boolean;
+  transaction_id: 21;
 };
 
-const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit }: TProps) => {
+const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_deposit, transaction_id }: TProps) => {
   const navigate = useNavigate();
   const [day, setDay] = useState<string | null>(null);
 
@@ -31,7 +32,11 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
   }, []);
 
   return (
-    <div className="transaction-card" onClick={() => navigate("/details")} data-testid="transaction-card">
+    <div
+      className="transaction-card"
+      onClick={() => navigate(`/details/${transaction_id}`)}
+      data-testid="transaction-card"
+    >
       <div className="transaction-info">
         <div className="trans-icon">{getIcon(transaction_type)?.icon}</div>
         <div className="info-wrapper">
