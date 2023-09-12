@@ -41,11 +41,36 @@ test("Have all links wired up correctly", async () => {
       }),
       link: CLIENT_ROUTES.transactionPage,
     },
-    { elem: screen.getByTestId("add-money-link"), link: CLIENT_ROUTES.addMoney },
-    { elem: screen.getByTestId("transfer-link"), link: CLIENT_ROUTES.sendMoneyInHouse },
-    { elem: screen.getByTestId("in-house-link"), link: CLIENT_ROUTES.sendMoneyInHouse },
-    { elem: screen.getByTestId("bank-link"), link: CLIENT_ROUTES.sendMoneyBank },
-    { elem: screen.getByTestId("mobile-link"), link: CLIENT_ROUTES.sendMoneyMobile },
+    {
+      elem: screen.getByRole("link", {
+        name: /add money/i,
+      }),
+      link: CLIENT_ROUTES.addMoney,
+    },
+    {
+      elem: screen.getByRole("link", {
+        name: /transfer/i,
+      }),
+      link: CLIENT_ROUTES.sendMoneyInHouse,
+    },
+    {
+      elem: screen.getByRole("link", {
+        name: /opay/i,
+      }),
+      link: CLIENT_ROUTES.sendMoneyInHouse,
+    },
+    {
+      elem: screen.getByRole("link", {
+        name: /bank/i,
+      }),
+      link: CLIENT_ROUTES.sendMoneyBank,
+    },
+    {
+      elem: screen.getByRole("link", {
+        name: /mobile/i,
+      }),
+      link: CLIENT_ROUTES.sendMoneyMobile,
+    },
   ];
 
   for (const { elem, link } of links) {

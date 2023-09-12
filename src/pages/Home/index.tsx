@@ -40,36 +40,37 @@ const Home = () => {
               <h5>Total Balance</h5>
               <Button icon={icons.eyeOpenIcon()} />
             </div>
-            <Link to={CLIENT_ROUTES.transactionPage}>Transaction History &gt;</Link>
+            <Button link={CLIENT_ROUTES.transactionPage}>Transaction History &gt;</Button>
           </div>
 
           <div className="top-card-2">0,00</div>
         </div>
         {/* Below Card */}
         <div className="bottom-card">
-          <Link to={CLIENT_ROUTES.addMoney} className="bottom-card-link" data-testid="add-money-link">
-            <Button icon={icons.addMoneyIcon()}>Add Money</Button>
-          </Link>
-          <Link to={CLIENT_ROUTES.sendMoneyInHouse} className="bottom-card-link" data-testid="transfer-link">
-            <Button icon={icons.transferIcon()}>Transfer</Button>
-          </Link>
+          <Button icon={icons.addMoneyIcon()} link={CLIENT_ROUTES.addMoney} className="bottom-card-link">
+            Add Money
+          </Button>
+
+          <Button icon={icons.transferIcon()} link={CLIENT_ROUTES.sendMoneyInHouse} className="bottom-card-link">
+            Transfer
+          </Button>
         </div>
       </HeroWrapper>
       {/* Payment Section */}
       <PaymentWrapper>
         <h1>Payment</h1>
         <div className="icons">
-          <Link to={CLIENT_ROUTES.sendMoneyInHouse} data-testid="in-house-link">
-            <Button icon={icons.phoneIcon()}>Opay</Button>
-          </Link>
+          <Button icon={icons.phoneIcon()} link={CLIENT_ROUTES.sendMoneyInHouse}>
+            Opay
+          </Button>
 
-          <Link to={CLIENT_ROUTES.sendMoneyBank} data-testid="bank-link">
-            <Button icon={icons.phoneIcon()}>Bank</Button>
-          </Link>
+          <Button icon={icons.phoneIcon()} link={CLIENT_ROUTES.sendMoneyBank}>
+            Bank
+          </Button>
 
-          <Link to={CLIENT_ROUTES.sendMoneyMobile} data-testid="mobile-link">
-            <Button icon={icons.worldIcon()}>Mobile</Button>
-          </Link>
+          <Button icon={icons.worldIcon()} link={CLIENT_ROUTES.sendMoneyMobile}>
+            Mobile
+          </Button>
         </div>
       </PaymentWrapper>
       {/* Home Notification */}
