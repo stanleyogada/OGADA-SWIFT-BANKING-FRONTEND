@@ -57,7 +57,7 @@ const Home = () => {
             <>
               <div className="top-card-2">{formatToCurrency(getAccount("NORMAL")?.balance)}</div>
 
-              <div className="top-card-2">
+              <div>
                 + CASHBACK &gt;&nbsp;
                 {formatToCurrency(getAccount("CASHBACK")?.balance)}
               </div>

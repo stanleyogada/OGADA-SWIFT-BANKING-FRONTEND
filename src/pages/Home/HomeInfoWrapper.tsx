@@ -72,6 +72,11 @@ const HeroWrapper = styled.section`
         gap: 1rem;
       }
     }
+
+    .top-card-2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
   }
 
   .bottom-card {
