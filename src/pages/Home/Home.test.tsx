@@ -113,7 +113,7 @@ const handleCreateServer = (nickname?: string) => {
 describe("When user has NO nickname", () => {
   handleCreateServer();
 
-  test("Displays the user's information", async () => {
+  test("Displays the user's information with the First and Last Name", async () => {
     render(<Home />, {
       wrapper: TestProviders,
     });

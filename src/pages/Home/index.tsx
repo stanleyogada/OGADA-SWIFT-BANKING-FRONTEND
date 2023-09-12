@@ -12,8 +12,6 @@ import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./H
 const Home = () => {
   const { handleSignOut, currentUser } = useAuth();
 
-  console.log(currentUser);
-
   return (
     <>
       <HomeInfoWrapper>
