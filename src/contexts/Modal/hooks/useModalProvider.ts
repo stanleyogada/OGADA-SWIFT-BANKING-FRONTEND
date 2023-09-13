@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { TModal } from "../types";
 import Stack from "@DS/Stack";
 
 const useModalProvider = () => {
-  const stack = new Stack<TModal>();
-  const [data, setData] = useState<TModal[]>(stack.data());
+  const [stack, setStack] = useState<Stack<TModal>>(new Stack<TModal>());
 
-  useEffect(() => {
-    setData(stack.data());
-  }, [stack.size()]);
+  const handleAdd = (modal: Omit<TModal, "id">) => {
+    const newStack = Stack.clone(stack.data());
+    newStack.push({ ...modal, id: Date.now() });
 
-  const handleAdd = (modal: TModal) => {
-    stack.push(modal);
+    setStack(newStack);
   };
 
   const handleRemove = () => {
-    stack.pop();
+    const newStack = Stack.clone(stack.data());
+    newStack.pop();
+
+    setStack(newStack);
   };
+
+  const data = useMemo(() => stack.data(), [stack]);
 
   return {
     data,

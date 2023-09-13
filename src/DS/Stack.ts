@@ -23,8 +23,14 @@ class Stack<T> implements IStack<T> {
   data(): T[] {
     return this._data;
   }
+
+  static clone = <T>(data: T[]): Stack<T> => {
+    const stack = new Stack<T>();
+    data.forEach((item) => stack.push(item));
+
+    return stack;
+  };
 }
 
 export default Stack;
-
 export type { IStack };

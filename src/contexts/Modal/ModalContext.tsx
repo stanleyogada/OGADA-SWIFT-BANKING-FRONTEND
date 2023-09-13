@@ -4,7 +4,7 @@ import type { TModal } from "./types";
 
 type TModalContextProps = {
   data: TModal[];
-  handleAdd: (modal: TModal) => void;
+  handleAdd: (modal: Omit<TModal, "id">) => void;
   handleRemove: () => void;
 };
 
