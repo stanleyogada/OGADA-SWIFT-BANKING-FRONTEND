@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 const path = require("path");
 
 const getAliases = () => {
-  const paths = ["assets", "components", "constants", "hooks", "pages", "services", "types", "utils"];
+  const paths = ["assets", "components", "constants", "hooks", "pages", "services", "types", "utils", "contexts", "DS"];
 
   const aliases = paths.reduce((acc, path) => {
     return {
