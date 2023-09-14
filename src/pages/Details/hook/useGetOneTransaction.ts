@@ -1,6 +1,7 @@
 import { CLIENT_ROUTES } from "@constants/routes";
 import { getOneTransaction } from "@services/transaction";
 import { ETransactionAllType } from "@services/transaction/types";
+import testLogger from "@utils/testLogger";
 import { useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -16,13 +17,13 @@ const useGetOneTransaction = (type: string, id: string) => {
     // @ts-ignore
     if (isError && error?.response.status === 404) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }, [error && isError]);
 
   useEffect(() => {
     if (is404Error) {
+      testLogger("Navigate", CLIENT_ROUTES._404);
       navigate(CLIENT_ROUTES._404);
     }
   }, [is404Error]);

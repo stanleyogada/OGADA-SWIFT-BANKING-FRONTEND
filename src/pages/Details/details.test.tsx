@@ -7,6 +7,8 @@ import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
 import { navigate } from "@utils/test/mocks/navigate";
+import { consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
+import { TEST_LOG_PREFIX } from "@constants/index";
 
 const TRANSACTION_TYPE = "banks";
 const TRANSACTION_ID = 2;
@@ -59,19 +61,13 @@ test("navigate to 404 Page when the there is an error", async () => {
 
   handleCreateErrorConfig({
     url: `${BASE_URL}${CLIENT_ROUTES.allTransactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
-    res() {
-      return {
-        message: "an error occured while processing transaction details",
-        status: 404,
-      };
-    },
+
+    statusCode: 404,
   });
 
-  // expect(
-  //   await screen.findByRole("error", {
-  //     name: /error/i,
-  //   })
-  // ).toBeInTheDocument();
+  expect(consoleInfoSpy).not.toHaveBeenCalled();
 
-  // await waitFor(() => expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES._404));
+  expect(await screen.findByTestId("error404")).toBeInTheDocument();
+
+  expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, "Navigate", "/404");
 });

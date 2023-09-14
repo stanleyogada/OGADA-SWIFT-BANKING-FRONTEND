@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { ETransactionAllType, TTransactionAll } from "@services/transaction/types";
 import PageNavHeader from "@components/PageNavHeader";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import useTransactionInfoList from "./hook/useTransactionInfoList";
 import TransactionInfo from "@components/TransactionInfo";
 import { useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { navigate } from "@utils/test/mocks/navigate";
+
 import { CLIENT_ROUTES } from "@constants/routes";
 
 const TransactionInfoList = ({
@@ -67,11 +67,29 @@ const Details = () => {
           <div className="number">29404724790849245972</div>
         </div>
 
-        <button className="receipt-btn"> Share Receipt </button>
-        {is404Error ? <div role="error"> Error </div> : ""}
+        {/* <button className="receipt-btn">Share Receipt</button> */}
+
+        {/* {is404Error && <Error404 is404Error={is404Error} />} */}
+
+        {is404Error && <div data-testid="error404">404</div>}
       </div>
     </DetailsWrapper>
   );
+};
+
+const Error404 = ({ is404Error }: { is404Error: boolean }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (is404Error) {
+      console.log({
+        is404Error,
+      });
+      navigate(CLIENT_ROUTES._404);
+    }
+  }, [is404Error]);
+
+  return <div data-testid="error404">404</div>;
 };
 
 export default Details;
