@@ -1,9 +1,7 @@
+import { NetworkErrorModalBody, NetworkErrorModalHeader } from "@components/NetworkErrorModal";
 import { useEffect, useState } from "react";
-
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
-import { NetworkErrorModalHeader, NetworkErrorModalBody } from "@components/NetworkErrorModal";
-
-import useCurrentUser from "./useCurrentUser";
+import useCurrentUser from "@hooks/useCurrentUser";
 
 const useNetworkErrorModal = () => {
   const { isError, error } = useCurrentUser();
@@ -26,4 +24,4 @@ const useNetworkErrorModal = () => {
   }, [isMixedContentError]);
 };
 
-export default useNetworkErrorModal();
+export default useNetworkErrorModal;

@@ -57,11 +57,6 @@ const useCurrentUser = () => {
     },
   });
 
-  useEffect(() => {
-    console.log("r.isSuccess", result.isSuccess);
-    console.log("s.isSuccess", status.isSuccess);
-  }, [result.isSuccess, status.isSuccess]);
-
   return Object.assign({}, result, status);
 };
 
