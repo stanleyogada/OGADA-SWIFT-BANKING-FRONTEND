@@ -2,6 +2,8 @@ import { COLORS } from "@constants/colors";
 import useModalApp from "@contexts/Modal/hooks/useModalApp";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 
+import ModalWrapper from "./ModalWrapper";
+
 const Modal = () => {
   const { data } = useModalApp();
   const { handleAdd, handleRemove } = useModalConsumer();
@@ -15,23 +17,12 @@ const Modal = () => {
   };
 
   return (
-    <div>
+    <>
       {/* {process.env.NODE_ENV === "test" && <button onClick={handleAdModal}>Show Modal</button>} */}
       <button onClick={handleAdModal}>Show Modal</button>
 
       {data.map((modal, idx) => (
-        <div
-          key={modal.id}
-          data-testid="modal"
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 1000 + idx + 1,
-          }}
-        >
+        <ModalWrapper key={modal.id} index={idx} data-testid="modal">
           <div
             data-testid="modal-overlay"
             onClick={handleRemove}
@@ -87,9 +78,9 @@ const Modal = () => {
             {modal.footer}
             <button onClick={handleAdModal}>Show Modal</button>
           </div>
-        </div>
+        </ModalWrapper>
       ))}
-    </div>
+    </>
   );
 };
 
