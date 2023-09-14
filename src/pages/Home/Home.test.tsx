@@ -9,7 +9,6 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 import Home from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { S } from "msw/lib/glossary-de6278a9";
 import formatToCurrency from "@utils/formatToCurrency";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { DEFAULT_USER_AVATAR } from "@constants/index";
