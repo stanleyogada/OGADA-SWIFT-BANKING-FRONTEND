@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <Modal />
+
       <div data-app-container>
         <RouterProvider router={ROUTER} />;
       </div>
