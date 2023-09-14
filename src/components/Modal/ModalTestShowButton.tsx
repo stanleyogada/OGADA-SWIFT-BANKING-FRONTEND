@@ -7,7 +7,6 @@ const ModalTestShowButton = () => {
     handleAdd({
       heading: <p>Header</p>,
       body: <p>Body</p>,
-      footer: <p>Footer</p>,
     });
   };
 
@@ -15,7 +14,6 @@ const ModalTestShowButton = () => {
     handleAdd({
       heading: <p>Header</p>,
       body: <p>Body</p>,
-      footer: <p>Footer</p>,
       isPersistent: true,
     });
   };

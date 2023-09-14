@@ -1,7 +1,8 @@
-import { NetworkErrorModalBody, NetworkErrorModalHeader } from "@components/NetworkErrorModal";
 import { useEffect, useState } from "react";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import useCurrentUser from "@hooks/useCurrentUser";
+import NetworkErrorModal from "@components/NetworkErrorModal";
+import ModalHeader from "@components/Modal/ModalHeader";
 
 const useNetworkErrorModal = () => {
   const { isError, error } = useCurrentUser();
@@ -17,8 +18,8 @@ const useNetworkErrorModal = () => {
   useEffect(() => {
     if (isMixedContentError) {
       handleAdd({
-        heading: <NetworkErrorModalHeader />,
-        body: <NetworkErrorModalBody />,
+        heading: <ModalHeader text="Network Error ⚠️ ✌🏼" />,
+        body: <NetworkErrorModal />,
         isPersistent: true,
       });
     }

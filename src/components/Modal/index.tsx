@@ -23,7 +23,6 @@ const Modal = () => {
             <p className="modal__count-text">Count: {idx + 1}</p>
             {modal.heading}
             {modal.body}
-            {modal.footer}
           </div>
         </ModalWrapper>
       ))}

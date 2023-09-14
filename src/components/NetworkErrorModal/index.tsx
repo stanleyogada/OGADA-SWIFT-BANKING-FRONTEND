@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 import promptErrorFixVideo from "@assets/prompt-error-fix.mp4";
 
-const NetworkErrorModalBody = () => {
+const NetworkErrorModal = () => {
   const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   return (
-    <NetworkErrorModalBodyWrapper>
+    <NetworkErrorModalWrapper>
       <p className="modal__text">Please confirm that you network connection is not disconnected. ᯤ 📶 🌐</p>
 
       {isMobileDevice ? (
@@ -29,11 +29,11 @@ const NetworkErrorModalBody = () => {
           </video>
         </>
       )}
-    </NetworkErrorModalBodyWrapper>
+    </NetworkErrorModalWrapper>
   );
 };
 
-const NetworkErrorModalBodyWrapper = styled.div`
+const NetworkErrorModalWrapper = styled.div`
   margin-top: 1rem;
 
   .modal__text {
@@ -52,4 +52,4 @@ const NetworkErrorModalBodyWrapper = styled.div`
   }
 `;
 
-export default NetworkErrorModalBody;
+export default NetworkErrorModal;
