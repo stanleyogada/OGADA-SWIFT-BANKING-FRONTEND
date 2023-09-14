@@ -4,13 +4,16 @@ import userEvent from "@testing-library/user-event";
 import TestProviders from "@components/TestProviders";
 
 import Modal from ".";
-import { COLORS } from "@constants/colors";
+
+import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
+
+let user: UserEvent;
+beforeEach(() => (user = userEvent.setup()));
 
 test("Ensures modal works correctly in the Signin Page", async () => {
   render(<Modal />, {
     wrapper: TestProviders,
   });
-  const user = userEvent.setup();
 
   const showModalButton = screen.getByRole("button", { name: /show modal/i });
 
@@ -92,4 +95,31 @@ test("Ensures modal works correctly in the Signin Page", async () => {
   expect(screen.queryByText(/count: 1/i)).not.toBeInTheDocument();
 
   expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
+});
+
+test("Ensure some modal can be closed", async () => {
+  render(<Modal />, {
+    wrapper: TestProviders,
+  });
+
+  const persistShowModalButton = screen.getByRole("button", { name: /persist modal/i });
+  expect(screen.queryByTestId("modal")).not.toBeInTheDocument();
+
+  await user.click(persistShowModalButton);
+  expect(screen.getByTestId("modal")).toBeInTheDocument();
+
+  const closeButton = screen.getByRole("button", { name: /x/i });
+  const modalOverlay = screen.getByTestId("modal-overlay");
+
+  await user.click(closeButton);
+  expect(screen.getByTestId("modal")).toBeInTheDocument();
+
+  await user.click(closeButton);
+  expect(screen.getByTestId("modal")).toBeInTheDocument();
+
+  await user.click(modalOverlay);
+  expect(screen.getByTestId("modal")).toBeInTheDocument();
+
+  await user.click(modalOverlay);
+  expect(screen.getByTestId("modal")).toBeInTheDocument();
 });

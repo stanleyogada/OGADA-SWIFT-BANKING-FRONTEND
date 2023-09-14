@@ -3,6 +3,7 @@ type TModal = {
   heading?: string | JSX.Element;
   body?: string | JSX.Element;
   footer?: string | JSX.Element;
+  isPersistent?: boolean;
 };
 
 export type { TModal };

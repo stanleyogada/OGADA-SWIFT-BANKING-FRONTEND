@@ -2,6 +2,7 @@ interface IStack<T> {
   push(item: T): void;
   pop(): T | undefined;
   size(): number;
+  peek(): T | undefined;
   data(): T[];
 }
 
@@ -18,6 +19,10 @@ class Stack<T> implements IStack<T> {
 
   size(): number {
     return this._data.length;
+  }
+
+  peek(): T | undefined {
+    return this._data[this._data.length - 1];
   }
 
   data(): T[] {

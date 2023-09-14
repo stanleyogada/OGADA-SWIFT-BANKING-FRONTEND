@@ -13,6 +13,11 @@ const useModalProvider = () => {
   };
 
   const handleRemove = () => {
+    const lastModal = stack.peek();
+
+    if (!lastModal) return;
+    if (lastModal.isPersistent) return;
+
     const newStack = Stack.clone(stack.data());
     newStack.pop();
 
