@@ -11,7 +11,7 @@ const useModalApp = () => {
 
     if (data.length > 0) {
       appContainer.style.overflow = "hidden";
-      appContainer.style.filter = "blur(2px)";
+      appContainer.style.filter = "blur(3px)";
 
       return;
     }
