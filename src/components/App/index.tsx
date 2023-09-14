@@ -1,15 +1,13 @@
 import { RouterProvider } from "react-router-dom";
 
-import useSplash from "./hooks/useSplash";
-
-import ROUTER from "./router";
 import SplashScreen from "@components/SplashScreen";
-import useModalApp from "@contexts/Modal/hooks/useModalApp";
-import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
+import Modal from "@components/Modal";
+
+import useSplash from "./hooks/useSplash";
+import ROUTER from "./router";
+
 function App() {
   const { isAppLoading } = useSplash();
-  const { data, handleRemove } = useModalApp();
-  const { handleAdd } = useModalConsumer();
 
   if (isAppLoading) {
     return <SplashScreen />;
@@ -17,34 +15,10 @@ function App() {
 
   return (
     <>
-      <button
-        onClick={() => {
-          console.log("handleAdd");
-
-          handleAdd({
-            heading: "Heading",
-            body: "Body",
-            footer: "Footer",
-          });
-        }}
-      >
-        Open Modal
-      </button>
-      {data.map((item) => (
-        <div key={item.id}>
-          Modal {item.id}
-          <button
-            onClick={() => {
-              console.log("handleRemove");
-
-              handleRemove();
-            }}
-          >
-            Close
-          </button>
-        </div>
-      ))}
-      <RouterProvider router={ROUTER} />;
+      <Modal />
+      <div data-app-container>
+        <RouterProvider router={ROUTER} />;
+      </div>
     </>
   );
 }
