@@ -19,6 +19,7 @@ const useNetworkErrorModal = () => {
       handleAdd({
         heading: <NetworkErrorModalHeader />,
         body: <NetworkErrorModalBody />,
+        isPersistent: true,
       });
     }
   }, [isMixedContentError]);
