@@ -21,6 +21,7 @@ const CLIENT_ROUTES = {
   sendMoneyInHouse: "/send-money/In-house",
   sendMoneyBank: "/send-money/bank",
   sendMoneyMobile: "/send-money/mobile",
+  _404: "/404",
 };
 
 export { CLIENT_ROUTES };

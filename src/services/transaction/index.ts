@@ -1,8 +1,10 @@
 import { ENDPOINTS } from "@constants/services";
 import { axiosInstance } from "@utils/axiosInstance";
-import { TTransactionAll } from "./types";
+import { ETransactionAllType, TTransactionAll } from "./types";
+import { CLIENT_ROUTES } from "@constants/routes";
+import { TTransactionDetails } from "@services/transactionDetails/types";
 
-const geTTransactionAlls = async ({ pageNumber }: { pageNumber: number }): Promise<TTransactionAll[]> => {
+const getAllTransactions = async ({ pageNumber }: { pageNumber: number }): Promise<TTransactionAll[]> => {
   const { data } = await axiosInstance({
     method: "GET",
     url: `${ENDPOINTS.transactionAll}?_limit=4&_page=${pageNumber}`,
@@ -11,4 +13,14 @@ const geTTransactionAlls = async ({ pageNumber }: { pageNumber: number }): Promi
   return data.data;
 };
 
-export { geTTransactionAlls };
+const getOneTransaction = async (type: ETransactionAllType, id: string) => {
+  const response = await axiosInstance({
+    method: "GET",
+    url: `${CLIENT_ROUTES.allTransactions}/${type}/${id}`,
+  });
+
+  console.log("data", response.data.data);
+  return response.data.data as TTransactionDetails;
+};
+
+export { getAllTransactions, getOneTransaction };

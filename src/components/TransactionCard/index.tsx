@@ -44,7 +44,9 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
           <div className="title" data-testid="transaction-type">
             {transaction_type}
           </div>
-          <div className="trans-date">{day}</div>
+          <div className="trans-date" role="day">
+            {day}
+          </div>
         </div>
       </div>
       <div className="transaction-details">

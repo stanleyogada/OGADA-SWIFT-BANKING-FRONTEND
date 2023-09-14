@@ -6,6 +6,10 @@ import getTransactionIcon from "@utils/getTransactionIcon";
 import useGetOneTransaction from "./hook/useGetOneTransaction";
 import useTransactionInfoList from "./hook/useTransactionInfoList";
 import TransactionInfo from "@components/TransactionInfo";
+import { useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { navigate } from "@utils/test/mocks/navigate";
+import { CLIENT_ROUTES } from "@constants/routes";
 
 const TransactionInfoList = ({
   data,
@@ -27,7 +31,8 @@ const TransactionInfoList = ({
 const Details = () => {
   const { type, id } = useParams();
 
-  const { data } = useGetOneTransaction(type as string, id as string);
+  const { data, is404Error } = useGetOneTransaction(type as string, id as string);
+
   const { firstHalf, secondHalf } = useTransactionInfoList(data as TTransactionAll);
 
   return (
@@ -63,6 +68,7 @@ const Details = () => {
         </div>
 
         <button className="receipt-btn"> Share Receipt </button>
+        {is404Error ? <div role="error"> Error </div> : ""}
       </div>
     </DetailsWrapper>
   );

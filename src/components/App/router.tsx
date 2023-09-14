@@ -116,6 +116,14 @@ const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
+      {
+        path: "/404",
+        element: (
+          <PageWrapper>
+            <div>404</div>
+          </PageWrapper>
+        ),
+      },
     ],
   },
   {

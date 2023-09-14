@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react";
+import { screen, render, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import Details from ".";
 import { useParams, MemoryRouter, Route, Routes } from "react-router-dom";
 import * as Router from "react-router-dom";
@@ -6,6 +6,7 @@ import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
+import { navigate } from "@utils/test/mocks/navigate";
 
 const TRANSACTION_TYPE = "banks";
 const TRANSACTION_ID = 2;
@@ -32,16 +33,45 @@ const { handleCreateErrorConfig } = createServer([
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("renders Details", async () => {
+test("renders transaction details correctly", async () => {
   render(
     <TestProviders>
       <Details />
     </TestProviders>
   );
 
-  // const Heading = screen.getByTestId("params");
+  const params = screen.getByTestId("params");
   const details = await screen.findAllByTestId("details");
-  details.forEach((d) => screen.debug(d));
-  // expect(details).toHaveLength(6);
-  // expect(Heading).toBeInTheDocument();
+  expect(details).toHaveLength(4);
+  expect(details[0]).toHaveTextContent(`${TRANSACTION_ID}`);
+  expect(details[1]).toHaveTextContent("Saturday, Sep 2023");
+  expect(params).toBeInTheDocument();
+  expect(details[2]).toHaveTextContent("failed");
+  expect(screen.getByText(/mood type/i)).toBeInTheDocument();
+});
+
+test("navigate to 404 Page when the there is an error", async () => {
+  render(
+    <TestProviders>
+      <Details />
+    </TestProviders>
+  );
+
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${CLIENT_ROUTES.allTransactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
+    res() {
+      return {
+        message: "an error occured while processing transaction details",
+        status: 404,
+      };
+    },
+  });
+
+  // expect(
+  //   await screen.findByRole("error", {
+  //     name: /error/i,
+  //   })
+  // ).toBeInTheDocument();
+
+  // await waitFor(() => expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES._404));
 });
