@@ -8,6 +8,7 @@ import PasswordInput from "@components/Input/PasswordInput";
 import Button from "@components/Button";
 import PageNavHeader from "@components/PageNavHeader";
 import { CLIENT_ROUTES } from "@constants/routes";
+import SigninModal from "./SigninModal";
 
 const Signin = () => {
   const { handleSubmit, register, mutationState, errors } = useSignin();
@@ -17,6 +18,8 @@ const Signin = () => {
       {mutationState.isError && <p data-testid="error"></p>}
 
       <PageNavHeader heading="Sign in" />
+
+      <SigninModal />
 
       <main className="content">
         <h2 className="sub-title">Welcome Back!</h2>
