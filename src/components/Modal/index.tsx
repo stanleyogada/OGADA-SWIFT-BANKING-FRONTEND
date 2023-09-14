@@ -1,4 +1,3 @@
-import { COLORS } from "@constants/colors";
 import useModalApp from "@contexts/Modal/hooks/useModalApp";
 
 import ModalWrapper from "./ModalWrapper";
