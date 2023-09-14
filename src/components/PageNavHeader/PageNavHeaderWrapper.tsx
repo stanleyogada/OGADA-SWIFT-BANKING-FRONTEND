@@ -24,7 +24,6 @@ const PageNavHeaderWrapper = styled.div<TProps>`
   }
   .text {
     color: ${COLORS.blue};
-    width: 50%;
     text-align: end;
     font-weight: 500;
     font-size: 17px;

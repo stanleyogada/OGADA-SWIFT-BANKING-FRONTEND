@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getExactDay, getExactMonth } from "@utils/getDate";
 import getTransactionIcon from "@utils/getTransactionIcon";
 import { ETransactionAllType } from "@services/transaction/types";
+import { CLIENT_ROUTES } from "@constants/routes";
 
 type TProps = {
   transaction_type: string;
@@ -34,7 +35,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
   return (
     <div
       className="transaction-card"
-      onClick={() => navigate(`/details/${transaction_id}`)}
+      onClick={() => navigate(`${CLIENT_ROUTES.allTransactions}/${transaction_type}/${transaction_id}`)}
       data-testid="transaction-card"
     >
       <div className="transaction-info">

@@ -16,6 +16,7 @@ const ENDPOINTS = {
   forgetPasscode: "/auth/forgot-login-passcode",
   resetLoginPasscode: "/auth/reset-login-passcode",
   transactionAll: "/transactions/all",
+  transaction: "/transactions/banks/1",
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {

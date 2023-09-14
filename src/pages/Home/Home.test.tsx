@@ -48,7 +48,7 @@ test("Have all links wired up correctly", async () => {
       elem: screen.getByRole("link", {
         name: /transaction history >/i,
       }),
-      link: CLIENT_ROUTES.transactionPage,
+      link: CLIENT_ROUTES.allTransactions,
     },
     {
       elem: screen.getByRole("link", {
