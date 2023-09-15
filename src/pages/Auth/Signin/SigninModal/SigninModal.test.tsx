@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 
 import TestProviders from "@components/TestProviders";
 import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS, TEST_LOG_PREFIX } from "@constants/index";
-import { navigate } from "@utils/test/mocks/navigate";
 import { consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
 
 import SigninModal from ".";
@@ -35,6 +34,6 @@ test("Add query string `user` the url or navigate on option select", async () =>
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
 
   await user.click(createUserRadio);
-  expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
-  expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authSignup);
+  expect(consoleInfoSpy).toHaveBeenCalledTimes(3);
+  expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, CLIENT_ROUTES.authSignup);
 });

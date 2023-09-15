@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import SigninModalWrapper from "./SigninModalWrapper";
-import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS } from "@constants/index";
 import { useNavigate, useSearchParams } from "react-router-dom";
+
+import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS } from "@constants/index";
 import testLogger from "@utils/testLogger";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
+
+import SigninModalWrapper from "./SigninModalWrapper";
 
 const SigninModal = () => {
   const { handleRemove } = useModalConsumer();
@@ -19,7 +21,8 @@ const SigninModal = () => {
     if (value === undefined) return;
 
     if (value === "null") {
-      navigate(CLIENT_ROUTES.authSignup);
+      testLogger(CLIENT_ROUTES.authSignup);
+      location.href = CLIENT_ROUTES.authSignup;
 
       return;
     }
@@ -34,8 +37,6 @@ const SigninModal = () => {
 
   return (
     <SigninModalWrapper>
-      <h1>SigninModal</h1>
-
       <form>
         <div data-testid="radio" onClick={() => handleClick(SIGNIN_MODAL_URL_USER_QUERY_OPTIONS.defaultUser)}>
           <p>Default</p>

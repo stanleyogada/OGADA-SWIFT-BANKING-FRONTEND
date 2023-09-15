@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-const SigninModalWrapper = styled.div`
-  background-color: red; // TODO: Remove
-`;
+const SigninModalWrapper = styled.div``;
 
 export default SigninModalWrapper;
