@@ -1,10 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SigninModal from ".";
+
 import TestProviders from "@components/TestProviders";
-import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS } from "@constants/index";
+import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS, TEST_LOG_PREFIX } from "@constants/index";
 import { navigate } from "@utils/test/mocks/navigate";
 import { consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
+
+import SigninModal from ".";
 
 test("Add query string `user` the url or navigate on option select", async () => {
   render(<SigninModal />, { wrapper: TestProviders });
@@ -16,6 +18,7 @@ test("Add query string `user` the url or navigate on option select", async () =>
 
   await user.click(defaultUserRadio);
   expect(consoleInfoSpy).toHaveBeenCalledWith(
+    TEST_LOG_PREFIX,
     "setSearchParams",
     "user",
     SIGNIN_MODAL_URL_USER_QUERY_OPTIONS.defaultUser
@@ -23,7 +26,12 @@ test("Add query string `user` the url or navigate on option select", async () =>
   expect(consoleInfoSpy).toHaveBeenCalledTimes(1);
 
   await user.click(noUserRadio);
-  expect(consoleInfoSpy).toHaveBeenCalledWith("setSearchParams", "user", SIGNIN_MODAL_URL_USER_QUERY_OPTIONS.noUser);
+  expect(consoleInfoSpy).toHaveBeenCalledWith(
+    TEST_LOG_PREFIX,
+    "setSearchParams",
+    "user",
+    SIGNIN_MODAL_URL_USER_QUERY_OPTIONS.noUser
+  );
   expect(consoleInfoSpy).toHaveBeenCalledTimes(2);
 
   await user.click(createUserRadio);

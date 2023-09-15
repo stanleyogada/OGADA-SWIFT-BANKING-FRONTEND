@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SigninModalWrapper from "./SigninModalWrapper";
 import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS } from "@constants/index";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import testLogger from "@utils/testLogger";
 
 const SigninModal = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const SigninModal = () => {
       return;
     }
 
-    console.info("setSearchParams", "user", value);
+    testLogger("setSearchParams", "user", value);
     setSearchParams({
       user: value,
     });

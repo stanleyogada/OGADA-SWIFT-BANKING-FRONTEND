@@ -15,15 +15,7 @@ function App() {
     return <SplashScreen />;
   }
 
-  return (
-    <>
-      <Modal />
-
-      <div data-app-container>
-        <RouterProvider router={ROUTER} />;
-      </div>
-    </>
-  );
+  return <RouterProvider router={ROUTER} />;
 }
 
 export default App;
