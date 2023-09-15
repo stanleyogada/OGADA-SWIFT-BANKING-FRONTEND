@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import Signin from ".";
+import Signin from "..";
 
 import createServer from "@utils/test/createServer";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
@@ -15,7 +15,6 @@ import TestProviders from "@components/TestProviders";
 import { navigate } from "@utils/test/mocks/navigate";
 
 import { TUser } from "@services/users/types";
-import { DEFAULT_LOGIN } from "@constants/pages";
 
 const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; token: string }) => {
   const { handleCreateErrorConfig } = createServer([
@@ -33,17 +32,17 @@ const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; toke
 };
 
 const handleAssertTypeInForm = async (
-  user: ReturnType<typeof userEvent.setup>
-  // formData: { phone: string; loginPasscode: string } TODO: clean up
+  user: ReturnType<typeof userEvent.setup>,
+  formData: { phone: string; loginPasscode: string }
 ) => {
   const phoneInput = screen.getByPlaceholderText(/phone number/i);
   const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
 
-  // await user.type(phoneInput, formData.phone); TODO: clean up
-  // await user.type(loginPasscodeInput, formData.loginPasscode); TODO: clean up
+  await user.type(phoneInput, formData.phone);
+  await user.type(loginPasscodeInput, formData.loginPasscode);
 
-  expect(phoneInput).toHaveValue(DEFAULT_LOGIN.phoneNumber);
-  expect(loginPasscodeInput).toHaveValue(DEFAULT_LOGIN.loginPasscode);
+  expect(phoneInput).toHaveValue(formData.phone);
+  expect(loginPasscodeInput).toHaveValue(formData.loginPasscode);
 };
 
 describe("When signin request failed ", () => {
@@ -62,10 +61,7 @@ describe("When signin request failed ", () => {
       wrapper: TestProviders,
     });
 
-    await handleAssertTypeInForm(
-      user
-      // { phone: "1234567890", loginPasscode: "123456" } // TODO: clean up
-    );
+    await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
     expect(JSON.stringify(consoleErrorSpy.mock.calls)).not.toContain("Request failed with status code 400");
 
     const signInButton = screen.getByRole("button", { name: /sign in/i });
@@ -96,10 +92,7 @@ describe("Signin form works correctly onSuccess", () => {
         wrapper: TestProviders,
       });
 
-      await handleAssertTypeInForm(
-        user
-        // { phone: "1234567890", loginPasscode: "123456" } TODO: clean up
-      );
+      await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
       expect(window.location.reload).not.toHaveBeenCalled();
 
       const signInButton = screen.getByRole("button", { name: /sign in/i });
@@ -125,10 +118,7 @@ describe("Signin form works correctly onSuccess", () => {
         wrapper: TestProviders,
       });
 
-      await handleAssertTypeInForm(
-        user
-        // { phone: "1234567890", loginPasscode: "123456" } TODO: clean up
-      );
+      await handleAssertTypeInForm(user, { phone: "1234567890", loginPasscode: "123456" });
       expect(navigate).not.toHaveBeenCalled();
 
       const signInButton = screen.getByRole("button", { name: /sign in/i });

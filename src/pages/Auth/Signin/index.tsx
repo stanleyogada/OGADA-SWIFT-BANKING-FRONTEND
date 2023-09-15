@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import useSignin from "./hooks/useSignin";
 
@@ -9,10 +9,20 @@ import Button from "@components/Button";
 import PageNavHeader from "@components/PageNavHeader";
 import { CLIENT_ROUTES } from "@constants/routes";
 import useSigninModal from "./hooks/useSigninModal";
+import { useEffect, useState } from "react";
 
 const Signin = () => {
   const { handleSubmit, register, mutationState, errors } = useSignin();
   useSigninModal();
+  const [getSearchParams] = useSearchParams();
+
+  const [userOption, setUserOption] = useState<null | string>(null);
+
+  useEffect(() => {
+    const user = getSearchParams.get("user");
+
+    setUserOption(user);
+  }, []);
 
   return (
     <SigninWrapper>
