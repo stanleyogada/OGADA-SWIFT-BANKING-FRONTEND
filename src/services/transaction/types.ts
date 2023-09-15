@@ -8,6 +8,7 @@ type TTransactionAll = {
   sender_account_number: string;
   receiver_account_number: string;
   is_deposit: boolean;
+  transaction_number: string;
 };
 enum ETransactionAllType {
   IN_HOUSES = "in-houses",

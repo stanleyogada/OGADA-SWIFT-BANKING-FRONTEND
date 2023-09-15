@@ -1,97 +1,72 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import Transaction from ".";
+import { screen, render } from "@testing-library/react";
+import Transaction from "./Transaction";
 import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
-import { handleAssertLoadingState } from "@utils/test/assertUtils";
-import { navigate } from "@utils/test/mocks/navigate";
+import { CLIENT_ROUTES } from "@constants/routes";
+import { consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
+import { TEST_LOG_PREFIX } from "@constants/index";
 
-const response = [
-  {
-    transaction_id: 21,
-    created_at: "2023-09-02T21:57:18.999Z",
-    transaction_type: "in-house",
-    amount: "280.00",
-    is_success: true,
-    account_id: 19,
-    sender_account_number: "9012345619",
-    receiver_account_number: "n/a",
-    is_deposit: true,
-  },
-  {
-    transaction_id: 21,
-    created_at: "2023-09-04T21:57:18.999Z",
-    transaction_type: "banks",
-    amount: "280.00",
-    is_success: false,
-    account_id: 19,
-    sender_account_number: "9012345619",
-    receiver_account_number: "n/a",
-    is_deposit: false,
-  },
-  {
-    transaction_id: 21,
-    created_at: "2023-09-02T21:57:18.999Z",
-    transaction_type: "banks",
-    amount: "280.00",
-    is_success: true,
-    account_id: 19,
-    sender_account_number: "9012345619",
-    receiver_account_number: "n/a",
-    is_deposit: false,
-  },
-  {
-    transaction_id: 21,
-    created_at: "2023-09-02T21:57:18.999Z",
-    transaction_type: "banks",
-    amount: "280.00",
-    is_success: true,
-    account_id: 19,
-    sender_account_number: "9012345619",
-    receiver_account_number: "n/a",
-    is_deposit: false,
-  },
-];
+const TRANSACTION_TYPE = "banks";
+const TRANSACTION_ID = 2;
 
-createServer([
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(() => ({ type: TRANSACTION_TYPE, id: TRANSACTION_ID })),
+}));
+
+const { handleCreateErrorConfig } = createServer([
   {
-    url: `${BASE_URL}${ENDPOINTS.transactionAll}`,
+    url: `${BASE_URL}${CLIENT_ROUTES.allTransactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
     res() {
       return {
-        data: response,
+        data: {
+          transaction_id: TRANSACTION_ID,
+          created_at: "2023-09-02T22:01:46.821Z",
+          is_success: false,
+          mood_type: "happy",
+          transaction_number: "1234589067890",
+          receiver_account_number: "123456789",
+        },
       };
     },
   },
   `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
-test("Renders two cards on load and fetches more data on button click", async () => {
+test("renders transaction details correctly", async () => {
   render(
     <TestProviders>
       <Transaction />
     </TestProviders>
   );
 
-  const initialCards = await screen.findAllByTestId("transaction-card");
-  expect(initialCards).toHaveLength(4);
-  expect(initialCards[0]).toHaveTextContent(new RegExp(`in-house`));
-  expect(initialCards[0]).toHaveTextContent(/saturday, sep 2023/i);
-  expect(initialCards[0]).toHaveTextContent(/\+N280.00/);
-  expect(initialCards[0]).toHaveTextContent(/successful/);
+  const params = screen.getByTestId("params");
+  const details = await screen.findAllByTestId("details");
+  expect(details).toHaveLength(4);
+  expect(details[0]).toHaveTextContent(`${TRANSACTION_ID}`);
+  expect(details[1]).toHaveTextContent("Saturday, Sep 2023");
+  expect(params).toBeInTheDocument();
+  expect(details[2]).toHaveTextContent("failed");
+  expect(screen.getByText(/mood type/i)).toBeInTheDocument();
+});
 
-  expect(initialCards[1]).toHaveTextContent(new RegExp(`banks`));
-  expect(initialCards[1]).toHaveTextContent(/monday, sep 2023/i);
-  expect(initialCards[1]).toHaveTextContent(/-N280.00/);
-  expect(initialCards[1]).toHaveTextContent(/failed/);
+test("navigate to 404 Page when the there is an error", async () => {
+  render(
+    <TestProviders>
+      <Transaction />
+    </TestProviders>
+  );
 
-  const user = userEvent.setup();
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${CLIENT_ROUTES.allTransactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
 
-  const button = screen.getByRole("button", { name: /load more/i });
-  await user.click(button);
-  await handleAssertLoadingState(button);
-  expect(await screen.findAllByTestId("transaction-card")).toHaveLength(8);
+    statusCode: 404,
+  });
 
-  await user.click(initialCards[0]);
-  expect(navigate).toHaveBeenCalled();
+  expect(consoleInfoSpy).not.toHaveBeenCalled();
+
+  expect(await screen.findByTestId("error404")).toBeInTheDocument();
+
+  expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, "Navigate", "/404");
 });

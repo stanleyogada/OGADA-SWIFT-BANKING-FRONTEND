@@ -11,7 +11,12 @@ const useTransactionInfoList = (transaction?: TTransactionDetails) => {
 
   if (transaction) transaction.created_at = getDateInDesiredFormat;
 
-  const keys = Object.keys(transaction || {}).map((k) => k.split("_").join(" "));
+  let keys = Object.keys(transaction || {}).map((k) => k.split("_").join(" "));
+  keys = keys.filter((key) => {
+    if (key !== "transaction number" && key !== "receiver account number") {
+      return key;
+    }
+  });
   const values = Object.values(transaction || {});
 
   const splitDataInFirstHalf = () => {

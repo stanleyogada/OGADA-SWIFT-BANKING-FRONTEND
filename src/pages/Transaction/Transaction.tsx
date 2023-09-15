@@ -3,32 +3,12 @@ import { ETransactionAllType, TTransactionAll } from "@services/transaction/type
 import PageNavHeader from "@components/PageNavHeader";
 import styled from "styled-components";
 import getTransactionIcon from "@utils/getTransactionIcon";
-import useGetOneTransaction from "./hook/useGetOneTransaction";
-import useTransactionInfoList from "./hook/useTransactionInfoList";
+import useGetOneTransaction from "./hooks/useGetOneTransaction";
+import useTransactionInfoList from "./hooks/useTransactionInfoList";
 import TransactionInfo from "@components/TransactionInfo";
-import { useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import TransactionInfoList from "@components/TransactionInfoList";
 
-import { CLIENT_ROUTES } from "@constants/routes";
-
-const TransactionInfoList = ({
-  data,
-}: {
-  data: {
-    value: string | number | boolean;
-    _key: string;
-  }[];
-}) => {
-  return (
-    <>
-      {data.map((item, idx) => (
-        <TransactionInfo key={idx} _key={item._key} value={item.value} />
-      ))}
-    </>
-  );
-};
-
-const Details = () => {
+const Transaction = () => {
   const { type, id } = useParams();
 
   const { data, is404Error } = useGetOneTransaction(type as string, id as string);
@@ -64,35 +44,15 @@ const Details = () => {
 
         <div className="transaction-number">
           <div className="transaction-title">Transaction number</div>
-          <div className="number">29404724790849245972</div>
+          <div className="number">{data?.transaction_number}</div>
         </div>
-
-        {/* <button className="receipt-btn">Share Receipt</button> */}
-
-        {/* {is404Error && <Error404 is404Error={is404Error} />} */}
-
         {is404Error && <div data-testid="error404">404</div>}
       </div>
     </DetailsWrapper>
   );
 };
 
-const Error404 = ({ is404Error }: { is404Error: boolean }) => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (is404Error) {
-      console.log({
-        is404Error,
-      });
-      navigate(CLIENT_ROUTES._404);
-    }
-  }, [is404Error]);
-
-  return <div data-testid="error404">404</div>;
-};
-
-export default Details;
+export default Transaction;
 
 const DetailsWrapper = styled.div`
   width: 100%;

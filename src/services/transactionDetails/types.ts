@@ -8,6 +8,7 @@ type TTransactionDetails = {
   sender_account_number: string;
   receiver_account_number: string;
   is_deposit: boolean;
+  transaction_number: string;
 };
 
 type TTransactionDetailsInHouse = {

@@ -2,7 +2,7 @@ import { getAllTransactions } from "@services/transaction";
 import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 
-const useTransaction = () => {
+const useGetAllTransactions = () => {
   const [pageParams, setPageParam] = useState(0);
 
   let { data, fetchNextPage, isFetching, refetch } = useInfiniteQuery(
@@ -34,4 +34,4 @@ const useTransaction = () => {
   };
 };
 
-export default useTransaction;
+export default useGetAllTransactions;
