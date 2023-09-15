@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import { SIGNIN_MODAL_URL_USER_QUERY_OPTIONS } from "@constants/index";
 import TestProviders from "@components/TestProviders";
@@ -20,4 +20,10 @@ test("should first", () => {
   render(<Signin />, {
     wrapper: TestProviders,
   });
+
+  const phoneInput = screen.getByPlaceholderText(/phone number/i);
+  const loginPasscodeInput = screen.getByPlaceholderText(/enter 6 digits login passcode/i);
+
+  expect(phoneInput).toHaveValue("");
+  expect(loginPasscodeInput).toHaveValue("");
 });
