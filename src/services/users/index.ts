@@ -1,7 +1,7 @@
 import { axiosInstance } from "@utils/axiosInstance";
 import { ENDPOINTS } from "@constants/services";
 
-import type { TUser, TUserAccount } from "./types";
+import type { TUser, TUserAccount, TUserDefault } from "./types";
 
 const getCurrentUser = async (): Promise<TUser> => {
   const { data } = await axiosInstance({
@@ -10,8 +10,8 @@ const getCurrentUser = async (): Promise<TUser> => {
   });
 
   return {
-    ...data.data,
-    fullName: `${data.data.first_name} ${data.data.last_name}`,
+    ...data?.data,
+    fullName: `${data?.data?.first_name} ${data?.data?.last_name}`,
   } as TUser;
 };
 
@@ -24,4 +24,13 @@ const getCurrentUserAccounts = async (): Promise<TUserAccount[]> => {
   return data.data as TUserAccount[];
 };
 
-export { getCurrentUser, getCurrentUserAccounts };
+const getDefaultUserLoginInfo = async (): Promise<TUserDefault> => {
+  const { data } = await axiosInstance({
+    method: "GET",
+    url: ENDPOINTS.defaultUserLoginInfo,
+  });
+
+  return data.data as TUserDefault;
+};
+
+export { getCurrentUser, getCurrentUserAccounts, getDefaultUserLoginInfo };

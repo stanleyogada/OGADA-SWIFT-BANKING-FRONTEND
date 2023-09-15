@@ -6,6 +6,7 @@ import { postSignIn } from "../services/auth";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_ROUTES } from "../constants";
+import testLogger from "@utils/testLogger";
 
 const useAuth = () => {
   const navigate = useNavigate();
@@ -41,7 +42,10 @@ const useAuth = () => {
     onSuccess: ({ token, emailIsVerified }) => {
       if (emailIsVerified) {
         localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
-        window.location.reload(); // Signifies that the user is logged in successfully
+        // window.location.reload(); // Signifies that the user is logged in successfully
+
+        testLogger("logged-in", CLIENT_ROUTES.home);
+        location.href = CLIENT_ROUTES.home;
 
         return;
       }
@@ -61,7 +65,9 @@ const useAuth = () => {
     localStorage.removeItem("token"); // TODO: remove this after fixing cookie issue on the backend
 
     if (redirectTo) {
-      navigate(redirectTo);
+      testLogger("logged-out", redirectTo);
+      location.href = redirectTo;
+
       return;
     }
 

@@ -24,6 +24,11 @@ type TUserAccount = {
   full_name: string;
 };
 
+type TUserDefault = TUser & {
+  login_passcode: string;
+  transfer_pin: string;
+};
+
 type TUserAccountType = "NORMAL" | "CASHBACK";
 
-export type { TUser, TUserAccount, TUserAccountType };
+export type { TUser, TUserAccount, TUserAccountType, TUserDefault };

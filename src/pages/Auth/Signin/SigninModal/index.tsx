@@ -3,8 +3,10 @@ import SigninModalWrapper from "./SigninModalWrapper";
 import { CLIENT_ROUTES, SIGNIN_MODAL_URL_USER_QUERY_OPTIONS } from "@constants/index";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import testLogger from "@utils/testLogger";
+import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 
 const SigninModal = () => {
+  const { handleRemove } = useModalConsumer();
   const navigate = useNavigate();
   const [, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<undefined | string>();
@@ -26,6 +28,8 @@ const SigninModal = () => {
     setSearchParams({
       user: value,
     });
+
+    handleRemove();
   }, [value]);
 
   return (

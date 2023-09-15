@@ -5,7 +5,7 @@ import Signin from "..";
 
 import createServer from "@utils/test/createServer";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
-import { consoleErrorSpy } from "@utils/test/mocks/consoleSpy";
+import { consoleErrorSpy, consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
 
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
@@ -15,6 +15,7 @@ import TestProviders from "@components/TestProviders";
 import { navigate } from "@utils/test/mocks/navigate";
 
 import { TUser } from "@services/users/types";
+import { TEST_LOG_PREFIX } from "@constants/index";
 
 const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; token: string }) => {
   const { handleCreateErrorConfig } = createServer([
@@ -100,7 +101,7 @@ describe("Signin form works correctly onSuccess", () => {
 
       await handleAssertLoadingState(signInButton);
 
-      expect(window.location.reload).toHaveBeenCalled();
+      expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, "logged-in", CLIENT_ROUTES.home);
     });
   });
 
@@ -112,7 +113,7 @@ describe("Signin form works correctly onSuccess", () => {
       },
     });
 
-    test("Forces a navigate at the end of the operation", async () => {
+    test("Forces a sign-out and navigate at the end of the operation", async () => {
       const user = userEvent.setup();
       render(<Signin />, {
         wrapper: TestProviders,
@@ -127,7 +128,7 @@ describe("Signin form works correctly onSuccess", () => {
       await handleAssertLoadingState(signInButton);
 
       expect(window.location.reload).not.toHaveBeenCalled();
-      expect(navigate).toHaveBeenCalledWith(CLIENT_ROUTES.authVerifyEmail);
+      expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, "logged-out", CLIENT_ROUTES.authVerifyEmail);
     });
   });
 });

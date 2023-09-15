@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import ModalHeader from "@components/Modal/ModalHeader";
@@ -12,7 +12,6 @@ const useSigninModal = () => {
     handleAdd({
       heading: <ModalHeader text="How would you like to signin? 🤷🏽‍♂️" />,
       body: <SigninModal />,
-      isPersistent: true,
     });
   }, []);
 };

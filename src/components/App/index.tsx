@@ -1,7 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 
 import SplashScreen from "@components/SplashScreen";
-import Modal from "@components/Modal";
 import useNetworkErrorModal from "@hooks/useNetworkErrorModal";
 
 import useSplash from "./hooks/useSplash";

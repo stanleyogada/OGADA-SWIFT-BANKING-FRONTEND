@@ -12,6 +12,7 @@ const useSignin = () => {
     register,
     handleSubmit: _handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<TSignInFormValues>({
     // defaultValues: {
     //   ...(() =>
@@ -50,6 +51,7 @@ const useSignin = () => {
     errors,
     handleSubmit,
     register,
+    setValue,
   };
 };
 

@@ -16,7 +16,7 @@ jest.mock("react-router-dom", () => ({
   useSearchParams: jest.fn(() => [getSearchPrams]),
 }));
 
-test("should first", () => {
+test("Ensures the form is empty on no-user opt", () => {
   render(<Signin />, {
     wrapper: TestProviders,
   });
