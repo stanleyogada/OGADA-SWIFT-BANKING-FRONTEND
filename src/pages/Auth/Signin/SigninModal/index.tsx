@@ -9,7 +9,6 @@ import SigninModalWrapper from "./SigninModalWrapper";
 
 const SigninModal = () => {
   const { handleRemove } = useModalConsumer();
-  const navigate = useNavigate();
   const [, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<undefined | string>();
 
