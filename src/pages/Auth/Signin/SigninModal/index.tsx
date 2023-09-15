@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 const SigninModal = () => {
   const navigate = useNavigate();
-  // const [, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const [value, setValue] = useState<undefined | string>();
 
   const handleClick = (value: string) => {
@@ -21,11 +21,10 @@ const SigninModal = () => {
       return;
     }
 
-    location.search = `user=${value}`;
-
-    // setSearchParams({
-    //   user: value,
-    // });
+    console.info("setSearchParams", "user", value);
+    setSearchParams({
+      user: value,
+    });
   }, [value]);
 
   return (
