@@ -16,7 +16,7 @@ const getAllTransactions = async ({ pageNumber }: { pageNumber: number }): Promi
 const getOneTransaction = async (type: ETransactionAllType, id: string) => {
   const response = await axiosInstance({
     method: "GET",
-    url: `${CLIENT_ROUTES.allTransactions}/${type}/${id}`,
+    url: `${CLIENT_ROUTES.transactions}/${type}/${id}`,
   });
 
   return response.data.data as TTransactionDetails;

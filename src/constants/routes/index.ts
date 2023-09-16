@@ -16,7 +16,7 @@ const CLIENT_ROUTES = {
   authForgetPasscode: "/auth/forget-passcode",
   authResetPasscode: "/auth/reset-passcode",
   liveChat: "/livechat",
-  allTransactions: "/transactions",
+  transactions: "/transactions",
   addMoney: "/add-money",
   sendMoneyInHouse: "/send-money/In-house",
   sendMoneyBank: "/send-money/bank",

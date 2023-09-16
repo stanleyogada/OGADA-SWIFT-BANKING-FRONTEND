@@ -7,6 +7,7 @@ import { getOneTransaction } from "@services/transaction";
 import testLogger from "@utils/testLogger";
 
 import type { ETransactionAllType } from "@services/transaction/types";
+import type { AxiosError } from "axios";
 
 const useTransactionDetails = (type: string, id: string) => {
   const { data, error, isError } = useQuery(["transaction", id, type], () =>
@@ -16,10 +17,10 @@ const useTransactionDetails = (type: string, id: string) => {
   const navigate = useNavigate();
 
   const is404Error = useMemo(() => {
-    // @ts-ignore
-    if (isError && error?.response.status === 404) {
+    if (isError && (error as AxiosError)?.response?.status === 404) {
       return true;
     }
+
     return false;
   }, [error && isError]);
 

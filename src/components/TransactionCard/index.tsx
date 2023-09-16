@@ -36,7 +36,7 @@ const TransactionCard = ({ amount, created_at, is_success, transaction_type, is_
   return (
     <div
       className="transaction-card"
-      onClick={() => navigate(`${CLIENT_ROUTES.allTransactions}/${transaction_type}/${transaction_id}`)}
+      onClick={() => navigate(`${CLIENT_ROUTES.transactions}/${transaction_type}/${transaction_id}`)}
       data-testid="transaction-card"
     >
       <div className="transaction-info">

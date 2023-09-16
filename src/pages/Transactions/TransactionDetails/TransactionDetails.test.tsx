@@ -19,7 +19,7 @@ jest.mock("react-router-dom", () => ({
 
 const { handleCreateErrorConfig } = createServer([
   {
-    url: `${BASE_URL}${CLIENT_ROUTES.allTransactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
+    url: `${BASE_URL}${CLIENT_ROUTES.transactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
     res() {
       return {
         data: {
@@ -61,7 +61,7 @@ test("navigate to 404 Page when the there is an error", async () => {
   );
 
   handleCreateErrorConfig({
-    url: `${BASE_URL}${CLIENT_ROUTES.allTransactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
+    url: `${BASE_URL}${CLIENT_ROUTES.transactions}/${TRANSACTION_TYPE}/${TRANSACTION_ID}`,
 
     statusCode: 404,
   });

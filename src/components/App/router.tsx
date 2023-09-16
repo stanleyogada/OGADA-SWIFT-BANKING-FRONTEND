@@ -94,7 +94,7 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.allTransactions,
+        path: CLIENT_ROUTES.transactions,
         element: (
           <PageWrapper>
             <Transactions />
@@ -102,7 +102,7 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: `${CLIENT_ROUTES.allTransactions}/:type/:id`,
+        path: `${CLIENT_ROUTES.transactions}/:type/:id`,
         element: (
           <PageWrapper>
             <TransactionDetails />
