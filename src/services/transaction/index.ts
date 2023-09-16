@@ -19,7 +19,6 @@ const getOneTransaction = async (type: ETransactionAllType, id: string) => {
     url: `${CLIENT_ROUTES.allTransactions}/${type}/${id}`,
   });
 
-  console.log("data", response.data.data);
   return response.data.data as TTransactionDetails;
 };
 
