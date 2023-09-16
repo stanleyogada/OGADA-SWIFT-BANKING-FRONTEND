@@ -6,7 +6,7 @@ import { getAllTransactions } from "@services/transaction";
 const useTransactions = () => {
   const [pageParams, setPageParam] = useState(0);
 
-  let { data, fetchNextPage, isFetching, refetch } = useInfiniteQuery(
+  let { data, fetchNextPage, isFetching, refetch, isLoading } = useInfiniteQuery(
     ["transaction"],
     () => getAllTransactions({ pageNumber: pageParams }),
     {
@@ -32,6 +32,7 @@ const useTransactions = () => {
     fetchNextPage,
     isFetching,
     setPageParam,
+    isLoading,
   };
 };
 

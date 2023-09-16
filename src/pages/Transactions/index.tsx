@@ -3,15 +3,19 @@ import TransactionCard from "@components/TransactionCard";
 
 import TransactionsWrapper from "./TransactionsWrapper";
 import useTransactions from "./hooks/useTransactions";
+import SplashScreen from "@components/SplashScreen";
 
 const Transactions = () => {
-  const { data, fetchNextPage, isFetching, setPageParam } = useTransactions();
+  const { data, fetchNextPage, isFetching, setPageParam, isLoading } = useTransactions();
 
-  return (
+  return isLoading ? (
+    <SplashScreen />
+  ) : (
     <TransactionsWrapper>
+      <PageNavHeader heading="All Transactions" />
+
       <div className="transaction-container">
         <div className="transaction-header">
-          <PageNavHeader heading="transactions"></PageNavHeader>
           <div className="categories-section">
             <p>All categories</p>
             <p>Any status</p>
