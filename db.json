@@ -1,1 +1,11 @@
-{}
+{
+  "auth": {
+    "signin": {
+      "data": {
+        "email": "jsonServerUser@email.com",
+        "password": "jsonServerUserPassword",
+        "phone_number": "1234567890"
+      }
+    }
+  }
+}
