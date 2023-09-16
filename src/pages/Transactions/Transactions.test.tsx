@@ -58,7 +58,7 @@ const RESPONSE_DATA = [
 
 createServer([
   {
-    url: `${BASE_URL}${ENDPOINTS.transactionAll}`,
+    url: `${BASE_URL}${ENDPOINTS.transactions}`,
     res() {
       return {
         data: RESPONSE_DATA,
