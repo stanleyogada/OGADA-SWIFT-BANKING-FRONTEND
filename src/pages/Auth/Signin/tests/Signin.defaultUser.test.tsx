@@ -1,13 +1,13 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import { SIGNIN_MODAL_URL_USER_QUERY_OPTIONS, TEST_LOG_PREFIX } from "@constants/index";
 import TestProviders from "@components/TestProviders";
-
-import Signin from "..";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
+
+import Signin from "..";
 
 const getSearchParams = {
   get: jest.fn(() => {
@@ -65,6 +65,8 @@ test("Ensures the form is NOT empty on default user opt", async () => {
   expect(phoneInput).toHaveValue(responseDefault.phone);
   expect(loginPasscodeInput).toHaveValue(responseDefault.login_passcode);
 
-  // Automatically login with default user
-  expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, "auto-submit");
+  // Automatically login with default user (WHICH ASSERTS THE SUBMIT BUTTON WAS AUTO CLICKED)
+  await waitFor(() => {
+    expect(consoleInfoSpy).toHaveBeenCalledWith(TEST_LOG_PREFIX, "auto-submit");
+  });
 });
