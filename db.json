@@ -37,30 +37,30 @@
         "login_passcode": "123456",
         "transfer_pin": "1234"
       }
-    }
-  ],
-  "me.accounts": [
+    },
     {
+      "id": "me.accounts",
+      "status": "success",
       "data": [
         {
-          "user_id": 1000,
-          "created_at": "2023-09-12T15:31:16.414Z",
-          "email": "defaultNormalUser@email.com",
-          "account_number": "4286351832",
-          "account_id": 1,
-          "balance": "6700.00",
+          "user_id": 2,
+          "created_at": "2023-09-02T22:01:31.398Z",
+          "email": "money-man@gmail.com",
+          "account_number": "9012345639",
+          "account_id": 3,
+          "balance": "1800000.00",
           "type": "NORMAL",
-          "full_name": "Default Faker Normal User"
+          "full_name": "Offer MoneyMan2"
         },
         {
-          "user_id": 1000,
-          "created_at": "2023-09-12T15:31:16.414Z",
-          "email": "defaultNormalUser@email.com",
-          "account_number": "4286351832",
-          "account_id": 2,
-          "balance": "1900.00",
+          "user_id": 2,
+          "created_at": "2023-09-02T22:01:31.398Z",
+          "email": "money-man@gmail.com",
+          "account_number": "9012345639",
+          "account_id": 4,
+          "balance": "900000.00",
           "type": "CASHBACK",
-          "full_name": "Default Faker Normal User"
+          "full_name": "Offer MoneyMan2"
         }
       ],
       "count": 2
