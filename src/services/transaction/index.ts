@@ -1,8 +1,7 @@
 import { ENDPOINTS } from "@constants/services";
 import { axiosInstance } from "@utils/axiosInstance";
-import { ETransactionAllType, TTransactionAll } from "./types";
+import { ETransactionAllType, TTransactionAll, TTransactionDetails } from "./types";
 import { CLIENT_ROUTES } from "@constants/routes";
-import { TTransactionDetails } from "@services/transactionDetails/types";
 
 const getAllTransactions = async ({ pageNumber }: { pageNumber: number }): Promise<TTransactionAll[]> => {
   const { data } = await axiosInstance({
