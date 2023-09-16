@@ -23,6 +23,7 @@ import ForgotLoginPasscode from "@pages/Auth/ForgotLoginPasscode";
 import ResetLoginPasscode from "@pages/Auth/ResetLoginPasscode";
 import Transactions from "@pages/Transactions";
 import TransactionDetails from "@pages/Transactions/TransactionDetails";
+import Error404 from "@pages/Error404";
 
 const ROUTER = createBrowserRouter([
   {
@@ -120,7 +121,7 @@ const ROUTER = createBrowserRouter([
         path: "/404",
         element: (
           <PageWrapper>
-            <div>404</div>
+            <Error404 />
           </PageWrapper>
         ),
       },
