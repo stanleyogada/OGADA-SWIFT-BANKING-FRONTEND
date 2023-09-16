@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import useCurrentUser from "@hooks/useCurrentUser";
 import NetworkErrorModal from "@components/NetworkErrorModal";

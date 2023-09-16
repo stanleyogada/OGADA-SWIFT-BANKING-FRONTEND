@@ -1,10 +1,12 @@
-import ReactDOM from "react-dom/client";
-import App from "./components/App";
-import "./main.css";
 import React from "react";
+import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+
 import ModalProvider from "@contexts/Modal/ModalProvider";
+
+import App from "./components/App";
+import "./main.css";
 
 const queryClient = new QueryClient();
 

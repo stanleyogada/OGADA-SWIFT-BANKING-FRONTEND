@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
-import { TModal } from "../types";
+
 import Stack from "@DS/Stack";
+
+import type { TModal } from "../types";
 
 const useModalProvider = () => {
   const [stack, setStack] = useState<Stack<TModal>>(new Stack<TModal>());

@@ -1,21 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import Signin from "..";
-
 import createServer from "@utils/test/createServer";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { consoleErrorSpy, consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
-
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
-
 import TestProviders from "@components/TestProviders";
-
 import { navigate } from "@utils/test/mocks/navigate";
-
-import { TUser } from "@services/users/types";
 import { TEST_LOG_PREFIX } from "@constants/index";
+
+import type { TUser } from "@services/users/types";
+
+import Signin from "..";
 
 const handleCreateSignInConfigSuccess = (response: { data?: Partial<TUser>; token: string }) => {
   const { handleCreateErrorConfig } = createServer([
