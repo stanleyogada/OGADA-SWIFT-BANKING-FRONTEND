@@ -1,17 +1,18 @@
-import { Navigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
+
 import { ETransactionAllType, TTransactionAll } from "@services/transaction/types";
 import PageNavHeader from "@components/PageNavHeader";
-import styled from "styled-components";
 import getTransactionIcon from "@utils/getTransactionIcon";
-import useGetOneTransaction from "./hooks/useGetOneTransaction";
-import useTransactionInfoList from "./hooks/useTransactionInfoList";
-import TransactionInfo from "@components/TransactionInfo";
 import TransactionInfoList from "@components/TransactionInfoList";
 
-const Transaction = () => {
+import useTransactionDetails from "./hooks/useTransactionDetails";
+import useTransactionInfoList from "./hooks/useTransactionInfoList";
+
+const TransactionDetails = () => {
   const { type, id } = useParams();
 
-  const { data, is404Error } = useGetOneTransaction(type as string, id as string);
+  const { data, is404Error } = useTransactionDetails(type as string, id as string);
 
   const { firstHalf, secondHalf } = useTransactionInfoList(data as TTransactionAll);
 
@@ -52,7 +53,7 @@ const Transaction = () => {
   );
 };
 
-export default Transaction;
+export default TransactionDetails;
 
 const DetailsWrapper = styled.div`
   width: 100%;

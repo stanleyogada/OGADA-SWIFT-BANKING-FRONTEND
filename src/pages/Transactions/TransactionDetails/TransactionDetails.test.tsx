@@ -1,11 +1,13 @@
 import { screen, render } from "@testing-library/react";
-import Transaction from "./Transaction";
+
 import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { CLIENT_ROUTES } from "@constants/routes";
 import { consoleInfoSpy } from "@utils/test/mocks/consoleSpy";
 import { TEST_LOG_PREFIX } from "@constants/index";
+
+import TransactionDetails from ".";
 
 const TRANSACTION_TYPE = "banks";
 const TRANSACTION_ID = 2;
@@ -37,7 +39,7 @@ const { handleCreateErrorConfig } = createServer([
 test("renders transaction details correctly", async () => {
   render(
     <TestProviders>
-      <Transaction />
+      <TransactionDetails />
     </TestProviders>
   );
 
@@ -54,7 +56,7 @@ test("renders transaction details correctly", async () => {
 test("navigate to 404 Page when the there is an error", async () => {
   render(
     <TestProviders>
-      <Transaction />
+      <TransactionDetails />
     </TestProviders>
   );
 

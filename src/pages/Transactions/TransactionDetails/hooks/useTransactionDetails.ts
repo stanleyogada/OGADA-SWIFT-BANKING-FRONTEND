@@ -1,12 +1,14 @@
-import { CLIENT_ROUTES } from "@constants/routes";
-import { getOneTransaction } from "@services/transaction";
-import { ETransactionAllType } from "@services/transaction/types";
-import testLogger from "@utils/testLogger";
 import { useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 
-const useGetOneTransaction = (type: string, id: string) => {
+import { CLIENT_ROUTES } from "@constants/routes";
+import { getOneTransaction } from "@services/transaction";
+import testLogger from "@utils/testLogger";
+
+import type { ETransactionAllType } from "@services/transaction/types";
+
+const useTransactionDetails = (type: string, id: string) => {
   const { data, error, isError } = useQuery(["transaction", id, type], () =>
     getOneTransaction(type as ETransactionAllType, id)
   );
@@ -34,4 +36,4 @@ const useGetOneTransaction = (type: string, id: string) => {
   };
 };
 
-export default useGetOneTransaction;
+export default useTransactionDetails;

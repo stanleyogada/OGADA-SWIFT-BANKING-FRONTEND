@@ -1,6 +1,6 @@
-import TransactionInfo from "@components/TransactionInfo";
-import { TTransactionDetails } from "@services/transactionDetails/types";
 import { getExactDay, getExactMonth } from "@utils/getDate";
+
+import type { TTransactionDetails } from "@services/transactionDetails/types";
 
 const useTransactionInfoList = (transaction?: TTransactionDetails) => {
   const transactionDate = transaction ? new Date(transaction.created_at) : new Date();

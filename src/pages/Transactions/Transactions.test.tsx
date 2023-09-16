@@ -1,13 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import AllTransactions from ".";
+
 import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { navigate } from "@utils/test/mocks/navigate";
 
-const response = [
+import Transactions from ".";
+
+const RESPONSE_DATA = [
   {
     transaction_id: 21,
     created_at: "2023-09-02T21:57:18.999Z",
@@ -59,7 +61,7 @@ createServer([
     url: `${BASE_URL}${ENDPOINTS.transactionAll}`,
     res() {
       return {
-        data: response,
+        data: RESPONSE_DATA,
       };
     },
   },
@@ -69,7 +71,7 @@ createServer([
 test("Renders two cards on load and fetches more data on button click", async () => {
   render(
     <TestProviders>
-      <AllTransactions />
+      <Transactions />
     </TestProviders>
   );
 

@@ -1,14 +1,14 @@
-import useGetAllTransactions from "./hooks/useGetAllTransactions";
-
 import PageNavHeader from "@components/PageNavHeader";
 import TransactionCard from "@components/TransactionCard";
-import TransactionWrapper from "./TransactionStyle";
 
-const AllTransactions = () => {
-  const { data, fetchNextPage, isFetching, setPageParam } = useGetAllTransactions();
+import TransactionsWrapper from "./TransactionsWrapper";
+import useTransactions from "./hooks/useTransactions";
+
+const Transactions = () => {
+  const { data, fetchNextPage, isFetching, setPageParam } = useTransactions();
 
   return (
-    <TransactionWrapper>
+    <TransactionsWrapper>
       <div className="transaction-container">
         <div className="transaction-header">
           <PageNavHeader heading="transactions"></PageNavHeader>
@@ -46,8 +46,8 @@ const AllTransactions = () => {
         </div>
         {isFetching && <p data-testid="loading">loading</p>}
       </div>
-    </TransactionWrapper>
+    </TransactionsWrapper>
   );
 };
 
-export default AllTransactions;
+export default Transactions;

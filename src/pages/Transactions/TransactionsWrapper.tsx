@@ -1,7 +1,7 @@
 import { COLORS } from "@constants/colors";
 import styled from "styled-components";
 
-const TransactionWrapper = styled.div`
+const TransactionsWrapper = styled.div`
   .transaction-container {
     width: 100%;
     height: auto;
@@ -122,4 +122,4 @@ const TransactionWrapper = styled.div`
   }
 `;
 
-export default TransactionWrapper;
+export default TransactionsWrapper;
