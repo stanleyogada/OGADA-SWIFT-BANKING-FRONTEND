@@ -1,10 +1,4 @@
 {
-  "auth": [
-    {
-      "id": "signin",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiY3JlYXRlZF9hdCI6IjIwMjMtMDktMTNUMTQ6MzQ6MjYuNjA1WiIsInVwZGF0ZWRfYXQiOiIyMDIzLTA5LTEzVDE0OjM0OjI2LjYwNVoiLCJmaXJzdF9uYW1lIjoiTmV3IiwibGFzdF9uYW1lIjoiQmVlIiwibWlkZGxlX25hbWUiOm51bGwsIm5pY2tuYW1lIjpudWxsLCJlbWFpbCI6Im5ld0BnbWFpbC5jb20iLCJlbWFpbF9pc192ZXJpZmllZCI6dHJ1ZSwicGhvbmUiOiI5MDI0MTczOTQyIiwiYXZhdGFyIjpudWxsLCJpYXQiOjE2OTQ2MTcyNTIsImV4cCI6MTY5NDYxNzg1Mn0.qC6bA1cZZSB9vr3gAOCANPHjmO5pNWLRN1do0SWR16I"
-    }
-  ],
   "users": [
     {
       "id": "me",
@@ -19,23 +13,6 @@
         "email": "test2@gmail.com",
         "email_is_verified": false,
         "phone": "1234567890"
-      }
-    },
-    {
-      "id": "default-user-login",
-      "data": {
-        "id": 1000,
-        "created_at": "2023-09-12T13:09:25.387Z",
-        "updated_at": "2023-09-12T13:09:25.387Z",
-        "first_name": "Default Faker",
-        "last_name": "User",
-        "middle_name": "Normal",
-        "nickname": null,
-        "email": "defaultNormalUser@email.com",
-        "email_is_verified": true,
-        "phone": "4286351832",
-        "login_passcode": "123456",
-        "transfer_pin": "1234"
       }
     },
     {
