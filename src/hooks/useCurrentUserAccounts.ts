@@ -6,7 +6,9 @@ import { getCurrentUserAccounts } from "@services/users";
 import type { TUserAccount, TUserAccountType } from "@services/users/types";
 
 const useCurrentUserAccounts = () => {
-  const { data, isLoading, isError } = useQuery(QUERY_KEYS.currentUserAccounts, getCurrentUserAccounts);
+  const { data, isLoading, isError } = useQuery(QUERY_KEYS.currentUserAccounts, getCurrentUserAccounts, {
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 
   useEffect(() => {
     if (isError) {
