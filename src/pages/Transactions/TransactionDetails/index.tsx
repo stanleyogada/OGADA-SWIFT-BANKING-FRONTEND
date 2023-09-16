@@ -8,15 +8,18 @@ import TransactionInfoList from "@components/TransactionInfoList";
 
 import useTransactionDetails from "./hooks/useTransactionDetails";
 import useTransactionInfoList from "./hooks/useTransactionInfoList";
+import SplashScreen from "@components/SplashScreen";
 
 const TransactionDetails = () => {
   const { type, id } = useParams();
 
-  const { data, is404Error } = useTransactionDetails(type as string, id as string);
+  const { data, is404Error, isLoading } = useTransactionDetails(type as string, id as string);
 
   const { firstHalf, secondHalf } = useTransactionInfoList(data as TTransactionAll);
 
-  return (
+  return isLoading ? (
+    <SplashScreen />
+  ) : (
     <DetailsWrapper>
       <div className="details">
         <PageNavHeader heading="Transaction Details" />

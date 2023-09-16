@@ -43,8 +43,9 @@ test("renders transaction details correctly", async () => {
     </TestProviders>
   );
 
-  const params = screen.getByTestId("params");
   const details = await screen.findAllByTestId("details");
+  const params = screen.getByTestId("params");
+
   expect(details).toHaveLength(4);
   expect(details[0]).toHaveTextContent(`${TRANSACTION_ID}`);
   expect(details[1]).toHaveTextContent("Saturday, Sep 2023");

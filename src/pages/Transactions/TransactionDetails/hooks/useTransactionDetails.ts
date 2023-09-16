@@ -10,7 +10,7 @@ import type { ETransactionAllType } from "@services/transaction/types";
 import type { AxiosError } from "axios";
 
 const useTransactionDetails = (type: string, id: string) => {
-  const { data, error, isError } = useQuery(["transaction", id, type], () =>
+  const { data, error, isError, isLoading } = useQuery(["transaction", id, type], () =>
     getOneTransaction(type as ETransactionAllType, id)
   );
 
@@ -34,6 +34,7 @@ const useTransactionDetails = (type: string, id: string) => {
   return {
     data,
     is404Error,
+    isLoading,
   };
 };
 
