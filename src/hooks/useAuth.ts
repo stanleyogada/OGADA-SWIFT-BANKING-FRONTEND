@@ -1,15 +1,14 @@
 import { useMemo } from "react";
 import { useMutation } from "react-query";
+import { AxiosError } from "axios";
+
+import testLogger from "@utils/testLogger";
 
 import useCurrentUser from "./useCurrentUser";
 import { postSignIn } from "../services/auth";
-import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
 import { CLIENT_ROUTES } from "../constants";
 
 const useAuth = () => {
-  const navigate = useNavigate();
-
   const { data: currentUser, isLoading } = useCurrentUser();
   const userIsAuthenticated = useMemo(() => {
     if (isLoading) {
@@ -22,31 +21,16 @@ const useAuth = () => {
     return true;
   }, [currentUser, isLoading]);
 
-  //
-  //
-
-  // TODO: add this after fixing cookie issue on the backend
-  // const signOutMutation = useMutation(postSignOut, {
-  //   onSuccess: (redirectTo?: string) => {
-  //     if (redirectTo) {
-  //       navigate(redirectTo);
-  //       return;
-  //     }
-
-  //     window.location.reload();
-  //   },
-  // })
-
   const signInMutation = useMutation(postSignIn, {
     onSuccess: ({ token, emailIsVerified }) => {
-      if (emailIsVerified) {
-        localStorage.setItem("token", token); // TODO: remove this after fixing cookie issue on the backend
-        window.location.reload(); // Signifies that the user is logged in successfully
-
+      if (!emailIsVerified) {
+        handleSignOut(CLIENT_ROUTES.authVerifyEmail);
         return;
       }
 
-      handleSignOut(CLIENT_ROUTES.authVerifyEmail); // Signs out but skips the reload
+      localStorage.setItem("token", token);
+      testLogger("logged-in", CLIENT_ROUTES.home);
+      location.href = CLIENT_ROUTES.home;
     },
   });
 
@@ -55,13 +39,11 @@ const useAuth = () => {
   };
 
   const handleSignOut = (redirectTo?: string) => {
-    // signOutMutation.mutate(redirectTo); // Signs out but skips the reload // TODO: real implementation:: call the signOutMutation
-
-    // TODO: remove all code below after fixing cookie issue on the backend
-    localStorage.removeItem("token"); // TODO: remove this after fixing cookie issue on the backend
-
+    localStorage.removeItem("token");
     if (redirectTo) {
-      navigate(redirectTo);
+      testLogger("logged-out", redirectTo);
+      location.href = redirectTo;
+
       return;
     }
 
@@ -81,7 +63,6 @@ const useAuth = () => {
 
   return {
     currentUser,
-    // signOutMutationState // TODO: add this after implementing signout mutation
     signInMutationState,
     userIsAuthenticated,
     handleSignIn,

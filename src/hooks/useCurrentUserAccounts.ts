@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
+
 import { QUERY_KEYS } from "@constants/services";
 import { getCurrentUserAccounts } from "@services/users";
 

@@ -4,9 +4,11 @@ const BASE_URL = "http://localhost:8000"; // TODO: remove this line of code (++ 
 const QUERY_KEYS = {
   currentUser: "currentUser",
   currentUserAccounts: "currentUserAccounts",
+  defaultUserLoginInfo: "defaultUserLoginInfo",
 };
 
 const ENDPOINTS = {
+  defaultUserLoginInfo: "/users/default-user-login",
   currentUser: "/users/me", // TODO: remove this comment (++ fake data)
   // currentUserAccounts: "/users/me/accounts", // TODO: uncomment this line of code
   currentUserAccounts: "/users/me.accounts", // TODO: remove this comment (++ fake data) TODO: remove this line of code

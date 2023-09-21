@@ -1,11 +1,14 @@
 import { RouterProvider } from "react-router-dom";
 
-import useSplash from "./hooks/useSplash";
-
-import ROUTER from "./router";
 import SplashScreen from "@components/SplashScreen";
+import useNetworkErrorModal from "@hooks/useNetworkErrorModal";
+
+import useSplash from "./hooks/useSplash";
+import ROUTER from "./router";
+
 function App() {
   const { isAppLoading } = useSplash();
+  useNetworkErrorModal();
 
   if (isAppLoading) {
     return <SplashScreen />;

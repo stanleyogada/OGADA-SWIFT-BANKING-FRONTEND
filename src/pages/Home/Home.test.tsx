@@ -1,4 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
+
 import userEvent from "@testing-library/user-event";
 import TestProviders from "@components/TestProviders";
 import { localStorageRemoveItem } from "@utils/test/mocks/localStorage";
@@ -9,7 +10,6 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 import Home from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { S } from "msw/lib/glossary-de6278a9";
 import formatToCurrency from "@utils/formatToCurrency";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import { DEFAULT_USER_AVATAR } from "@constants/index";

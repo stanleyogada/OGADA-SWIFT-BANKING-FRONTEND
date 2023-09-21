@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
 
-import useSignin from "./hooks/useSignin";
-
-import SigninWrapper from "./SigninWrapper";
 import PhoneInput from "@components/Input/PhoneInput";
 import PasswordInput from "@components/Input/PasswordInput";
 import Button from "@components/Button";
 import PageNavHeader from "@components/PageNavHeader";
 import { CLIENT_ROUTES } from "@constants/routes";
 
+import useSignin from "./hooks/useSignin";
+import SigninWrapper from "./SigninWrapper";
+import useSigninModal from "./hooks/useSigninModal";
+import useSignDefaultFormValues from "./hooks/useSignDefaultFormValues";
+
 const Signin = () => {
-  const { handleSubmit, register, mutationState, errors } = useSignin();
+  const { handleSubmit, register, mutationState, errors, setValue } = useSignin();
+  useSigninModal();
+
+  const { isDefaultUserLoginInfoLoading, signinButtonRef } = useSignDefaultFormValues(setValue);
 
   return (
     <SigninWrapper>
@@ -61,9 +66,15 @@ const Signin = () => {
               </Link>
             </div>
 
-            <Button type="submit" disabled={mutationState.isLoading} className="form__actions-bottom">
+            <Button
+              type="submit"
+              disabled={mutationState.isLoading}
+              className="form__actions-bottom"
+              ref={signinButtonRef}
+            >
               Sign In
               {mutationState.isLoading && <p data-testid="loading"></p>}
+              {isDefaultUserLoginInfoLoading && <p data-testid="default-user-loading"></p>}
             </Button>
 
             <Link to="/auth/signup" className="form__link">

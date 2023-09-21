@@ -1,26 +1,21 @@
-import { useQuery, useQueryClient } from "react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AxiosError } from "axios";
+import { useQuery, useQueryClient } from "react-query";
 
 import { QUERY_KEYS } from "@constants/services";
 import { getCurrentUser } from "@services/users";
 
-import promptErrorFixVideo from "../assets/prompt-error-fix.mp4";
-
-function isMobileDevice() {
-  var check = false;
-
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    check = true;
-  }
-
-  return check;
-}
-
 const useCurrentUser = () => {
   const queryClient = useQueryClient();
-
-  const [isMixedContentError, setIsMixedContentError] = useState(false);
+  const [status, setStatus] = useState<{
+    isSuccess: boolean;
+    isError: boolean;
+    error: null | AxiosError;
+  }>({
+    isSuccess: false,
+    isError: false,
+    error: null,
+  });
 
   const result = useQuery(QUERY_KEYS.currentUser, getCurrentUser, {
     staleTime: 1000 * 60 * 20, // 20 minutes
@@ -30,59 +25,39 @@ const useCurrentUser = () => {
     retry: false,
 
     onError: (err: AxiosError) => {
-      if (err.code === "ERR_NETWORK" && err.message === "Network Error") {
-        setIsMixedContentError(true);
-      }
+      setStatus({
+        isSuccess: false,
+        isError: true,
+        error: err,
+      });
 
       // If the error is a 401 error, we want to set the current user to null.
       // So RQ will cache that the current user is null and we won't keep trying
-      queryClient.setQueryData(QUERY_KEYS.currentUser, null);
+      queryClient.setQueryData(QUERY_KEYS.currentUser, null); // NOTE: is simulates a SUCCESSFUL request: THUS you need to manage a custom status state
+    },
+
+    onSettled(data) {
+      if (data === null) {
+        setStatus(({ error }) => ({
+          isSuccess: false,
+          isError: true,
+          error,
+        }));
+
+        return;
+      }
+
+      if (data !== null && data !== undefined) {
+        setStatus({
+          isSuccess: true,
+          isError: false,
+          error: null,
+        });
+      }
     },
   });
 
-  useEffect(() => {
-    if (isMixedContentError) {
-      console.log("isMixedContentError", isMixedContentError);
-
-      // TODO: remove all this modal code here as it's not a good practice
-
-      const modal = document.querySelector(".modal");
-      if (modal) document.body.removeChild(document.querySelector(".modal")!);
-
-      document.body.innerHTML = `
-      <div class="modal">
-        <div class="modal__overlay"></div>
-        <div class="modal__content">
-          <div class="modal__header">
-            <h2 class="modal__title">Network Error ⚠️</h2>
-          </div>
-          <div class="modal__body">
-            <p class="modal__text">Please confirm that you network connection is not disconnected. ᯤ 📶 🌐</p>
-
-            ${
-              isMobileDevice()
-                ? `
-                <p class="modal__text"><mark>If you network connection is fine, please visit the website on a desktop computer to fix the issue.</mark></p>
-              `
-                : `
-                <p class="modal__text"><mark>If you network connection is fine, please follow the instructions in the video below to fix the issue.</mark></p>
-
-                <video controls autoplay loop muted class="modal__video">
-                  <source src=${promptErrorFixVideo} type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              `
-            }
-          </div>
-        </div>
-      </div>
-
-      ${document.body.innerHTML}
-      `;
-    }
-  }, [isMixedContentError]);
-
-  return result;
+  return Object.assign({}, result, status);
 };
 
 export default useCurrentUser;
