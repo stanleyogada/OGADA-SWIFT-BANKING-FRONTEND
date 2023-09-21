@@ -1,5 +1,20 @@
-// const BASE_URL = "https://opay-demo-backend-production.up.railway.app/api/v1"; // TODO: uncomment this line of code
-const BASE_URL = "http://localhost:8000"; // TODO: remove this line of code (++ fake data)
+const env = (() => {
+  const dev = {
+    BASE_URL: "http://localhost:8000",
+    currentUserAccounts: "/users/me.accounts",
+  };
+
+  const prod = {
+    BASE_URL: "https://opay-demo-backend-production.up.railway.app/api/v1",
+    currentUserAccounts: "/users/me/accounts",
+  };
+
+  if (process.env.NODE_ENV === "development") return dev;
+
+  return prod;
+})();
+
+const BASE_URL = env.BASE_URL;
 
 const QUERY_KEYS = {
   currentUser: "currentUser",
@@ -9,17 +24,16 @@ const QUERY_KEYS = {
 
 const ENDPOINTS = {
   defaultUserLoginInfo: "/users/default-user-login",
-  currentUser: "/users/me", // TODO: remove this comment (++ fake data)
-  // currentUserAccounts: "/users/me/accounts", // TODO: uncomment this line of code
-  currentUserAccounts: "/users/me.accounts", // TODO: remove this comment (++ fake data) TODO: remove this line of code
-  signIn: "/auth/signin", // TODO: remove this comment (++ fake data)
+  currentUser: "/users/me", // (++ has fake data)
+  currentUserAccounts: env.currentUserAccounts, // (++ has fake data)
+  signIn: "/auth/signin", // (++ has fake data)
   signOut: "/auth/signout",
   signUp: "/auth/signup",
   sendEmail: "/auth/send-email-verification",
   verifyEmail: "/auth/confirm-email-verification",
   forgetPasscode: "/auth/forgot-login-passcode",
   resetLoginPasscode: "/auth/reset-login-passcode",
-  transactions: "/transactions/all",
+  transactions: "/transactions/all", // (++ has fake data)
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {
