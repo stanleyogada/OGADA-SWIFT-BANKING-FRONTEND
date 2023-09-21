@@ -13,10 +13,6 @@ const useNetworkErrorModal = () => {
   useEffect(() => {
     if (isError && error?.code === "ERR_NETWORK" && error?.message === "Network Error") {
       setIsMixedContentError(true);
-
-      const e = JSON.stringify(error, null, 2);
-
-      alert(e);
     }
   }, [isError, error]);
 
