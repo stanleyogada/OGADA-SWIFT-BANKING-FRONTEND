@@ -1,5 +1,4 @@
 // const BASE_URL = "http://ec2-34-245-147-71.eu-west-1.compute.amazonaws.com/api/v1"; // TODO: uncomment this line of code
-// const BASE_URL = "http://localhost:8000"; // TODO: remove this line of code (++ fake data)
 const BASE_URL = "http://localhost:8000"; // TODO: remove this line of code (++ fake data)
 
 const QUERY_KEYS = {
