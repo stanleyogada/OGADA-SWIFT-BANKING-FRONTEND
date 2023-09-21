@@ -11,10 +11,11 @@
     "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev --host && pm2 logs 0",
     "pm2:stop": "pm2 delete 0",
     "install-cmd": "yarn && yarn add -D @vitejs/plugin-react",
-    "json:server": "json-server --watch db.json --port 8000",
+    "json:server:dev": "json-server --watch db.json --port 8000",
+    "json:server:prod": "json-server --watch db.json --port 80",
     "start:preview": "vite preview --port 80",
-    "server:dev": "npm-run-all --parallel json:server dev",
-    "start": "npm-run-all --parallel json:server start:preview"
+    "server:dev": "npm-run-all --parallel json:server:dev dev",
+    "start": "npm-run-all --parallel json:server:prod start:preview"
   },
   "dependencies": {
     "@types/react-query": "^1.2.9",
