@@ -21,8 +21,9 @@ import VerifyEmail from "@pages/Auth/VerifyEmail";
 import ResendEmail from "@pages/Auth/ResendEmail";
 import ForgotLoginPasscode from "@pages/Auth/ForgotLoginPasscode";
 import ResetLoginPasscode from "@pages/Auth/ResetLoginPasscode";
-import Transaction from "@pages/Transaction";
-import Details from "@pages/Details";
+import Transactions from "@pages/Transactions";
+import TransactionDetails from "@pages/Transactions/TransactionDetails";
+import Error404 from "@pages/Error404";
 
 const ROUTER = createBrowserRouter([
   {
@@ -93,18 +94,18 @@ const ROUTER = createBrowserRouter([
         ),
       },
       {
-        path: CLIENT_ROUTES.transactionPage,
+        path: CLIENT_ROUTES.transactions,
         element: (
           <PageWrapper>
-            <Transaction />
+            <Transactions />
           </PageWrapper>
         ),
       },
       {
-        path: CLIENT_ROUTES.details,
+        path: `${CLIENT_ROUTES.transactions}/:type/:id`,
         element: (
           <PageWrapper>
-            <Details />
+            <TransactionDetails />
           </PageWrapper>
         ),
       },
@@ -113,6 +114,14 @@ const ROUTER = createBrowserRouter([
         element: (
           <PageWrapper>
             <EditAccount />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: "/404",
+        element: (
+          <PageWrapper>
+            <Error404 />
           </PageWrapper>
         ),
       },

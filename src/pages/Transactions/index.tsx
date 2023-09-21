@@ -1,17 +1,21 @@
-import useTransaction from "./hooks";
-
 import PageNavHeader from "@components/PageNavHeader";
 import TransactionCard from "@components/TransactionCard";
-import TransactionWrapper from "./TransactionStyle";
 
-const Transaction = () => {
-  const { data, fetchNextPage, isFetching, setPageParam } = useTransaction();
+import TransactionsWrapper from "./TransactionsWrapper";
+import useTransactions from "./hooks/useTransactions";
+import SplashScreen from "@components/SplashScreen";
 
-  return (
-    <TransactionWrapper>
+const Transactions = () => {
+  const { data, fetchNextPage, isFetching, setPageParam, isLoading } = useTransactions();
+
+  return isLoading ? (
+    <SplashScreen />
+  ) : (
+    <TransactionsWrapper>
+      <PageNavHeader heading="All Transactions" />
+
       <div className="transaction-container">
         <div className="transaction-header">
-          <PageNavHeader heading="transactions"></PageNavHeader>
           <div className="categories-section">
             <p>All categories</p>
             <p>Any status</p>
@@ -23,6 +27,7 @@ const Transaction = () => {
         {data?.pages.map((page) =>
           page.map((item) => (
             <TransactionCard
+              transaction_id={item.transaction_id}
               key={item.transaction_id}
               amount={item.amount}
               created_at={item.created_at}
@@ -45,8 +50,8 @@ const Transaction = () => {
         </div>
         {isFetching && <p data-testid="loading">loading</p>}
       </div>
-    </TransactionWrapper>
+    </TransactionsWrapper>
   );
 };
 
-export default Transaction;
+export default Transactions;

@@ -10,4 +10,6 @@ const LOCAL_STORAGE_KEYS = {
 const DEFAULT_USER_AVATAR =
   "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436191.jpg?size=626&ext=jpg&ga=GA1.2.1995508173.1693448090&semt=sph";
 
-export { COLORS, CLIENT_ROUTES, LOCAL_STORAGE_KEYS, DEFAULT_USER_AVATAR };
+const TEST_LOG_PREFIX = "TEST LOG: ";
+
+export { COLORS, CLIENT_ROUTES, LOCAL_STORAGE_KEYS, DEFAULT_USER_AVATAR, TEST_LOG_PREFIX };

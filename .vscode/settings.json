@@ -9,5 +9,6 @@
     "Signup",
     "testid",
     "Xperience"
-  ]
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
