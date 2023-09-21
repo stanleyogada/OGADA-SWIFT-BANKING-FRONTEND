@@ -3,11 +3,13 @@
     "lightpink",
     "lightyellow",
     "livechat",
+    "mockdate",
     "opay",
     "Passcode",
     "Signin",
     "Signup",
     "testid",
     "Xperience"
-  ]
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

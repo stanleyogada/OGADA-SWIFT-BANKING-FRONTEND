@@ -16,12 +16,12 @@ const CLIENT_ROUTES = {
   authForgetPasscode: "/auth/forget-passcode",
   authResetPasscode: "/auth/reset-passcode",
   liveChat: "/livechat",
-  transactionPage: "/trans",
-  details: "/details",
+  transactions: "/transactions",
   addMoney: "/add-money",
   sendMoneyInHouse: "/send-money/In-house",
   sendMoneyBank: "/send-money/bank",
   sendMoneyMobile: "/send-money/mobile",
+  _404: "/404",
 };
 
 export { CLIENT_ROUTES };

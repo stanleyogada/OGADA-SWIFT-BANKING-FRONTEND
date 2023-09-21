@@ -6,13 +6,15 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "start": "vite preview --port 80",
     "test:watch": "npx jest --clearCache && jest --watchAll --no-cache",
     "test": "npx jest --clearCache && jest --no-cache",
     "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev --host && pm2 logs 0",
     "pm2:stop": "pm2 delete 0",
     "install-cmd": "yarn && yarn add -D @vitejs/plugin-react",
-    "json:server": "json-server --watch db.json --port 8000"
+    "json:server": "json-server --watch db.json --port 8000",
+    "start:preview": "vite preview --port 80",
+    "server:dev": "npm-run-all --parallel json:server dev",
+    "start": "npm-run-all --parallel json:server start:preview"
   },
   "dependencies": {
     "@types/react-query": "^1.2.9",
@@ -44,6 +46,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.4.3",
     "jest-environment-jsdom": "^29.4.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "2.8.1",
     "react-is": "^18.2.0",
     "ts-jest": "^29.0.5",

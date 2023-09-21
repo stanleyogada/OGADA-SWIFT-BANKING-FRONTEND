@@ -84,7 +84,7 @@ const Home = () => {
                 data-testid="hide-balance-button"
               />
             </div>
-            <Button link={CLIENT_ROUTES.transactionPage}>Transaction History &gt;</Button>
+            <Button link={CLIENT_ROUTES.transactions}>Transaction History &gt;</Button>
           </div>
 
           {isLoading ? (

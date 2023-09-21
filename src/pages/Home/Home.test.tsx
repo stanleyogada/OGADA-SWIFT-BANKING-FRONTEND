@@ -48,7 +48,7 @@ test("Have all links wired up correctly", async () => {
       elem: screen.getByRole("link", {
         name: /transaction history >/i,
       }),
-      link: CLIENT_ROUTES.transactionPage,
+      link: CLIENT_ROUTES.transactions,
     },
     {
       elem: screen.getByRole("link", {
@@ -104,9 +104,6 @@ const handleCreateServer = (nickname?: string, avatar?: string) => {
           last_name: "Doe",
           nickname,
           avatar,
-
-          // login_passcode: "$2b$10$PVLvS0iw0FZA/RNOEx7XKOJzW3gzjizVJgWp2dM7IqCUpiDrua7Oe", // TODO: Remove this from the backend endpoint
-          // transfer_pin: "$2b$10$S.Tw3vvZwtd0aUUJAhDukOr95gxo8n5mqzmNziow2oFVtkNFHIFtu", // TODO: Remove this from the backend endpoint
         },
       }),
     },
