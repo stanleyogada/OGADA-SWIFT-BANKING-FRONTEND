@@ -1,1 +1,97 @@
-{}
+{
+  "users": [
+    {
+      "id": "me",
+      "data": {
+        "id": 4,
+        "created_at": "2023-06-21T17:05:11.518Z",
+        "updated_at": "2023-06-21T17:05:11.518Z",
+        "first_name": "Faker",
+        "last_name": "Me",
+        "middle_name": "Yeeeeehh!",
+        "nickname": "ewrtyu!",
+        "email": "test2@gmail.com",
+        "email_is_verified": false,
+        "phone": "1234567890"
+      }
+    },
+    {
+      "id": "me.accounts",
+      "data": [
+        {
+          "user_id": 2,
+          "created_at": "2023-09-02T22:01:31.398Z",
+          "email": "money-man@gmail.com",
+          "account_number": "9012345639",
+          "account_id": 3,
+          "balance": "1800000.00",
+          "type": "NORMAL",
+          "full_name": "Offer MoneyMan2"
+        },
+        {
+          "user_id": 2,
+          "created_at": "2023-09-02T22:01:31.398Z",
+          "email": "money-man@gmail.com",
+          "account_number": "9012345639",
+          "account_id": 4,
+          "balance": "900000.00",
+          "type": "CASHBACK",
+          "full_name": "Offer MoneyMan2"
+        }
+      ],
+      "count": 2
+    }
+  ],
+  "transactions": [
+    {
+      "id": "all",
+      "data": [
+        {
+          "transaction_id": 4,
+          "created_at": "2023-09-13T15:03:47.821Z",
+          "transaction_type": "rewards",
+          "amount": "1750.00",
+          "is_success": true,
+          "account_id": 3,
+          "sender_account_number": "n/a",
+          "receiver_account_number": "n/a",
+          "is_deposit": true
+        },
+        {
+          "transaction_id": 3,
+          "created_at": "2023-09-13T15:03:47.806Z",
+          "transaction_type": "mobiles",
+          "amount": "3500.00",
+          "is_success": true,
+          "account_id": 3,
+          "sender_account_number": "9024173942",
+          "receiver_account_number": "n/a",
+          "is_deposit": false
+        },
+        {
+          "transaction_id": 2,
+          "created_at": "2023-09-13T15:01:26.954Z",
+          "transaction_type": "in-houses",
+          "amount": "1200.00",
+          "is_success": true,
+          "account_id": 3,
+          "sender_account_number": "9024173942",
+          "receiver_account_number": "4286351832",
+          "is_deposit": false
+        },
+        {
+          "transaction_id": 1,
+          "created_at": "2023-09-13T14:51:40.647Z",
+          "transaction_type": "banks",
+          "amount": "100.00",
+          "is_success": true,
+          "account_id": 3,
+          "sender_account_number": "9024173942",
+          "receiver_account_number": "n/a",
+          "is_deposit": false
+        }
+      ],
+      "count": 4
+    }
+  ]
+}
