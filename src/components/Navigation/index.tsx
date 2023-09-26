@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import DisabledLink from "@components/DisabledLink";
 import { Header, Nav, List } from "@components/styles/Navigation.styled";
 import { CLIENT_ROUTES } from "@constants/routes";
 import icons from "@constants/icons";
@@ -17,10 +17,12 @@ const Navigation = () => {
           </List>
 
           <List>
-            <NavLink to={CLIENT_ROUTES.rewards}>
-              <i>{icons.blackHeartIcon()}</i>
-              <span className="nav__name">Rewards</span>
-            </NavLink>
+            <DisabledLink to={CLIENT_ROUTES.rewards}>
+              <NavLink to={CLIENT_ROUTES.rewards}>
+                <i>{icons.blackHeartIcon()}</i>
+                <span className="nav__name">Rewards</span>
+              </NavLink>
+            </DisabledLink>
           </List>
 
           <List>

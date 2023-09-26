@@ -9,7 +9,9 @@ const PageWrapper = ({ children }: { children: JSX.Element[] | JSX.Element }) =>
     <>
       <Modal />
 
-      <div data-app-container>{children}</div>
+      <div data-app-container style={{ height: "100vh" }}>
+        {children}
+      </div>
     </>
   );
 };
