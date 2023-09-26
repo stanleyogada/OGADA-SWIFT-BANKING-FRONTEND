@@ -13,7 +13,7 @@ const env = (() => {
     getUserByPhone: "/users/by-phone",
   };
 
-  if (process.env.NODE_ENV === "development") return dev;
+  if (["development", "test"].includes(process.env.NODE_ENV as string)) return dev;
 
   return prod;
 })();
@@ -24,6 +24,7 @@ const QUERY_KEYS = {
   currentUser: "currentUser",
   currentUserAccounts: "currentUserAccounts",
   defaultUserLoginInfo: "defaultUserLoginInfo",
+  getUserByPhone: "getUserByPhone",
 };
 
 const ENDPOINTS = {
@@ -38,6 +39,8 @@ const ENDPOINTS = {
   forgetPasscode: "/auth/forgot-login-passcode",
   resetLoginPasscode: "/auth/reset-login-passcode",
   transactions: "/transactions/all", // (++ has fake data)
+  sendMoneyInHouse: env.sendMoneyInHouse, // (++ has fake data)
+  getUserByPhone: env.getUserByPhone, // (++ has fake data)
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {

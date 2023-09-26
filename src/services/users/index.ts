@@ -33,4 +33,13 @@ const getDefaultUserLoginInfo = async (): Promise<TUserDefault> => {
   return data.data as TUserDefault;
 };
 
-export { getCurrentUser, getCurrentUserAccounts, getDefaultUserLoginInfo };
+const getUserByPhone = async (phone: string): Promise<TUser> => {
+  const { data: json } = await axiosInstance({
+    method: "GET",
+    url: `${ENDPOINTS.getUserByPhone}/${phone}`,
+  });
+
+  return json.data as TUser;
+};
+
+export { getCurrentUser, getCurrentUserAccounts, getDefaultUserLoginInfo, getUserByPhone };

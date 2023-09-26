@@ -111,7 +111,8 @@
         "nickname": null,
         "email": "defaultNormalUser@email.com",
         "email_is_verified": true,
-        "phone": "4286351832"
+        "phone": "4286351832",
+        "avatar": "https://i.pravatar.cc/150?u=4286351832"
       }
     },
     {
@@ -126,7 +127,8 @@
         "nickname": "Tall guy",
         "email": "TallDude@email.com",
         "email_is_verified": true,
-        "phone": "1234567890"
+        "phone": "1234567890",
+        "avatar": "https://i.pravatar.cc/150?u=1234567890"
       }
     }
   ]
