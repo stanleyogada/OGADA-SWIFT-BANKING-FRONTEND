@@ -1,35 +1,30 @@
+import { screen, render, cleanup } from "@testing-library/react";
+
 import TestProviders from "@components/TestProviders";
-import { screen, render } from "@testing-library/react";
-import user_event from "@testing-library/user-event";
-import { navigate } from "@utils/test/mocks/navigate";
 
 import LinkDescription from ".";
-const mockFunction = jest.fn();
 
-test("Should render", async () => {
+const renderComponent = (to?: string) =>
   render(
     <TestProviders>
-      <LinkDescription removeModal={mockFunction} text="This page is blank" />
+      <LinkDescription text="This page is blank" to={to} />
     </TestProviders>
   );
 
+test("Renders as expected", async () => {
+  renderComponent();
+
   expect(screen.getByTestId("content")).toHaveTextContent("This page is blank");
-  const proceedBtn = screen.getByTestId("proceedBtn");
+  let proceedBtn = screen.getByTestId("proceedBtn");
 
   expect(proceedBtn).toBeDisabled();
-});
 
-test("Should navigate", async () => {
-  render(
-    <TestProviders>
-      <LinkDescription removeModal={mockFunction} to={"/auth"} text="This page is blank" />
-    </TestProviders>
-  );
+  cleanup();
+
+  renderComponent("/auth");
 
   expect(screen.getByTestId("content")).toHaveTextContent("This page is blank");
-  const proceedBtn = screen.getByTestId("proceedBtn");
+  proceedBtn = screen.getByTestId("proceedBtn");
   expect(proceedBtn).not.toBeDisabled();
   expect(screen.getByTestId("content")).toHaveTextContent("This page is blank");
-
-  const user = user_event.setup();
 });
