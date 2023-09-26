@@ -92,6 +92,42 @@
         }
       ],
       "count": 4
+    },
+    {
+      "id": "send.in-house",
+      "message": "Send money successfully!"
+    }
+  ],
+  "user-by-phone": [
+    {
+      "id": "4286351832",
+      "data": {
+        "id": 1000,
+        "created_at": "2023-09-12T13:09:25.387Z",
+        "updated_at": "2023-09-12T13:09:25.387Z",
+        "first_name": "Default",
+        "last_name": "User",
+        "middle_name": "Normal",
+        "nickname": null,
+        "email": "defaultNormalUser@email.com",
+        "email_is_verified": true,
+        "phone": "4286351832"
+      }
+    },
+    {
+      "id": "1234567890",
+      "data": {
+        "id": 2000,
+        "created_at": "2023-09-12T13:09:25.387Z",
+        "updated_at": "2023-09-12T13:09:25.387Z",
+        "first_name": "Faker",
+        "last_name": "Guy",
+        "middle_name": "Normal",
+        "nickname": "Tall guy",
+        "email": "TallDude@email.com",
+        "email_is_verified": true,
+        "phone": "1234567890"
+      }
     }
   ]
 }
