@@ -1,18 +1,18 @@
-import { navigate } from "@utils/test/mocks/navigate";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
+import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 
 type TProps = {
   text: string;
   to?: string;
-  removeModal: () => void;
 };
-const LinkDescription = ({ text, to, removeModal }: TProps) => {
+const LinkDescription = ({ text, to }: TProps) => {
+  const { handleRemove } = useModalConsumer();
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    // TODO:  removeModal(); uncomment this after fixing the modal
+    handleRemove();
     navigate(to as string);
   };
 

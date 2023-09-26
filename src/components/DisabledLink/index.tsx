@@ -1,8 +1,8 @@
+import styled from "styled-components";
+
 import LinkDescription from "@components/LinkDescripttion";
 import ModalHeader from "@components/Modal/ModalHeader";
-import useModalApp from "@contexts/Modal/hooks/useModalApp";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
-import styled from "styled-components";
 
 type TProps = {
   children: React.ReactNode;
@@ -12,7 +12,6 @@ type TProps = {
 
 const DisabledLink = ({ children, to }: TProps) => {
   const { handleAdd } = useModalConsumer();
-  const { handleRemove } = useModalApp();
 
   return (
     <DisabledLinkWrapper>
@@ -25,7 +24,6 @@ const DisabledLink = ({ children, to }: TProps) => {
             body: (
               <LinkDescription
                 to={to}
-                removeModal={handleRemove}
                 text="This page you are about to go does not have functionality"
               ></LinkDescription>
             ),
