@@ -8,9 +8,10 @@ type TpageNavHeaderProps = {
   heading: string;
   backgroundColor?: string;
   text?: string;
+  handler?: () => void;
 };
 
-function PageNavHeader({ heading, backgroundColor, text }: TpageNavHeaderProps) {
+function PageNavHeader({ heading, backgroundColor, text, handler }: TpageNavHeaderProps) {
   const navigate = useNavigate();
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>
@@ -19,7 +20,13 @@ function PageNavHeader({ heading, backgroundColor, text }: TpageNavHeaderProps) 
       <h1 className="heading" data-testid="heading">
         {heading}
       </h1>
-      <div className="text">{text}</div>
+      {handler && (
+        <form onSubmit={handler}>
+          <button type="submit" className="text" data-testid="save">
+            {text}
+          </button>
+        </form>
+      )}
     </PageNavHeaderWrapper>
   );
 }

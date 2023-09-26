@@ -18,6 +18,7 @@ const Input = forwardRef(
       onChange,
       renderLeft,
       renderRight,
+      disabled,
     }: TInputProps,
     ref: ForwardedRef<HTMLInputElement | null>
   ) => {
@@ -47,6 +48,7 @@ const Input = forwardRef(
               onChange={onChange}
               value={value}
               className={"input__control " + className}
+              disabled={disabled ? true : false}
             />
 
             {renderRight && <div className="input__control-right">{renderRight()}</div>}
