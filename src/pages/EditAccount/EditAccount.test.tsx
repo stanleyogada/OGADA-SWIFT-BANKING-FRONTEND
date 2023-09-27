@@ -90,5 +90,7 @@ describe("porpulate input on load", () => {
       name: /save/i,
     });
     userEvent.click(saveButton);
+
+    expect(await screen.findByTestId("success")).toBeInTheDocument();
   });
 });

@@ -15,7 +15,7 @@ const useEditUser = () => {
 
 const EditAccount = () => {
   const { data } = useCurrentUser();
-  const { updateUserMutation } = usePatchUser();
+  const { updateUserMutation, isSuccess } = usePatchUser();
   const { register, setValue, handleSubmit } = useEditUser();
   const [credential, setCredential] = useState({
     nickname: data?.nickname,
@@ -71,6 +71,7 @@ const EditAccount = () => {
               onChange={handleChangeEmail}
             />
             <Input label="Opay Account Number" placeholder="account number" value={data?.phone} disabled={true} />
+            {isSuccess && <p data-testid="success">User updated successfully!</p>}
           </div>
         </div>
       )}

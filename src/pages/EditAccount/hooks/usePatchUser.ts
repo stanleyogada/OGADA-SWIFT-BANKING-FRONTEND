@@ -5,7 +5,8 @@ import { useState } from "react";
 const usePatchUser = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const updateUserMutation = useMutation(patchUser, {
-    onSuccess: () => {
+    onSuccess: (response) => {
+      console.log(response);
       setIsSuccess(true);
     },
   });
