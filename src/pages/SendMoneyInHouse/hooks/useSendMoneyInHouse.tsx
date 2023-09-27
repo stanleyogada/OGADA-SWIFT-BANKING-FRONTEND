@@ -7,6 +7,7 @@ import { getUserByPhone } from "@services/users";
 import { postSendMoneyInHouse } from "@services/sendMoney";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import SendMoneyModal from "@components/SendMoneyModal";
+import ModalHeader from "@components/Modal/ModalHeader";
 
 const useSendMoneyInHouse = () => {
   const { handleAdd } = useModalConsumer();
@@ -45,7 +46,7 @@ const useSendMoneyInHouse = () => {
         reset();
         setValue("recipientAccountNumber", ""); // Have no idea why the input value is not reset
         handleAdd({
-          heading: "Transfer was successful",
+          heading: <ModalHeader text="Transfer successful!" />,
           body: <SendMoneyModal />,
           onClose: () => window.location.reload(),
         });
@@ -54,7 +55,7 @@ const useSendMoneyInHouse = () => {
 
     onError: () => {
       handleAdd({
-        heading: "Transfer failed!",
+        heading: <ModalHeader text="Transfer failed!" />,
         body: <SendMoneyModal hasError />,
       });
     },
