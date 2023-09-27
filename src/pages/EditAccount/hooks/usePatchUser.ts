@@ -3,15 +3,9 @@ import { useMutation } from "react-query";
 import { useState } from "react";
 
 const usePatchUser = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const updateUserMutation = useMutation(patchUser, {
-    onSuccess: (response) => {
-      console.log(response);
-      setIsSuccess(true);
-    },
-  });
+  const updateUserMutation = useMutation(patchUser, {});
 
-  return { isSuccess, updateUserMutation };
+  return { updateUserMutation };
 };
 
 export default usePatchUser;

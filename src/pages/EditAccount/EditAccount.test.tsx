@@ -4,11 +4,12 @@ import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import userEvent from "@testing-library/user-event";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
 
 const NICKNAME = "code knight";
 const EMAIl = "test@gmail.com";
 
-createServer([
+const { handleCreateErrorConfig } = createServer([
   {
     url: `${BASE_URL}${ENDPOINTS.currentUser}`,
     res: () => {
@@ -89,8 +90,53 @@ describe("porpulate input on load", () => {
     const saveButton = screen.getByRole("button", {
       name: /save/i,
     });
-    userEvent.click(saveButton);
+    await user.click(saveButton);
 
     expect(await screen.findByTestId("success")).toBeInTheDocument();
+  });
+
+  test("Shows error when there is an error occur", async () => {
+    handleCreateErrorConfig({
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      res: () => {
+        return {
+          status: "fail",
+          message: "Invalid token. Please log in again!",
+        };
+      },
+      statusCode: 401,
+    });
+
+    render(<EditAccount />, {
+      wrapper: TestProviders,
+    });
+
+    const error = await screen.findByTestId("error");
+    expect(error).toBeInTheDocument();
+  });
+
+  test("show error when trying to update user info", async () => {
+    handleCreateErrorConfig({
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      method: "patch",
+      statusCode: 404,
+    });
+
+    render(<EditAccount />, {
+      wrapper: TestProviders,
+    });
+
+    const saveButton = screen.getByRole("button", {
+      name: /save/i,
+    });
+
+    const user = userEvent.setup();
+    await user.click(saveButton);
+    const error = await screen.findByTestId("post-error");
+    expect(error).toBeInTheDocument();
+
+    // await handleAssertLoadingState(saveButton);
+
+    // expect(await screen.findByTestId("splash-screen")).toBeInTheDocument();
   });
 });
