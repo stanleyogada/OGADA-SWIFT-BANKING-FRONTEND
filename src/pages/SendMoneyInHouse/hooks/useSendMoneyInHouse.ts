@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 
@@ -9,35 +9,41 @@ import { postSendMoneyInHouse } from "@services/sendMoney";
 const PHONE_REGEX = /^[0-9]*$/;
 
 const useSendMoneyInHouse = () => {
-  const [phone, setPhone] = useState<string>("");
-  const {
-    handleSubmit,
-    register,
-    reset,
+  const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
 
-    formState: { errors },
-  } = useForm();
+  useEffect(() => {
+    watch("recipientAccountNumber");
+  }, []);
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value);
+  const recipientAccountNumber = useMemo(
+    () => getValues("recipientAccountNumber"),
+    [getValues("recipientAccountNumber")]
+  );
 
   const enabledGetUser = useMemo(() => {
-    if (!phone) return false;
-    if (phone?.length !== 10) return false;
-    if (PHONE_REGEX.test(phone) === false) return false;
+    if (!recipientAccountNumber) return false;
+    if (recipientAccountNumber?.length !== 10) return false;
+    if (PHONE_REGEX.test(recipientAccountNumber) === false) return false;
+    if (recipientAccountNumber?.length !== 10) return false;
 
-    if (phone?.length === 10) return true;
-  }, [phone]);
+    return true;
+  }, [recipientAccountNumber]);
 
-  const recipient = useQuery([QUERY_KEYS.getUserByPhone, enabledGetUser], () => getUserByPhone(phone), {
-    enabled: enabledGetUser,
-  });
+  const recipient = useQuery(
+    [QUERY_KEYS.getUserByPhone, enabledGetUser],
+    () => getUserByPhone(recipientAccountNumber),
+    {
+      enabled: enabledGetUser,
+      retry: false,
+    }
+  );
 
   const sendMoneyMutation = useMutation(postSendMoneyInHouse, {
     onSuccess: () => {
       // Add a delay to ensure the submit button is still disabled (for testing)
       setTimeout(() => {
         reset();
-        setPhone("");
+        setValue("recipientAccountNumber", ""); // Have no idea why the input value is not reset
       }, 5);
     },
   });
@@ -61,12 +67,18 @@ const useSendMoneyInHouse = () => {
     return false;
   }, [enabledGetUser, recipient.data, recipient.isLoading, recipient.isError, sendMoneyMutation.isLoading]);
 
+  const isRecipientFound = useMemo(() => {
+    if (!enabledGetUser) return false;
+    if (recipient.isLoading || recipient.isError || !recipient.data) return false;
+
+    return true;
+  }, [recipient.data, recipient.isLoading, recipient.isError, enabledGetUser]);
+
   return {
-    phone,
     recipient,
     isSendMoneyButtonDisabled,
     sendMoneyMutation,
-    handlePhoneChange,
+    isRecipientFound,
     handleSendMoney,
     register,
   };

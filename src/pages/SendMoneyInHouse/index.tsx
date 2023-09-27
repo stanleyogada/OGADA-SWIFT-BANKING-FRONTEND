@@ -1,21 +1,14 @@
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 
 const SendMoneyInHouse = () => {
-  const {
-    phone,
-    recipient,
-    sendMoneyMutation,
-    isSendMoneyButtonDisabled,
-    handlePhoneChange,
-    handleSendMoney,
-    register,
-  } = useSendMoneyInHouse();
+  const { recipient, sendMoneyMutation, isSendMoneyButtonDisabled, isRecipientFound, handleSendMoney, register } =
+    useSendMoneyInHouse();
 
   return (
     <>
-      <input type="text" placeholder="Recipient account number" value={phone} onChange={handlePhoneChange} />
+      <input type="text" placeholder="Recipient account number" {...register("recipientAccountNumber")} />
 
-      {recipient.data && (
+      {isRecipientFound && (
         <div data-testid="user-block">
           <p data-testid="user-full-name">{recipient.data?.fullName}</p>
 
