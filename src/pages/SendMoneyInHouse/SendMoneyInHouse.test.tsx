@@ -1,4 +1,4 @@
-import { cleanup, render, screen, within } from "@testing-library/react";
+import { cleanup, render, screen, waitFor, within } from "@testing-library/react";
 
 import TestProviders from "@components/TestProviders";
 
@@ -8,10 +8,7 @@ import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 
-const PHONE = {
-  CORRECT: ["4286351832", "1234567890"],
-  INCORRECT: ["1112223334", "0202020202"],
-};
+const PHONE = ["4286351832", "1234567890"];
 
 const USERS = [
   {
@@ -25,7 +22,7 @@ const USERS = [
       nickname: null,
       email: "defaultNormalUser@email.com",
       email_is_verified: true,
-      phone: PHONE.CORRECT[0],
+      phone: PHONE[0],
       avatar: "https://i.pravatar.cc/150?u=4286351832",
     },
   },
@@ -40,7 +37,7 @@ const USERS = [
       nickname: "Tall guy",
       email: "TallDude@email.com",
       email_is_verified: true,
-      phone: PHONE.CORRECT[1],
+      phone: PHONE[1],
       avatar: "https://i.pravatar.cc/150?u=1234567890",
     },
   },
@@ -50,9 +47,9 @@ let user: ReturnType<typeof userEvent.setup>;
 
 beforeEach(() => (user = userEvent.setup()));
 
-createServer([
+const { handleCreateErrorConfig } = createServer([
   {
-    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE.CORRECT[0]}`,
+    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE[0]}`,
     res: () => {
       return {
         data: USERS[0].data,
@@ -60,7 +57,7 @@ createServer([
     },
   },
   {
-    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE.CORRECT[1]}`,
+    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE[1]}`,
     res: () => {
       return {
         data: USERS[1].data,
@@ -82,11 +79,11 @@ test("Allow transfer for known users", async () => {
 
   expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
 
-  await user.type(phoneInput, PHONE.CORRECT[0].slice(0, -1));
+  await user.type(phoneInput, PHONE[0].slice(0, -1));
   expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
 
-  await user.type(phoneInput, PHONE.CORRECT[0].slice(-1));
-  expect(phoneInput).toHaveValue(PHONE.CORRECT[0]);
+  await user.type(phoneInput, PHONE[0].slice(-1));
+  expect(phoneInput).toHaveValue(PHONE[0]);
 
   await handleAssertLoadingState("get-user-by-phone-loading");
 
@@ -109,8 +106,8 @@ test("Allow transfer for known users", async () => {
 
   expect(sendMoneyButton).toBeDisabled();
 
-  await user.type(phoneInput, PHONE.CORRECT[1]);
-  expect(phoneInput).toHaveValue(PHONE.CORRECT[1]);
+  await user.type(phoneInput, PHONE[1]);
+  expect(phoneInput).toHaveValue(PHONE[1]);
 
   await handleAssertLoadingState("get-user-by-phone-loading");
 
@@ -140,9 +137,92 @@ test("Allow transfer for known users", async () => {
 
   await handleAssertLoadingState(sendMoneyButton);
 
-  // expect(phoneInput).toHaveValue("");
-  // expect(amountInput).toHaveValue("");
-  // expect(noteInput).toHaveValue("");
+  // The real implementation has a setTimeout of 5ms before clearing the form
+  await waitFor(() => {
+    expect(phoneInput).toHaveValue("");
+    expect(amountInput).toHaveValue("");
+    expect(noteInput).toHaveValue("");
+
+    expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
+    expect(screen.getByTestId("send-money-success")).toBeInTheDocument();
+  });
 });
 
-test("DISALLOW transfer for UNKNOWN users", () => {});
+test("DISALLOW transfer for UNKNOWN users", async () => {
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE[0]}`,
+    statusCode: 404,
+  });
+
+  render(<SendMoneyInHouse />, {
+    wrapper: TestProviders,
+  });
+
+  const phoneInput = screen.getByPlaceholderText(/phone/i);
+  const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
+
+  await user.type(phoneInput, PHONE[0]);
+
+  expect(sendMoneyButton).toBeDisabled();
+
+  await handleAssertLoadingState("get-user-by-phone-loading");
+
+  expect(sendMoneyButton).toBeDisabled();
+  expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
+
+  expect(screen.getByTestId("get-user-by-phone-error")).toBeInTheDocument();
+});
+
+test("Ensure prompt error if send money fails", async () => {
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyInHouse}`,
+    method: "post",
+    statusCode: 500,
+  });
+
+  render(<SendMoneyInHouse />, {
+    wrapper: TestProviders,
+  });
+
+  const phoneInput = screen.getByPlaceholderText(/phone/i);
+  const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
+
+  await user.type(phoneInput, PHONE[0]);
+
+  expect(sendMoneyButton).toBeDisabled();
+
+  await handleAssertLoadingState("get-user-by-phone-loading");
+
+  expect(sendMoneyButton).toBeEnabled();
+  expect(screen.getByTestId("user-block")).toBeInTheDocument();
+
+  const amountInput = screen.getByPlaceholderText(/amount/i);
+  const noteInput = screen.getByPlaceholderText(/note/i);
+
+  const amount = "1000";
+  const remark = "Test remark";
+
+  await user.type(amountInput, amount);
+  await user.type(noteInput, remark);
+
+  expect(amountInput).toHaveValue(amount);
+  expect(noteInput).toHaveValue(remark);
+
+  await user.click(sendMoneyButton);
+
+  await handleAssertLoadingState(sendMoneyButton);
+
+  expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
+  expect(phoneInput).toHaveValue(PHONE[0]);
+  expect(amountInput).toHaveValue(amount);
+  expect(noteInput).toHaveValue(remark);
+
+  await user.click(sendMoneyButton);
+
+  await handleAssertLoadingState(sendMoneyButton);
+
+  expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
+  expect(phoneInput).toHaveValue(PHONE[0]);
+  expect(amountInput).toHaveValue(amount);
+  expect(noteInput).toHaveValue(remark);
+});

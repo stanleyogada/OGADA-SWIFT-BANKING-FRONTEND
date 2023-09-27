@@ -28,21 +28,17 @@ const useSendMoneyInHouse = () => {
     if (phone?.length === 10) return true;
   }, [phone]);
 
-  const {
-    data: user,
-    isLoading: isUserLoading,
-    isError: isUserError,
-  } = useQuery([QUERY_KEYS.getUserByPhone, enabledGetUser], () => getUserByPhone(phone), {
+  const recipient = useQuery([QUERY_KEYS.getUserByPhone, enabledGetUser], () => getUserByPhone(phone), {
     enabled: enabledGetUser,
   });
 
   const sendMoneyMutation = useMutation(postSendMoneyInHouse, {
     onSuccess: () => {
+      // Add a delay to ensure the submit button is still disabled (for testing)
       setTimeout(() => {
-        // Add a delay to ensure the submit button is still disabled (for testing)
         reset();
         setPhone("");
-      }, 2);
+      }, 5);
     },
   });
 
@@ -59,16 +55,15 @@ const useSendMoneyInHouse = () => {
 
   const isSendMoneyButtonDisabled = useMemo(() => {
     if (!enabledGetUser) return true;
-    if (isUserLoading || isUserError || !user) return true;
+    if (recipient.isLoading || recipient.isError || !recipient.data) return true;
     if (sendMoneyMutation.isLoading) return true;
 
     return false;
-  }, [enabledGetUser, user, isUserLoading, isUserError, sendMoneyMutation.isLoading]);
+  }, [enabledGetUser, recipient.data, recipient.isLoading, recipient.isError, sendMoneyMutation.isLoading]);
 
   return {
     phone,
-    isUserLoading,
-    user,
+    recipient,
     isSendMoneyButtonDisabled,
     sendMoneyMutation,
     handlePhoneChange,
@@ -80,28 +75,27 @@ const useSendMoneyInHouse = () => {
 const SendMoneyInHouse = () => {
   const {
     phone,
-    isUserLoading,
-    user,
+    recipient,
+    sendMoneyMutation,
     isSendMoneyButtonDisabled,
     handlePhoneChange,
     handleSendMoney,
     register,
-    sendMoneyMutation,
   } = useSendMoneyInHouse();
 
   return (
     <>
       <input type="text" placeholder="Phone" value={phone} onChange={handlePhoneChange} />
 
-      {user && (
+      {recipient.data && (
         <div data-testid="user-block">
           <p data-testid="user-full-name">
-            {user?.first_name} {user?.last_name}
+            {recipient.data?.first_name} {recipient.data?.last_name}
           </p>
 
-          <p>{user?.phone}</p>
+          <p>{recipient.data?.phone}</p>
 
-          <img src={user?.avatar} alt="avatar" />
+          <img src={recipient.data?.avatar} alt="avatar" />
         </div>
       )}
 
@@ -127,9 +121,13 @@ const SendMoneyInHouse = () => {
           Send money
           {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
         </button>
+
+        {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
+        {sendMoneyMutation.isSuccess && <div data-testid="send-money-success">Money sent successfully</div>}
       </form>
 
-      {isUserLoading && <div data-testid="get-user-by-phone-loading">Searching for the user...</div>}
+      {recipient.isError && <div data-testid="get-user-by-phone-error">Error searching for the user</div>}
+      {recipient.isLoading && <div data-testid="get-user-by-phone-loading">Searching for the user...</div>}
     </>
   );
 };
