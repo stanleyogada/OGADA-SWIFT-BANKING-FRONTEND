@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 
 import TestProviders from "@components/TestProviders";
 
@@ -6,7 +6,7 @@ import SendMoneyInHouse from ".";
 import userEvent from "@testing-library/user-event";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import createServer from "@utils/test/createServer";
-import { ENDPOINTS } from "@constants/services";
+import { BASE_URL, ENDPOINTS } from "@constants/services";
 
 const PHONE = {
   CORRECT: ["4286351832", "1234567890"],
@@ -50,32 +50,99 @@ let user: ReturnType<typeof userEvent.setup>;
 
 beforeEach(() => (user = userEvent.setup()));
 
-createServer([`${ENDPOINTS.currentUser}`]);
+createServer([
+  {
+    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE.CORRECT[0]}`,
+    res: () => {
+      return {
+        data: USERS[0].data,
+      };
+    },
+  },
+  {
+    url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${PHONE.CORRECT[1]}`,
+    res: () => {
+      return {
+        data: USERS[1].data,
+      };
+    },
+  },
+  {
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyInHouse}`,
+    method: "post",
+  },
+]);
 
 test("Allow transfer for known users", async () => {
   render(<SendMoneyInHouse />, {
     wrapper: TestProviders,
   });
 
-  const phoneInput = screen.getByPlaceholderText(/phone/i);
+  let phoneInput = screen.getByPlaceholderText(/phone/i);
 
-  // const incompleteCorrectPhone = PHONE.CORRECT[0].slice(0, -1);
+  expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
 
-  await user.type(phoneInput, PHONE.CORRECT[0]);
+  await user.type(phoneInput, PHONE.CORRECT[0].slice(0, -1));
+  expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
 
-  console.log((phoneInput as any).value);
-
+  await user.type(phoneInput, PHONE.CORRECT[0].slice(-1));
   expect(phoneInput).toHaveValue(PHONE.CORRECT[0]);
 
   await handleAssertLoadingState("get-user-by-phone-loading");
 
-  const userBlock = screen.getByTestId("user-block");
-  const fullNameElement = within(userBlock).getByTestId("user-full-name");
+  let userBlock = screen.getByTestId("user-block");
+  let fullNameElement = within(userBlock).getByTestId("user-full-name");
   expect(fullNameElement).toHaveTextContent(`${USERS[0].data.first_name} ${USERS[0].data.last_name}`);
   expect(within(userBlock).getByText(USERS[0].data.phone)).toBeInTheDocument();
 
-  const avatarImage = within(userBlock).getByRole("img");
+  let avatarImage = within(userBlock).getByRole("img");
   expect(avatarImage).toHaveAttribute("src", USERS[0].data.avatar);
+
+  cleanup();
+
+  render(<SendMoneyInHouse />, {
+    wrapper: TestProviders,
+  });
+
+  const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
+  phoneInput = screen.getByPlaceholderText(/phone/i);
+
+  expect(sendMoneyButton).toBeDisabled();
+
+  await user.type(phoneInput, PHONE.CORRECT[1]);
+  expect(phoneInput).toHaveValue(PHONE.CORRECT[1]);
+
+  await handleAssertLoadingState("get-user-by-phone-loading");
+
+  expect(sendMoneyButton).toBeEnabled();
+
+  userBlock = screen.getByTestId("user-block");
+  fullNameElement = within(userBlock).getByTestId("user-full-name");
+  expect(fullNameElement).toHaveTextContent(`${USERS[1].data.first_name} ${USERS[1].data.last_name}`);
+  expect(within(userBlock).getByText(USERS[1].data.phone)).toBeInTheDocument();
+
+  avatarImage = within(userBlock).getByRole("img");
+  expect(avatarImage).toHaveAttribute("src", USERS[1].data.avatar);
+
+  const amountInput = screen.getByPlaceholderText(/amount/i);
+  const noteInput = screen.getByPlaceholderText(/note/i);
+
+  const amount = "1000";
+  const remark = "Test remark";
+
+  await user.type(amountInput, amount);
+  await user.type(noteInput, remark);
+
+  expect(amountInput).toHaveValue(amount);
+  expect(noteInput).toHaveValue(remark);
+
+  await user.click(sendMoneyButton);
+
+  await handleAssertLoadingState(sendMoneyButton);
+
+  // expect(phoneInput).toHaveValue("");
+  // expect(amountInput).toHaveValue("");
+  // expect(noteInput).toHaveValue("");
 });
 
 test("DISALLOW transfer for UNKNOWN users", () => {});

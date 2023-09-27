@@ -2,7 +2,7 @@ const env = (() => {
   const dev = {
     BASE_URL: "http://localhost:8000",
     currentUserAccounts: "/users/me.accounts",
-    sendMoneyInHouse: "/transactions/send.in-house",
+    sendMoneyInHouse: "/transactions.send.in-house",
     getUserByPhone: "/user-by-phone",
   };
 

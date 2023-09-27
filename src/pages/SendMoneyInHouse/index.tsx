@@ -1,14 +1,22 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
-import { ENDPOINTS, QUERY_KEYS } from "@constants/services";
+import { QUERY_KEYS } from "@constants/services";
 import { getUserByPhone } from "@services/users";
 import { useForm } from "react-hook-form";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { postSendMoneyInHouse } from "@services/sendMoney";
 
 const PHONE_REGEX = /^[0-9]*$/;
 
 const useSendMoneyInHouse = () => {
   const [phone, setPhone] = useState<string>("");
+  const {
+    handleSubmit,
+    register,
+    reset,
+
+    formState: { errors },
+  } = useForm();
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value);
 
@@ -20,24 +28,66 @@ const useSendMoneyInHouse = () => {
     if (phone?.length === 10) return true;
   }, [phone]);
 
-  const { data: user, isLoading: iseUserLoading } = useQuery(
-    [QUERY_KEYS.getUserByPhone, enabledGetUser],
-    () => getUserByPhone(phone),
-    {
-      enabled: enabledGetUser,
-    }
-  );
+  const {
+    data: user,
+    isLoading: isUserLoading,
+    isError: isUserError,
+  } = useQuery([QUERY_KEYS.getUserByPhone, enabledGetUser], () => getUserByPhone(phone), {
+    enabled: enabledGetUser,
+  });
+
+  const sendMoneyMutation = useMutation(postSendMoneyInHouse, {
+    onSuccess: () => {
+      setTimeout(() => {
+        // Add a delay to ensure the submit button is still disabled (for testing)
+        reset();
+        setPhone("");
+      }, 2);
+    },
+  });
+
+  const handleSendMoney = () =>
+    handleSubmit(({ amount, remark }) => {
+      sendMoneyMutation.mutate({
+        amount,
+        remark,
+        receiverAccountNumber: "1234567890",
+        senderAccountType: "234567",
+        transferPin: "123456",
+      });
+    });
+
+  const isSendMoneyButtonDisabled = useMemo(() => {
+    if (!enabledGetUser) return true;
+    if (isUserLoading || isUserError || !user) return true;
+    if (sendMoneyMutation.isLoading) return true;
+
+    return false;
+  }, [enabledGetUser, user, isUserLoading, isUserError, sendMoneyMutation.isLoading]);
 
   return {
     phone,
-    iseUserLoading,
+    isUserLoading,
     user,
+    isSendMoneyButtonDisabled,
+    sendMoneyMutation,
     handlePhoneChange,
+    handleSendMoney,
+    register,
   };
 };
 
 const SendMoneyInHouse = () => {
-  const { phone, iseUserLoading, user, handlePhoneChange } = useSendMoneyInHouse();
+  const {
+    phone,
+    isUserLoading,
+    user,
+    isSendMoneyButtonDisabled,
+    handlePhoneChange,
+    handleSendMoney,
+    register,
+    sendMoneyMutation,
+  } = useSendMoneyInHouse();
 
   return (
     <>
@@ -55,7 +105,31 @@ const SendMoneyInHouse = () => {
         </div>
       )}
 
-      {iseUserLoading && <div data-testid="get-user-by-phone-loading">Searching for the user...</div>}
+      <form onSubmit={handleSendMoney()}>
+        <input
+          type="text"
+          placeholder="Amount"
+          {...register("amount", {
+            required: true,
+            min: 3,
+          })}
+        />
+        <input
+          type="text"
+          placeholder="Note"
+          {...register("remark", {
+            required: true,
+            min: 3,
+          })}
+        />
+
+        <button type="submit" disabled={isSendMoneyButtonDisabled}>
+          Send money
+          {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
+        </button>
+      </form>
+
+      {isUserLoading && <div data-testid="get-user-by-phone-loading">Searching for the user...</div>}
     </>
   );
 };
