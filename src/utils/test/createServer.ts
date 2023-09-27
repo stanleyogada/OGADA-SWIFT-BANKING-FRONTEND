@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
-import { Optional } from "../../types";
+import { Optional } from "../../customTypes";
 
 type THandlerConfigMethod = "get" | "post" | "put" | "delete" | "patch" | "head" | "options";
 type TUrl = string;

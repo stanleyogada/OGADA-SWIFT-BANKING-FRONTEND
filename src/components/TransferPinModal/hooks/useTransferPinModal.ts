@@ -1,5 +1,6 @@
-import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import { useEffect, useState } from "react";
+
+import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 
 const useTransferPinModal = (onComplete: (pin: string) => void) => {
   const [transferPin, setTransferPin] = useState("");

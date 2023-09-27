@@ -9,6 +9,8 @@ import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import SendMoneyModal from "@components/SendMoneyModal";
 import ModalHeader from "@components/Modal/ModalHeader";
 import TransferPinModal from "@components/TransferPinModal";
+import { LOCAL_STORAGE_KEYS } from "@constants/index";
+import { TBeneficiary } from "@customTypes/Beneficiary";
 
 const useSendMoneyInHouse = () => {
   const { handleAdd } = useModalConsumer();
@@ -69,8 +71,6 @@ const useSendMoneyInHouse = () => {
     setTransferPin(value);
   };
 
-  console.log("transferPin", transferPin);
-
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
       if (!transferPin && process.env.NODE_ENV !== "test") {
@@ -87,6 +87,22 @@ const useSendMoneyInHouse = () => {
         senderAccountType: "NORMAL",
         transferPin: transferPin,
       });
+
+      const beneficiaries = getAllBeneficiaries();
+      const isBeneficiaryExist = beneficiaries.some(
+        (beneficiary: TBeneficiary) => beneficiary.accountNumber === recipient.data?.phone
+      );
+
+      if (isBeneficiaryExist) return;
+
+      beneficiaries.push({
+        accountNumber: recipient.data?.phone,
+        avatar: recipient.data?.avatar,
+        fullName: recipient.data?.fullName,
+        type: "in-house",
+      } as TBeneficiary);
+
+      localStorage.setItem(LOCAL_STORAGE_KEYS.saveBeneficiary, JSON.stringify(beneficiaries));
     });
 
   const isSendMoneyButtonDisabled = useMemo(() => {
@@ -104,13 +120,32 @@ const useSendMoneyInHouse = () => {
     return true;
   }, [recipient.data, recipient.isLoading, recipient.isError, enabledGetUser]);
 
+  const getAllBeneficiaries = (): TBeneficiary[] => {
+    const beneficiaries = localStorage.getItem(LOCAL_STORAGE_KEYS.saveBeneficiary);
+    if (beneficiaries) {
+      return JSON.parse(beneficiaries).filter((beneficiary: TBeneficiary) => beneficiary.type === "in-house");
+    }
+
+    return [];
+  };
+
+  const handleBeneficiaryClick = (beneficiaryAccountNumber: string) => {
+    setValue("recipientAccountNumber", beneficiaryAccountNumber);
+  };
+
+  const beneficiaries = getAllBeneficiaries();
+
+  console.log("beneficiaries", beneficiaries);
+
   return {
+    beneficiaries,
     recipient,
     isSendMoneyButtonDisabled,
     sendMoneyMutation,
     isRecipientFound,
     handleSendMoney,
     register,
+    handleBeneficiaryClick,
   };
 };
 

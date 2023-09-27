@@ -1,8 +1,17 @@
+import { TBeneficiary } from "@customTypes/Beneficiary";
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 
 const SendMoneyInHouse = () => {
-  const { recipient, sendMoneyMutation, isSendMoneyButtonDisabled, isRecipientFound, handleSendMoney, register } =
-    useSendMoneyInHouse();
+  const {
+    recipient,
+    sendMoneyMutation,
+    isSendMoneyButtonDisabled,
+    isRecipientFound,
+    beneficiaries,
+    handleSendMoney,
+    register,
+    handleBeneficiaryClick,
+  } = useSendMoneyInHouse();
 
   return (
     <>
@@ -47,6 +56,26 @@ const SendMoneyInHouse = () => {
 
       {recipient.isError && <div data-testid="get-user-by-account-number-error">Error searching for the user</div>}
       {recipient.isLoading && <div data-testid="get-user-by-account-number-loading">Searching for the user...</div>}
+
+      {!isRecipientFound && (
+        <div>
+          {!beneficiaries.length && <p>No Beneficiaries</p>}
+
+          {beneficiaries.map((beneficiary: TBeneficiary) => (
+            <div
+              key={beneficiary.accountNumber}
+              data-testid="beneficiary"
+              onClick={() => handleBeneficiaryClick(beneficiary.accountNumber as string)}
+            >
+              <img src={beneficiary.avatar} alt="avatar" />
+              <div>
+                <p>{beneficiary.accountNumber}</p>
+                <p>{beneficiary.fullName}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };

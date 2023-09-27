@@ -5,6 +5,7 @@ const LOCAL_STORAGE_KEYS = {
   token: "token",
   sendEmailCodeSuccess: "signup-success",
   sendForgetPasscodeOTPSuccess: "forget-passcode-otp-success",
+  saveBeneficiary: "save-beneficiary",
 };
 
 const DEFAULT_USER_AVATAR =
