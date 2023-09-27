@@ -6,8 +6,6 @@ import { QUERY_KEYS } from "@constants/services";
 import { getUserByPhone } from "@services/users";
 import { postSendMoneyInHouse } from "@services/sendMoney";
 
-const PHONE_REGEX = /^[0-9]*$/;
-
 const useSendMoneyInHouse = () => {
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
 
@@ -23,8 +21,7 @@ const useSendMoneyInHouse = () => {
   const enabledGetUser = useMemo(() => {
     if (!recipientAccountNumber) return false;
     if (recipientAccountNumber?.length !== 10) return false;
-    if (PHONE_REGEX.test(recipientAccountNumber) === false) return false;
-    if (recipientAccountNumber?.length !== 10) return false;
+    if (/^[0-9]{10,10}$/.test(recipientAccountNumber) === false) return false;
 
     return true;
   }, [recipientAccountNumber]);
