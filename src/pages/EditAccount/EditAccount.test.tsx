@@ -95,6 +95,25 @@ describe("porpulate input on load", () => {
     expect(await screen.findByTestId("success")).toBeInTheDocument();
   });
 
+  test("disabled save button when inputs value are the same", async () => {
+    render(<EditAccount />, {
+      wrapper: TestProviders,
+    });
+
+    const nickNameInput = await screen.findByPlaceholderText(/nickname/i);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    const saveButton = screen.getByRole("button", {
+      name: /save/i,
+    });
+
+    const user = userEvent.setup();
+    await user.type(nickNameInput, "tester");
+    await user.type(emailInput, "test2@gmail.com");
+
+    expect(saveButton).toBeDisabled();
+    expect(screen.queryByTestId("success")).not.toBeInTheDocument();
+  });
+
   test("Shows error when there is an error occur", async () => {
     handleCreateErrorConfig({
       url: `${BASE_URL}${ENDPOINTS.currentUser}`,
@@ -121,7 +140,6 @@ describe("porpulate input on load", () => {
       method: "patch",
       statusCode: 404,
     });
-
     render(<EditAccount />, {
       wrapper: TestProviders,
     });
@@ -131,7 +149,12 @@ describe("porpulate input on load", () => {
     });
 
     const user = userEvent.setup();
+    const nickNameInput = await screen.findByPlaceholderText(/nickname/i);
+    const emailInput = screen.getByPlaceholderText(/email/i);
+    await user.type(nickNameInput, NICKNAME);
+    await user.type(emailInput, EMAIl);
     await user.click(saveButton);
+
     const error = await screen.findByTestId("post-error");
     expect(error).toBeInTheDocument();
 

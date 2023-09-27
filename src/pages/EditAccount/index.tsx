@@ -2,29 +2,28 @@ import EditAccountWrapper from "./EditAccountWrapper";
 import PageNavHeader from "@components/PageNavHeader";
 import Input from "@components/Input";
 import useCurrentUser from "@hooks/useCurrentUser";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import usePatchUser from "./hooks/usePatchUser";
 import SplashScreen from "@components/SplashScreen";
+import useEditUser from "./hooks/useEditUser";
 
-const useEditUser = () => {
-  const { register, formState, getValues, setValue, handleSubmit } = useForm({});
-
-  return { register, formState, getValues, setValue, handleSubmit };
+export type TCredentials = {
+  nickname: string | undefined;
+  email: string | undefined;
 };
-
 const EditAccount = () => {
   const { data, isError } = useCurrentUser();
   const { updateUserMutation } = usePatchUser();
   const { register, setValue, handleSubmit } = useEditUser();
-  const [credential, setCredential] = useState({
+  const [credential, setCredential] = useState<TCredentials>({
     nickname: data?.nickname,
     email: data?.email,
   });
 
   const handleSubmitForm = () => {
     return handleSubmit(() => {
-      const userMutation = updateUserMutation.mutate(credential);
+      if (credential.nickname === data?.nickname && credential.email === data?.email) return;
+      updateUserMutation.mutate(credential);
     });
   };
 
@@ -43,7 +42,7 @@ const EditAccount = () => {
   return (
     <EditAccountWrapper>
       {updateUserMutation.isLoading && <SplashScreen />}
-      <PageNavHeader heading="Edit account" text="Save" handler={handleSubmitForm()} />
+      <PageNavHeader heading="Edit account" text="Save" handler={handleSubmitForm()} value={credential} data={data} />
       <div className="content-wrapper">
         {data && (
           <div data-testid="content">

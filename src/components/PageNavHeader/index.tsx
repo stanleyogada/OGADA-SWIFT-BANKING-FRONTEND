@@ -3,15 +3,19 @@ import { useNavigate } from "react-router-dom";
 import PageNavHeaderWrapper from "./PageNavHeaderWrapper";
 import Button from "@components/Button";
 import icons from "@constants/icons";
+import { TUser } from "@services/users/types";
+import { TCredentials } from "@pages/EditAccount";
 
 type TpageNavHeaderProps = {
   heading: string;
   backgroundColor?: string;
   text?: string;
   handler?: () => void;
+  data?: TUser | undefined;
+  value?: TCredentials;
 };
 
-function PageNavHeader({ heading, backgroundColor, text, handler }: TpageNavHeaderProps) {
+function PageNavHeader({ heading, backgroundColor, text, handler, data, value }: TpageNavHeaderProps) {
   const navigate = useNavigate();
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>
@@ -22,7 +26,12 @@ function PageNavHeader({ heading, backgroundColor, text, handler }: TpageNavHead
       </h1>
       {handler && (
         <form onSubmit={handler}>
-          <button type="submit" className="text" data-testid="save">
+          <button
+            type="submit"
+            className="text"
+            data-testid="save"
+            disabled={value?.nickname === data?.nickname && value?.email === data?.email ? true : false}
+          >
             {text}
           </button>
         </form>
