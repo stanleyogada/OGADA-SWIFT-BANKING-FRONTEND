@@ -22,15 +22,10 @@ const LinkDescription = ({ text, to }: TProps) => {
         <p data-testid="content">{text}</p>
 
         <div className="navigationBtn">
-          <button className="cancelBtn" data-testid="cancel">
+          <button className="cancelBtn" data-testid="cancel" onClick={handleRemove}>
             cancel
           </button>
-          <button
-            className="proceedBtn"
-            data-testid="proceedBtn"
-            onClick={() => handleNavigate()}
-            disabled={to ? false : true}
-          >
+          <button className="proceedBtn" data-testid="proceedBtn" onClick={handleNavigate} disabled={to ? false : true}>
             proceed
           </button>
         </div>
