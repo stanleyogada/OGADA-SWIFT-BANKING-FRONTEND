@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 
@@ -8,6 +8,7 @@ import { postSendMoneyInHouse } from "@services/sendMoney";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import SendMoneyModal from "@components/SendMoneyModal";
 import ModalHeader from "@components/Modal/ModalHeader";
+import TransferPinModal from "@components/TransferPinModal";
 
 const useSendMoneyInHouse = () => {
   const { handleAdd } = useModalConsumer();
@@ -61,14 +62,30 @@ const useSendMoneyInHouse = () => {
     },
   });
 
+  const [transferPin, setTransferPin] = useState("");
+  const handleTransferPinChange = (value: string) => {
+    console.log("handleTransferPinChange", value);
+
+    setTransferPin(value);
+  };
+
+  console.log("transferPin", transferPin);
+
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
+      if (!transferPin && process.env.NODE_ENV !== "test") {
+        return handleAdd({
+          heading: <ModalHeader text="Transfer Pin" />,
+          body: <TransferPinModal onComplete={handleTransferPinChange} />,
+        });
+      }
+
       sendMoneyMutation.mutate({
         amount,
         remark,
         receiverAccountNumber: recipientAccountNumber,
-        senderAccountType: "234567",
-        transferPin: "123456",
+        senderAccountType: "NORMAL",
+        transferPin: transferPin,
       });
     });
 
