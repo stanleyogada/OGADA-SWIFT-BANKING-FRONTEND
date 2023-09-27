@@ -75,15 +75,15 @@ test("Allow transfer for known users", async () => {
     wrapper: TestProviders,
   });
 
-  let phoneInput = screen.getByPlaceholderText(/phone/i);
+  let recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
 
   expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
 
-  await user.type(phoneInput, PHONE[0].slice(0, -1));
+  await user.type(recipientAccountNumberInput, PHONE[0].slice(0, -1));
   expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
 
-  await user.type(phoneInput, PHONE[0].slice(-1));
-  expect(phoneInput).toHaveValue(PHONE[0]);
+  await user.type(recipientAccountNumberInput, PHONE[0].slice(-1));
+  expect(recipientAccountNumberInput).toHaveValue(PHONE[0]);
 
   await handleAssertLoadingState("get-user-by-phone-loading");
 
@@ -102,12 +102,12 @@ test("Allow transfer for known users", async () => {
   });
 
   const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
-  phoneInput = screen.getByPlaceholderText(/phone/i);
+  recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
 
   expect(sendMoneyButton).toBeDisabled();
 
-  await user.type(phoneInput, PHONE[1]);
-  expect(phoneInput).toHaveValue(PHONE[1]);
+  await user.type(recipientAccountNumberInput, PHONE[1]);
+  expect(recipientAccountNumberInput).toHaveValue(PHONE[1]);
 
   await handleAssertLoadingState("get-user-by-phone-loading");
 
@@ -139,7 +139,7 @@ test("Allow transfer for known users", async () => {
 
   // The real implementation has a setTimeout of 5ms before clearing the form
   await waitFor(() => {
-    expect(phoneInput).toHaveValue("");
+    expect(recipientAccountNumberInput).toHaveValue("");
     expect(amountInput).toHaveValue("");
     expect(noteInput).toHaveValue("");
 
@@ -158,10 +158,10 @@ test("DISALLOW transfer for UNKNOWN users", async () => {
     wrapper: TestProviders,
   });
 
-  const phoneInput = screen.getByPlaceholderText(/phone/i);
+  const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
   const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
 
-  await user.type(phoneInput, PHONE[0]);
+  await user.type(recipientAccountNumberInput, PHONE[0]);
 
   expect(sendMoneyButton).toBeDisabled();
 
@@ -184,10 +184,10 @@ test("Ensure prompt error if send money fails", async () => {
     wrapper: TestProviders,
   });
 
-  const phoneInput = screen.getByPlaceholderText(/phone/i);
+  const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
   const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
 
-  await user.type(phoneInput, PHONE[0]);
+  await user.type(recipientAccountNumberInput, PHONE[0]);
 
   expect(sendMoneyButton).toBeDisabled();
 
@@ -213,7 +213,7 @@ test("Ensure prompt error if send money fails", async () => {
   await handleAssertLoadingState(sendMoneyButton);
 
   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
-  expect(phoneInput).toHaveValue(PHONE[0]);
+  expect(recipientAccountNumberInput).toHaveValue(PHONE[0]);
   expect(amountInput).toHaveValue(amount);
   expect(noteInput).toHaveValue(remark);
 
@@ -222,7 +222,7 @@ test("Ensure prompt error if send money fails", async () => {
   await handleAssertLoadingState(sendMoneyButton);
 
   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
-  expect(phoneInput).toHaveValue(PHONE[0]);
+  expect(recipientAccountNumberInput).toHaveValue(PHONE[0]);
   expect(amountInput).toHaveValue(amount);
   expect(noteInput).toHaveValue(remark);
 });
