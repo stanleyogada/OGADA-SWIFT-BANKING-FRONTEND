@@ -5,8 +5,11 @@ import { useMutation, useQuery } from "react-query";
 import { QUERY_KEYS } from "@constants/services";
 import { getUserByPhone } from "@services/users";
 import { postSendMoneyInHouse } from "@services/sendMoney";
+import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
+import SendMoneyModal from "@components/SendMoneyModal";
 
 const useSendMoneyInHouse = () => {
+  const { handleAdd } = useModalConsumer();
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
 
   useEffect(() => {
@@ -41,7 +44,19 @@ const useSendMoneyInHouse = () => {
       setTimeout(() => {
         reset();
         setValue("recipientAccountNumber", ""); // Have no idea why the input value is not reset
+        handleAdd({
+          heading: "Transfer was successful",
+          body: <SendMoneyModal />,
+          onClose: () => window.location.reload(),
+        });
       }, 5);
+    },
+
+    onError: () => {
+      handleAdd({
+        heading: "Transfer failed!",
+        body: <SendMoneyModal hasError />,
+      });
     },
   });
 

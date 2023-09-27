@@ -19,6 +19,7 @@ const useModalProvider = () => {
 
     if (!lastModal) return;
     if (lastModal.isPersistent) return;
+    if (lastModal.onClose) lastModal.onClose();
 
     const newStack = Stack.clone(stack.data());
     newStack.pop();
