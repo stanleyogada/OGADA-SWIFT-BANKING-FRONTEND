@@ -45,8 +45,8 @@ const SendMoneyInHouse = () => {
         {sendMoneyMutation.isSuccess && <div data-testid="send-money-success">Money sent successfully</div>}
       </form>
 
-      {recipient.isError && <div data-testid="get-user-by-phone-error">Error searching for the user</div>}
-      {recipient.isLoading && <div data-testid="get-user-by-phone-loading">Searching for the user...</div>}
+      {recipient.isError && <div data-testid="get-user-by-account-number-error">Error searching for the user</div>}
+      {recipient.isLoading && <div data-testid="get-user-by-account-number-loading">Searching for the user...</div>}
     </>
   );
 };
