@@ -16,7 +16,7 @@ const useEditUser = () => {
 const EditAccount = () => {
   const { data } = useCurrentUser();
   const { updateUserMutation } = usePatchUser();
-  const { register, formState, getValues, setValue, handleSubmit } = useEditUser();
+  const { register, setValue, handleSubmit } = useEditUser();
   const [credential, setCredential] = useState({
     nickname: data?.nickname,
     email: data?.email,

@@ -31,7 +31,8 @@ createServer([
   },
 
   {
-    url: `${BASE_URL}${ENDPOINTS.updateUser}`,
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+    method: "patch",
     res: () => {
       return {
         status: "success",
