@@ -20,11 +20,11 @@ const DisabledLink = ({ children, to, mute }: TProps) => {
         className="disabledLink-container"
         onClick={() => {
           handleAdd({
-            heading: <ModalHeader text="Are you sure?" />,
+            heading: <ModalHeader text="Do you want to Visit a UI-only page?" />,
             body: (
               <LinkDescription
                 to={to}
-                text="This page you are about to go does not have functionality"
+                text="This page you are about to visit do not have functionality but contains only dummy data and UI."
               ></LinkDescription>
             ),
           });
