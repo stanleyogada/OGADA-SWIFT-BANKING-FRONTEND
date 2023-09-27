@@ -61,11 +61,11 @@ const useSendMoneyInHouse = () => {
   });
 
   const handleSendMoney = () =>
-    handleSubmit(({ amount, remark }) => {
+    handleSubmit(({ amount, remark, recipientAccountNumber }) => {
       sendMoneyMutation.mutate({
         amount,
         remark,
-        receiverAccountNumber: "1234567890",
+        receiverAccountNumber: recipientAccountNumber,
         senderAccountType: "234567",
         transferPin: "123456",
       });
