@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import TestProviders from "@components/TestProviders";
@@ -51,7 +51,9 @@ const BANKS = [
   },
 ];
 
-createServer([
+const VERIFIED_ACCOUNT_NAME = "TEST ACCOUNT NAME";
+
+const { handleCreateErrorConfig } = createServer([
   {
     url: `${BASE_URL}${ENDPOINTS.getAllBanks}`,
     res: () => {
@@ -60,13 +62,27 @@ createServer([
       };
     },
   },
+  {
+    url: `${BASE_URL}${ENDPOINTS.getBankVerify}`,
+    res: () => {
+      return {
+        data: {
+          account_name: VERIFIED_ACCOUNT_NAME,
+        },
+      };
+    },
+  },
 ]);
+
+let user: ReturnType<typeof userEvent.setup>;
+beforeEach(() => {
+  user = userEvent.setup();
+});
 
 test("Allow users to see list of banks to choose from", async () => {
   render(<SendMoneyBank />, {
     wrapper: TestProviders,
   });
-  const user = userEvent.setup();
 
   await handleAssertLoadingState("get-all-banks-loading");
 
@@ -95,4 +111,59 @@ test("Allow users to see list of banks to choose from", async () => {
 
   expect(screen.getByTestId("current-bank")).toHaveTextContent(BANKS[2].name);
   expect(screen.queryAllByTestId("bank")).toHaveLength(0);
+});
+
+describe("Verify account number and bank", () => {
+  test("Allow users to verify success", async () => {
+    render(<SendMoneyBank />, {
+      wrapper: TestProviders,
+    });
+    const recipientAccountNumberInput = screen.getByPlaceholderText("Recipient account number");
+
+    await handleAssertLoadingState("get-all-banks-loading");
+    expect(recipientAccountNumberInput).toBeDisabled();
+
+    await user.click(screen.getAllByTestId("bank")[0]);
+    expect(recipientAccountNumberInput).toBeEnabled();
+
+    await user.type(recipientAccountNumberInput, "1234");
+    expect(recipientAccountNumberInput).toHaveValue("1234");
+
+    await user.click(within(screen.getByTestId("current-bank")).getByTestId("remove"));
+    expect(recipientAccountNumberInput).toBeDisabled();
+    expect(recipientAccountNumberInput).toHaveValue("");
+
+    await user.click(screen.getAllByTestId("bank")[1]);
+    expect(recipientAccountNumberInput).toBeEnabled();
+    expect(recipientAccountNumberInput).toHaveValue("");
+
+    await user.type(recipientAccountNumberInput, "123456789");
+    expect(screen.queryByTestId("verify-account-loading")).not.toBeInTheDocument();
+    expect(screen.queryByText(VERIFIED_ACCOUNT_NAME)).not.toBeInTheDocument();
+
+    await user.clear(recipientAccountNumberInput);
+    await user.type(recipientAccountNumberInput, "1234567890");
+    await handleAssertLoadingState("verify-account-loading");
+
+    expect(screen.getByText(VERIFIED_ACCOUNT_NAME)).toBeInTheDocument();
+  });
+
+  test("Prompt error on verify failure", async () => {
+    handleCreateErrorConfig({
+      url: `${BASE_URL}${ENDPOINTS.getBankVerify}`,
+      statusCode: 404,
+    });
+    render(<SendMoneyBank />, {
+      wrapper: TestProviders,
+    });
+
+    await handleAssertLoadingState("get-all-banks-loading");
+    const recipientAccountNumberInput = screen.getByPlaceholderText("Recipient account number");
+
+    await user.click(screen.getAllByTestId("bank")[0]);
+    await user.type(recipientAccountNumberInput, "1234567890");
+    await handleAssertLoadingState("verify-account-loading");
+
+    expect(screen.getByTestId("verify-account-error")).toBeInTheDocument();
+  });
 });
