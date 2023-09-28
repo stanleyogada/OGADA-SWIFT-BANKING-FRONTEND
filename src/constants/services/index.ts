@@ -36,6 +36,7 @@ const ENDPOINTS = {
   forgetPasscode: "/auth/forgot-login-passcode",
   resetLoginPasscode: "/auth/reset-login-passcode",
   transactions: "/transactions/all", // (++ has fake data)
+  editUser: env.editUser, // (++ has fake data)
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {
