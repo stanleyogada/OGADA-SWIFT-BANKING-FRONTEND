@@ -10,6 +10,7 @@ const LOCAL_STORAGE_KEYS = {
 
 const DEFAULT_USER_AVATAR =
   "https://img.freepik.com/free-psd/3d-illustration-person-with-glasses_23-2149436191.jpg?size=626&ext=jpg&ga=GA1.2.1995508173.1693448090&semt=sph";
+const DEFAULT_BANK_LOGO = "https://nigerianbanks.xyz/logo/default-image.png";
 
 const TEST_LOG_PREFIX = "TEST LOG: ";
 
@@ -25,4 +26,5 @@ export {
   DEFAULT_USER_AVATAR,
   TEST_LOG_PREFIX,
   SIGNIN_MODAL_URL_USER_QUERY_OPTIONS,
+  DEFAULT_BANK_LOGO,
 };

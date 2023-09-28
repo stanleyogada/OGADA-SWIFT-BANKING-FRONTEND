@@ -126,6 +126,22 @@
       "senderAccountType": "NORMAL",
       "transferPin": "9369",
       "id": 4
+    },
+    {
+      "amount": "1234567890",
+      "remark": "USD",
+      "receiverAccountNumber": "4286351832",
+      "senderAccountType": "NORMAL",
+      "transferPin": "4444",
+      "id": 5
+    },
+    {
+      "amount": "1234567890",
+      "remark": "USD",
+      "receiverAccountNumber": "1234567890",
+      "senderAccountType": "NORMAL",
+      "transferPin": "5072",
+      "id": 6
     }
   ],
   "user-by-phone": [
@@ -161,5 +177,54 @@
         "avatar": "https://i.pravatar.cc/150?u=1234567890"
       }
     }
-  ]
+  ],
+  "banks": {
+    "data": [
+      {
+        "name": "Access Bank",
+        "code": "044",
+        "logo": "https://nigerianbanks.xyz/logo/access-bank.png"
+      },
+      {
+        "name": "ALAT by WEMA",
+        "code": "035A",
+        "logo": "https://nigerianbanks.xyz/logo/alat-by-wema.png"
+      },
+      {
+        "name": "ASO Savings and Loans",
+        "code": "401",
+        "logo": null
+      },
+      {
+        "name": "Bowen Microfinance Bank",
+        "code": "50931",
+        "logo": "https://nigerianbanks.xyz/logo/default-image.png"
+      },
+      {
+        "name": "CEMCS Microfinance Bank",
+        "code": "50823",
+        "logo": null
+      },
+      {
+        "name": "Citibank Nigeria",
+        "code": "023",
+        "logo": "https://nigerianbanks.xyz/logo/citibank-nigeria.png"
+      },
+      {
+        "name": "Ecobank Nigeria",
+        "code": "050",
+        "logo": "https://nigerianbanks.xyz/logo/ecobank-nigeria.png"
+      },
+      {
+        "name": "Airtel Smartcash PSB",
+        "code": "120004",
+        "logo": null
+      }
+    ]
+  },
+  "banks.verify": {
+    "data": {
+      "account_name": "CHINEDU STANLEY OGADA"
+    }
+  }
 }

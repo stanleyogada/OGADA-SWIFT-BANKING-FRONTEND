@@ -4,6 +4,7 @@ const env = (() => {
     currentUserAccounts: "/users/me.accounts",
     sendMoneyInHouse: "/transactions.send.in-house",
     getUserByPhone: "/user-by-phone",
+    getBankVerify: "/banks.verify",
   };
 
   const prod = {
@@ -11,6 +12,7 @@ const env = (() => {
     currentUserAccounts: "/users/me/accounts",
     sendMoneyInHouse: "/transactions/in-houses/send-money",
     getUserByPhone: "/users/by-phone",
+    getBankVerify: "/banks/verify",
   };
 
   if (["development", "test"].includes(process.env.NODE_ENV as string)) return dev;
@@ -25,6 +27,8 @@ const QUERY_KEYS = {
   currentUserAccounts: "currentUserAccounts",
   defaultUserLoginInfo: "defaultUserLoginInfo",
   getUserByPhone: "getUserByPhone",
+  getAllBanks: "getAllBanks",
+  getBankVerify: "getBankVerify",
 };
 
 const ENDPOINTS = {
@@ -41,6 +45,8 @@ const ENDPOINTS = {
   transactions: "/transactions/all", // (++ has fake data)
   sendMoneyInHouse: env.sendMoneyInHouse, // (++ has fake data)
   getUserByPhone: env.getUserByPhone, // (++ has fake data)
+  getAllBanks: "/banks", // (++ has fake data)
+  getBankVerify: env.getBankVerify, // (++ has fake data)
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {

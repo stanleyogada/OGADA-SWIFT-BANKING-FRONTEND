@@ -1,34 +1,11 @@
-type TUser = {
-  id: number;
-  created_at: string;
-  updated_at: string;
-  first_name: string;
-  last_name: string;
-  fullName: string;
-  middle_name?: string;
-  nickname?: string;
-  email: string;
-  email_is_verified: boolean;
-  phone: string;
-  avatar?: string;
+import { TUserAccountType } from "@services/users/types";
+
+type TSendMoneyInHouseProps = {
+  transferPin: string;
+  senderAccountType: TUserAccountType;
+  receiverAccountNumber: string;
+  amount: number;
+  remark: string;
 };
 
-type TUserAccount = {
-  user_id: number;
-  created_at: string;
-  email: string;
-  account_number: string;
-  account_id: number;
-  balance: TUserAccountType;
-  type: string;
-  full_name: string;
-};
-
-type TUserDefault = TUser & {
-  login_passcode: string;
-  transfer_pin: string;
-};
-
-type TUserAccountType = "NORMAL" | "CASHBACK";
-
-export type { TUser, TUserAccount, TUserAccountType, TUserDefault };
+export type { TSendMoneyInHouseProps };
