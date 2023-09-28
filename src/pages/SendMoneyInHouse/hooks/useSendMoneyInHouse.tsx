@@ -133,16 +133,19 @@ const useSendMoneyInHouse = () => {
     setValue("recipientAccountNumber", beneficiaryAccountNumber);
   };
 
-  const beneficiaries = getAllBeneficiaries();
+  const showBeneficiaries = useMemo(() => {
+    if (recipientAccountNumber) return false;
 
-  console.log("beneficiaries", beneficiaries);
+    return true;
+  }, [recipientAccountNumber]);
 
   return {
-    beneficiaries,
+    beneficiaries: getAllBeneficiaries(),
     recipient,
     isSendMoneyButtonDisabled,
     sendMoneyMutation,
     isRecipientFound,
+    showBeneficiaries,
     handleSendMoney,
     register,
     handleBeneficiaryClick,

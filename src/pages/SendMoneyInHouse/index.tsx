@@ -8,6 +8,7 @@ const SendMoneyInHouse = () => {
     isSendMoneyButtonDisabled,
     isRecipientFound,
     beneficiaries,
+    showBeneficiaries,
     handleSendMoney,
     register,
     handleBeneficiaryClick,
@@ -57,7 +58,7 @@ const SendMoneyInHouse = () => {
       {recipient.isError && <div data-testid="get-user-by-account-number-error">Error searching for the user</div>}
       {recipient.isLoading && <div data-testid="get-user-by-account-number-loading">Searching for the user...</div>}
 
-      {!isRecipientFound && (
+      {showBeneficiaries && (
         <div>
           {!beneficiaries.length && <p>No Beneficiaries</p>}
 
