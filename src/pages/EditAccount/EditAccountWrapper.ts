@@ -21,6 +21,10 @@ const EditAccountWrapper = styled.div`
     .addressIfo {
       margin: 10px 0;
     }
+
+    .updateUser {
+      color: blue;
+    }
   }
 `;
 

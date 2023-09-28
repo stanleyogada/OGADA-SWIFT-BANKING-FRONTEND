@@ -14,28 +14,16 @@ export type TCredentials = {
 const EditAccount = () => {
   const { data, isError } = useCurrentUser();
   const { updateUserMutation } = usePatchUser();
-  const { register, setValue, handleSubmit } = useEditUser();
   const [credential, setCredential] = useState<TCredentials>({
     nickname: data?.nickname,
     email: data?.email,
   });
-
-  const handleSubmitForm = () => {
-    return handleSubmit(() => {
-      if (credential.nickname === data?.nickname && credential.email === data?.email) return;
-      updateUserMutation.mutate(credential);
-    });
-  };
-
-  const handleChangeNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("nickname", e.target.value);
-    setCredential({ ...credential, nickname: e.target.value });
-  };
-
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue("email", e.target.value);
-    setCredential({ ...credential, email: e.target.value });
-  };
+  const { register, setValue, handleSubmit, handleChangeEmail, handleChangeNickName, handleSubmitForm } = useEditUser({
+    userMutation: updateUserMutation,
+    credential,
+    setCredential,
+    data,
+  });
 
   // FIXME: fix page reload afer submit form
 
@@ -72,7 +60,11 @@ const EditAccount = () => {
                 onChange={handleChangeEmail}
               />
               <Input label="Opay Account Number" placeholder="account number" value={data?.phone} disabled={true} />
-              {updateUserMutation.isSuccess && <p data-testid="success">User updated successfully!</p>}
+              {updateUserMutation.isSuccess && (
+                <p className="updateUser" data-testid="success">
+                  User updated successfully!
+                </p>
+              )}
             </div>
           </div>
         )}

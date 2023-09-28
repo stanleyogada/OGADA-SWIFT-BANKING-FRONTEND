@@ -5,6 +5,7 @@ import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import userEvent from "@testing-library/user-event";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
+import { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 
 const NICKNAME = "code knight";
 const EMAIl = "test@gmail.com";
@@ -43,7 +44,10 @@ const { handleCreateErrorConfig } = createServer([
   },
 ]);
 
-describe("porpulate input on load", () => {
+let user: UserEvent;
+
+describe("porpulate user input on load", () => {
+  beforeEach(() => (user = userEvent.setup()));
   test("Updates a user's nickname and email", async () => {
     render(<EditAccount />, {
       wrapper: TestProviders,
@@ -83,7 +87,6 @@ describe("porpulate input on load", () => {
     expect(nickNameInput).not.toBeDisabled();
     expect(emailInput).not.toBeDisabled();
 
-    const user = userEvent.setup();
     await user.type(nickNameInput, NICKNAME);
     await user.type(emailInput, EMAIl);
 
@@ -91,6 +94,8 @@ describe("porpulate input on load", () => {
       name: /save/i,
     });
     await user.click(saveButton);
+
+    await handleAssertLoadingState("splash-screen");
 
     expect(await screen.findByTestId("success")).toBeInTheDocument();
   });
@@ -106,15 +111,15 @@ describe("porpulate input on load", () => {
       name: /save/i,
     });
 
-    const user = userEvent.setup();
     await user.type(nickNameInput, "tester");
     await user.type(emailInput, "test2@gmail.com");
 
     expect(saveButton).toBeDisabled();
+
     expect(screen.queryByTestId("success")).not.toBeInTheDocument();
   });
 
-  test("Shows error when there is an error occur", async () => {
+  test("Shows error when there is an error fetching data", async () => {
     handleCreateErrorConfig({
       url: `${BASE_URL}${ENDPOINTS.currentUser}`,
       res: () => {
@@ -134,7 +139,7 @@ describe("porpulate input on load", () => {
     expect(error).toBeInTheDocument();
   });
 
-  test("show error when trying to update user info", async () => {
+  test("shows error when updating user info", async () => {
     handleCreateErrorConfig({
       url: `${BASE_URL}${ENDPOINTS.currentUser}`,
       method: "patch",
@@ -148,18 +153,15 @@ describe("porpulate input on load", () => {
       name: /save/i,
     });
 
-    const user = userEvent.setup();
     const nickNameInput = await screen.findByPlaceholderText(/nickname/i);
     const emailInput = screen.getByPlaceholderText(/email/i);
     await user.type(nickNameInput, NICKNAME);
     await user.type(emailInput, EMAIl);
     await user.click(saveButton);
 
+    await handleAssertLoadingState("splash-screen");
+
     const error = await screen.findByTestId("post-error");
     expect(error).toBeInTheDocument();
-
-    // await handleAssertLoadingState(saveButton);
-
-    // expect(await screen.findByTestId("splash-screen")).toBeInTheDocument();
   });
 });
