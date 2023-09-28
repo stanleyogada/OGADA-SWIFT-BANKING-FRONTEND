@@ -21,8 +21,6 @@ function PageNavHeader({ heading, backgroundColor, text, handler, data, value }:
   const isButtonDisabled = () => {
     if (value?.nickname === data?.nickname && value?.email === data?.email) {
       return true;
-    } else if (value?.nickname === data?.nickname || value?.email === data?.email) {
-      return true;
     }
 
     return false;

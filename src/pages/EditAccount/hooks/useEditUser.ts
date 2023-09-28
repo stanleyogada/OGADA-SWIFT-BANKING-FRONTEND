@@ -21,11 +21,28 @@ type THandleForm = {
 const useEditUser = ({ userMutation, credential, setCredential, data }: THandleForm) => {
   const { register, formState, getValues, setValue, handleSubmit } = useForm({});
 
+  // Pick keys from credentials to data type
+  const getRequestBody = (credential: TCredentials, data: Pick<TUser, keyof TCredentials>) => {
+    let keys = Object.keys(credential) as Array<keyof TCredentials>;
+
+    return keys.reduce((acc, key) => {
+      if (credential[key] === data[key]) return acc;
+
+      return {
+        ...acc,
+        [key]: credential[key],
+      };
+    }, {} as TCredentials);
+  };
+
   const handleSubmitForm = () => {
     return handleSubmit(() => {
-      if (credential.nickname === data?.nickname && credential.email === data?.email) return;
-      if (credential.nickname === data?.nickname || credential.email === data?.email) return;
-      userMutation.mutate(credential);
+      userMutation.mutate(
+        getRequestBody(credential, {
+          nickname: data?.nickname,
+          email: data?.email as string,
+        })
+      );
     });
   };
 

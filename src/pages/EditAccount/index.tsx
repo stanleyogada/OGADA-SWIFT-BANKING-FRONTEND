@@ -6,6 +6,7 @@ import { useState } from "react";
 import usePatchUser from "./hooks/usePatchUser";
 import SplashScreen from "@components/SplashScreen";
 import useEditUser from "./hooks/useEditUser";
+import useDefaultUser from "./hooks/useDefaultUser";
 
 export type TCredentials = {
   nickname: string | undefined;
@@ -19,6 +20,7 @@ const EditAccount = () => {
     email: data?.email,
   });
 
+  const { checkUser } = useDefaultUser({ current: data });
   const { register, handleChangeEmail, handleChangeNickName, handleSubmitForm } = useEditUser({
     userMutation: updateUserMutation,
     credential,
@@ -57,6 +59,7 @@ const EditAccount = () => {
                 value={credential.email}
                 {...register("email", {})}
                 onChange={handleChangeEmail}
+                disabled={checkUser()}
               />
               <Input label="Opay Account Number" placeholder="account number" value={data?.phone} disabled={true} />
               {updateUserMutation.isSuccess && (
