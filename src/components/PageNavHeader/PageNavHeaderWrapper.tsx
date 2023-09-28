@@ -27,6 +27,8 @@ const PageNavHeaderWrapper = styled.div<TProps>`
     text-align: end;
     font-weight: 500;
     font-size: 17px;
+    background-color: ${COLORS.white};
+    border: none;
   }
 `;
 export default PageNavHeaderWrapper;

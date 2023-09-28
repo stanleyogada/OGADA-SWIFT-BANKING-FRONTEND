@@ -2,14 +2,16 @@ const env = (() => {
   const dev = {
     BASE_URL: "http://localhost:8000",
     currentUserAccounts: "/users/me.accounts",
+    editUser: "/users/me",
   };
 
   const prod = {
     BASE_URL: "https://opay-demo-backend-production.up.railway.app/api/v1",
     currentUserAccounts: "/users/me/accounts",
+    editUser: "/users",
   };
 
-  if (process.env.NODE_ENV === "development") return dev;
+  if (["development", "test"].includes(process.env.NODE_ENV as string)) return dev;
 
   return prod;
 })();

@@ -33,4 +33,15 @@ const getDefaultUserLoginInfo = async (): Promise<TUserDefault> => {
   return data.data as TUserDefault;
 };
 
-export { getCurrentUser, getCurrentUserAccounts, getDefaultUserLoginInfo };
+const patchUser = async ({ nickname, email }: { nickname: string | undefined; email: string | undefined }) => {
+  const { data } = await axiosInstance({
+    method: "PATCH",
+    url: ENDPOINTS.currentUser,
+    data: {
+      nickname,
+      email,
+    },
+  });
+};
+
+export { getCurrentUser, getCurrentUserAccounts, patchUser, getDefaultUserLoginInfo };
