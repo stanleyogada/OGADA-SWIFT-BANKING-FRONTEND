@@ -24,6 +24,7 @@ const useEditUser = ({ userMutation, credential, setCredential, data }: THandleF
   const handleSubmitForm = () => {
     return handleSubmit(() => {
       if (credential.nickname === data?.nickname && credential.email === data?.email) return;
+      if (credential.nickname === data?.nickname || credential.email === data?.email) return;
       userMutation.mutate(credential);
     });
   };

@@ -17,21 +17,25 @@ type TpageNavHeaderProps = {
 
 function PageNavHeader({ heading, backgroundColor, text, handler, data, value }: TpageNavHeaderProps) {
   const navigate = useNavigate();
+
+  const isButtonDisabled = () => {
+    if (value?.nickname === data?.nickname && value?.email === data?.email) {
+      return true;
+    } else if (value?.nickname === data?.nickname || value?.email === data?.email) {
+      return true;
+    }
+
+    return false;
+  };
   return (
     <PageNavHeaderWrapper backgroundColor={backgroundColor}>
       <Button onClick={() => navigate(-1)}>{icons.blueLeftArrowIcon()}</Button>
-
       <h1 className="heading" data-testid="heading">
         {heading}
       </h1>
       {handler && (
         <form onSubmit={handler}>
-          <button
-            type="submit"
-            className="text"
-            data-testid="save"
-            disabled={value?.nickname === data?.nickname && value?.email === data?.email ? true : false}
-          >
+          <button type="submit" className="text" data-testid="save" disabled={isButtonDisabled()}>
             {text}
           </button>
         </form>

@@ -18,14 +18,13 @@ const EditAccount = () => {
     nickname: data?.nickname,
     email: data?.email,
   });
-  const { register, setValue, handleSubmit, handleChangeEmail, handleChangeNickName, handleSubmitForm } = useEditUser({
+
+  const { register, handleChangeEmail, handleChangeNickName, handleSubmitForm } = useEditUser({
     userMutation: updateUserMutation,
     credential,
     setCredential,
     data,
   });
-
-  // FIXME: fix page reload afer submit form
 
   return (
     <EditAccountWrapper>
