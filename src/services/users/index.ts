@@ -34,9 +34,10 @@ const getDefaultUserLoginInfo = async (): Promise<TUserDefault> => {
 };
 
 const patchUser = async ({ nickname, email }: { nickname: string | undefined; email: string | undefined }) => {
-  const { data } = await axiosInstance({
+  await axiosInstance({
     method: "PATCH",
-    url: ENDPOINTS.currentUser,
+    url: ENDPOINTS.editUser,
+
     data: {
       nickname,
       email,

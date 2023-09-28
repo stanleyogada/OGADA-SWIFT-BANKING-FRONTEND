@@ -15,7 +15,7 @@ let user: UserEvent;
 describe("porpulate user input on load", () => {
   const { handleCreateErrorConfig } = createServer([
     {
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      url: `${BASE_URL}${ENDPOINTS.editUser}`,
       res: () => {
         return {
           data: {
@@ -36,7 +36,7 @@ describe("porpulate user input on load", () => {
     },
 
     {
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      url: `${BASE_URL}${ENDPOINTS.editUser}`,
       method: "patch",
       res: () => {
         return {
@@ -121,7 +121,7 @@ describe("porpulate user input on load", () => {
 
   test("Shows error when there is an error fetching data", async () => {
     handleCreateErrorConfig({
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      url: `${BASE_URL}${ENDPOINTS.editUser}`,
       res: () => {
         return {
           status: "fail",
@@ -141,7 +141,7 @@ describe("porpulate user input on load", () => {
 
   test("shows error when updating user info", async () => {
     handleCreateErrorConfig({
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      url: `${BASE_URL}${ENDPOINTS.editUser}`,
       method: "patch",
       statusCode: 404,
     });
@@ -180,7 +180,7 @@ describe("disables email input when default user is logged in", () => {
       },
     },
     {
-      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      url: `${BASE_URL}${ENDPOINTS.editUser}`,
       res: () => {
         return {
           data: {
