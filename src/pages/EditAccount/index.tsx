@@ -14,13 +14,16 @@ export type TCredentials = {
 };
 const EditAccount = () => {
   const { data, isError } = useCurrentUser();
+
   const { updateUserMutation } = usePatchUser();
+
   const [credential, setCredential] = useState<TCredentials>({
     nickname: data?.nickname,
     email: data?.email,
   });
 
   const { checkUser } = useDefaultUser({ current: data });
+
   const { register, handleChangeEmail, handleChangeNickName, handleSubmitForm } = useEditUser({
     userMutation: updateUserMutation,
     credential,

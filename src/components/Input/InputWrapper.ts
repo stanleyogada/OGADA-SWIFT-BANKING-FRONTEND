@@ -48,6 +48,9 @@ const InputWrapper = styled.div`
           padding: 11px;
           font-size: 15px;
         }
+        &__control:disabled {
+          opacity: 0.2;
+        }
 
         &__error {
           color: ${COLORS.pink};
