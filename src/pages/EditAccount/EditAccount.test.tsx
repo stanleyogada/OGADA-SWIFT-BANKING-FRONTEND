@@ -10,43 +10,43 @@ import { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 const NICKNAME = "code knight";
 const EMAIl = "test@gmail.com";
 
-const { handleCreateErrorConfig } = createServer([
-  {
-    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-    res: () => {
-      return {
-        data: {
-          id: 4,
-          created_at: "2023-06-21T17:05:11.518Z",
-          updated_at: "2023-06-21T17:05:11.518Z",
-          first_name: "Faker",
-          last_name: "Me",
-          middle_name: "tester",
-          nickname: "tester",
-          email: "test2@gmail.com",
-          email_is_verified: false,
-          phone: "1234567890",
-          fullName: "Faker Me",
-        },
-      };
-    },
-  },
-
-  {
-    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
-    method: "patch",
-    res: () => {
-      return {
-        status: "success",
-        message: "User updated successfully!",
-      };
-    },
-  },
-]);
-
 let user: UserEvent;
 
 describe("porpulate user input on load", () => {
+  const { handleCreateErrorConfig } = createServer([
+    {
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      res: () => {
+        return {
+          data: {
+            id: 4,
+            created_at: "2023-06-21T17:05:11.518Z",
+            updated_at: "2023-06-21T17:05:11.518Z",
+            first_name: "Faker",
+            last_name: "Me",
+            middle_name: "tester",
+            nickname: "tester",
+            email: "test2@gmail.com",
+            email_is_verified: false,
+            phone: "1234567890",
+            fullName: "Faker Me",
+          },
+        };
+      },
+    },
+
+    {
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      method: "patch",
+      res: () => {
+        return {
+          status: "success",
+          message: "User updated successfully!",
+        };
+      },
+    },
+  ]);
+
   beforeEach(() => (user = userEvent.setup()));
   test("Updates a user's nickname and email", async () => {
     render(<EditAccount />, {
@@ -163,5 +163,40 @@ describe("porpulate user input on load", () => {
 
     const error = await screen.findByTestId("post-error");
     expect(error).toBeInTheDocument();
+  });
+});
+
+describe("disables email input when default user is logged in", () => {
+  createServer([
+    {
+      url: `${BASE_URL}${ENDPOINTS.defaultUserLoginInfo}`,
+      res: () => {
+        return {
+          data: {
+            email: "defaultNormalUser@email.com",
+            phone: "4286351832",
+          },
+        };
+      },
+    },
+    {
+      url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+      res: () => {
+        return {
+          data: {
+            email: "defaultNormalUser@email.com",
+            phone: "4286351832",
+          },
+        };
+      },
+    },
+  ]);
+  test("disables email input when default user is logged in", async () => {
+    render(<EditAccount />, {
+      wrapper: TestProviders,
+    });
+
+    const emailInput = await screen.findByPlaceholderText(/email/i);
+    expect(emailInput).toBeDisabled();
   });
 });
