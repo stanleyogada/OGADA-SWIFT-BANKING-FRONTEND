@@ -4,7 +4,6 @@ import styled from "styled-components";
 const SendMoneyWrapper = styled.div<{ isRecipientFound: boolean }>`
   width: 100%;
   height: 100vh;
-  border: ${(props) => (props.isRecipientFound ? "2px solid green" : "2px solid red")};
   background-color: #f1f1f1;
 
   .input-wrapper {
@@ -69,7 +68,6 @@ const SendMoneyWrapper = styled.div<{ isRecipientFound: boolean }>`
   }
 
   .user-form {
-    border: 1px solid red;
     flex-direction: column;
     align-items: center;
     display: flex;

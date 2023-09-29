@@ -38,15 +38,16 @@ const FinanceWrapper = styled.section`
   .finances-section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 100vw;
     margin-left: 0rem;
     margin-bottom: 0.85rem;
     background-color: ${COLORS.gray};
 
     .finance {
       background-color: ${COLORS.gray};
+      width: 100%;
 
       .finance-btn {
+        width: 40%;
         border: transparent;
         text-transform: capitalize;
         font-size: 20px;
@@ -59,7 +60,6 @@ const FinanceWrapper = styled.section`
         padding: 0.85rem;
         background-color: ${COLORS.gray};
         color: ${COLORS.black};
-        width: 100%;
         font-weight: 700;
         transition: all 0.5s linear;
       }

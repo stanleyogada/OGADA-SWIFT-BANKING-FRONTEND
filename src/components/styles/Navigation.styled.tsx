@@ -9,9 +9,6 @@ export const Header = styled.header`
 `;
 
 export const Nav = styled.nav`
-  position: fixed;
-  bottom: 0;
-  left: 0;
   background-color: #f1f1f1;
   box-shadow: 0 -2px 12px hsla(174, 63%, 15%, 0.25);
 
@@ -38,7 +35,7 @@ export const Nav = styled.nav`
     flex-direction: column;
     align-items: center;
     row-gap: 0.25rem;
-    color: ${COLORS.black};
+    color: #918f8f;
     font-weight: 600;
     padding-top: 5px;
     text-decoration: none;
@@ -55,7 +52,12 @@ export const List = styled.li`
     font-size: 1.5rem;
   }
 
-  a.active {
-    color: ${COLORS.blue}; /*This affects the SVG icons inside also*/
+  a.active span {
+    color: ${COLORS.blue};
+  }
+
+  a.active svg {
+    color: ${COLORS.blue};
+    fill: blue; /*This affects the SVG icons inside also*/
   }
 `;

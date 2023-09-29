@@ -61,14 +61,13 @@ const TransferPinWrapper = styled.div`
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-auto-rows: 50px;
-      gap: 20px;
-      width: 80%;
-      margin: 0 auto;
+      gap: 10px;
 
       button {
         border-radius: 12px;
         border: none;
         font-weight: bold;
+        font-size: 20px;
       }
     }
   }
