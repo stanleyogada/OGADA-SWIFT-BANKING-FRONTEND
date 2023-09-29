@@ -8,4 +8,24 @@ type TSendMoneyInHouseProps = {
   remark: string;
 };
 
-export type { TSendMoneyInHouseProps };
+type TSendMoneyBankProps = {
+  transferPin: string;
+  senderAccountType: TUserAccountType;
+  bankName: string;
+  bankAccountFullName: string;
+  bankAccountNumber: string;
+  amount: number;
+  remark: string;
+};
+
+type TSendMoneyMobileProps = {
+  transferPin: string;
+  senderAccountType: TUserAccountType;
+  amount: number;
+  operator: string;
+  phoneNumber: string;
+  isAirtime: boolean;
+  remark: string;
+};
+
+export type { TSendMoneyInHouseProps, TSendMoneyBankProps, TSendMoneyMobileProps };

@@ -2,7 +2,7 @@ import { cleanup, render, screen, waitFor, within } from "@testing-library/react
 import userEvent from "@testing-library/user-event";
 
 import TestProviders from "@components/TestProviders";
-import { handleAssertLoadingState } from "@utils/test/assertUtils";
+import { handleAssertLoadingState, handleTypeAmountRemarkAndSendMoney } from "@utils/test/assertUtils";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 
@@ -72,28 +72,6 @@ const { handleCreateErrorConfig } = createServer([
     method: "post",
   },
 ]);
-
-const handleTypeAndSendMoney = async (amount: string = "1000", remark: string = "Test remark") => {
-  const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
-
-  const amountInput = screen.getByPlaceholderText(/amount/i);
-  const noteInput = screen.getByPlaceholderText(/note/i);
-
-  await user.type(amountInput, amount);
-  await user.type(noteInput, remark);
-
-  expect(amountInput).toHaveValue(amount);
-  expect(noteInput).toHaveValue(remark);
-
-  await user.click(sendMoneyButton);
-
-  await handleAssertLoadingState(sendMoneyButton);
-
-  return {
-    amountInput,
-    noteInput,
-  };
-};
 
 const handleAssertUserBlock = (user: typeof USERS[0]) => {
   let userBlock = screen.getByTestId("user-block");
@@ -218,7 +196,7 @@ test("Allow transfer for known users", async () => {
     })
   );
 
-  const { amountInput, noteInput } = await handleTypeAndSendMoney();
+  const { amountInput, noteInput } = await handleTypeAmountRemarkAndSendMoney();
 
   // The real implementation has a setTimeout of 5ms before clearing the form
   await waitFor(() => {
@@ -292,7 +270,7 @@ test("Ensure prompt error if send money fails", async () => {
 
   const amount = "2000";
   const remark = "Test remark note";
-  const { amountInput, noteInput } = await handleTypeAndSendMoney(amount, remark);
+  const { amountInput, noteInput } = await handleTypeAmountRemarkAndSendMoney(amount, remark);
 
   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
   expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);

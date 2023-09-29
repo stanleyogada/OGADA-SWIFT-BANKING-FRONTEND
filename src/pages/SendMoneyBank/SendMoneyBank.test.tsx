@@ -6,7 +6,7 @@ import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 
 import SendMoneyBank from ".";
-import { handleAssertLoadingState } from "@utils/test/assertUtils";
+import { handleAssertLoadingState, handleTypeAmountRemarkAndSendMoney } from "@utils/test/assertUtils";
 
 const BANKS = [
   {
@@ -72,6 +72,10 @@ const { handleCreateErrorConfig } = createServer([
       };
     },
   },
+  {
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyBank}`,
+    method: "post",
+  },
 ]);
 
 let user: ReturnType<typeof userEvent.setup>;
@@ -113,6 +117,17 @@ test("Allow users to see list of banks to choose from", async () => {
   expect(screen.queryAllByTestId("bank")).toHaveLength(0);
 });
 
+const handleAssertSelectBankAndTypeAccountNumber = async () => {
+  await handleAssertLoadingState("get-all-banks-loading");
+
+  await user.click(screen.getAllByTestId("bank")[0]);
+
+  const recipientAccountNumberInput = screen.getByPlaceholderText("Recipient account number");
+
+  await user.type(recipientAccountNumberInput, "1234567890");
+  await handleAssertLoadingState("verify-account-loading");
+};
+
 describe("Verify account number and bank", () => {
   test("Allow users to verify success", async () => {
     render(<SendMoneyBank />, {
@@ -134,6 +149,7 @@ describe("Verify account number and bank", () => {
     expect(recipientAccountNumberInput).toHaveValue("");
 
     await user.click(screen.getAllByTestId("bank")[1]);
+
     expect(recipientAccountNumberInput).toBeEnabled();
     expect(recipientAccountNumberInput).toHaveValue("");
 
@@ -147,7 +163,6 @@ describe("Verify account number and bank", () => {
 
     expect(screen.getByText(VERIFIED_ACCOUNT_NAME)).toBeInTheDocument();
   });
-
   test("Prompt error on verify failure", async () => {
     handleCreateErrorConfig({
       url: `${BASE_URL}${ENDPOINTS.getBankVerify}`,
@@ -157,13 +172,61 @@ describe("Verify account number and bank", () => {
       wrapper: TestProviders,
     });
 
-    await handleAssertLoadingState("get-all-banks-loading");
-    const recipientAccountNumberInput = screen.getByPlaceholderText("Recipient account number");
-
-    await user.click(screen.getAllByTestId("bank")[0]);
-    await user.type(recipientAccountNumberInput, "1234567890");
-    await handleAssertLoadingState("verify-account-loading");
+    await handleAssertSelectBankAndTypeAccountNumber();
 
     expect(screen.getByTestId("verify-account-error")).toBeInTheDocument();
   });
 });
+
+test("Allow transfer for known users", async () => {
+  render(<SendMoneyBank />, {
+    wrapper: TestProviders,
+  });
+
+  const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
+  // const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
+
+  expect(sendMoneyButton).toBeDisabled();
+  await handleAssertSelectBankAndTypeAccountNumber();
+  expect(sendMoneyButton).toBeEnabled();
+
+  await handleTypeAmountRemarkAndSendMoney();
+});
+
+// test("Ensure prompt error if send money fails", async () => {
+//   handleCreateErrorConfig({
+//     url: `${BASE_URL}${ENDPOINTS.sendMoneyInHouse}`,
+//     method: "post",
+//     statusCode: 500,
+//   });
+
+//   render(<SendMoneyInHouse />, {
+//     wrapper: TestProviders,
+//   });
+
+//   const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
+//   const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
+
+//   await user.type(recipientAccountNumberInput, ACCOUNT_NUMBER[0]);
+
+//   expect(sendMoneyButton).toBeDisabled();
+
+//   await handleAssertLoadingState("get-user-by-account-number-loading");
+
+//   expect(sendMoneyButton).toBeEnabled();
+//   expect(screen.getByTestId("user-block")).toBeInTheDocument();
+
+//   const amount = "2000";
+//   const remark = "Test remark note";
+//   const { amountInput, noteInput } = await handleTypeAmountRemarkAndSendMoney(amount, remark);
+
+//   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
+//   expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);
+//   expect(amountInput).toHaveValue(amount);
+//   expect(noteInput).toHaveValue(remark);
+
+//   await user.click(sendMoneyButton);
+//   await handleAssertLoadingState(sendMoneyButton);
+
+//   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
+// });

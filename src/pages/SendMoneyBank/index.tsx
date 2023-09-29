@@ -9,8 +9,11 @@ const SendMoneyBank = () => {
     currentBank,
     recipientAccountNumberInputIsDisabled,
     isRecipientFound,
+    isSendMoneyButtonDisabled,
+    sendMoneyMutation,
     handleCurrentBankCodeChange,
     register,
+    handleSendMoney,
   } = useSendMoneyBank();
 
   return (
@@ -49,6 +52,33 @@ const SendMoneyBank = () => {
           ))}
         </div>
       )}
+
+      <form onSubmit={handleSendMoney()}>
+        <input
+          type="text"
+          placeholder="Amount"
+          {...register("amount", {
+            required: true,
+            min: 3,
+          })}
+        />
+        <input
+          type="text"
+          placeholder="Note"
+          {...register("remark", {
+            required: true,
+            min: 3,
+          })}
+        />
+
+        <button type="submit" disabled={isSendMoneyButtonDisabled}>
+          Send money
+          {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
+        </button>
+
+        {/* {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
+        {sendMoneyMutation.isSuccess && <div data-testid="send-money-success">Money sent successfully</div>} */}
+      </form>
 
       {verifyAccount.isLoading && <div data-testid="verify-account-loading">Verifying account...</div>}
       {isRecipientFound && <div>{verifyAccount.data?.accountName}</div>}
