@@ -14,6 +14,7 @@ let user: UserEvent;
 
 describe("porpulate user input on load", () => {
   const { handleCreateErrorConfig } = createServer([
+    `${BASE_URL}${ENDPOINTS.defaultUserLoginInfo}`,
     {
       url: `${BASE_URL}${ENDPOINTS.editUser}`,
       res: () => {
