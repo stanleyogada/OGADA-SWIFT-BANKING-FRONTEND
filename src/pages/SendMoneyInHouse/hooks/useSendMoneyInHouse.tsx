@@ -11,6 +11,7 @@ import ModalHeader from "@components/Modal/ModalHeader";
 import TransferPinModal from "@components/TransferPinModal";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
 import { TBeneficiary } from "@customTypes/Beneficiary";
+import { AxiosError } from "axios";
 
 const useSendMoneyInHouse = () => {
   const { handleAdd } = useModalConsumer();
@@ -57,14 +58,34 @@ const useSendMoneyInHouse = () => {
       }, 5);
     },
 
-    onError: () => {
-      handleAdd({
-        heading: <ModalHeader text="Transfer failed!" />,
-        body: <SendMoneyModal hasError />,
-        onClose: () => setTransferPin(""),
-      });
-    },
+    // onError: () => {
+    //   handleAdd({
+    //     heading: <ModalHeader text="Transfer failed!" />,
+    //     body: <SendMoneyModal hasError />,
+    //     onClose: () => setTransferPin(""),
+    //   });
+    // },
   });
+
+  const errorMessage = useMemo(() => {
+    if (!sendMoneyMutation.isError || !sendMoneyMutation.error) return null;
+
+    let error = (sendMoneyMutation.error as AxiosError).response?.data as { message: string };
+
+    return error.message;
+  }, [sendMoneyMutation.isError, sendMoneyMutation.error]);
+
+  useEffect(() => {
+    if (!errorMessage) return;
+
+    console.log("errorMessage", errorMessage);
+
+    handleAdd({
+      heading: <ModalHeader text={`Transfer failed! ${errorMessage}`} />,
+      body: <SendMoneyModal hasError />,
+      onClose: () => setTransferPin(""),
+    });
+  }, [errorMessage]);
 
   const handleTransferPinChange = (value: string) => {
     console.log("handleTransferPinChange", value);
