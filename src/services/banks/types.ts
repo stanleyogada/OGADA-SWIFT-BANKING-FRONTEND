@@ -4,4 +4,8 @@ type TBank = {
   logo: string | null;
 };
 
-export type { TBank };
+type TBankVerification = {
+  accountName: string;
+};
+
+export type { TBank, TBankVerification };
