@@ -90,7 +90,7 @@ const SendMoneyInHouse = () => {
 
           {beneficiaries.map((beneficiary: TBeneficiary) => (
             <div
-              className="user-block"
+              className="user-block beneficiary"
               key={beneficiary.accountNumber}
               data-testid="beneficiary"
               onClick={() => handleBeneficiaryClick(beneficiary.accountNumber as string)}
