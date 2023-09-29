@@ -60,6 +60,7 @@ const useSendMoneyInHouse = () => {
       handleAdd({
         heading: <ModalHeader text="Transfer failed!" />,
         body: <SendMoneyModal hasError />,
+        onClose: () => setTransferPin(""),
       });
     },
   });
@@ -77,7 +78,6 @@ const useSendMoneyInHouse = () => {
         return handleAdd({
           heading: <ModalHeader text="Transfer Pin" />,
           body: <TransferPinModal onComplete={handleTransferPinChange} />,
-          onClose: () => setTransferPin(""),
         });
       }
 
