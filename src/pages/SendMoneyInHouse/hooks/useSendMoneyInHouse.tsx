@@ -15,6 +15,7 @@ import { TBeneficiary } from "@customTypes/Beneficiary";
 const useSendMoneyInHouse = () => {
   const { handleAdd } = useModalConsumer();
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
+  const [transferPin, setTransferPin] = useState("");
 
   useEffect(() => {
     watch("recipientAccountNumber");
@@ -65,7 +66,6 @@ const useSendMoneyInHouse = () => {
     },
   });
 
-  const [transferPin, setTransferPin] = useState("");
   const handleTransferPinChange = (value: string) => {
     console.log("handleTransferPinChange", value);
 
