@@ -8,6 +8,7 @@ type TInputProps = {
   label?: string;
   required?: boolean;
   info?: string;
+  disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   renderLeft?: () => React.ReactNode;
   renderRight?: () => React.ReactNode;

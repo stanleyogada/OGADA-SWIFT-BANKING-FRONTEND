@@ -5,7 +5,7 @@ import SplashScreenWrapper from "./SplashScreenStyle";
 export default function SplashScreen() {
   return (
     <SplashScreenWrapper>
-      <div>
+      <div data-testid="splash-screen">
         <div className="brand-logo-wrapper">
           <BrandLogo />
         </div>

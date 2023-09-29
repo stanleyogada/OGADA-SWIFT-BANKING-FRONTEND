@@ -45,4 +45,16 @@ const getUserByPhone = async (phone: string): Promise<TUser> => {
   } as TUser;
 };
 
-export { getCurrentUser, getCurrentUserAccounts, getDefaultUserLoginInfo, getUserByPhone };
+const patchUser = async ({ nickname, email }: { nickname: string | undefined; email: string | undefined }) => {
+  await axiosInstance({
+    method: "PATCH",
+    url: ENDPOINTS.editUser,
+
+    data: {
+      nickname,
+      email,
+    },
+  });
+};
+
+export { getCurrentUser, getCurrentUserAccounts, patchUser, getDefaultUserLoginInfo, getUserByPhone };

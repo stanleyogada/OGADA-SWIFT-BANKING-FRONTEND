@@ -7,6 +7,7 @@ const env = (() => {
     sendMoneyMobile: "/transactions.send.mobile",
     getUserByPhone: "/user-by-phone",
     getBankVerify: "/banks.verify",
+    editUser: "/users/me",
   };
 
   const prod = {
@@ -17,6 +18,7 @@ const env = (() => {
     sendMoneyMobile: "/transactions/mobiles/send-money",
     getUserByPhone: "/users/by-phone",
     getBankVerify: "/banks/verify",
+    editUser: "/users",
   };
 
   if (["development", "test"].includes(process.env.NODE_ENV as string)) return dev;
@@ -53,6 +55,7 @@ const ENDPOINTS = {
   getUserByPhone: env.getUserByPhone, // (++ has fake data)
   getAllBanks: "/banks", // (++ has fake data)
   getBankVerify: env.getBankVerify, // (++ has fake data)
+  editUser: env.editUser, // (++ has fake data)
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {
