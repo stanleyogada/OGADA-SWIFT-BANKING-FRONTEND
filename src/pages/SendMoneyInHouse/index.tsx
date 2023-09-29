@@ -1,5 +1,8 @@
+import PageNavHeader from "@components/PageNavHeader";
 import { TBeneficiary } from "@customTypes/Beneficiary";
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
+import SendMoneyWrapper from "./SendMoneyInHouseWrapper";
+import Input from "@components/Input";
 
 const SendMoneyInHouse = () => {
   const {
@@ -15,22 +18,40 @@ const SendMoneyInHouse = () => {
   } = useSendMoneyInHouse();
 
   return (
-    <>
-      <input type="text" placeholder="Recipient account number" {...register("recipientAccountNumber")} />
+    <SendMoneyWrapper isRecipientFound={isRecipientFound}>
+      <PageNavHeader heading="Transfer to Opay Account" />
+
+      <div className="recipient-title">Recipient Account</div>
+      <div className="input-wrapper">
+        <input
+          className="recipient-input"
+          type="text"
+          placeholder="Recipient account number"
+          {...register("recipientAccountNumber")}
+        />
+      </div>
+
+      <div className="banner-wrapper">
+        <div className="banner">Instant, Zero issues,Free</div>
+      </div>
 
       {isRecipientFound && (
-        <div data-testid="user-block">
-          <p data-testid="user-full-name">{recipient.data?.fullName}</p>
+        <div className="user-block" data-testid="user-block">
+          <img className="user-image" src={recipient.data?.avatar} alt="avatar" />
+          <div className="text-wrapper">
+            <p className="fullname" data-testid="user-full-name">
+              {recipient.data?.fullName}
+            </p>
 
-          <p>{recipient.data?.phone}</p>
-
-          <img src={recipient.data?.avatar} alt="avatar" />
+            <p className="phone">{recipient.data?.phone}</p>
+          </div>
         </div>
       )}
 
-      <form onSubmit={handleSendMoney()}>
+      <form className="user-form" onSubmit={handleSendMoney()}>
         <input
           type="text"
+          className="recipient-input"
           placeholder="Amount"
           {...register("amount", {
             required: true,
@@ -38,6 +59,7 @@ const SendMoneyInHouse = () => {
           })}
         />
         <input
+          className="recipient-input"
           type="text"
           placeholder="Note"
           {...register("remark", {
@@ -46,7 +68,7 @@ const SendMoneyInHouse = () => {
           })}
         />
 
-        <button type="submit" disabled={isSendMoneyButtonDisabled}>
+        <button className="transfer-btn" type="submit" disabled={isSendMoneyButtonDisabled}>
           Send money
           {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
         </button>
@@ -60,24 +82,29 @@ const SendMoneyInHouse = () => {
 
       {showBeneficiaries && (
         <div>
+          <div className="beneficiaries">
+            <h3>Beneficiaries</h3>
+          </div>
+
           {!beneficiaries.length && <p>No Beneficiaries</p>}
 
           {beneficiaries.map((beneficiary: TBeneficiary) => (
             <div
+              className="user-block"
               key={beneficiary.accountNumber}
               data-testid="beneficiary"
               onClick={() => handleBeneficiaryClick(beneficiary.accountNumber as string)}
             >
-              <img src={beneficiary.avatar} alt="avatar" />
-              <div>
-                <p>{beneficiary.accountNumber}</p>
-                <p>{beneficiary.fullName}</p>
+              <img className="user-image" src={beneficiary.avatar} alt="avatar" />
+              <div className="text-wrapper">
+                <p className="fullname">{beneficiary.accountNumber}</p>
+                <p className="phone">{beneficiary.fullName}</p>
               </div>
             </div>
           ))}
         </div>
       )}
-    </>
+    </SendMoneyWrapper>
   );
 };
 

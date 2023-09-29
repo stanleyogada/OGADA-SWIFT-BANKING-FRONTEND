@@ -149,7 +149,6 @@ describe("Verify account number and bank", () => {
     expect(recipientAccountNumberInput).toHaveValue("");
 
     await user.click(screen.getAllByTestId("bank")[1]);
-
     expect(recipientAccountNumberInput).toBeEnabled();
     expect(recipientAccountNumberInput).toHaveValue("");
 
