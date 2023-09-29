@@ -77,6 +77,7 @@ const useSendMoneyInHouse = () => {
         return handleAdd({
           heading: <ModalHeader text="Transfer Pin" />,
           body: <TransferPinModal onComplete={handleTransferPinChange} />,
+          onClose: () => setTransferPin(""),
         });
       }
 
