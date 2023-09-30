@@ -1,8 +1,7 @@
 import PageNavHeader from "@components/PageNavHeader";
-import { TBeneficiary } from "@customTypes/Beneficiary";
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 import SendMoneyWrapper from "./SendMoneyInHouseWrapper";
-import Input from "@components/Input";
+import SendMoneyBeneficiaries from "@components/SendMoneyBeneficiaries";
 
 const SendMoneyInHouse = () => {
   const {
@@ -80,30 +79,11 @@ const SendMoneyInHouse = () => {
       {recipient.isError && <div data-testid="get-user-by-account-number-error">Error searching for the user</div>}
       {recipient.isLoading && <div data-testid="get-user-by-account-number-loading">Searching for the user...</div>}
 
-      {showBeneficiaries && (
-        <div>
-          <div className="beneficiaries">
-            <h3>Beneficiaries</h3>
-          </div>
-
-          {!beneficiaries.length && <p>No Beneficiaries</p>}
-
-          {beneficiaries.map((beneficiary: TBeneficiary) => (
-            <div
-              className="user-block beneficiary"
-              key={beneficiary.accountNumber}
-              data-testid="beneficiary"
-              onClick={() => handleBeneficiaryClick(beneficiary.accountNumber as string)}
-            >
-              <img className="user-image" src={beneficiary.avatar} alt="avatar" />
-              <div className="text-wrapper">
-                <p className="fullname">{beneficiary.accountNumber}</p>
-                <p className="phone">{beneficiary.fullName}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <SendMoneyBeneficiaries
+        showBeneficiaries={showBeneficiaries}
+        beneficiaries={beneficiaries}
+        onBeneficiaryClick={handleBeneficiaryClick}
+      />
     </SendMoneyWrapper>
   );
 };

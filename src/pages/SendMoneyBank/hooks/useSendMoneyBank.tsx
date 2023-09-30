@@ -1,17 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "react-query";
+import { useForm } from "react-hook-form";
 
 import { QUERY_KEYS } from "@constants/services";
 import { getBankVerification, getBanks } from "@services/banks";
-import { useForm } from "react-hook-form";
+
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import ModalHeader from "@components/Modal/ModalHeader";
 import TransferPinModal from "@components/TransferPinModal";
 import { postSendMoneyBank } from "@services/sendMoney";
 import SendMoneyModal from "@components/SendMoneyModal";
-import { TBeneficiary } from "@customTypes/Beneficiary";
+import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
 
 const useSendMoneyBank = () => {
+  const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
   const { handleAdd } = useModalConsumer();
   const [currentBankCode, handleCurrentBankCodeChange] = useState<number | null>(null);
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
@@ -157,7 +159,15 @@ const useSendMoneyBank = () => {
     return false;
   }, [enabledVerifyAccount, isRecipientFound, sendMoneyMutation.isLoading]);
 
+  const showBeneficiaries = useMemo(() => {
+    if (recipientAccountNumber) return false;
+
+    return true;
+  }, [recipientAccountNumber]);
+
   return {
+    beneficiary: handleGetAllBeneficiaries("bank"),
+    showBeneficiaries,
     verifyAccount,
     banks,
     currentBank,
