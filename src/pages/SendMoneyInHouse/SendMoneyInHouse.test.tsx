@@ -46,11 +46,23 @@ const USERS = [
   },
 ];
 
+const CURRENT_USER_ID = 1000;
+
 let user: ReturnType<typeof userEvent.setup>;
 
 beforeEach(() => (user = userEvent.setup()));
 
 const { handleCreateErrorConfig } = createServer([
+  {
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+    res() {
+      return {
+        data: {
+          id: CURRENT_USER_ID,
+        },
+      };
+    },
+  },
   {
     url: `${BASE_URL}${ENDPOINTS.getUserByPhone}/${ACCOUNT_NUMBER[0]}`,
     res: () => {
@@ -83,7 +95,7 @@ const handleAssertUserBlock = (user: typeof USERS[0]) => {
   expect(avatarImage).toHaveAttribute("src", user.data.avatar);
 };
 
-describe("Shows beneficiaries if any", () => {
+describe("Shows beneficiaries and filter correctly if any", () => {
   test("When empty", async () => {
     localStorageGetItem.mockReturnValueOnce(null);
     render(<SendMoneyInHouse />, {
@@ -103,13 +115,17 @@ describe("Shows beneficiaries if any", () => {
           avatar: USERS[0].data.avatar,
           fullName: `${USERS[0].data.first_name} ${USERS[0].data.last_name}`,
           type: "in-house",
+          ownedBy: CURRENT_USER_ID.toString(),
         },
         {
           accountNumber: ACCOUNT_NUMBER[1],
           avatar: USERS[1].data.avatar,
           fullName: `${USERS[1].data.first_name} ${USERS[1].data.last_name}`,
           type: "in-house",
+          ownedBy: CURRENT_USER_ID.toString(),
         },
+        { type: "bank", ownedBy: CURRENT_USER_ID.toString() },
+        { type: "mobile", ownedBy: CURRENT_USER_ID.toString() },
       ] as TBeneficiary[])
     );
 
@@ -186,15 +202,20 @@ test("Allow transfer for known users", async () => {
 
   handleAssertUserBlock(USERS[1]);
 
-  expect(localStorageSetItem).not.toHaveBeenCalledWith(
+  const beneficiariesLSValues = [
     LOCAL_STORAGE_KEYS.saveBeneficiary,
-    JSON.stringify({
-      accountNumber: ACCOUNT_NUMBER[1],
-      avatar: USERS[1].data.avatar,
-      fullName: `${USERS[1].data.first_name} ${USERS[1].data.last_name}`,
-      type: "in-house",
-    })
-  );
+    JSON.stringify([
+      {
+        accountNumber: ACCOUNT_NUMBER[1],
+        avatar: USERS[1].data.avatar,
+        fullName: `${USERS[1].data.first_name} ${USERS[1].data.last_name}`,
+        type: "in-house",
+        ownedBy: CURRENT_USER_ID.toString(),
+      },
+    ]),
+  ];
+
+  expect(localStorageSetItem).not.toHaveBeenCalledWith(...beneficiariesLSValues);
 
   const { amountInput, noteInput } = await handleTypeAmountRemarkAndSendMoney();
 
@@ -206,17 +227,7 @@ test("Allow transfer for known users", async () => {
 
     expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
     expect(screen.getByTestId("send-money-success")).toBeInTheDocument();
-    expect(localStorageSetItem).toHaveBeenCalledWith(
-      LOCAL_STORAGE_KEYS.saveBeneficiary,
-      JSON.stringify([
-        {
-          accountNumber: ACCOUNT_NUMBER[1],
-          avatar: USERS[1].data.avatar,
-          fullName: `${USERS[1].data.first_name} ${USERS[1].data.last_name}`,
-          type: "in-house",
-        },
-      ] as TBeneficiary[])
-    );
+    expect(localStorageSetItem).toHaveBeenCalledWith(...beneficiariesLSValues);
   });
 });
 

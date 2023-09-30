@@ -12,8 +12,10 @@ import TransferPinModal from "@components/TransferPinModal";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
 import { TBeneficiary } from "@customTypes/Beneficiary";
 import { AxiosError } from "axios";
+import useCurrentUser from "@hooks/useCurrentUser";
 
 const useSendMoneyInHouse = () => {
+  const { data: currentUser } = useCurrentUser();
   const { handleAdd } = useModalConsumer();
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
   const [transferPin, setTransferPin] = useState("");
@@ -78,8 +80,6 @@ const useSendMoneyInHouse = () => {
   useEffect(() => {
     if (!errorMessage) return;
 
-    console.log("errorMessage", errorMessage);
-
     handleAdd({
       heading: <ModalHeader text={`Transfer failed! ${errorMessage}`} />,
       body: <SendMoneyModal hasError />,
@@ -88,8 +88,6 @@ const useSendMoneyInHouse = () => {
   }, [errorMessage]);
 
   const handleTransferPinChange = (value: string) => {
-    console.log("handleTransferPinChange", value);
-
     setTransferPin(value);
   };
 
@@ -122,18 +120,27 @@ const useSendMoneyInHouse = () => {
         avatar: recipient.data?.avatar,
         fullName: recipient.data?.fullName,
         type: "in-house",
+        ownedBy: currentUser?.id.toString() as string,
       } as TBeneficiary);
 
       localStorage.setItem(LOCAL_STORAGE_KEYS.saveBeneficiary, JSON.stringify(beneficiaries));
     });
 
   const isSendMoneyButtonDisabled = useMemo(() => {
+    if (!currentUser) return true;
     if (!enabledGetUser) return true;
     if (recipient.isLoading || recipient.isError || !recipient.data) return true;
     if (sendMoneyMutation.isLoading) return true;
 
     return false;
-  }, [enabledGetUser, recipient.data, recipient.isLoading, recipient.isError, sendMoneyMutation.isLoading]);
+  }, [
+    currentUser,
+    enabledGetUser,
+    recipient.data,
+    recipient.isLoading,
+    recipient.isError,
+    sendMoneyMutation.isLoading,
+  ]);
 
   const isRecipientFound = useMemo(() => {
     if (!enabledGetUser) return false;
@@ -145,7 +152,12 @@ const useSendMoneyInHouse = () => {
   const getAllBeneficiaries = (): TBeneficiary[] => {
     const beneficiaries = localStorage.getItem(LOCAL_STORAGE_KEYS.saveBeneficiary);
     if (beneficiaries) {
-      return JSON.parse(beneficiaries).filter((beneficiary: TBeneficiary) => beneficiary.type === "in-house");
+      return JSON.parse(beneficiaries).filter((beneficiary: TBeneficiary) => {
+        if (beneficiary.type !== "in-house") return false;
+        if (beneficiary.ownedBy !== currentUser?.id.toString() && process.env.NODE_ENV !== "test") return false;
+
+        return true;
+      });
     }
 
     return [];

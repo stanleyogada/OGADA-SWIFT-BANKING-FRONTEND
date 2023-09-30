@@ -7,6 +7,9 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 
 import SendMoneyBank from ".";
 import { handleAssertLoadingState, handleTypeAmountRemarkAndSendMoney } from "@utils/test/assertUtils";
+import { localStorageGetItem } from "@utils/test/mocks/localStorage";
+import { LOCAL_STORAGE_KEYS } from "@constants/index";
+import { TBeneficiary } from "@customTypes/Beneficiary";
 
 const BANKS = [
   {
@@ -81,6 +84,66 @@ const { handleCreateErrorConfig } = createServer([
 let user: ReturnType<typeof userEvent.setup>;
 beforeEach(() => {
   user = userEvent.setup();
+});
+
+describe("Shows beneficiaries if any", () => {
+  test("When empty", async () => {
+    localStorageGetItem.mockReturnValueOnce(null);
+    render(<SendMoneyBank />, {
+      wrapper: TestProviders,
+    });
+    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
+
+    expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
+    expect(screen.getByText(/no beneficiaries/i)).toBeInTheDocument();
+  });
+
+  test("When not empty", async () => {
+    localStorageGetItem.mockReturnValueOnce(
+      JSON.stringify([
+        {
+          // accountNumber: ACCOUNT_NUMBER[0],
+          // avatar: USERS[0].data.avatar,
+          // fullName: `${USERS[0].data.first_name} ${USERS[0].data.last_name}`,
+          type: "in-house",
+        },
+        {
+          // accountNumber: ACCOUNT_NUMBER[1],
+          // avatar: USERS[1].data.avatar,
+          // fullName: `${USERS[1].data.first_name} ${USERS[1].data.last_name}`,
+          type: "in-house",
+        },
+      ] as TBeneficiary[])
+    );
+
+    render(<SendMoneyBank />, {
+      wrapper: TestProviders,
+    });
+    const user = userEvent.setup();
+    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
+
+    const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
+
+    expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
+    expect(screen.queryByText(/no beneficiaries/i)).not.toBeInTheDocument();
+
+    let allBeneficiaries = screen.getAllByTestId("beneficiary");
+    expect(allBeneficiaries).toHaveLength(2);
+
+    const beneficiaryElement1 = allBeneficiaries[0];
+
+    // expect(within(beneficiaryElement1).getByRole("img")).toHaveAttribute("src", USERS[0].data.avatar);
+    // expect(within(allBeneficiaries[1]).getByRole("img")).toHaveAttribute("src", USERS[1].data.avatar);
+
+    await user.click(beneficiaryElement1);
+
+    // expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);
+
+    await handleAssertLoadingState("get-user-by-account-number-loading");
+    // handleAssertUserBlock(USERS[0]);
+
+    expect(screen.queryByTestId("beneficiary")).not.toBeInTheDocument();
+  });
 });
 
 test("Allow users to see list of banks to choose from", async () => {
