@@ -95,7 +95,7 @@ const useSendMoneyBank = () => {
   };
 
   const handleSendMoney = () =>
-    handleSubmit(({ amount, remark, recipientAccountNumber, bankAccountFullName, bankName }) => {
+    handleSubmit(({ amount, remark, recipientAccountNumber }) => {
       if (!transferPin && process.env.NODE_ENV !== "test") {
         return handleAdd({
           heading: <ModalHeader text="Transfer Pin" />,
@@ -108,9 +108,9 @@ const useSendMoneyBank = () => {
         remark,
         senderAccountType: "NORMAL",
         transferPin: transferPin,
-        bankAccountFullName,
+        bankAccountFullName: verifyAccount.data?.accountName as string,
         bankAccountNumber: recipientAccountNumber,
-        bankName,
+        bankName: currentBank?.name as string,
       });
     });
 
