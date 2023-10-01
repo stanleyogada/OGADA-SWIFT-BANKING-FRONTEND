@@ -43,6 +43,8 @@ const useSendMoneyInHouse = () => {
     {
       enabled: enabledGetUser,
       retry: false,
+      staleTime: 0,
+      cacheTime: 0,
     }
   );
 

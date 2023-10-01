@@ -42,6 +42,8 @@ const useSendMoneyBank = () => {
     {
       enabled: enabledVerifyAccount,
       retry: false,
+      staleTime: 0,
+      cacheTime: 0,
     }
   );
 
