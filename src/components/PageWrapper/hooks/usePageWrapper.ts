@@ -21,6 +21,10 @@ const usePageWrapper = () => {
   useEffect(() => {
     handleRedirect();
   }, [handleRedirect]);
+
+  return {
+    isAuthPage,
+  };
 };
 
 export default usePageWrapper;
