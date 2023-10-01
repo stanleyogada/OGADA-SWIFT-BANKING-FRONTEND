@@ -11,6 +11,7 @@ import TransferPinModal from "@components/TransferPinModal";
 import { postSendMoneyBank } from "@services/sendMoney";
 import SendMoneyModal from "@components/SendMoneyModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
+import { AxiosError } from "axios";
 
 const useSendMoneyBank = () => {
   const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
@@ -48,10 +49,6 @@ const useSendMoneyBank = () => {
     retry: false,
   });
 
-  // const handleCurrentBankCodeChange = (code: typeof currentBankCode) => {
-  //   setCurrentBankCode(bankCode);
-  // }
-
   const sendMoneyMutation = useMutation(postSendMoneyBank, {
     onSuccess: () => {
       // Add a delay to ensure the submit button is still disabled (for testing)
@@ -74,19 +71,26 @@ const useSendMoneyBank = () => {
         });
       }, 5);
     },
-
-    onError: () => {
-      handleAdd({
-        heading: <ModalHeader text="Transfer failed!" />,
-        body: <SendMoneyModal hasError />,
-        onClose: () => setTransferPin(""),
-      });
-    },
   });
 
-  const handleTransferPinChange = (value: string) => {
-    console.log("handleTransferPinChange", value);
+  const errorMessage = useMemo(() => {
+    if (!sendMoneyMutation.isError || !sendMoneyMutation.error) return null;
 
+    let error = (sendMoneyMutation.error as AxiosError).response?.data as { message: string };
+    return error.message;
+  }, [sendMoneyMutation.isError, sendMoneyMutation.error]);
+
+  useEffect(() => {
+    if (!errorMessage) return;
+
+    handleAdd({
+      heading: <ModalHeader text={`Transfer failed! ${errorMessage}`} />,
+      body: <SendMoneyModal hasError />,
+      onClose: () => setTransferPin(""),
+    });
+  }, [errorMessage]);
+
+  const handleTransferPinChange = (value: string) => {
     setTransferPin(value);
   };
 
