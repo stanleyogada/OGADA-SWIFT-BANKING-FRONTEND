@@ -1,6 +1,6 @@
 # Opay-Demo-Frontend
 
-<a href="http://ec2-3-252-140-2.eu-west-1.compute.amazonaws.com/">Production Link</a> 🚀 
+<a href="https://opay-demo-peach.vercel.app/">Production Link</a> 🚀 
 
 An application solely for education purposes!
 
