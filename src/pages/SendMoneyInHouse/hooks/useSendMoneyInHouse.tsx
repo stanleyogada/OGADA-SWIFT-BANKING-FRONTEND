@@ -16,7 +16,6 @@ import type { AxiosError } from "axios";
 
 const useSendMoneyInHouse = () => {
   const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
-  const { data: currentUser } = useCurrentUser();
   const { handleAdd } = useModalConsumer();
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
   const [transferPin, setTransferPin] = useState("");
@@ -64,7 +63,6 @@ const useSendMoneyInHouse = () => {
           avatar: recipient.data?.avatar,
           fullName: recipient.data?.fullName,
           type: "in-house",
-          ownedBy: currentUser?.id.toString() as string,
         });
       }, 5);
     },
@@ -110,14 +108,14 @@ const useSendMoneyInHouse = () => {
     });
 
   const isSendMoneyButtonDisabled = useMemo(() => {
-    if (!currentUser) return true;
+    // if (!currentUser) return true;
     if (!enabledGetUser) return true;
     if (recipient.isLoading || recipient.isError || !recipient.data) return true;
     if (sendMoneyMutation.isLoading) return true;
 
     return false;
   }, [
-    currentUser,
+    // currentUser,
     enabledGetUser,
     recipient.data,
     recipient.isLoading,

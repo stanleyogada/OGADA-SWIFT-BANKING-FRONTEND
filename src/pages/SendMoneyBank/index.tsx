@@ -1,9 +1,12 @@
 import { DEFAULT_BANK_LOGO } from "@constants/index";
 import useSendMoneyBank from "./hooks/useSendMoneyBank";
 import { TBank } from "@services/banks/types";
+import SendMoneyBeneficiaries from "@components/SendMoneyBeneficiaries";
 
 const SendMoneyBank = () => {
   const {
+    showBeneficiaries,
+    beneficiaries,
     verifyAccount,
     banks,
     currentBank,
@@ -14,6 +17,7 @@ const SendMoneyBank = () => {
     handleCurrentBankCodeChange,
     register,
     handleSendMoney,
+    handleBeneficiaryClick,
   } = useSendMoneyBank();
 
   return (
@@ -76,13 +80,18 @@ const SendMoneyBank = () => {
           {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
         </button>
 
-        {/* {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
-        {sendMoneyMutation.isSuccess && <div data-testid="send-money-success">Money sent successfully</div>} */}
+        {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
       </form>
 
-      {verifyAccount.isLoading && <div data-testid="verify-account-loading">Verifying account...</div>}
       {isRecipientFound && <div>{verifyAccount.data?.accountName}</div>}
+      {verifyAccount.isLoading && <div data-testid="verify-account-loading">Verifying account...</div>}
       {verifyAccount.isError && <div data-testid="verify-account-error">Error verifying account</div>}
+
+      <SendMoneyBeneficiaries
+        showBeneficiaries={showBeneficiaries}
+        beneficiaries={beneficiaries}
+        onBeneficiaryClick={handleBeneficiaryClick}
+      />
     </div>
   );
 };

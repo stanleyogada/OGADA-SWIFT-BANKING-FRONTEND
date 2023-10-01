@@ -7,6 +7,9 @@ const useSendMoneyBeneficiaries = () => {
 
   const handleGetAllBeneficiaries = (type: TBeneficiary["type"]): TBeneficiary[] => {
     const beneficiaries = localStorage.getItem(LOCAL_STORAGE_KEYS.saveBeneficiary);
+
+    // console.log("beneficiaries", beneficiaries);
+
     if (beneficiaries) {
       return JSON.parse(beneficiaries).filter((beneficiary: TBeneficiary) => {
         if (beneficiary.type !== type) return false;
@@ -19,13 +22,16 @@ const useSendMoneyBeneficiaries = () => {
     return [];
   };
 
-  const handleSetBeneficiary = (type: TBeneficiary["type"], beneficiary: TBeneficiary) => {
+  const handleSetBeneficiary = (type: TBeneficiary["type"], beneficiary: Omit<TBeneficiary, "ownedBy">) => {
     const beneficiaries = handleGetAllBeneficiaries(type);
     const isBeneficiaryExist = beneficiaries.some((b: TBeneficiary) => b.accountNumber === beneficiary.accountNumber);
 
     if (isBeneficiaryExist) return;
 
-    beneficiaries.push(beneficiary);
+    beneficiaries.push({
+      ...beneficiary,
+      ownedBy: currentUser?.id.toString() as string,
+    });
     localStorage.setItem(LOCAL_STORAGE_KEYS.saveBeneficiary, JSON.stringify(beneficiaries));
   };
 

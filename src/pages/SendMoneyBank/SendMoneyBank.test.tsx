@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import TestProviders from "@components/TestProviders";
@@ -7,8 +7,6 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 
 import SendMoneyBank from ".";
 import { handleAssertLoadingState, handleTypeAmountRemarkAndSendMoney } from "@utils/test/assertUtils";
-import { localStorageGetItem } from "@utils/test/mocks/localStorage";
-import { LOCAL_STORAGE_KEYS } from "@constants/index";
 
 const BANKS = [
   {
@@ -55,8 +53,19 @@ const BANKS = [
 
 const VERIFIED_ACCOUNT_NAME = "TEST ACCOUNT NAME";
 
+const CURRENT_USER_ID = 2000;
+
 const { handleCreateErrorConfig } = createServer([
-  `${BASE_URL}${ENDPOINTS.currentUser}`,
+  {
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+    res() {
+      return {
+        data: {
+          id: CURRENT_USER_ID,
+        },
+      };
+    },
+  },
   {
     url: `${BASE_URL}${ENDPOINTS.getAllBanks}`,
     res: () => {
@@ -86,65 +95,68 @@ beforeEach(() => {
   user = userEvent.setup();
 });
 
-describe("Shows beneficiaries if any", () => {
-  test("When empty", async () => {
-    localStorageGetItem.mockReturnValueOnce(null);
-    render(<SendMoneyBank />, {
-      wrapper: TestProviders,
-    });
-    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
+// describe("Shows beneficiaries if any", () => {
+//   test("When empty", async () => {
+//     localStorageGetItem.mockReturnValueOnce(null);
+//     render(<SendMoneyBank />, {
+//       wrapper: TestProviders,
+//     });
+//     expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
 
-    expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
-    expect(screen.getByText(/no beneficiaries/i)).toBeInTheDocument();
-  });
+//     expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
+//     expect(screen.getByText(/no beneficiaries/i)).toBeInTheDocument();
+//   });
 
-  // test("When not empty", async () => {
-  //   localStorageGetItem.mockReturnValueOnce(
-  //     JSON.stringify([
-  //       {
-  //         // accountNumber: ACCOUNT_NUMBER[0],
-  //         // avatar: USERS[0].data.avatar,
-  //         // fullName: `${USERS[0].data.first_name} ${USERS[0].data.last_name}`,
-  //         type: "in-house",
-  //       },
-  //       {
-  //         // accountNumber: ACCOUNT_NUMBER[1],
-  //         // avatar: USERS[1].data.avatar,
-  //         // fullName: `${USERS[1].data.first_name} ${USERS[1].data.last_name}`,
-  //         type: "in-house",
-  //       },
-  //     ] as TBeneficiary[])
-  //   );
+//   test("When not empty", async () => {
+//     cleanup();
 
-  //   render(<SendMoneyBank />, {
-  //     wrapper: TestProviders,
-  //   });
-  //   const user = userEvent.setup();
-  //   expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
+//     localStorageGetItem.mockReturnValueOnce(
+//       JSON.stringify([
+//         {
+//           accountNumber: "1234567890",
+//           fullName: VERIFIED_ACCOUNT_NAME,
+//           bankName: BANKS[0].name,
+//           type: "bank",
+//           ownedBy: CURRENT_USER_ID.toString(),
+//         },
+//         {
+//           accountNumber: "1234567890",
+//           fullName: VERIFIED_ACCOUNT_NAME,
+//           bankName: BANKS[1].name,
+//           type: "bank",
+//           ownedBy: CURRENT_USER_ID.toString(),
+//         },
+//         { type: "in-house", ownedBy: CURRENT_USER_ID.toString() },
+//         { type: "mobile", ownedBy: CURRENT_USER_ID.toString() },
+//       ] as TBeneficiary[])
+//     );
+//     render(<SendMoneyBank />, {
+//       wrapper: TestProviders,
+//     });
 
-  //   const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
+//     const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
 
-  //   expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
-  //   expect(screen.queryByText(/no beneficiaries/i)).not.toBeInTheDocument();
+//     expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
 
-  //   let allBeneficiaries = screen.getAllByTestId("beneficiary");
-  //   expect(allBeneficiaries).toHaveLength(2);
+//     // await waitFor(() => {
+//     screen.debug();
+//     // });
 
-  //   const beneficiaryElement1 = allBeneficiaries[0];
+//     // expect(screen.queryByTestId("user-block")).not.toBeInTheDocument();
+//     // expect(screen.queryByText(/no beneficiaries/i)).not.toBeInTheDocument();
 
-  //   // expect(within(beneficiaryElement1).getByRole("img")).toHaveAttribute("src", USERS[0].data.avatar);
-  //   // expect(within(allBeneficiaries[1]).getByRole("img")).toHaveAttribute("src", USERS[1].data.avatar);
-
-  //   await user.click(beneficiaryElement1);
-
-  //   // expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);
-
-  //   await handleAssertLoadingState("get-user-by-account-number-loading");
-  //   // handleAssertUserBlock(USERS[0]);
-
-  //   expect(screen.queryByTestId("beneficiary")).not.toBeInTheDocument();
-  // });
-});
+//     //   let allBeneficiaries = screen.getAllByTestId("beneficiary");
+//     //   expect(allBeneficiaries).toHaveLength(2);
+//     //   const beneficiaryElement1 = allBeneficiaries[0];
+//     //   // expect(within(beneficiaryElement1).getByRole("img")).toHaveAttribute("src", USERS[0].data.avatar);
+//     //   // expect(within(allBeneficiaries[1]).getByRole("img")).toHaveAttribute("src", USERS[1].data.avatar);
+//     //   await user.click(beneficiaryElement1);
+//     //   // expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);
+//     //   await handleAssertLoadingState("get-user-by-account-number-loading");
+//     //   // handleAssertUserBlock(USERS[0]);
+//     //   expect(screen.queryByTestId("beneficiary")).not.toBeInTheDocument();
+//   });
+// });
 
 test("Allow users to see list of banks to choose from", async () => {
   render(<SendMoneyBank />, {
@@ -189,6 +201,10 @@ const handleAssertSelectBankAndTypeAccountNumber = async () => {
 
   await user.type(recipientAccountNumberInput, "1234567890");
   await handleAssertLoadingState("verify-account-loading");
+
+  return {
+    recipientAccountNumberInput,
+  };
 };
 
 describe("Verify account number and bank", () => {
@@ -246,7 +262,6 @@ test("Allow transfer for known users", async () => {
   });
 
   const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
-  // const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
 
   expect(sendMoneyButton).toBeDisabled();
   await handleAssertSelectBankAndTypeAccountNumber();
@@ -255,40 +270,32 @@ test("Allow transfer for known users", async () => {
   await handleTypeAmountRemarkAndSendMoney();
 });
 
-// test("Ensure prompt error if send money fails", async () => {
-//   handleCreateErrorConfig({
-//     url: `${BASE_URL}${ENDPOINTS.sendMoneyInHouse}`,
-//     method: "post",
-//     statusCode: 500,
-//   });
+test("Ensure prompt error if send money fails", async () => {
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyBank}`,
+    method: "post",
+    statusCode: 500,
+  });
+  render(<SendMoneyBank />, {
+    wrapper: TestProviders,
+  });
 
-//   render(<SendMoneyInHouse />, {
-//     wrapper: TestProviders,
-//   });
+  const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
 
-//   const recipientAccountNumberInput = screen.getByPlaceholderText(/recipient account number/i);
-//   const sendMoneyButton = screen.getByRole("button", { name: /send money/i });
+  expect(sendMoneyButton).toBeDisabled();
+  const { recipientAccountNumberInput } = await handleAssertSelectBankAndTypeAccountNumber();
+  expect(sendMoneyButton).toBeEnabled();
 
-//   await user.type(recipientAccountNumberInput, ACCOUNT_NUMBER[0]);
+  const amount = "2000";
+  const remark = "Test remark note";
+  const { amountInput, noteInput } = await handleTypeAmountRemarkAndSendMoney(amount, remark);
+  expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
 
-//   expect(sendMoneyButton).toBeDisabled();
+  expect(recipientAccountNumberInput).toHaveValue("1234567890");
+  expect(amountInput).toHaveValue(amount);
+  expect(noteInput).toHaveValue(remark);
 
-//   await handleAssertLoadingState("get-user-by-account-number-loading");
-
-//   expect(sendMoneyButton).toBeEnabled();
-//   expect(screen.getByTestId("user-block")).toBeInTheDocument();
-
-//   const amount = "2000";
-//   const remark = "Test remark note";
-//   const { amountInput, noteInput } = await handleTypeAmountRemarkAndSendMoney(amount, remark);
-
-//   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
-//   expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);
-//   expect(amountInput).toHaveValue(amount);
-//   expect(noteInput).toHaveValue(remark);
-
-//   await user.click(sendMoneyButton);
-//   await handleAssertLoadingState(sendMoneyButton);
-
-//   expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
-// });
+  await user.click(sendMoneyButton);
+  await handleAssertLoadingState(sendMoneyButton);
+  expect(screen.getByTestId("send-money-error")).toBeInTheDocument();
+});

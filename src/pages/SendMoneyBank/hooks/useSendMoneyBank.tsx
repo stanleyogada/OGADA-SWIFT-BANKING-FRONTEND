@@ -17,6 +17,7 @@ const useSendMoneyBank = () => {
   const { handleAdd } = useModalConsumer();
   const [currentBankCode, handleCurrentBankCodeChange] = useState<number | null>(null);
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
+  const [transferPin, setTransferPin] = useState("");
 
   useEffect(() => {
     watch("recipientAccountNumber");
@@ -62,6 +63,15 @@ const useSendMoneyBank = () => {
           body: <SendMoneyModal />,
           onClose: () => window.location.reload(),
         });
+
+        handleSetBeneficiary("bank", {
+          accountNumber: recipientAccountNumber,
+          fullName: verifyAccount.data?.accountName,
+          bankName: currentBank?.name,
+          bankCode: currentBank?.code as number,
+          avatar: currentBank?.logo as string,
+          type: "bank",
+        });
       }, 5);
     },
 
@@ -69,11 +79,11 @@ const useSendMoneyBank = () => {
       handleAdd({
         heading: <ModalHeader text="Transfer failed!" />,
         body: <SendMoneyModal hasError />,
+        onClose: () => setTransferPin(""),
       });
     },
   });
 
-  const [transferPin, setTransferPin] = useState("");
   const handleTransferPinChange = (value: string) => {
     console.log("handleTransferPinChange", value);
 
@@ -98,32 +108,7 @@ const useSendMoneyBank = () => {
         bankAccountNumber: recipientAccountNumber,
         bankName,
       });
-
-      // const beneficiaries = getAllBeneficiaries();
-      // const isBeneficiaryExist = beneficiaries.some(
-      //   (beneficiary: TBeneficiary) => beneficiary.accountNumber === recipient.data?.phone
-      // );
-
-      // if (isBeneficiaryExist) return;
-
-      // beneficiaries.push({
-      //   type: "bank",
-      //   fullName: bankAccountFullName,
-      //   bankName,
-      //   accountNumber: bankAccountNumber,
-      // } as TBeneficiary);
-
-      // localStorage.setItem(LOCAL_STORAGE_KEYS.saveBeneficiary, JSON.stringify(beneficiaries));
     });
-
-  // const getAllBeneficiaries = (): TBeneficiary[] => {
-  //   const beneficiaries = localStorage.getItem(LOCAL_STORAGE_KEYS.saveBeneficiary);
-  //   if (beneficiaries) {
-  //     return JSON.parse(beneficiaries).filter((beneficiary: TBeneficiary) => beneficiary.type === "in-house");
-  //   }
-
-  //   return [];
-  // };
 
   const currentBank = useMemo(() => {
     if (currentBankCode === null) return null;
@@ -159,6 +144,17 @@ const useSendMoneyBank = () => {
     return false;
   }, [enabledVerifyAccount, isRecipientFound, sendMoneyMutation.isLoading]);
 
+  const handleBeneficiaryClick = (beneficiaryAccountNumber: string) => {
+    const beneficiary = handleGetAllBeneficiaries("bank").find(
+      (beneficiary) => beneficiary.accountNumber === beneficiaryAccountNumber
+    );
+
+    if (!beneficiary) return;
+
+    setValue("recipientAccountNumber", beneficiary?.accountNumber);
+    handleCurrentBankCodeChange(beneficiary.bankCode as number);
+  };
+
   const showBeneficiaries = useMemo(() => {
     if (recipientAccountNumber) return false;
 
@@ -166,7 +162,7 @@ const useSendMoneyBank = () => {
   }, [recipientAccountNumber]);
 
   return {
-    beneficiary: handleGetAllBeneficiaries("bank"),
+    beneficiaries: handleGetAllBeneficiaries("bank"),
     showBeneficiaries,
     verifyAccount,
     banks,
@@ -178,6 +174,7 @@ const useSendMoneyBank = () => {
     handleCurrentBankCodeChange,
     register,
     handleSendMoney,
+    handleBeneficiaryClick,
   };
 };
 
