@@ -88,9 +88,6 @@ const SendMoneyWrapper = styled.div<{ isRecipientFound: boolean }>`
         top: 0;
         left: 0;
         transform: translate(-100%, -100%);
-      // opacity: 0;
-      // height: 0px;
-      // z-index: -1;
     `}
 
     .recipient-input {

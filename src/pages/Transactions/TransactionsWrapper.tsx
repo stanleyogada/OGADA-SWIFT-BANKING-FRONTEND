@@ -119,6 +119,13 @@ const TransactionsWrapper = styled.div`
         padding: 12px;
       }
     }
+
+    .load-more {
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translate(-100%, -100%);
+    }
   }
 `;
 
