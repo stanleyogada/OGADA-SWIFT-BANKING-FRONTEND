@@ -5,6 +5,7 @@ import SendMoneyMobile from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import { SEND_MONEY_MOBILE_NETWORKS } from "@constants/index";
+import { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
@@ -24,7 +25,7 @@ test("Renders a network selector", async () => {
   render(<SendMoneyMobile />);
 
   const assertNetworks = async (currentNetworkName: string) => {
-    let currentNetwork: typeof SEND_MONEY_MOBILE_NETWORKS[0] | undefined;
+    let currentNetwork: TSendMoneyMobileNetwork | undefined;
     const restNetworks = SEND_MONEY_MOBILE_NETWORKS.filter((network) => {
       if (network.name === currentNetworkName) {
         currentNetwork = network;

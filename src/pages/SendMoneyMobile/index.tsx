@@ -1,7 +1,9 @@
+import { useMemo, useState } from "react";
+
 import Tabs from "@components/Tabs/Tabs";
 import { SEND_MONEY_MOBILE_NETWORKS } from "@constants/index";
-import { useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+
+import NetworkSelector from "./NetworkSelector";
 
 const useSendMoneyMobile = () => {
   // const { watch, register, handleSubmit: _handleSubmit } = useForm();
@@ -67,32 +69,25 @@ const SendMoneyMobile = () => {
         ]}
       >
         <div>
-          <div>
-            <div data-testid="current-network" onClick={handleCurrentNetworkClick}>
-              <img src={currentNetwork.logo} alt={currentNetwork.name} width="50" height="50" />
-            </div>
-            {isDropRestNetworks && (
-              <div data-testid="networks">
-                {restNetworks.map((network) => (
-                  <div key={network.id} data-testid="network" onClick={() => handleCurrentNetworkChange(network.id)}>
-                    <img src={network.logo} alt={network.name} width="50" height="50" />
-                    <p>{network.name}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <NetworkSelector
+            currentNetwork={currentNetwork}
+            isDropRestNetworks={isDropRestNetworks}
+            restNetworks={restNetworks}
+            onCurrentNetworkClick={handleCurrentNetworkClick}
+            onCurrentNetworkChange={handleCurrentNetworkChange}
+          />
         </div>
-        <div></div>
+        <div>
+          <NetworkSelector
+            currentNetwork={currentNetwork}
+            isDropRestNetworks={isDropRestNetworks}
+            restNetworks={restNetworks}
+            onCurrentNetworkClick={handleCurrentNetworkClick}
+            onCurrentNetworkChange={handleCurrentNetworkChange}
+          />
+        </div>
       </Tabs>
     </>
-    // <form onSubmit={handleSubmit()}>
-    //   <select aria-label="Mode" aria-selected={currentMode} {...register("mode")}>
-    //     <option>Select Mode</option>
-    //     <option>Airtime</option>
-    //     <option>Data</option>
-    //   </select>
-    // </form>
   );
 };
 
