@@ -87,8 +87,8 @@ const { handleCreateErrorConfig } = createServer([
 
 const handleAssertUserBlock = (user: typeof USERS[0]) => {
   let userBlock = screen.getByTestId("user-block");
-  let fullNameElement = within(userBlock).getByTestId("user-full-name");
-  expect(fullNameElement).toHaveTextContent(`${user.data.first_name} ${user.data.last_name}`);
+
+  within(userBlock).getByText(new RegExp(`${user.data.first_name} ${user.data.last_name}`, "i"));
   expect(within(userBlock).getByText(user.data.phone)).toBeInTheDocument();
 
   let avatarImage = within(userBlock).getByRole("img");

@@ -1,5 +1,7 @@
 import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
+
 import BeneficiariesWrapper from "./BeneficiariesWrapper";
+import ListItem from "../ListItem";
 
 type TProps = {
   showBeneficiaries: boolean;
@@ -24,18 +26,14 @@ const SendMoneyBeneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiar
 
       <div className="beneficiaries__list">
         {beneficiaries.map((beneficiary: TBeneficiary) => (
-          <div
-            className="user-block beneficiary"
+          <ListItem
             key={beneficiary.accountNumber}
-            data-testid="beneficiary"
+            imgSrc={beneficiary.avatar as string}
+            text={beneficiary.fullName as string}
+            secondaryText={beneficiary.accountNumber as string}
+            dataTestid="beneficiary"
             onClick={() => onBeneficiaryClick(beneficiary.accountNumber as string)}
-          >
-            <img className="user-image" src={beneficiary.avatar} alt="avatar" />
-            <div className="text-wrapper">
-              <p className="fullname">{beneficiary.accountNumber}</p>
-              <p className="phone">{beneficiary.fullName}</p>
-            </div>
-          </div>
+          />
         ))}
       </div>
     </BeneficiariesWrapper>
