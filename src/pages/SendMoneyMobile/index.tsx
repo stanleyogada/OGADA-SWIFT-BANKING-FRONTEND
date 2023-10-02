@@ -2,8 +2,10 @@ import { useMemo, useState } from "react";
 
 import Tabs from "@components/Tabs/Tabs";
 import { SEND_MONEY_MOBILE_NETWORKS } from "@constants/index";
+import PageNavHeader from "@components/PageNavHeader";
 
 import NetworkSelector from "./NetworkSelector";
+import Tag from "@components/SendMoney/Tag";
 
 const useSendMoneyMobile = () => {
   // const { watch, register, handleSubmit: _handleSubmit } = useForm();
@@ -56,6 +58,8 @@ const SendMoneyMobile = () => {
 
   return (
     <>
+      <PageNavHeader heading="Transfer to Bank Account" />
+
       <Tabs
         data={[
           {
@@ -69,6 +73,8 @@ const SendMoneyMobile = () => {
         ]}
       >
         <div>
+          <Tag />
+
           <NetworkSelector
             currentNetwork={currentNetwork}
             isDropRestNetworks={isDropRestNetworks}
@@ -78,6 +84,8 @@ const SendMoneyMobile = () => {
           />
         </div>
         <div>
+          <Tag />
+
           <NetworkSelector
             currentNetwork={currentNetwork}
             isDropRestNetworks={isDropRestNetworks}
