@@ -6,7 +6,7 @@ type TProps = {
   placeholder: string;
   maxLength?: number;
   disabled?: boolean;
-  rest: Record<string, unknown>;
+  rest?: Record<string, unknown>;
 };
 
 const Input = ({ title, type, maxLength, disabled, placeholder, rest }: TProps) => {

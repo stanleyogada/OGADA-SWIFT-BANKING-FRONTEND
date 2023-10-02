@@ -1,15 +1,18 @@
 import { useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import Tabs from "@components/Tabs/Tabs";
 import { SEND_MONEY_MOBILE_NETWORKS } from "@constants/index";
 import PageNavHeader from "@components/PageNavHeader";
+import Tag from "@components/SendMoney/Tag";
+import Input from "@components/SendMoney/Input";
+import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
 
 import NetworkSelector from "./NetworkSelector";
-import Tag from "@components/SendMoney/Tag";
 
 const useSendMoneyMobile = () => {
-  // const { watch, register, handleSubmit: _handleSubmit } = useForm();
-  // const handleSubmit = () => _handleSubmit((data) => {});
+  const { watch, register, handleSubmit: _handleSubmit } = useForm();
+  const handleSubmit = () => _handleSubmit((data) => {});
   // const currentMode = watch("mode");
 
   const [currentNetwork, setCurrentNetwork] = useState(SEND_MONEY_MOBILE_NETWORKS[0]);
@@ -41,8 +44,8 @@ const useSendMoneyMobile = () => {
     handleCurrentNetworkClick,
     handleCurrentNetworkChange,
     // currentMode,
-    // register,
-    // handleSubmit,
+    register,
+    handleSubmit,
   };
 };
 
@@ -53,7 +56,9 @@ const SendMoneyMobile = () => {
     restNetworks,
     handleCurrentNetworkClick,
     handleCurrentNetworkChange,
-    // currentMode, register, handleSubmit
+    // currentMode,
+    register,
+    handleSubmit,
   } = useSendMoneyMobile();
 
   return (
@@ -75,6 +80,15 @@ const SendMoneyMobile = () => {
         <div>
           <Tag />
 
+          <Input
+            title="Phone"
+            type="text"
+            placeholder="Phone number"
+            rest={{
+              ...register("phoneNumber"),
+            }}
+          />
+
           <NetworkSelector
             currentNetwork={currentNetwork}
             isDropRestNetworks={isDropRestNetworks}
@@ -82,9 +96,26 @@ const SendMoneyMobile = () => {
             onCurrentNetworkClick={handleCurrentNetworkClick}
             onCurrentNetworkChange={handleCurrentNetworkChange}
           />
+
+          {/* <AmountRemarkForm
+            isDisabled={false}
+            onSubmit={handleSubmit}
+            register={register}
+            isRecipientFound={false}
+            // sendMoneyMutation={}
+          /> */}
         </div>
         <div>
           <Tag />
+
+          <Input
+            title="Phone"
+            type="text"
+            placeholder="Phone number"
+            // rest={{
+            //   ...register("recipientAccountNumber"),
+            // }}
+          />
 
           <NetworkSelector
             currentNetwork={currentNetwork}
