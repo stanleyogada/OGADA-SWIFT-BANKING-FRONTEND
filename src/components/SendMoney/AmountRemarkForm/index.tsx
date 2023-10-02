@@ -39,11 +39,11 @@ const AmountRemarkForm = ({ isRecipientFound, isDisabled, sendMoneyMutation, onS
 
       <button className="transfer-btn" type="submit" disabled={isDisabled}>
         Send money
-        {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
+        {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading"></div>}
       </button>
 
-      {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
-      {sendMoneyMutation.isSuccess && <div data-testid="send-money-success">Money sent successfully</div>}
+      {sendMoneyMutation.isError && <div data-testid="send-money-error"></div>}
+      {sendMoneyMutation.isSuccess && <div data-testid="send-money-success"></div>}
     </AmountRemarkFormWrapper>
   );
 };
