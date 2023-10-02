@@ -9,7 +9,7 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 import SendMoneyInHouse from ".";
 import { localStorageGetItem, localStorageSetItem } from "@utils/test/mocks/localStorage";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
-import { TBeneficiary } from "@customTypes/Beneficiary";
+import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
 
 const ACCOUNT_NUMBER = ["4286351832", "1234567890"];
 

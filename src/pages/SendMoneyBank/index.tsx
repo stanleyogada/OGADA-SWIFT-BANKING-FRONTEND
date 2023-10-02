@@ -1,7 +1,7 @@
 import { DEFAULT_BANK_LOGO } from "@constants/index";
 import useSendMoneyBank from "./hooks/useSendMoneyBank";
 import { TBank } from "@services/banks/types";
-import SendMoneyBeneficiaries from "@components/SendMoneyBeneficiaries";
+import SendMoneyBeneficiaries from "@components/SendMoney/Beneficiaries";
 
 const SendMoneyBank = () => {
   const {

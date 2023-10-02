@@ -1,5 +1,5 @@
-import { TBeneficiary } from "@customTypes/Beneficiary";
-import SendMoneyBeneficiariesWrapper from "./SendMoneyBeneficiariesWrapper";
+import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
+import BeneficiariesWrapper from "./BeneficiariesWrapper";
 
 type TProps = {
   showBeneficiaries: boolean;
@@ -11,7 +11,7 @@ const SendMoneyBeneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiar
   if (!showBeneficiaries) return null;
 
   return (
-    <SendMoneyBeneficiariesWrapper>
+    <BeneficiariesWrapper>
       <div className="beneficiaries__title">
         <h3>Beneficiaries</h3>
       </div>
@@ -38,7 +38,7 @@ const SendMoneyBeneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiar
           </div>
         ))}
       </div>
-    </SendMoneyBeneficiariesWrapper>
+    </BeneficiariesWrapper>
   );
 };
 

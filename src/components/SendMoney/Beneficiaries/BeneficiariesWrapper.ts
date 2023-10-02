@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SendMoneyBeneficiariesWrapper = styled.div`
+const BeneficiariesWrapper = styled.div`
   .beneficiaries {
     &__title,
     &__list,
@@ -15,4 +15,4 @@ const SendMoneyBeneficiariesWrapper = styled.div`
   }
 `;
 
-export default SendMoneyBeneficiariesWrapper;
+export default BeneficiariesWrapper;

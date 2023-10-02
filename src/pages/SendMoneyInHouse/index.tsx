@@ -1,7 +1,7 @@
 import PageNavHeader from "@components/PageNavHeader";
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 import SendMoneyWrapper from "./SendMoneyInHouseWrapper";
-import SendMoneyBeneficiaries from "@components/SendMoneyBeneficiaries";
+import SendMoneyBeneficiaries from "@components/SendMoney/Beneficiaries";
 
 const SendMoneyInHouse = () => {
   const {
