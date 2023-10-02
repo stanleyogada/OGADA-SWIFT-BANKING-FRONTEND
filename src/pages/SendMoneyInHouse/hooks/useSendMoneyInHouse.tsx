@@ -6,7 +6,7 @@ import { QUERY_KEYS } from "@constants/services";
 import { getUserByPhone } from "@services/users";
 import { postSendMoneyInHouse } from "@services/sendMoney";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
-import SendMoneyModal from "@components/SendMoneyModal";
+import SendMoneyModal from "@components/SendMoney/SendMoneyModal";
 import ModalHeader from "@components/Modal/ModalHeader";
 import TransferPinModal from "@components/TransferPinModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";

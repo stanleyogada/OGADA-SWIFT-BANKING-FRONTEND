@@ -8,6 +8,7 @@ import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 import SendMoneyInHouseWrapper from "./SendMoneyInHouseWrapper";
 
 import type { UseMutationResult } from "react-query";
+import Tag from "@components/SendMoney/Tag";
 
 const SendMoneyInHouse = () => {
   const {
@@ -35,9 +36,7 @@ const SendMoneyInHouse = () => {
         }}
       />
 
-      <div className="banner-wrapper">
-        <div className="banner">Instant, Zero issues,Free</div>
-      </div>
+      <Tag />
 
       {isRecipientFound && (
         <ListItem

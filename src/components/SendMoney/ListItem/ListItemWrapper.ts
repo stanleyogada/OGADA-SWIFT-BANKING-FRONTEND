@@ -7,7 +7,7 @@ const ListItemWrapper = styled.div<{
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 12px;
+  padding: 12px 16px;
   z-index: 5;
   min-width: 74px;
 

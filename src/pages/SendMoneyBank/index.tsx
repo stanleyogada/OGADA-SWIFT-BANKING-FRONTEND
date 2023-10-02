@@ -12,6 +12,7 @@ import useSendMoneyBank from "./hooks/useSendMoneyBank";
 
 import type { UseMutationResult } from "react-query";
 import Input from "@components/SendMoney/Input";
+import Tag from "@components/SendMoney/Tag";
 
 const SendMoneyBank = () => {
   const {
@@ -45,9 +46,7 @@ const SendMoneyBank = () => {
         }}
       />
 
-      <div className="banner-wrapper">
-        <div className="banner">Instant, Zero issues,Free</div>
-      </div>
+      <Tag />
 
       <div className="bank-container">
         {currentBank && (

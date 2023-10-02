@@ -13,7 +13,7 @@ const Beneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiaryClick }:
   if (!showBeneficiaries) return null;
 
   return (
-    <BeneficiariesWrapper>
+    <BeneficiariesWrapper hasBeneficiaries={!!beneficiaries.length}>
       <div className="beneficiaries__title">
         <h3>Beneficiaries</h3>
       </div>

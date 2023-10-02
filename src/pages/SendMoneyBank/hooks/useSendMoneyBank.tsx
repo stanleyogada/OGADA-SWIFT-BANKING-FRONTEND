@@ -9,7 +9,7 @@ import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import ModalHeader from "@components/Modal/ModalHeader";
 import TransferPinModal from "@components/TransferPinModal";
 import { postSendMoneyBank } from "@services/sendMoney";
-import SendMoneyModal from "@components/SendMoneyModal";
+import SendMoneyModal from "@components/SendMoney/SendMoneyModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
 import { AxiosError } from "axios";
 
