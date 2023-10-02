@@ -1,7 +1,7 @@
 import PageNavHeader from "@components/PageNavHeader";
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 import SendMoneyWrapper from "./SendMoneyInHouseWrapper";
-import SendMoneyBeneficiaries from "@components/SendMoney/Beneficiaries";
+import Beneficiaries from "@components/SendMoney/Beneficiaries";
 import ListItem from "@components/SendMoney/ListItem";
 
 const SendMoneyInHouse = () => {
@@ -76,7 +76,7 @@ const SendMoneyInHouse = () => {
       {recipient.isError && <div data-testid="get-user-by-account-number-error">Error searching for the user</div>}
       {recipient.isLoading && <div data-testid="get-user-by-account-number-loading">Searching for the user...</div>}
 
-      <SendMoneyBeneficiaries
+      <Beneficiaries
         showBeneficiaries={showBeneficiaries}
         beneficiaries={beneficiaries}
         onBeneficiaryClick={handleBeneficiaryClick}

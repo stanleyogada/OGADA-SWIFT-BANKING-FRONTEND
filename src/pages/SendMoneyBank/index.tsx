@@ -3,8 +3,8 @@ import useSendMoneyBank from "./hooks/useSendMoneyBank";
 import { TBank } from "@services/banks/types";
 import styled from "styled-components";
 import PageNavHeader from "@components/PageNavHeader";
-import Input from "@components/Input";
-import SendMoneyBeneficiaries from "@components/SendMoney/Beneficiaries";
+import Beneficiaries from "@components/SendMoney/Beneficiaries";
+import ListItem from "@components/SendMoney/ListItem";
 
 const SendMoneyBank = () => {
   const {
@@ -104,7 +104,7 @@ const SendMoneyBank = () => {
           {verifyAccount.isLoading && <div data-testid="verify-account-loading">Verifying account...</div>}
           {verifyAccount.isError && <div data-testid="verify-account-error">Error verifying account</div>}
 
-          <SendMoneyBeneficiaries
+          <Beneficiaries
             showBeneficiaries={showBeneficiaries}
             beneficiaries={beneficiaries}
             onBeneficiaryClick={handleBeneficiaryClick}
@@ -132,11 +132,7 @@ const Bank = ({
   };
 
   return (
-    <div data-testid={dataTestid} onClick={onClick} className="bank">
-      <img src={bank.logo || DEFAULT_BANK_LOGO} alt={bank.name} width={30} height={30} />
-      <p>{bank.name}</p>
-      {/* <p>{bank.code}</p> */}
-    </div>
+    <ListItem imgSrc={bank.logo || DEFAULT_BANK_LOGO} text={bank.name} dataTestid={dataTestid} onClick={onClick} />
   );
 };
 

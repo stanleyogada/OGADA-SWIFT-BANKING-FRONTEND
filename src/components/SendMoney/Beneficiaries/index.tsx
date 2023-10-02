@@ -9,7 +9,7 @@ type TProps = {
   onBeneficiaryClick: (beneficiaryAccountNumber: string) => void;
 };
 
-const SendMoneyBeneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiaryClick }: TProps) => {
+const Beneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiaryClick }: TProps) => {
   if (!showBeneficiaries) return null;
 
   return (
@@ -40,4 +40,4 @@ const SendMoneyBeneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiar
   );
 };
 
-export default SendMoneyBeneficiaries;
+export default Beneficiaries;
