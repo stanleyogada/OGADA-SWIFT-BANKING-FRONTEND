@@ -5,6 +5,7 @@ import styled from "styled-components";
 import PageNavHeader from "@components/PageNavHeader";
 import Beneficiaries from "@components/SendMoney/Beneficiaries";
 import ListItem from "@components/SendMoney/ListItem";
+import vector from "@constants/images/vector";
 
 const SendMoneyBank = () => {
   const {
@@ -72,6 +73,12 @@ const SendMoneyBank = () => {
         )}
 
         <div className="sendData">
+          {isRecipientFound && (
+            <div className="user-found">
+              <p>{verifyAccount.data?.accountName}</p>
+              {vector.checkIcon()}
+            </div>
+          )}
           <form onSubmit={handleSendMoney()}>
             <input
               type="text"
@@ -99,8 +106,6 @@ const SendMoneyBank = () => {
 
             {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
           </form>
-
-          {isRecipientFound && <div>{verifyAccount.data?.accountName}</div>}
           {verifyAccount.isLoading && <div data-testid="verify-account-loading">Verifying account...</div>}
           {verifyAccount.isError && <div data-testid="verify-account-error">Error verifying account</div>}
 
@@ -178,41 +183,6 @@ const BankWrapper = styled.div`
       }
     }
 
-    .banks {
-      .select {
-        font-size: 20px;
-        color: ${COLORS.black};
-        margin: 10px;
-      }
-
-      .allbanks {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        height: 300px;
-        overflow-y: auto;
-      }
-
-      .bank {
-        width: 95%;
-        display: flex;
-        margin-top: 10px;
-        border-bottom: 0.3px solid #e6e6e6;
-        padding: 5px;
-
-        img {
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          border: 0.3px solid ${COLORS.lightGray};
-        }
-
-        p {
-          margin: 10px;
-        }
-      }
-    }
-
     .sendData {
       form {
         display: flex;
@@ -235,6 +205,16 @@ const BankWrapper = styled.div`
           color: white;
           border-radius: 5px;
           border: none;
+        }
+      }
+
+      .user-found {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px 20px;
+
+        img {
+          width: 20px;
         }
       }
     }
