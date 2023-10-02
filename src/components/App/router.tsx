@@ -26,6 +26,7 @@ import TransactionDetails from "@pages/Transactions/TransactionDetails";
 import Error404 from "@pages/Error404";
 import SendMoneyInHouse from "@pages/SendMoneyInHouse";
 import SendMoneyBank from "@pages/SendMoneyBank";
+import SendMoneyMobile from "@pages/SendMoneyMobile";
 
 const ROUTER = createBrowserRouter([
   {
@@ -144,12 +145,19 @@ const ROUTER = createBrowserRouter([
           </PageWrapper>
         ),
       },
-
       {
         path: CLIENT_ROUTES.sendMoneyBank,
         element: (
           <PageWrapper>
             <SendMoneyBank />
+          </PageWrapper>
+        ),
+      },
+      {
+        path: CLIENT_ROUTES.sendMoneyMobile,
+        element: (
+          <PageWrapper>
+            <SendMoneyMobile />
           </PageWrapper>
         ),
       },

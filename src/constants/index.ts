@@ -1,3 +1,8 @@
+import gloLogo from "@assets/mobile/glo.png";
+import airtelLogo from "@assets/mobile/airtel.png";
+import mtnLogo from "@assets/mobile/mtn.png";
+import nineMobileLogo from "@assets/mobile/9mobile.png";
+
 import { COLORS } from "./colors";
 import { CLIENT_ROUTES } from "./routes";
 
@@ -19,6 +24,29 @@ const SIGNIN_MODAL_URL_USER_QUERY_OPTIONS = {
   noUser: "no-user",
 };
 
+const SEND_MONEY_MOBILE_NETWORKS = [
+  {
+    id: "glo",
+    name: "Glo",
+    logo: gloLogo,
+  },
+  {
+    id: "airtel",
+    name: "Airtel",
+    logo: airtelLogo,
+  },
+  {
+    id: "mtn",
+    name: "MTN",
+    logo: mtnLogo,
+  },
+  {
+    id: "9mobile",
+    name: "9mobile",
+    logo: nineMobileLogo,
+  },
+];
+
 export {
   COLORS,
   CLIENT_ROUTES,
@@ -27,4 +55,5 @@ export {
   TEST_LOG_PREFIX,
   SIGNIN_MODAL_URL_USER_QUERY_OPTIONS,
   DEFAULT_BANK_LOGO,
+  SEND_MONEY_MOBILE_NETWORKS,
 };
