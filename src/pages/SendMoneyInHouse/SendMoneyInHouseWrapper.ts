@@ -6,18 +6,6 @@ const SendMoneyInHouseWrapper = styled.div<{ isRecipientFound: boolean }>`
   height: 100vh;
   background-color: ${COLORS.lightGray2};
 
-  .input-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-
-    .recipient-input {
-      width: 95%;
-      padding: 16px;
-      border-radius: 8px;
-    }
-  }
-
   .banner-wrapper {
     width: 100%;
     display: flex;

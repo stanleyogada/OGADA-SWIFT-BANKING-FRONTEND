@@ -7,6 +7,8 @@ import SendMoneyInHouseWrapper from "./SendMoneyInHouseWrapper";
 
 import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
 import { UseMutationResult } from "react-query";
+import { FieldValues, UseFormRegister } from "react-hook-form";
+import styled from "styled-components";
 
 const SendMoneyInHouse = () => {
   const {
@@ -25,15 +27,7 @@ const SendMoneyInHouse = () => {
     <SendMoneyInHouseWrapper isRecipientFound={isRecipientFound}>
       <PageNavHeader heading="Transfer to Opay Account" />
 
-      <div className="recipient-title">Recipient Account</div>
-      <div className="input-wrapper">
-        <input
-          className="recipient-input"
-          type="text"
-          placeholder="Recipient account number"
-          {...register("recipientAccountNumber")}
-        />
-      </div>
+      <Input title="Recipient Account" type="text" placeholder="Recipient account number" register={register} />
 
       <div className="banner-wrapper">
         <div className="banner">Instant, Zero issues,Free</div>
@@ -67,5 +61,33 @@ const SendMoneyInHouse = () => {
     </SendMoneyInHouseWrapper>
   );
 };
+
+type TProps = {
+  title?: string;
+  type: string;
+  placeholder: string;
+  register: UseFormRegister<FieldValues>;
+};
+
+const Input = ({ title, type, placeholder, register }: TProps) => {
+  return (
+    <InputWrapper>
+      {title && <h3>{title}</h3>}
+
+      <input type={type} placeholder={placeholder} {...register("recipientAccountNumber")} />
+    </InputWrapper>
+  );
+};
+
+const InputWrapper = styled.div`
+  padding: 20px 16px 0;
+
+  input {
+    margin-top: 15px;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+  }
+`;
 
 export default SendMoneyInHouse;
