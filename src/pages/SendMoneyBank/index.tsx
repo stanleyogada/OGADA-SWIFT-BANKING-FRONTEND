@@ -1,10 +1,10 @@
 import { COLORS, DEFAULT_BANK_LOGO } from "@constants/index";
 import useSendMoneyBank from "./hooks/useSendMoneyBank";
 import { TBank } from "@services/banks/types";
-import SendMoneyBeneficiaries from "@components/SendMoneyBeneficiaries";
 import styled from "styled-components";
 import PageNavHeader from "@components/PageNavHeader";
 import Input from "@components/Input";
+import SendMoneyBeneficiaries from "@components/SendMoney/Beneficiaries";
 
 const SendMoneyBank = () => {
   const {

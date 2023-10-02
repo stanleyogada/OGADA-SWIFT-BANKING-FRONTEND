@@ -9,7 +9,7 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 import SendMoneyInHouse from ".";
 import { localStorageGetItem, localStorageSetItem } from "@utils/test/mocks/localStorage";
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
-import { TBeneficiary } from "@customTypes/Beneficiary";
+import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
 
 const ACCOUNT_NUMBER = ["4286351832", "1234567890"];
 
@@ -87,8 +87,8 @@ const { handleCreateErrorConfig } = createServer([
 
 const handleAssertUserBlock = (user: typeof USERS[0]) => {
   let userBlock = screen.getByTestId("user-block");
-  let fullNameElement = within(userBlock).getByTestId("user-full-name");
-  expect(fullNameElement).toHaveTextContent(`${user.data.first_name} ${user.data.last_name}`);
+
+  within(userBlock).getByText(new RegExp(`${user.data.first_name} ${user.data.last_name}`, "i"));
   expect(within(userBlock).getByText(user.data.phone)).toBeInTheDocument();
 
   let avatarImage = within(userBlock).getByRole("img");

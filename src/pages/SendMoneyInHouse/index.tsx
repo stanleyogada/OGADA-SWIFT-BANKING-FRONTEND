@@ -1,7 +1,8 @@
 import PageNavHeader from "@components/PageNavHeader";
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 import SendMoneyWrapper from "./SendMoneyInHouseWrapper";
-import SendMoneyBeneficiaries from "@components/SendMoneyBeneficiaries";
+import SendMoneyBeneficiaries from "@components/SendMoney/Beneficiaries";
+import ListItem from "@components/SendMoney/ListItem";
 
 const SendMoneyInHouse = () => {
   const {
@@ -35,16 +36,12 @@ const SendMoneyInHouse = () => {
       </div>
 
       {isRecipientFound && (
-        <div className="user-block" data-testid="user-block">
-          <img className="user-image" src={recipient.data?.avatar} alt="avatar" />
-          <div className="text-wrapper">
-            <p className="fullname" data-testid="user-full-name">
-              {recipient.data?.fullName}
-            </p>
-
-            <p className="phone">{recipient.data?.phone}</p>
-          </div>
-        </div>
+        <ListItem
+          imgSrc={recipient.data?.avatar as string}
+          text={recipient.data?.fullName}
+          secondaryText={recipient.data?.phone}
+          dataTestid="user-block"
+        />
       )}
 
       <form className="user-form" onSubmit={handleSendMoney()}>

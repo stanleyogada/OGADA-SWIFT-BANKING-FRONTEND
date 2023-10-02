@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_KEYS } from "@constants/index";
-import { TBeneficiary } from "@customTypes/Beneficiary";
+import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
 import useCurrentUser from "@hooks/useCurrentUser";
 
 const useSendMoneyBeneficiaries = () => {
