@@ -113,7 +113,16 @@
       "count": 4
     }
   ],
-  "transactions.send.in-house": [],
+  "transactions.send.in-house": [
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "receiver_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "sdfghj",
+      "id": 1
+    }
+  ],
   "transactions.send.bank": [
     {
       "transfer_pin": "",
