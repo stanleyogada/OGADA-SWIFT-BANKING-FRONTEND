@@ -3,6 +3,7 @@ import { UseMutationResult } from "react-query";
 import AmountRemarkFormWrapper from "./AmountRemarkFormWrapper";
 
 import type { FieldValues, UseFormRegister } from "react-hook-form";
+import Input from "../Input";
 
 type TProps = {
   isRecipientFound: boolean;
@@ -15,23 +16,25 @@ type TProps = {
 const AmountRemarkForm = ({ isRecipientFound, isDisabled, sendMoneyMutation, onSubmit, register }: TProps) => {
   return (
     <AmountRemarkFormWrapper isRecipientFound={isRecipientFound} onSubmit={onSubmit()}>
-      <input
+      <Input
         type="text"
-        className="recipient-input"
         placeholder="Amount"
-        {...register("amount", {
-          required: true,
-          min: 3,
-        })}
+        rest={{
+          ...register("amount", {
+            required: true,
+            min: 3,
+          }),
+        }}
       />
-      <input
-        className="recipient-input"
+      <Input
         type="text"
         placeholder="Note"
-        {...register("remark", {
-          required: true,
-          min: 3,
-        })}
+        rest={{
+          ...register("remark", {
+            required: true,
+            min: 3,
+          }),
+        }}
       />
 
       <button className="transfer-btn" type="submit" disabled={isDisabled}>

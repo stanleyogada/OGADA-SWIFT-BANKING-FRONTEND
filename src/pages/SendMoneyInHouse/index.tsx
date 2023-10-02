@@ -1,14 +1,13 @@
 import PageNavHeader from "@components/PageNavHeader";
 import Beneficiaries from "@components/SendMoney/Beneficiaries";
 import ListItem from "@components/SendMoney/ListItem";
+import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
+import Input from "@components/SendMoney/Input";
 
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
 import SendMoneyInHouseWrapper from "./SendMoneyInHouseWrapper";
 
-import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
-import { UseMutationResult } from "react-query";
-import { FieldValues, UseFormRegister } from "react-hook-form";
-import styled from "styled-components";
+import type { UseMutationResult } from "react-query";
 
 const SendMoneyInHouse = () => {
   const {
@@ -27,7 +26,14 @@ const SendMoneyInHouse = () => {
     <SendMoneyInHouseWrapper isRecipientFound={isRecipientFound}>
       <PageNavHeader heading="Transfer to Opay Account" />
 
-      <Input title="Recipient Account" type="text" placeholder="Recipient account number" register={register} />
+      <Input
+        title="Recipient Account"
+        type="text"
+        placeholder="Recipient account number"
+        rest={{
+          ...register("recipientAccountNumber"),
+        }}
+      />
 
       <div className="banner-wrapper">
         <div className="banner">Instant, Zero issues,Free</div>
@@ -61,33 +67,5 @@ const SendMoneyInHouse = () => {
     </SendMoneyInHouseWrapper>
   );
 };
-
-type TProps = {
-  title?: string;
-  type: string;
-  placeholder: string;
-  register: UseFormRegister<FieldValues>;
-};
-
-const Input = ({ title, type, placeholder, register }: TProps) => {
-  return (
-    <InputWrapper>
-      {title && <h3>{title}</h3>}
-
-      <input type={type} placeholder={placeholder} {...register("recipientAccountNumber")} />
-    </InputWrapper>
-  );
-};
-
-const InputWrapper = styled.div`
-  padding: 20px 16px 0;
-
-  input {
-    margin-top: 15px;
-    width: 100%;
-    padding: 16px;
-    border-radius: 8px;
-  }
-`;
 
 export default SendMoneyInHouse;
