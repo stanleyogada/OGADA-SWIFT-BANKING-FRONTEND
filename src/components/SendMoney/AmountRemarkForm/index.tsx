@@ -1,7 +1,5 @@
 import { UseMutationResult } from "react-query";
 
-import { TSendMoneyInHouseProps } from "@services/sendMoney/types";
-
 import AmountRemarkFormWrapper from "./AmountRemarkFormWrapper";
 
 import type { FieldValues, UseFormRegister } from "react-hook-form";
@@ -9,7 +7,7 @@ import type { FieldValues, UseFormRegister } from "react-hook-form";
 type TProps = {
   isRecipientFound: boolean;
   isDisabled: boolean;
-  sendMoneyMutation: UseMutationResult<void, unknown, TSendMoneyInHouseProps, unknown>;
+  sendMoneyMutation: UseMutationResult;
   onSubmit: () => () => unknown;
   register: UseFormRegister<FieldValues>;
 };

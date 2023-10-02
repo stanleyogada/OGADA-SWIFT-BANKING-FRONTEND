@@ -8,7 +8,7 @@ const AmountRemarkFormWrapper = styled.form<{
   flex-direction: column;
   align-items: center;
   display: flex;
-  /* display: ${(props) => (props.isRecipientFound ? "flex" : "none")}; */
+
   ${(props) =>
     props.isRecipientFound
       ? ""

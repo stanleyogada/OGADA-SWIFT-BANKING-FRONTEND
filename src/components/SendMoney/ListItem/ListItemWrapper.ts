@@ -9,6 +9,7 @@ const ListItemWrapper = styled.div<{
   width: 100%;
   padding: 12px;
   z-index: 5;
+  min-width: 74px;
 
   transition: all 0.3s ease-in-out;
 

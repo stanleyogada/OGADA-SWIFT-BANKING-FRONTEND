@@ -3,9 +3,10 @@ import Beneficiaries from "@components/SendMoney/Beneficiaries";
 import ListItem from "@components/SendMoney/ListItem";
 
 import useSendMoneyInHouse from "./hooks/useSendMoneyInHouse";
-import SendMoneyWrapper from "./SendMoneyInHouseWrapper";
+import SendMoneyInHouseWrapper from "./SendMoneyInHouseWrapper";
 
 import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
+import { UseMutationResult } from "react-query";
 
 const SendMoneyInHouse = () => {
   const {
@@ -21,7 +22,7 @@ const SendMoneyInHouse = () => {
   } = useSendMoneyInHouse();
 
   return (
-    <SendMoneyWrapper isRecipientFound={isRecipientFound}>
+    <SendMoneyInHouseWrapper isRecipientFound={isRecipientFound}>
       <PageNavHeader heading="Transfer to Opay Account" />
 
       <div className="recipient-title">Recipient Account</div>
@@ -51,7 +52,7 @@ const SendMoneyInHouse = () => {
         isRecipientFound={isRecipientFound}
         onSubmit={handleSendMoney}
         isDisabled={isSendMoneyButtonDisabled}
-        sendMoneyMutation={sendMoneyMutation}
+        sendMoneyMutation={sendMoneyMutation as UseMutationResult}
         register={register}
       />
 
@@ -63,7 +64,7 @@ const SendMoneyInHouse = () => {
         beneficiaries={beneficiaries}
         onBeneficiaryClick={handleBeneficiaryClick}
       />
-    </SendMoneyWrapper>
+    </SendMoneyInHouseWrapper>
   );
 };
 

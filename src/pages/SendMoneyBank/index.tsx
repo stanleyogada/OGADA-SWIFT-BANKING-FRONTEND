@@ -1,11 +1,16 @@
-import { COLORS, DEFAULT_BANK_LOGO } from "@constants/index";
-import useSendMoneyBank from "./hooks/useSendMoneyBank";
-import { TBank } from "@services/banks/types";
 import styled from "styled-components";
+
+import { COLORS, DEFAULT_BANK_LOGO } from "@constants/index";
+import { TBank } from "@services/banks/types";
 import PageNavHeader from "@components/PageNavHeader";
 import Beneficiaries from "@components/SendMoney/Beneficiaries";
 import ListItem from "@components/SendMoney/ListItem";
 import vector from "@constants/images/vector";
+import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
+
+import useSendMoneyBank from "./hooks/useSendMoneyBank";
+
+import type { UseMutationResult } from "react-query";
 
 const SendMoneyBank = () => {
   const {
@@ -25,7 +30,7 @@ const SendMoneyBank = () => {
   } = useSendMoneyBank();
 
   return (
-    <BankWrapper>
+    <SendMoneyBankWrapper>
       <PageNavHeader heading="Transfer to Bank Account" />
       <div className="banner-wrapper">
         <div className="banner">Instant, Zero issues,Free</div>
@@ -55,7 +60,7 @@ const SendMoneyBank = () => {
 
         {!currentBank && (
           <div className="banks">
-            <h2 className="select">Select a bank</h2>
+            <h3 className="banks__title">Select a bank</h3>
 
             {banks.isLoading && <div data-testid="get-all-banks-loading">Loading banks...</div>}
             <div className="allbanks">
@@ -79,33 +84,15 @@ const SendMoneyBank = () => {
               {vector.checkIcon()}
             </div>
           )}
-          <form onSubmit={handleSendMoney()}>
-            <input
-              type="text"
-              className="beneficiaryInput"
-              placeholder="Amount"
-              {...register("amount", {
-                required: true,
-                min: 3,
-              })}
-            />
-            <input
-              type="text"
-              className="beneficiaryInput"
-              placeholder="Note"
-              {...register("remark", {
-                required: true,
-                min: 3,
-              })}
-            />
 
-            <button type="submit" disabled={isSendMoneyButtonDisabled} className="sendmoneyBtn">
-              Send money
-              {sendMoneyMutation && sendMoneyMutation.isLoading && <div data-testid="loading">Sending money...</div>}
-            </button>
+          <AmountRemarkForm
+            isRecipientFound={isRecipientFound}
+            onSubmit={handleSendMoney}
+            isDisabled={isSendMoneyButtonDisabled}
+            sendMoneyMutation={sendMoneyMutation as UseMutationResult}
+            register={register}
+          />
 
-            {sendMoneyMutation.isError && <div data-testid="send-money-error">Error sending money</div>}
-          </form>
           {verifyAccount.isLoading && <div data-testid="verify-account-loading">Verifying account...</div>}
           {verifyAccount.isError && <div data-testid="verify-account-error">Error verifying account</div>}
 
@@ -116,7 +103,7 @@ const SendMoneyBank = () => {
           />
         </div>
       </div>
-    </BankWrapper>
+    </SendMoneyBankWrapper>
   );
 };
 
@@ -143,10 +130,19 @@ const Bank = ({
 
 export default SendMoneyBank;
 
-const BankWrapper = styled.div`
+const SendMoneyBankWrapper = styled.div`
   width: 100%;
   height: auto;
-  border: 1px solid red;
+  background-color: ${COLORS.lightGray2};
+
+  .banks {
+    padding-bottom: 30px;
+
+    &__title {
+      padding: 12px;
+      font-weight: bold;
+    }
+  }
 
   .banner-wrapper {
     width: 100%;

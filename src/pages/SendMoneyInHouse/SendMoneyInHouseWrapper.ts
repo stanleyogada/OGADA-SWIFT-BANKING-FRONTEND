@@ -1,10 +1,10 @@
 import { COLORS } from "@constants/colors";
 import styled from "styled-components";
 
-const SendMoneyWrapper = styled.div<{ isRecipientFound: boolean }>`
+const SendMoneyInHouseWrapper = styled.div<{ isRecipientFound: boolean }>`
   width: 100%;
   height: 100vh;
-  background-color: #f1f1f1;
+  background-color: ${COLORS.lightGray2};
 
   .input-wrapper {
     width: 100%;
@@ -47,4 +47,4 @@ const SendMoneyWrapper = styled.div<{ isRecipientFound: boolean }>`
   }
 `;
 
-export default SendMoneyWrapper;
+export default SendMoneyInHouseWrapper;
