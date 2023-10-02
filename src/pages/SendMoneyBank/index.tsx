@@ -11,6 +11,7 @@ import AmountRemarkForm from "@components/SendMoney/AmountRemarkForm";
 import useSendMoneyBank from "./hooks/useSendMoneyBank";
 
 import type { UseMutationResult } from "react-query";
+import Input from "@components/SendMoney/Input";
 
 const SendMoneyBank = () => {
   const {
@@ -32,22 +33,23 @@ const SendMoneyBank = () => {
   return (
     <SendMoneyBankWrapper>
       <PageNavHeader heading="Transfer to Bank Account" />
+
+      <Input
+        title="Recipient Account"
+        type="text"
+        placeholder="Recipient account number"
+        maxLength={10}
+        disabled={recipientAccountNumberInputIsDisabled}
+        rest={{
+          ...register("recipientAccountNumber"),
+        }}
+      />
+
       <div className="banner-wrapper">
         <div className="banner">Instant, Zero issues,Free</div>
       </div>
 
       <div className="bank-container">
-        <div className="input-wrapper">
-          <input
-            className="account-number-input"
-            type="text"
-            placeholder="Recipient account number"
-            maxLength={10}
-            disabled={recipientAccountNumberInputIsDisabled}
-            {...register("recipientAccountNumber")}
-          />
-        </div>
-
         {currentBank && (
           <div data-testid="current-bank" className="current-bank">
             <Bank bankName={currentBank.name} bankLogo={currentBank.logo} />
@@ -132,7 +134,7 @@ export default SendMoneyBank;
 
 const SendMoneyBankWrapper = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   background-color: ${COLORS.lightGray2};
 
   .banks {
@@ -162,48 +164,7 @@ const SendMoneyBankWrapper = styled.div`
   .bank-container {
     width: 100%;
 
-    .input-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-
-      .account-number-input {
-        width: 95%;
-        height: 40px;
-        border-radius: 5px;
-        padding: 0 10px;
-        margin-bottom: 10px;
-        margin: 20px 0px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-      }
-    }
-
     .sendData {
-      form {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-
-        .beneficiaryInput {
-          padding: 12px;
-          width: 95%;
-          background-color: white;
-          margin-top: 10px;
-          border-radius: 5px;
-        }
-
-        .sendmoneyBtn {
-          width: 90%;
-          padding: 10px;
-          margin-top: 10px;
-          background-color: ${COLORS.blue};
-          color: white;
-          border-radius: 5px;
-          border: none;
-        }
-      }
-
       .user-found {
         display: flex;
         justify-content: space-between;
@@ -239,7 +200,6 @@ const SendMoneyBankWrapper = styled.div`
       }
 
       button {
-        background-color: white;
         border: none;
         padding: 12px;
         font-weight: bold;

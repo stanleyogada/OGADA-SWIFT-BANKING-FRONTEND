@@ -4,15 +4,17 @@ type TProps = {
   title?: string;
   type: string;
   placeholder: string;
+  maxLength?: number;
+  disabled?: boolean;
   rest: Record<string, unknown>;
 };
 
-const Input = ({ title, type, placeholder, rest }: TProps) => {
+const Input = ({ title, type, maxLength, disabled, placeholder, rest }: TProps) => {
   return (
-    <InputWrapper>
+    <InputWrapper hasTitle={!!title}>
       {title && <h3>{title}</h3>}
 
-      <input type={type} placeholder={placeholder} {...rest} />
+      <input type={type} placeholder={placeholder} disabled={disabled} maxLength={maxLength} {...rest} />
     </InputWrapper>
   );
 };
