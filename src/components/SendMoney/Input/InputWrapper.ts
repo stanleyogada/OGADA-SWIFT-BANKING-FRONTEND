@@ -1,8 +1,10 @@
 import { COLORS } from "@constants/colors";
+import { TBank } from "@services/banks/types";
 import styled from "styled-components";
 
-const InputWrapper = styled.div<{ hasTitle: boolean }>`
+const InputWrapper = styled.div<{ hasTitle: boolean; isVisible?: TBank | null | undefined }>`
   width: 100%;
+  display: ${(props) => (props.isVisible ? "none" : "block")};
 
   padding: ${(props) => (props.hasTitle ? "20px 16px 0" : "0 16px")};
 

@@ -6,6 +6,7 @@ const SendMoneyBankWrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${COLORS.lightGray2};
+  overflow-y: scroll;
 
   .banks {
     padding-bottom: 30px;

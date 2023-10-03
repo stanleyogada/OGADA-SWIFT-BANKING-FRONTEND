@@ -1,3 +1,4 @@
+import { TBank } from "@services/banks/types";
 import InputWrapper from "./InputWrapper";
 
 type TProps = {
@@ -7,11 +8,12 @@ type TProps = {
   maxLength?: number;
   disabled?: boolean;
   rest?: Record<string, unknown>;
+  isVisible?: TBank | null | undefined;
 };
 
-const Input = ({ title, type, maxLength, disabled, placeholder, rest }: TProps) => {
+const Input = ({ title, type, maxLength, disabled, placeholder, rest, isVisible }: TProps) => {
   return (
-    <InputWrapper hasTitle={!!title}>
+    <InputWrapper hasTitle={!!title} isVisible={isVisible}>
       {title && <h3>{title}</h3>}
 
       <input type={type} placeholder={placeholder} disabled={disabled} maxLength={maxLength} {...rest} />

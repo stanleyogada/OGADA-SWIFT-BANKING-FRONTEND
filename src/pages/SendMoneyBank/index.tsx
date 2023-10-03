@@ -26,7 +26,31 @@ const SendMoneyBank = () => {
     register,
     handleSendMoney,
     handleBeneficiaryClick,
+    filtered,
   } = useSendMoneyBank();
+
+  const listData = () => {
+    if (filtered.data) {
+      return filtered.data?.map((bank) => (
+        <BankItem
+          key={bank.code}
+          bankLogo={bank.logo}
+          bankName={bank.name}
+          onClick={() => handleCurrentBankCodeChange(bank.code)}
+          dataTestid="bank"
+        />
+      ));
+    }
+    return banks.data?.map((bank) => (
+      <BankItem
+        key={bank.code}
+        bankLogo={bank.logo}
+        bankName={bank.name}
+        onClick={() => handleCurrentBankCodeChange(bank.code)}
+        dataTestid="bank"
+      />
+    ));
+  };
 
   return (
     <SendMoneyBankWrapper>
@@ -41,6 +65,15 @@ const SendMoneyBank = () => {
         rest={{
           ...register("recipientAccountNumber"),
         }}
+      />
+      <Input
+        type="text"
+        placeholder="search bank"
+        maxLength={10}
+        rest={{
+          ...register("searchBank"),
+        }}
+        isVisible={currentBank}
       />
 
       <Tag />
@@ -61,17 +94,7 @@ const SendMoneyBank = () => {
             <h3 className="banks__title">Select a bank</h3>
 
             {banks.isLoading && <div data-testid="get-all-banks-loading">Loading banks...</div>}
-            <div className="allbanks">
-              {banks.data?.map((bank) => (
-                <BankItem
-                  key={bank.code}
-                  bankLogo={bank.logo}
-                  bankName={bank.name}
-                  onClick={() => handleCurrentBankCodeChange(bank.code)}
-                  dataTestid="bank"
-                />
-              ))}
-            </div>
+            <div className="allbanks">{listData()}</div>
           </div>
         )}
 

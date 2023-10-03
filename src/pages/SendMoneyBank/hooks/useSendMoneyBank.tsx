@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, UseQueryResult } from "react-query";
 import { useForm } from "react-hook-form";
 
 import { QUERY_KEYS } from "@constants/services";
@@ -12,6 +12,7 @@ import { postSendMoneyBank } from "@services/sendMoney";
 import SendMoneyModal from "@components/SendMoney/SendMoneyModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
 import { AxiosError } from "axios";
+import { TBank } from "@services/banks/types";
 
 const useSendMoneyBank = () => {
   const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
@@ -19,10 +20,29 @@ const useSendMoneyBank = () => {
   const [currentBankCode, handleCurrentBankCodeChange] = useState<number | null>(null);
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
   const [transferPin, setTransferPin] = useState("");
+  const [accountType, setaccountType] = useState("");
 
   useEffect(() => {
-    watch("recipientAccountNumber");
-  }, []);
+    setaccountType(watch("searchBank"));
+  });
+
+  const banks = useQuery(QUERY_KEYS.getAllBanks, getBanks, {
+    retry: false,
+  });
+
+  const filterData = () => {
+    let filteredData = banks.data?.filter((bank) => {
+      if (bank.name.toLowerCase().includes(accountType.toLowerCase())) {
+        return bank;
+      }
+    });
+
+    return { data: filteredData };
+  };
+
+  let filtered = useMemo(() => {
+    return filterData();
+  }, [accountType]);
 
   const recipientAccountNumber = useMemo(
     () => getValues("recipientAccountNumber"),
@@ -46,10 +66,6 @@ const useSendMoneyBank = () => {
       cacheTime: 0,
     }
   );
-
-  const banks = useQuery(QUERY_KEYS.getAllBanks, getBanks, {
-    retry: false,
-  });
 
   const sendMoneyMutation = useMutation(postSendMoneyBank, {
     onSuccess: () => {
@@ -181,6 +197,7 @@ const useSendMoneyBank = () => {
     register,
     handleSendMoney,
     handleBeneficiaryClick,
+    filtered,
   };
 };
 
