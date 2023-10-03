@@ -379,6 +379,26 @@
       "amount": "1200",
       "remark": "sdfghj",
       "id": 31
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "4286351832",
+      "amount": "1200",
+      "remark": "sdfghj",
+      "id": 32
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "ALAT by WEMA",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "4286351832",
+      "amount": "1200",
+      "remark": "aedf",
+      "id": 33
     }
   ],
   "user-by-phone": [

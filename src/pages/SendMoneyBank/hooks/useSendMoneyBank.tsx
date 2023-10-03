@@ -12,7 +12,6 @@ import { postSendMoneyBank } from "@services/sendMoney";
 import SendMoneyModal from "@components/SendMoney/SendMoneyModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
 import { AxiosError } from "axios";
-import { TBank } from "@services/banks/types";
 
 const useSendMoneyBank = () => {
   const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
@@ -25,6 +24,9 @@ const useSendMoneyBank = () => {
   useEffect(() => {
     setaccountType(watch("searchBank"));
   });
+  useEffect(() => {
+    watch("recipientAccountNumber");
+  }, []);
 
   const banks = useQuery(QUERY_KEYS.getAllBanks, getBanks, {
     retry: false,
