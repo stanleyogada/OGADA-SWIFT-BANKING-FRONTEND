@@ -24,8 +24,6 @@ const Cards = () => {
         </div>
 
         <Tabs data={CardName}>{[<PhysicalCard />, <VirtualCard />]}</Tabs>
-
-        <Navigation />
       </CardsWrapper>
     </>
   );

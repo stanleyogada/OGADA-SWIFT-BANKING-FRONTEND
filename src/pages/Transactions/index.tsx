@@ -37,7 +37,7 @@ const Transactions = () => {
             />
           ))
         )}
-        <div className="btn-wrapper">
+        <div className="btn-wrapper load-more">
           <button
             onClick={() => {
               fetchNextPage();

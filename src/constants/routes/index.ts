@@ -18,7 +18,7 @@ const CLIENT_ROUTES = {
   liveChat: "/livechat",
   transactions: "/transactions",
   addMoney: "/add-money",
-  sendMoneyInHouse: "/send-money/In-house",
+  sendMoneyInHouse: "/send-money/in-house",
   sendMoneyBank: "/send-money/bank",
   sendMoneyMobile: "/send-money/mobile",
   _404: "/404",

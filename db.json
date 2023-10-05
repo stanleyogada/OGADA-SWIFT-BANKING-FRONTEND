@@ -112,5 +112,376 @@
       ],
       "count": 4
     }
-  ]
+  ],
+  "transactions.send.in-house": [
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "receiver_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "sdfghj",
+      "id": 1
+    }
+  ],
+  "transactions.send.bank": [
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 1
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 2
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 3
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 4
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 5
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 6
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 7
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 8
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 9
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 10
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 11
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 12
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 13
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 14
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 15
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 16
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 17
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 18
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 19
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 20
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 21
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 22
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 23
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 24
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 25
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1000",
+      "remark": "Test remark",
+      "id": 26
+    },
+    {
+      "transfer_pin": "4444",
+      "sender_account_type": "NORMAL",
+      "bank_account_number": "1234567890",
+      "amount": "1234567890",
+      "remark": "USD",
+      "id": 27
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "ALAT by WEMA",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "dfghjkl",
+      "id": 28
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "c,./",
+      "id": 29
+    },
+    {
+      "transfer_pin": "4444",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "sdfghjk",
+      "id": 30
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "sdfghj",
+      "id": 31
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "4286351832",
+      "amount": "1200",
+      "remark": "sdfghj",
+      "id": 32
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "ALAT by WEMA",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "4286351832",
+      "amount": "1200",
+      "remark": "aedf",
+      "id": 33
+    }
+  ],
+  "user-by-phone": [
+    {
+      "id": "4286351832",
+      "data": {
+        "id": 1000,
+        "created_at": "2023-09-12T13:09:25.387Z",
+        "updated_at": "2023-09-12T13:09:25.387Z",
+        "first_name": "Default",
+        "last_name": "User",
+        "middle_name": "Normal",
+        "nickname": null,
+        "email": "defaultNormalUser@email.com",
+        "email_is_verified": true,
+        "phone": "4286351832",
+        "avatar": "https://i.pravatar.cc/150?u=4286351832"
+      }
+    },
+    {
+      "id": "1234567890",
+      "data": {
+        "id": 2000,
+        "created_at": "2023-09-12T13:09:25.387Z",
+        "updated_at": "2023-09-12T13:09:25.387Z",
+        "first_name": "Faker",
+        "last_name": "Guy",
+        "middle_name": "Normal",
+        "nickname": "Tall guy",
+        "email": "TallDude@email.com",
+        "email_is_verified": true,
+        "phone": "1234567890",
+        "avatar": "https://i.pravatar.cc/150?u=1234567890"
+      }
+    }
+  ],
+  "banks": {
+    "data": [
+      {
+        "name": "Access Bank",
+        "code": "044",
+        "logo": "https://nigerianbanks.xyz/logo/access-bank.png"
+      },
+      {
+        "name": "ALAT by WEMA",
+        "code": "035A",
+        "logo": "https://nigerianbanks.xyz/logo/alat-by-wema.png"
+      },
+      {
+        "name": "ASO Savings and Loans",
+        "code": "401",
+        "logo": null
+      },
+      {
+        "name": "Bowen Microfinance Bank",
+        "code": "50931",
+        "logo": "https://nigerianbanks.xyz/logo/default-image.png"
+      },
+      {
+        "name": "CEMCS Microfinance Bank",
+        "code": "50823",
+        "logo": null
+      },
+      {
+        "name": "Citibank Nigeria",
+        "code": "023",
+        "logo": "https://nigerianbanks.xyz/logo/citibank-nigeria.png"
+      },
+      {
+        "name": "Ecobank Nigeria",
+        "code": "050",
+        "logo": "https://nigerianbanks.xyz/logo/ecobank-nigeria.png"
+      },
+      {
+        "name": "Airtel Smartcash PSB",
+        "code": "120004",
+        "logo": null
+      }
+    ]
+  },
+  "banks.verify": {
+    "data": {
+      "account_name": "CHINEDU STANLEY OGADA"
+    }
+  }
 }
