@@ -20,8 +20,14 @@ EXPOSE 8000
 
 
 CMD ["yarn", "server:dev"]
+# CMD ["yarn", "start"]
 
 # Delete all containers  $ docker container rm -f $(docker container ls -aq)
 # Build image  $ docker build -t ogada-swift-banking-frontend:1 .
+
+# For starting on DEV environment
 # Install all deps on the HOST $ npm i --force --legacy-peer-deps
 # Start the container  $ docker run -d -p 5173:5173 -p 8000:8000 -v $(pwd):/app ogada-swift-banking-frontend:1
+
+# For starting on PROD environment
+# Start the container  $ docker run -d -p 5173:5173 -p 8000:8000 ogada-swift-banking-frontend:1
