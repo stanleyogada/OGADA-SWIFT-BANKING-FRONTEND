@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   web-api-dev:
-    build: ./
+    image: chineduogada/ogada-swift-banking-frontend:1
     ports:
       - 5173:5173
       - 8000:8000

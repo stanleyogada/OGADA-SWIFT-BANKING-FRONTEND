@@ -24,7 +24,7 @@ CMD ["yarn", "server:dev"]
 # CMD ["yarn", "start"]
 
 # Delete all containers  $ docker container rm -f $(docker container ls -aq)
-# Build image  $ docker build -t ogada-swift-banking-frontend:1 .
+# Build image  $ docker build -t chineduogada/ogada-swift-banking-frontend:1 .
 
 # For starting on DEV environment
 # Install all deps on the HOST $ npm i --force --legacy-peer-deps
