@@ -17,6 +17,7 @@ COPY ["./", "./"]
 
 EXPOSE 5173
 EXPOSE 8000
+EXPOSE 80
 
 
 CMD ["yarn", "server:dev"]
