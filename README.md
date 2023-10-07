@@ -1,12 +1,18 @@
 # Opay-Demo-Frontend
 
-<a href="https://opay-demo-peach.vercel.app/">Production Link</a> 🚀 
+<a href="https://opay-demo-peach.vercel.app/">Production Link</a> 🚀
 
-An application solely for education purposes!
+An application solely for education purposes! 
+This is a DEMO simple banking application that allows users to create accounts, deposit, withdraw, and transfer funds between accounts.
 
 **There are no .env files for the projects**
 
 #
+
+## For Quick Test with Docker On Your Local Machine
+
+- **Check out the QUICK_TEST_WITH_DOCKER.md file**
+- Or visit this link: [OGADA-SWIFT-BANKING-FRONTEND-DEV-TEST](https://github.com/stanleyogada/OGADA-SWIFT-BANKING-FRONTEND-DEV-TEST-DOCKER)
 
 ## Usage
 
@@ -14,7 +20,21 @@ An application solely for education purposes!
 2. Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 3. Run `cd Opay-Demo-Frontend`
 4. Run `npm i --force --legacy-peer-deps`
-5. Run `npm run dev`
+
+### Run directly on your machine
+
+5. **Run `npm run dev`**
+
+### Run with Docker
+
+##### Prerequisites
+
+- _Install the following on your machine_
+  - _[Docker](https://docs.docker.com/get-docker/)_
+  - _[Docker Compose](https://docs.docker.com/compose/install/)_
+- _Start Docker-Desktop on your machine_
+
+5. **Run `docker-compose up`**
 
 #
 

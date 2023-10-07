@@ -15,6 +15,7 @@
     "json:server:prod": "json-server --watch db.json --port 443",
     "start:preview": "vite preview --port 443",
     "server:dev": "npm-run-all --parallel json:server:dev dev",
+    "docker:dev": "export NODE_ENV=development",
     "start": "npm-run-all --parallel json:server:prod start:preview"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
+    "esbuild-wasm": "^0.19.4",
     "@testing-library/dom": "^9.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
