@@ -19,10 +19,10 @@ const useSendMoneyBank = () => {
   const [currentBankCode, handleCurrentBankCodeChange] = useState<number | null>(null);
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
   const [transferPin, setTransferPin] = useState("");
-  const [accountType, setaccountType] = useState("");
+  const [accountType, setAccountType] = useState("");
 
   useEffect(() => {
-    setaccountType(watch("searchBank"));
+    setAccountType(watch("searchBank"));
   });
   useEffect(() => {
     watch("recipientAccountNumber");
@@ -34,7 +34,7 @@ const useSendMoneyBank = () => {
 
   const filterData = () => {
     let filteredData = banks.data?.filter((bank) => {
-      if (bank.name.toLowerCase().includes(accountType.toLowerCase())) {
+      if (bank.name.toLowerCase().includes(accountType?.toLowerCase())) {
         return bank;
       }
     });
