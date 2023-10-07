@@ -35,6 +35,11 @@ const SendMoneyBankWrapper = styled.div`
   .bank-container {
     width: 100%;
 
+    .all-banks {
+      height: 300px;
+      overflow-y: auto;
+    }
+
     .sendData {
       .user-found {
         display: flex;

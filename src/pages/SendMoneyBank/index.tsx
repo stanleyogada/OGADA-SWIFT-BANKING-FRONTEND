@@ -94,7 +94,7 @@ const SendMoneyBank = () => {
             <h3 className="banks__title">Select a bank</h3>
 
             {banks.isLoading && <div data-testid="get-all-banks-loading">Loading banks...</div>}
-            <div className="allbanks">{listData()}</div>
+            <div className="all-banks">{listData()}</div>
           </div>
         )}
 
