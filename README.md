@@ -2,7 +2,8 @@
 
 <a href="https://opay-demo-peach.vercel.app/">Production Link</a> 🚀
 
-An application solely for education purposes!
+An application solely for education purposes! 
+This is a DEMO simple banking application that allows users to create accounts, deposit, withdraw, and transfer funds between accounts.
 
 **There are no .env files for the projects**
 
