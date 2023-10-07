@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "build": "tsc && vite build",
     "test:watch": "npx jest --clearCache && jest --watchAll --no-cache",
-    "test": "npx jest --clearCache && jest --no-cache",
+    "test": "npx jest --clearCache && jest --no-cache --detectOpenHandles",
     "pm2:start": "export NODE_ENV=production && pm2 start yarn -- dev --host && pm2 logs 0",
     "pm2:stop": "pm2 delete 0",
     "install-cmd": "yarn && yarn add -D @vitejs/plugin-react",
