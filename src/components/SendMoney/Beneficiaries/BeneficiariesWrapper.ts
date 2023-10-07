@@ -23,8 +23,9 @@ const BeneficiariesWrapper = styled.div<{
     }
 
     &__list {
-      height: ${(props) => (props.hasBeneficiaries ? "300px" : "auto")};
+      max-height: ${(props) => (props.hasBeneficiaries ? "300px" : "auto")};
       overflow-y: auto;
+      padding-bottom: 10px;
     }
   }
 `;
