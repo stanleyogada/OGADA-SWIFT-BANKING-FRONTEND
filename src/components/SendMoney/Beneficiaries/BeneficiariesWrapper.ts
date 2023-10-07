@@ -24,7 +24,7 @@ const BeneficiariesWrapper = styled.div<{
 
     &__list {
       height: ${(props) => (props.hasBeneficiaries ? "300px" : "auto")};
-      overflow-y: scroll;
+      overflow-y: auto;
     }
   }
 `;
