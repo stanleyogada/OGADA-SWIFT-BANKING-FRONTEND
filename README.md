@@ -10,7 +10,8 @@ An application solely for education purposes!
 
 ## For Quick Test with Docker On Your Local Machine
 
-**Check out the QUICK_TEST_WITH_DOCKER.md file**
+- **Check out the QUICK_TEST_WITH_DOCKER.md file**
+- Or visit this link: [OGADA-SWIFT-BANKING-FRONTEND-DEV-TEST](https://github.com/stanleyogada/OGADA-SWIFT-BANKING-FRONTEND-DEV-TEST-DOCKER)
 
 ## Usage
 
