@@ -19,7 +19,21 @@ An application solely for education purposes!
 2. Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
 3. Run `cd Opay-Demo-Frontend`
 4. Run `npm i --force --legacy-peer-deps`
-5. Run `npm run dev`
+
+### Run directly on your machine
+
+5. **Run `npm run dev`**
+
+### Run with Docker
+
+##### Prerequisites
+
+- _Install the following on your machine_
+  - _[Docker](https://docs.docker.com/get-docker/)_
+  - _[Docker Compose](https://docs.docker.com/compose/install/)_
+- _Start Docker-Desktop on your machine_
+
+5. **Run `docker-compose up`**
 
 #
 
