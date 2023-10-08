@@ -1,11 +1,11 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+
 import SendMoneyMobile from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
-
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
 let user: UserEvent;
