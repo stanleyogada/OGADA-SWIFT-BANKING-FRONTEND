@@ -68,3 +68,31 @@ test("Renders a network selector", async () => {
   await user.click(withinNetworks.getAllByTestId("network")[0]);
   withinNetworks = await assertNetworks(SEND_MONEY_MOBILE_NETWORKS[0].name);
 });
+
+test("Ensure buy mobile data/airtime successfully", async () => {
+  render(<SendMoneyMobile />);
+
+  const $airtimeTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[0];
+  const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
+
+  const handleAssertPhone = async ($tab: HTMLElement) => {
+    await user.click($tab);
+    const $phone = screen.getByPlaceholderText(/phone number/i);
+
+    const phoneValue = "08012345678";
+
+    await user.type($phone, phoneValue);
+    expect($phone).toHaveValue(phoneValue);
+
+    await user.type($phone, "123456");
+    expect($phone).toHaveValue(phoneValue);
+  };
+
+  await handleAssertPhone($dataTab);
+  expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
+
+  await handleAssertPhone($airtimeTab);
+  expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
+
+  screen.debug();
+});
