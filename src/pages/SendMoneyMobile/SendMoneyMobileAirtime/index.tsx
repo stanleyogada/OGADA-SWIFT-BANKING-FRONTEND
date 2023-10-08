@@ -6,6 +6,7 @@ import Tag from "@components/SendMoney/Tag";
 import NetworkSelector from "../NetworkSelector";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -57,6 +58,16 @@ const SendMoneyMobileAirtime = ({
           }),
         }}
       />
+
+      <div>
+        {SEND_MONEY_MOBILE_BUNDLES.slice(0, 6).map((bundle) => {
+          return (
+            <div key={bundle.amount} data-testid="bundle">
+              <div>{bundle.amount}</div>
+            </div>
+          );
+        })}
+      </div>
 
       {/* <AmountRemarkForm
             isDisabled={false}

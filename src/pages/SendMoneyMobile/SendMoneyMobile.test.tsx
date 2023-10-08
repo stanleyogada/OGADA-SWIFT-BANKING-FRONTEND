@@ -4,8 +4,9 @@ import userEvent from "@testing-library/user-event";
 import SendMoneyMobile from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import { SEND_MONEY_MOBILE_NETWORKS } from "@constants/index";
-import { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+
+import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
@@ -88,11 +89,45 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     expect($phone).toHaveValue(phoneValue);
   };
 
+  const handleAssertBundles = async (isAirtimeTab: boolean) => {
+    const bundles = isAirtimeTab ? SEND_MONEY_MOBILE_BUNDLES.slice(0, 6) : SEND_MONEY_MOBILE_BUNDLES;
+    const bundlesTags = bundles.filter((bundle) => bundle.tag);
+
+    if (!isAirtimeTab) {
+      expect(screen.getAllByTestId("bundle")).toHaveLength(bundles.length);
+      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(new RegExp(bundles[0].amount.toString(), "i"));
+      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(new RegExp(bundles[0].data as string, "i"));
+      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(new RegExp(bundles[0].validity as string, "i"));
+
+      expect(screen.getAllByTestId("bundle-tag")).toHaveLength(bundlesTags.length);
+    }
+
+    if (isAirtimeTab) {
+      expect(screen.getAllByTestId("bundle")).toHaveLength(6);
+      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(
+        new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString(), "i")
+      );
+      expect(screen.getAllByTestId("bundle")[0]).not.toHaveTextContent(
+        new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].data as string, "i")
+      );
+      expect(screen.getAllByTestId("bundle")[0]).not.toHaveTextContent(
+        new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].validity as string, "i")
+      );
+
+      expect(screen.queryAllByTestId("bundle-tag")).toHaveLength(0);
+    }
+
+    let lastIndex = bundles.length - 1;
+    expect(screen.getAllByTestId("bundle")[lastIndex]).toHaveTextContent(
+      new RegExp(bundles[lastIndex].amount.toString(), "i")
+    );
+  };
+
   await handleAssertPhone($dataTab);
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
+  handleAssertBundles(false);
 
   await handleAssertPhone($airtimeTab);
   expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
-
-  screen.debug();
+  handleAssertBundles(true);
 });

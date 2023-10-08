@@ -4,4 +4,11 @@ type TSendMoneyMobileNetwork = {
   logo: string;
 };
 
-export type { TSendMoneyMobileNetwork };
+type TSendMoneyMobileBundle = {
+  amount: number;
+  data?: string;
+  validity?: string;
+  tag?: string;
+};
+
+export type { TSendMoneyMobileNetwork, TSendMoneyMobileBundle };
