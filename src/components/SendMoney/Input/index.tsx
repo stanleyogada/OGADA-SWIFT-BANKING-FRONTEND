@@ -9,11 +9,12 @@ type TProps = {
   disabled?: boolean;
   rest?: Record<string, unknown>;
   isVisible?: TBank | null | undefined;
+  muteMargin?: boolean;
 };
 
-const Input = ({ title, type, maxLength, disabled, placeholder, rest, isVisible }: TProps) => {
+const Input = ({ title, type, maxLength, disabled, placeholder, rest, isVisible, muteMargin }: TProps) => {
   return (
-    <InputWrapper hasTitle={!!title} isVisible={isVisible}>
+    <InputWrapper hasTitle={!!title} isVisible={isVisible} muteMargin={muteMargin}>
       {title && <h3>{title}</h3>}
 
       <input type={type} placeholder={placeholder} disabled={disabled} maxLength={maxLength} {...rest} />

@@ -2,14 +2,14 @@ import { COLORS } from "@constants/colors";
 import { TBank } from "@services/banks/types";
 import styled from "styled-components";
 
-const InputWrapper = styled.div<{ hasTitle: boolean; isVisible?: TBank | null | undefined }>`
+const InputWrapper = styled.div<{ hasTitle: boolean; isVisible?: TBank | null | undefined; muteMargin?: boolean }>`
   width: 100%;
   display: ${(props) => (props.isVisible ? "none" : "block")};
 
   padding: ${(props) => (props.hasTitle ? "20px 16px 0" : "0 16px")};
 
   input {
-    margin-top: 15px;
+    margin-top: ${(props) => (props.muteMargin ? "0" : "16px")};
     width: 100%;
     padding: 16px;
     border-radius: 8px;

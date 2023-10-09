@@ -80,12 +80,6 @@ const SEND_MONEY_MOBILE_BUNDLES: TSendMoneyMobileBundle[] = [
     validity: "30 days",
   },
   {
-    amount: 100,
-    data: "1GB",
-    validity: "5 days",
-    tag: "Night",
-  },
-  {
     amount: 15000,
     data: "150GB",
     validity: "30 days",

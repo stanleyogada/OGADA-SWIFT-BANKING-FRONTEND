@@ -10,8 +10,7 @@ type TProps = {
 const NUMBER_LIST = Array.from(Array(10).keys());
 
 const TransferPinModal = ({ onComplete }: TProps) => {
-  const { transferPin, handleNumberClick, handleCloseModal, handleClear, handleDelete } =
-    useTransferPinModal(onComplete);
+  const { transferPin, handleNumberClick, handleClear, handleDelete } = useTransferPinModal(onComplete);
 
   return (
     <TransferPinWrapper>
