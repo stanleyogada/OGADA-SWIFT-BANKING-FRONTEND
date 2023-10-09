@@ -25,7 +25,7 @@ const useSendMoneyMobileAirtime = ({ currentNetwork }: { currentNetwork: TSendMo
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
-      if (!hasTransferPin) {
+      if (hasTransferPin) {
         return handlePushTransferPinModal();
       }
 

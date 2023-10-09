@@ -25,7 +25,7 @@ const useSendMoneyMobileData = ({ currentNetwork }: { currentNetwork: TSendMoney
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
-      if (!hasTransferPin) {
+      if (hasTransferPin) {
         return handlePushTransferPinModal();
       }
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useMutation, useQuery, UseQueryResult } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useForm } from "react-hook-form";
 
 import { QUERY_KEYS } from "@constants/services";
@@ -7,19 +7,20 @@ import { getBankVerification, getBanks } from "@services/banks";
 
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import ModalHeader from "@components/Modal/ModalHeader";
-import TransferPinModal from "@components/TransferPinModal";
 import { postSendMoneyBank } from "@services/sendMoney";
 import SendMoneyModal from "@components/SendMoney/SendMoneyModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
 import { AxiosError } from "axios";
+import useTransferPin from "@hooks/useTransferPin";
 
 const useSendMoneyBank = () => {
   const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
   const { handleAdd } = useModalConsumer();
   const [currentBankCode, handleCurrentBankCodeChange] = useState<number | null>(null);
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
-  const [transferPin, setTransferPin] = useState("");
   const [accountType, setAccountType] = useState("");
+
+  const { transferPin, hasTransferPin, setTransferPin, handlePushTransferPinModal } = useTransferPin();
 
   useEffect(() => {
     setAccountType(watch("searchBank"));
@@ -110,17 +111,10 @@ const useSendMoneyBank = () => {
     });
   }, [errorMessage]);
 
-  const handleTransferPinChange = (value: string) => {
-    setTransferPin(value);
-  };
-
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
-      if (!transferPin && process.env.NODE_ENV !== "test") {
-        return handleAdd({
-          heading: <ModalHeader text="Transfer Pin" />,
-          body: <TransferPinModal onComplete={handleTransferPinChange} />,
-        });
+      if (hasTransferPin) {
+        return handlePushTransferPinModal();
       }
 
       sendMoneyMutation.mutate({

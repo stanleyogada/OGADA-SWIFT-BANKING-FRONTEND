@@ -12,12 +12,14 @@ import TransferPinModal from "@components/TransferPinModal";
 import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
 
 import type { AxiosError } from "axios";
+import useTransferPin from "@hooks/useTransferPin";
 
 const useSendMoneyInHouse = () => {
   const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
   const { handleAdd } = useModalConsumer();
   const { handleSubmit, register, reset, getValues, watch, setValue } = useForm();
-  const [transferPin, setTransferPin] = useState("");
+
+  const { transferPin, hasTransferPin, setTransferPin, handlePushTransferPinModal } = useTransferPin();
 
   useEffect(() => {
     watch("recipientAccountNumber");
@@ -86,18 +88,9 @@ const useSendMoneyInHouse = () => {
     });
   }, [errorMessage]);
 
-  const handleTransferPinChange = (value: string) => {
-    setTransferPin(value);
-  };
-
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
-      if (!transferPin && process.env.NODE_ENV !== "test") {
-        return handleAdd({
-          heading: <ModalHeader text="Transfer Pin" />,
-          body: <TransferPinModal onComplete={handleTransferPinChange} />,
-        });
-      }
+      if (hasTransferPin) return handlePushTransferPinModal();
 
       sendMoneyMutation.mutate({
         amount,
@@ -109,7 +102,6 @@ const useSendMoneyInHouse = () => {
     });
 
   const isSendMoneyButtonDisabled = useMemo(() => {
-    // if (!currentUser) return true;
     if (!enabledGetUser) return true;
     if (recipient.isLoading || recipient.isError || !recipient.data) return true;
     if (sendMoneyMutation.isLoading) return true;

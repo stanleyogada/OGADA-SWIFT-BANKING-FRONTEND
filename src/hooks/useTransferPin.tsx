@@ -24,6 +24,7 @@ const useTransferPin = () => {
   return {
     transferPin,
     hasTransferPin,
+    setTransferPin,
     handlePushTransferPinModal,
   };
 };
