@@ -4,7 +4,7 @@ import { SEND_MONEY_MOBILE_NETWORKS } from "@constants/index";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
-const useSendMoneyMobile = () => {
+const useCurrentNetwork = () => {
   const [currentNetwork, setCurrentNetwork] = useState<TSendMoneyMobileNetwork>(SEND_MONEY_MOBILE_NETWORKS[0]);
   const [isDropRestNetworks, setIsDropRestNetworks] = useState(false);
 
@@ -36,4 +36,4 @@ const useSendMoneyMobile = () => {
   };
 };
 
-export default useSendMoneyMobile;
+export default useCurrentNetwork;

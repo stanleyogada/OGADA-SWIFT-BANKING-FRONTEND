@@ -3,11 +3,11 @@ import PageNavHeader from "@components/PageNavHeader";
 
 import SendMoneyMobileData from "./SendMoneyMobileData";
 import SendMoneyMobileAirtime from "./SendMoneyMobileAirtime";
-import useSendMoneyMobile from "./hooks/useSendMoneyMobile";
+import useCurrentNetwork from "./hooks/useCurrentNetwork";
 
 const SendMoneyMobile = () => {
   const { currentNetwork, isDropRestNetworks, restNetworks, handleCurrentNetworkClick, handleCurrentNetworkChange } =
-    useSendMoneyMobile();
+    useCurrentNetwork();
 
   return (
     <>

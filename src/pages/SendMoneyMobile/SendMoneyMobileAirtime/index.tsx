@@ -2,12 +2,12 @@ import { useForm } from "react-hook-form";
 
 import Input from "@components/SendMoney/Input";
 import Tag from "@components/SendMoney/Tag";
+import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
 
 import NetworkSelector from "../NetworkSelector";
+import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
-import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
-import { useEffect, useMemo, useState } from "react";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -22,38 +22,6 @@ const useSendMoneyMobileAirtime = () => {
 
   return {
     form,
-  };
-};
-
-const useCurrentBundleAmount = (form: ReturnType<typeof useForm>) => {
-  const { watch, setValue } = form;
-  const [currentBundleAmount, setCurrentBundleAmount] = useState<string>("");
-  const amountValue = watch("amount");
-
-  useEffect(() => {
-    if (!currentBundleAmount) {
-      setValue("amount", "");
-
-      return;
-    }
-
-    setValue("amount", currentBundleAmount);
-  }, [currentBundleAmount]);
-
-  const isPayButtonDisabled = useMemo(() => {
-    if (!amountValue) return true;
-
-    return false;
-  }, [amountValue]);
-
-  const handleBundleClick = (amount: string) => {
-    setCurrentBundleAmount(currentBundleAmount === amount ? "" : amount);
-  };
-
-  return {
-    currentBundleAmount,
-    isPayButtonDisabled,
-    handleBundleClick,
   };
 };
 
