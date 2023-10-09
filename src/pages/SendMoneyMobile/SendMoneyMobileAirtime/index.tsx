@@ -7,6 +7,7 @@ import NetworkSelector from "../NetworkSelector";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+import { useEffect, useMemo, useState } from "react";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -14,8 +15,46 @@ type TSendMoneyMobileAirtimeProps = {
   restNetworks: TSendMoneyMobileNetwork[];
   handleCurrentNetworkClick: () => void;
   handleCurrentNetworkChange: (networkId: string) => void;
-  register: ReturnType<typeof useForm>["register"];
-  handleSubmit: ReturnType<typeof useForm>["handleSubmit"];
+};
+
+const useSendMoneyMobileAirtime = () => {
+  const form = useForm();
+
+  return {
+    form,
+  };
+};
+
+const useCurrentBundleAmount = (form: ReturnType<typeof useForm>) => {
+  const { watch, setValue } = form;
+  const [currentBundleAmount, setCurrentBundleAmount] = useState<string>("");
+  const amountValue = watch("amount");
+
+  useEffect(() => {
+    if (!currentBundleAmount) {
+      setValue("amount", "");
+
+      return;
+    }
+
+    setValue("amount", currentBundleAmount);
+  }, [currentBundleAmount]);
+
+  const isPayButtonDisabled = useMemo(() => {
+    if (!amountValue) return true;
+
+    return false;
+  }, [amountValue]);
+
+  const handleBundleClick = (amount: string) => {
+    setCurrentBundleAmount(currentBundleAmount === amount ? "" : amount);
+  };
+
+  return {
+    currentBundleAmount,
+    isPayButtonDisabled,
+    handleBundleClick,
+  };
 };
 
 const SendMoneyMobileAirtime = ({
@@ -24,9 +63,11 @@ const SendMoneyMobileAirtime = ({
   restNetworks,
   handleCurrentNetworkClick,
   handleCurrentNetworkChange,
-  register,
-  handleSubmit,
 }: TSendMoneyMobileAirtimeProps) => {
+  const { form } = useSendMoneyMobileAirtime();
+  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount(form);
+  const { register } = form;
+
   return (
     <div>
       <Tag />
@@ -53,7 +94,7 @@ const SendMoneyMobileAirtime = ({
         type="text"
         placeholder="Amount"
         rest={{
-          ...register("phoneNumber", {
+          ...register("amount", {
             min: 2,
           }),
         }}
@@ -62,20 +103,19 @@ const SendMoneyMobileAirtime = ({
       <div>
         {SEND_MONEY_MOBILE_BUNDLES.slice(0, 6).map((bundle) => {
           return (
-            <div key={bundle.amount} data-testid="bundle">
+            <div
+              key={bundle.amount}
+              data-testid="bundle"
+              className={currentBundleAmount === bundle.amount.toString() ? "active" : ""}
+              onClick={() => handleBundleClick(bundle.amount.toString())}
+            >
               <div>{bundle.amount}</div>
             </div>
           );
         })}
       </div>
 
-      {/* <AmountRemarkForm
-            isDisabled={false}
-            onSubmit={handleSubmit}
-            register={register}
-            isRecipientFound={false}
-            // sendMoneyMutation={}
-          /> */}
+      <button disabled={isPayButtonDisabled}>Pay</button>
     </div>
   );
 };

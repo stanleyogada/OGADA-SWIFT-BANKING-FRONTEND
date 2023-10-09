@@ -6,16 +6,8 @@ import SendMoneyMobileAirtime from "./SendMoneyMobileAirtime";
 import useSendMoneyMobile from "./hooks/useSendMoneyMobile";
 
 const SendMoneyMobile = () => {
-  const {
-    currentNetwork,
-    isDropRestNetworks,
-    restNetworks,
-    handleCurrentNetworkClick,
-    handleCurrentNetworkChange,
-    // currentMode,
-    register,
-    handleSubmit,
-  } = useSendMoneyMobile();
+  const { currentNetwork, isDropRestNetworks, restNetworks, handleCurrentNetworkClick, handleCurrentNetworkChange } =
+    useSendMoneyMobile();
 
   return (
     <>
@@ -39,8 +31,6 @@ const SendMoneyMobile = () => {
           restNetworks={restNetworks}
           handleCurrentNetworkClick={handleCurrentNetworkClick}
           handleCurrentNetworkChange={handleCurrentNetworkChange}
-          register={register}
-          handleSubmit={handleSubmit}
         />
 
         <SendMoneyMobileData
@@ -49,8 +39,6 @@ const SendMoneyMobile = () => {
           restNetworks={restNetworks}
           handleCurrentNetworkClick={handleCurrentNetworkClick}
           handleCurrentNetworkChange={handleCurrentNetworkChange}
-          register={register}
-          handleSubmit={handleSubmit}
         />
       </Tabs>
     </>

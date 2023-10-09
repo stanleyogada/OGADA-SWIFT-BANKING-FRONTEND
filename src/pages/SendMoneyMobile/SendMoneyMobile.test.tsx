@@ -93,26 +93,22 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     const bundles = isAirtimeTab ? SEND_MONEY_MOBILE_BUNDLES.slice(0, 6) : SEND_MONEY_MOBILE_BUNDLES;
     const bundlesTags = bundles.filter((bundle) => bundle.tag);
 
+    const [$firstBundle, $secondBundle] = screen.getAllByTestId("bundle");
+
     if (!isAirtimeTab) {
       expect(screen.getAllByTestId("bundle")).toHaveLength(bundles.length);
-      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(new RegExp(bundles[0].amount.toString(), "i"));
-      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(new RegExp(bundles[0].data as string, "i"));
-      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(new RegExp(bundles[0].validity as string, "i"));
+      expect($firstBundle).toHaveTextContent(new RegExp(bundles[0].amount.toString(), "i"));
+      expect($firstBundle).toHaveTextContent(new RegExp(bundles[0].data as string, "i"));
+      expect($firstBundle).toHaveTextContent(new RegExp(bundles[0].validity as string, "i"));
 
       expect(screen.getAllByTestId("bundle-tag")).toHaveLength(bundlesTags.length);
     }
 
     if (isAirtimeTab) {
       expect(screen.getAllByTestId("bundle")).toHaveLength(6);
-      expect(screen.getAllByTestId("bundle")[0]).toHaveTextContent(
-        new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString(), "i")
-      );
-      expect(screen.getAllByTestId("bundle")[0]).not.toHaveTextContent(
-        new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].data as string, "i")
-      );
-      expect(screen.getAllByTestId("bundle")[0]).not.toHaveTextContent(
-        new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].validity as string, "i")
-      );
+      expect($firstBundle).toHaveTextContent(new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString(), "i"));
+      expect($firstBundle).not.toHaveTextContent(new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].data as string, "i"));
+      expect($firstBundle).not.toHaveTextContent(new RegExp(SEND_MONEY_MOBILE_BUNDLES[0].validity as string, "i"));
 
       expect(screen.queryAllByTestId("bundle-tag")).toHaveLength(0);
     }
@@ -121,13 +117,52 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     expect(screen.getAllByTestId("bundle")[lastIndex]).toHaveTextContent(
       new RegExp(bundles[lastIndex].amount.toString(), "i")
     );
+
+    const handleAssertAmountInput = async (amount: string) => {
+      if (!isAirtimeTab) return;
+
+      const $amount = screen.getByPlaceholderText(/amount/i);
+      expect($amount).toHaveValue(amount);
+
+      return $amount;
+    };
+
+    const $payButton = screen.getByRole("button", { name: /pay/i });
+
+    expect($payButton).toBeDisabled();
+    expect($firstBundle).not.toHaveClass("active");
+    handleAssertAmountInput("");
+
+    await user.click($firstBundle);
+    expect($firstBundle).toHaveClass("active");
+    expect($payButton).toBeEnabled();
+    handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
+
+    await user.click($firstBundle);
+    expect($firstBundle).not.toHaveClass("active");
+    expect($payButton).toBeDisabled();
+    handleAssertAmountInput("");
+
+    await user.click($secondBundle);
+    expect($firstBundle).not.toHaveClass("active");
+    expect($secondBundle).toHaveClass("active");
+    expect($payButton).toBeEnabled();
+    handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[1].amount.toString());
+
+    await user.click($firstBundle);
+    expect($firstBundle).toHaveClass("active");
+    expect($secondBundle).not.toHaveClass("active");
+    expect($payButton).toBeEnabled();
+    handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
+
+    await user.click($payButton);
   };
 
   await handleAssertPhone($dataTab);
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
-  handleAssertBundles(false);
+  await handleAssertBundles(false);
 
   await handleAssertPhone($airtimeTab);
   expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
-  handleAssertBundles(true);
+  await handleAssertBundles(true);
 });
