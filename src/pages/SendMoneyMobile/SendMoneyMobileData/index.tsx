@@ -9,6 +9,8 @@ import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import { useState } from "react";
+import { TUserAccountType } from "@services/users/types";
 
 type TSendMoneyMobileDataProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -18,7 +20,29 @@ type TSendMoneyMobileDataProps = {
   handleCurrentNetworkChange: (networkId: string) => void;
 };
 
-const useSendMoneyMobileData = ({ currentNetwork }: { currentNetwork: TSendMoneyMobileNetwork }) => {
+const useAccountType = () => {
+  const [accountType, setAccountType] = useState<TUserAccountType>("NORMAL");
+
+  const handleAccountTypeChange = (type: TUserAccountType) => {
+    setAccountType(type);
+  };
+
+  const allAccountType = ["NORMAL", "CASHBACK"];
+
+  return {
+    allAccountType,
+    accountType,
+    handleAccountTypeChange,
+  };
+};
+
+const useSendMoneyMobileData = ({
+  currentNetwork,
+  accountType,
+}: {
+  currentNetwork: TSendMoneyMobileNetwork;
+  accountType: TUserAccountType;
+}) => {
   const form = useForm();
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
@@ -35,6 +59,7 @@ const useSendMoneyMobileData = ({ currentNetwork }: { currentNetwork: TSendMoney
         operator: currentNetwork.name,
         is_airtime: false,
         transfer_pin: transferPin,
+        sender_account_type: accountType,
       };
 
       console.log(body);
@@ -54,7 +79,8 @@ const SendMoneyMobileData = ({
   handleCurrentNetworkClick,
   handleCurrentNetworkChange,
 }: TSendMoneyMobileDataProps) => {
-  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileData({ currentNetwork });
+  const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
+  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileData({ currentNetwork, accountType });
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
     form,
     handleClearTransferPin,
@@ -124,6 +150,21 @@ const SendMoneyMobileData = ({
             </div>
           );
         })}
+      </div>
+
+      <div>
+        <h3>From Account?</h3>
+
+        {allAccountType.map((type) => (
+          <div
+            key={type}
+            data-testid="account-type-radio"
+            onClick={() => handleAccountTypeChange(type as TUserAccountType)}
+            className={accountType === type ? "active" : ""}
+          >
+            {type}
+          </div>
+        ))}
       </div>
 
       <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>

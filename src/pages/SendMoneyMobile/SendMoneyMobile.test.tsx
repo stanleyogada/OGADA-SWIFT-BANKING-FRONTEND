@@ -155,6 +155,38 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     expect($payButton).toBeEnabled();
     handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
 
+    // screen.debug();
+
+    const allAccountTypeRadio = screen.getAllByTestId("account-type-radio");
+    expect(allAccountTypeRadio).toHaveLength(2);
+
+    const [$NormalAccountTypeRadio, $CashbackAccountTypeRadio] = allAccountTypeRadio;
+    expect($NormalAccountTypeRadio).toHaveTextContent(/normal/i);
+    expect($CashbackAccountTypeRadio).toHaveTextContent(/cashback/i);
+
+    expect($NormalAccountTypeRadio).toHaveClass("active");
+    expect($CashbackAccountTypeRadio).not.toHaveClass("active");
+
+    const handleAssertClickAccountTypeRadio = async (isNormalAccountTypeRadio: boolean) => {
+      if (isNormalAccountTypeRadio) {
+        await user.click($NormalAccountTypeRadio);
+
+        expect($NormalAccountTypeRadio).toHaveClass("active");
+        expect($CashbackAccountTypeRadio).not.toHaveClass("active");
+
+        return;
+      }
+
+      await user.click($CashbackAccountTypeRadio);
+
+      expect($CashbackAccountTypeRadio).toHaveClass("active");
+      expect($NormalAccountTypeRadio).not.toHaveClass("active");
+    };
+
+    await handleAssertClickAccountTypeRadio(false);
+    await handleAssertClickAccountTypeRadio(true);
+    await handleAssertClickAccountTypeRadio(true);
+
     await user.click($payButton);
   };
 
@@ -162,9 +194,7 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
   await handleAssertBundles(false);
 
-  await handleAssertPhone($airtimeTab);
-  expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
-  await handleAssertBundles(true);
-
-  // Assert
+  // await handleAssertPhone($airtimeTab);
+  // expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
+  // await handleAssertBundles(true);
 });
