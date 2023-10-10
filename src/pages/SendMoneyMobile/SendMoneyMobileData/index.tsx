@@ -3,14 +3,15 @@ import { useForm } from "react-hook-form";
 import Input from "@components/SendMoney/Input";
 import Tag from "@components/SendMoney/Tag";
 import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 import useTransferPin from "@hooks/useTransferPin";
 
 import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
+import AccountType from "../AccountType";
+import useAccountType from "../AccountType/useAccountType";
 
-import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
-import { useState } from "react";
-import { TUserAccountType } from "@services/users/types";
+import type { TUserAccountType } from "@services/users/types";
 
 type TSendMoneyMobileDataProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -18,22 +19,6 @@ type TSendMoneyMobileDataProps = {
   restNetworks: TSendMoneyMobileNetwork[];
   handleCurrentNetworkClick: () => void;
   handleCurrentNetworkChange: (networkId: string) => void;
-};
-
-const useAccountType = () => {
-  const [accountType, setAccountType] = useState<TUserAccountType>("NORMAL");
-
-  const handleAccountTypeChange = (type: TUserAccountType) => {
-    setAccountType(type);
-  };
-
-  const allAccountType = ["NORMAL", "CASHBACK"];
-
-  return {
-    allAccountType,
-    accountType,
-    handleAccountTypeChange,
-  };
 };
 
 const useSendMoneyMobileData = ({
@@ -152,20 +137,11 @@ const SendMoneyMobileData = ({
         })}
       </div>
 
-      <div>
-        <h3>From Account?</h3>
-
-        {allAccountType.map((type) => (
-          <div
-            key={type}
-            data-testid="account-type-radio"
-            onClick={() => handleAccountTypeChange(type as TUserAccountType)}
-            className={accountType === type ? "active" : ""}
-          >
-            {type}
-          </div>
-        ))}
-      </div>
+      <AccountType
+        allAccountType={allAccountType}
+        handleAccountTypeChange={handleAccountTypeChange}
+        accountType={accountType}
+      />
 
       <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
         Pay

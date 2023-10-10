@@ -194,7 +194,7 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
   await handleAssertBundles(false);
 
-  // await handleAssertPhone($airtimeTab);
-  // expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
-  // await handleAssertBundles(true);
+  await handleAssertPhone($airtimeTab);
+  expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
+  await handleAssertBundles(true);
 });

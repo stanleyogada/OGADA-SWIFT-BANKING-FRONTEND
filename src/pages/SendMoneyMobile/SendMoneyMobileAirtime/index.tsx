@@ -3,12 +3,15 @@ import { useForm } from "react-hook-form";
 import Input from "@components/SendMoney/Input";
 import Tag from "@components/SendMoney/Tag";
 import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import useTransferPin from "@hooks/useTransferPin";
 
 import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
+import AccountType from "../AccountType";
+import useAccountType from "../AccountType/useAccountType";
 
-import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
-import useTransferPin from "@hooks/useTransferPin";
+import type { TUserAccountType } from "@services/users/types";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -18,7 +21,13 @@ type TSendMoneyMobileAirtimeProps = {
   handleCurrentNetworkChange: (networkId: string) => void;
 };
 
-const useSendMoneyMobileAirtime = ({ currentNetwork }: { currentNetwork: TSendMoneyMobileNetwork }) => {
+const useSendMoneyMobileAirtime = ({
+  currentNetwork,
+  accountType,
+}: {
+  currentNetwork: TSendMoneyMobileNetwork;
+  accountType: TUserAccountType;
+}) => {
   const form = useForm();
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
@@ -35,6 +44,7 @@ const useSendMoneyMobileAirtime = ({ currentNetwork }: { currentNetwork: TSendMo
         operator: currentNetwork.name,
         is_airtime: true,
         transfer_pin: transferPin,
+        sender_account_type: accountType,
       };
 
       console.log(body);
@@ -54,7 +64,8 @@ const SendMoneyMobileAirtime = ({
   handleCurrentNetworkClick,
   handleCurrentNetworkChange,
 }: TSendMoneyMobileAirtimeProps) => {
-  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileAirtime({ currentNetwork });
+  const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
+  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileAirtime({ currentNetwork, accountType });
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
     form,
     handleClearTransferPin,
@@ -131,6 +142,12 @@ const SendMoneyMobileAirtime = ({
               min: 2,
             }),
           }}
+        />
+
+        <AccountType
+          allAccountType={allAccountType}
+          handleAccountTypeChange={handleAccountTypeChange}
+          accountType={accountType}
         />
 
         <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
