@@ -21,7 +21,7 @@ type TSendMoneyMobileAirtimeProps = {
 const useSendMoneyMobileAirtime = ({ currentNetwork }: { currentNetwork: TSendMoneyMobileNetwork }) => {
   const form = useForm();
   const { handleSubmit: _handleSubmit } = form;
-  const { transferPin, hasTransferPin, handlePushTransferPinModal } = useTransferPin();
+  const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
@@ -43,6 +43,7 @@ const useSendMoneyMobileAirtime = ({ currentNetwork }: { currentNetwork: TSendMo
   return {
     form,
     handleSubmit,
+    handleClearTransferPin,
   };
 };
 
@@ -53,8 +54,11 @@ const SendMoneyMobileAirtime = ({
   handleCurrentNetworkClick,
   handleCurrentNetworkChange,
 }: TSendMoneyMobileAirtimeProps) => {
-  const { form, handleSubmit } = useSendMoneyMobileAirtime({ currentNetwork });
-  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount(form);
+  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileAirtime({ currentNetwork });
+  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
+    form,
+    handleClearTransferPin,
+  });
 
   return (
     <div>

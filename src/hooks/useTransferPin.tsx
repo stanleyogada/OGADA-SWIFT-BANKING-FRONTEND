@@ -12,6 +12,8 @@ const useTransferPin = () => {
     setTransferPin(value);
   };
 
+  const handleClearTransferPin = () => setTransferPin("");
+
   const hasTransferPin = useMemo(() => !transferPin && process.env.NODE_ENV !== "test", [transferPin]);
 
   const handlePushTransferPinModal = () => {
@@ -26,6 +28,7 @@ const useTransferPin = () => {
     hasTransferPin,
     setTransferPin,
     handlePushTransferPinModal,
+    handleClearTransferPin,
   };
 };
 

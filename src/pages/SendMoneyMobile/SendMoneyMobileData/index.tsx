@@ -21,7 +21,7 @@ type TSendMoneyMobileDataProps = {
 const useSendMoneyMobileData = ({ currentNetwork }: { currentNetwork: TSendMoneyMobileNetwork }) => {
   const form = useForm();
   const { handleSubmit: _handleSubmit } = form;
-  const { transferPin, hasTransferPin, handlePushTransferPinModal } = useTransferPin();
+  const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
@@ -43,6 +43,7 @@ const useSendMoneyMobileData = ({ currentNetwork }: { currentNetwork: TSendMoney
   return {
     form,
     handleSubmit,
+    handleClearTransferPin,
   };
 };
 
@@ -53,8 +54,11 @@ const SendMoneyMobileData = ({
   handleCurrentNetworkClick,
   handleCurrentNetworkChange,
 }: TSendMoneyMobileDataProps) => {
-  const { form, handleSubmit } = useSendMoneyMobileData({ currentNetwork });
-  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount(form);
+  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileData({ currentNetwork });
+  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
+    form,
+    handleClearTransferPin,
+  });
 
   return (
     <div>
