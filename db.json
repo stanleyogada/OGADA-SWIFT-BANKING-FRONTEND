@@ -399,6 +399,16 @@
       "amount": "1200",
       "remark": "aedf",
       "id": 33
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Citibank Nigeria",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "xcvbn,.",
+      "id": 34
     }
   ],
   "user-by-phone": [
