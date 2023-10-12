@@ -79,7 +79,7 @@ const EditAccount = () => {
                   });
                 }}
               >
-                Update Pin
+                Update Login Passcode
               </div>
 
               {updateUserMutation.isSuccess && (
