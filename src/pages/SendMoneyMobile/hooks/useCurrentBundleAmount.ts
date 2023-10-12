@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 
 type TProps = {
   form: ReturnType<typeof useForm>;
+  mutationIsLoading: boolean;
   handleClearTransferPin: () => void;
 };
 
-const useCurrentBundleAmount = ({ form, handleClearTransferPin }: TProps) => {
+const useCurrentBundleAmount = ({ form, mutationIsLoading, handleClearTransferPin }: TProps) => {
   const { watch, setValue } = form;
   const [currentBundleAmount, setCurrentBundleAmount] = useState<string>("");
   const amountValue = watch("amount");
@@ -24,9 +25,10 @@ const useCurrentBundleAmount = ({ form, handleClearTransferPin }: TProps) => {
 
   const isPayButtonDisabled = useMemo(() => {
     if (!amountValue) return true;
+    if (mutationIsLoading) return true;
 
     return false;
-  }, [amountValue]);
+  }, [amountValue, mutationIsLoading]);
 
   const handleBundleClick = (amount: string) => {
     setCurrentBundleAmount(currentBundleAmount === amount ? "" : amount);

@@ -39,12 +39,11 @@ const postSendMoneyMobile = async (payload: TSendMoneyMobileProps) => {
     url: ENDPOINTS.sendMoneyMobile,
     data: {
       transfer_pin: payload.transferPin,
-      sender_account_type: payload.senderAccountType,
+      sender_account_type: payload.accountType,
       amount: payload.amount,
       operator: payload.operator,
       phone_number: payload.phoneNumber,
       is_airtime: payload.isAirtime,
-      remark: payload.remark,
     },
   });
 };

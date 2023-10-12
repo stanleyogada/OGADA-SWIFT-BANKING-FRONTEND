@@ -12,6 +12,7 @@ import AccountType from "../AccountType";
 import useAccountType from "../AccountType/useAccountType";
 
 import type { TUserAccountType } from "@services/users/types";
+import useSendMoneyMobileMutation from "../hooks/useSendMoneyMobileMutation";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -31,6 +32,7 @@ const useSendMoneyMobileAirtime = ({
   const form = useForm();
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
+  const mutation = useSendMoneyMobileMutation(true);
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
@@ -52,6 +54,10 @@ const useSendMoneyMobileAirtime = ({
 
   return {
     form,
+    mutation: {
+      isLoading: mutation.isLoading,
+    },
+
     handleSubmit,
     handleClearTransferPin,
   };
@@ -65,9 +71,13 @@ const SendMoneyMobileAirtime = ({
   handleCurrentNetworkChange,
 }: TSendMoneyMobileAirtimeProps) => {
   const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
-  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileAirtime({ currentNetwork, accountType });
+  const { form, mutation, handleSubmit, handleClearTransferPin } = useSendMoneyMobileAirtime({
+    currentNetwork,
+    accountType,
+  });
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
     form,
+    mutationIsLoading: mutation.isLoading,
     handleClearTransferPin,
   });
 

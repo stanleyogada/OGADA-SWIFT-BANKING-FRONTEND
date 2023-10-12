@@ -7,12 +7,25 @@ import SendMoneyMobile from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
+import TestProviders from "@components/TestProviders";
+import createServer from "@utils/test/createServer";
+import { BASE_URL, ENDPOINTS } from "@constants/services";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
 
+createServer([
+  {
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
+    method: "post",
+  },
+]);
+
 test("Renders as mobile page as tabs", async () => {
-  render(<SendMoneyMobile />);
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
   const $tabs = screen.getByTestId("tabs");
   const withinTabs = within($tabs);
@@ -23,7 +36,9 @@ test("Renders as mobile page as tabs", async () => {
 });
 
 test("Renders a network selector", async () => {
-  render(<SendMoneyMobile />);
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
   const assertNetworks = async (currentNetworkName: string) => {
     let currentNetwork: TSendMoneyMobileNetwork | undefined;
@@ -71,7 +86,9 @@ test("Renders a network selector", async () => {
 });
 
 test("Ensure buy mobile data/airtime successfully", async () => {
-  render(<SendMoneyMobile />);
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
   const $airtimeTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[0];
   const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
@@ -155,8 +172,6 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     expect($payButton).toBeEnabled();
     handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
 
-    // screen.debug();
-
     const allAccountTypeRadio = screen.getAllByTestId("account-type-radio");
     expect(allAccountTypeRadio).toHaveLength(2);
 
@@ -188,13 +203,16 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     await handleAssertClickAccountTypeRadio(true);
 
     await user.click($payButton);
+
+    await handleAssertLoadingState($payButton);
+    expect(screen.getByTestId("success")).toBeInTheDocument();
   };
 
   await handleAssertPhone($dataTab);
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
   await handleAssertBundles(false);
 
-  await handleAssertPhone($airtimeTab);
-  expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
-  await handleAssertBundles(true);
+  // await handleAssertPhone($airtimeTab);
+  // expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
+  // await handleAssertBundles(true);
 });

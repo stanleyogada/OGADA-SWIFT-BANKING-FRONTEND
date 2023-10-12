@@ -12,6 +12,7 @@ import AccountType from "../AccountType";
 import useAccountType from "../AccountType/useAccountType";
 
 import type { TUserAccountType } from "@services/users/types";
+import useSendMoneyMobileMutation from "../hooks/useSendMoneyMobileMutation";
 
 type TSendMoneyMobileDataProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -31,6 +32,7 @@ const useSendMoneyMobileData = ({
   const form = useForm();
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
+  const mutation = useSendMoneyMobileMutation(false);
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
@@ -38,20 +40,21 @@ const useSendMoneyMobileData = ({
         return handlePushTransferPinModal();
       }
 
-      const body = {
-        phone_number: data.phoneNumber,
-        amount: data.amount,
+      mutation.handleMutate({
+        accountType,
+        transferPin,
         operator: currentNetwork.name,
-        is_airtime: false,
-        transfer_pin: transferPin,
-        sender_account_type: accountType,
-      };
-
-      console.log(body);
+        phoneNumber: data.phoneNumber,
+        amount: data.amount,
+      });
     });
 
   return {
     form,
+    mutation: {
+      isLoading: mutation.isLoading,
+      isSuccess: mutation.isSuccess,
+    },
     handleSubmit,
     handleClearTransferPin,
   };
@@ -65,9 +68,13 @@ const SendMoneyMobileData = ({
   handleCurrentNetworkChange,
 }: TSendMoneyMobileDataProps) => {
   const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
-  const { form, handleSubmit, handleClearTransferPin } = useSendMoneyMobileData({ currentNetwork, accountType });
+  const { form, mutation, handleSubmit, handleClearTransferPin } = useSendMoneyMobileData({
+    currentNetwork,
+    accountType,
+  });
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
     form,
+    mutationIsLoading: mutation.isLoading,
     handleClearTransferPin,
   });
 
@@ -145,7 +152,10 @@ const SendMoneyMobileData = ({
 
       <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
         Pay
+        {mutation.isLoading && <div data-testid="loading"></div>}
       </button>
+
+      {mutation.isSuccess && <div data-testid="success"></div>}
     </div>
   );
 };
