@@ -40,22 +40,20 @@ const useSendMoneyMobileAirtime = ({
         return handlePushTransferPinModal();
       }
 
-      const body = {
-        phone_number: data.phoneNumber,
-        amount: data.amount,
+      mutation.handleMutate({
+        accountType,
+        transferPin,
         operator: currentNetwork.name,
-        is_airtime: true,
-        transfer_pin: transferPin,
-        sender_account_type: accountType,
-      };
-
-      console.log(body);
+        phoneNumber: data.phoneNumber,
+        amount: data.amount,
+      });
     });
 
   return {
     form,
     mutation: {
       isLoading: mutation.isLoading,
+      isSuccess: mutation.isSuccess,
     },
 
     handleSubmit,
@@ -162,7 +160,10 @@ const SendMoneyMobileAirtime = ({
 
         <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
           Pay
+          {mutation.isLoading && <div data-testid="loading"></div>}
         </button>
+
+        {mutation.isSuccess && <div data-testid="success"></div>}
       </div>
     </div>
   );
