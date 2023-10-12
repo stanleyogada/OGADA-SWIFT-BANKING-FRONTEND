@@ -25,6 +25,12 @@ const EditAccountWrapper = styled.div`
     .updateUser {
       color: blue;
     }
+
+    .update-pin {
+      color: ${COLORS.blue};
+      cursor: pointer;
+      font-weight: 600;
+    }
   }
 `;
 
