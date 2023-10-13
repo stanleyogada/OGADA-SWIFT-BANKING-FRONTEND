@@ -5,8 +5,12 @@ import SendMoneyModal from "@components/SendMoney/SendMoneyModal";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 
 import type { AxiosError } from "axios";
+import useSendMoneyBeneficiaries from "@hooks/useSendMoneyBeneficiaries";
+import { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
 type TProps = {
+  phoneNumber: string;
+  currentNetwork: TSendMoneyMobileNetwork;
   mutation: {
     isSuccess: boolean;
     isError: boolean;
@@ -16,8 +20,9 @@ type TProps = {
   onSuccessClose: () => void;
 };
 
-const useToaster = ({ mutation, onErrorClose, onSuccessClose }: TProps) => {
+const useToaster = ({ phoneNumber, currentNetwork, mutation, onErrorClose, onSuccessClose }: TProps) => {
   const { handleAdd } = useModalConsumer();
+  const { handleSetBeneficiary } = useSendMoneyBeneficiaries();
 
   const errorMessage = useMemo(() => {
     if (!mutation.isError || !mutation.error) return null;
@@ -40,6 +45,13 @@ const useToaster = ({ mutation, onErrorClose, onSuccessClose }: TProps) => {
     if (!mutation.isSuccess) return;
 
     setTimeout(() => {
+      handleSetBeneficiary("mobile", {
+        phoneNumber,
+        operator: currentNetwork.id,
+        // avatar: recipient.data?.avatar,
+        type: "mobile",
+      });
+
       // handleFormReset();
       // setValue("recipientAccountNumber", ""); // Have no idea why the input value is not reset
       handleAdd({

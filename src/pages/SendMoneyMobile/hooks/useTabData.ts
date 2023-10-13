@@ -24,16 +24,22 @@ const useTabData = ({ currentNetwork, accountType, isAirtime, handleCurrentNetwo
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
   const mutation = useSendMoneyMobileMutation(isAirtime);
-  const { handleGetAllBeneficiaries, handleSetBeneficiary } = useSendMoneyBeneficiaries();
+  const { handleGetAllBeneficiaries } = useSendMoneyBeneficiaries();
+
+  const phoneNumber = form.watch("phoneNumber");
 
   useToaster({
+    phoneNumber,
+    currentNetwork,
     mutation: {
       isSuccess: mutation.isSuccess,
       isError: mutation.isError,
       error: mutation.error,
     },
     onErrorClose: () => handleClearTransferPin(),
-    onSuccessClose: () => window.location.reload(),
+    onSuccessClose: () => {
+      window.location.reload();
+    },
   });
 
   const handleSubmit = () =>
@@ -51,23 +57,28 @@ const useTabData = ({ currentNetwork, accountType, isAirtime, handleCurrentNetwo
       });
     });
 
-  const phoneNumber = form.watch("phoneNumber");
-
   const showBeneficiaries = useMemo(() => {
-    // if (phoneNumber) return false;
+    if (phoneNumber) return false;
 
     return true;
   }, [phoneNumber]);
 
   const handleBeneficiaryClick = (_: unknown, beneficiaryPhoneNumber?: string) => {
-    const beneficiary = handleGetAllBeneficiaries("bank").find(
+    console.log({
+      beneficiaryPhoneNumber,
+    });
+
+    const beneficiary = handleGetAllBeneficiaries("mobile").find(
       (beneficiary) => beneficiary.phoneNumber === beneficiaryPhoneNumber
     );
-    // if (!beneficiary) return;
-    // form.setValue("phoneNumber", beneficiaryPhoneNumber);
-    // handleCurrentNetworkChange(beneficiary.operator as string);
 
-    console.log({ beneficiary });
+    console.log({
+      beneficiary,
+    });
+
+    if (!beneficiary) return;
+    form.setValue("phoneNumber", beneficiaryPhoneNumber as string);
+    handleCurrentNetworkChange(beneficiary.operator as string);
   };
 
   return {

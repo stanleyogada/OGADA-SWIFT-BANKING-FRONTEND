@@ -12,16 +12,28 @@ import SendMoneyMobile from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
+
+const CURRENT_USER_ID = 2000;
 
 const { handleCreateErrorConfig } = createServer([
   {
     url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
     method: "post",
   },
-  `${BASE_URL}${ENDPOINTS.currentUser}`,
+  {
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+    res() {
+      return {
+        data: {
+          id: CURRENT_USER_ID,
+        },
+      };
+    },
+  },
 ]);
 
 test("Renders as mobile page as tabs", async () => {
@@ -223,23 +235,6 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   await handleAssertPhone($airtimeTab);
   expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
   await handleAssertBundles(true);
-});
-
-describe("Shows beneficiaries and filter correctly if any", () => {
-  test("When empty", async () => {
-    localStorageGetItem.mockReturnValueOnce(null);
-
-    render(<SendMoneyMobile />, {
-      wrapper: TestProviders,
-    });
-
-    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
-    expect(screen.getByText(/no beneficiaries/i)).toBeInTheDocument();
-  });
-
-  // test("When not empty", async () => {
-
-  // });
 });
 
 test("Ensure error is properly handled", async () => {

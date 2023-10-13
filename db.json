@@ -411,7 +411,7 @@
       "id": 34
     }
   ],
-  "transactions.send.mobiles": [
+  "transactions.send.mobile": [
     {
       "transfer_pin": "0000",
       "sender_account_type": "NORMAL",
@@ -438,6 +438,78 @@
       "phone_number": "42863518323",
       "is_airtime": true,
       "id": 3
+    },
+    {
+      "transfer_pin": "4444",
+      "sender_account_type": "NORMAL",
+      "amount": 200,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 4
+    },
+    {
+      "transfer_pin": "2525",
+      "sender_account_type": "NORMAL",
+      "amount": 2000,
+      "operator": "Glo",
+      "phone_number": "90241739422",
+      "is_airtime": true,
+      "id": 5
+    },
+    {
+      "transfer_pin": "6666",
+      "sender_account_type": "NORMAL",
+      "amount": 3000,
+      "operator": "Glo",
+      "phone_number": "90123456782",
+      "is_airtime": true,
+      "id": 6
+    },
+    {
+      "transfer_pin": "6666",
+      "sender_account_type": "NORMAL",
+      "amount": 50,
+      "operator": "Glo",
+      "phone_number": "92345678901",
+      "is_airtime": true,
+      "id": 7
+    },
+    {
+      "transfer_pin": "2587",
+      "sender_account_type": "NORMAL",
+      "amount": 1000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": true,
+      "id": 8
+    },
+    {
+      "transfer_pin": "6666",
+      "sender_account_type": "NORMAL",
+      "amount": 1000,
+      "operator": "MTN",
+      "phone_number": "12345678903",
+      "is_airtime": true,
+      "id": 9
+    },
+    {
+      "transfer_pin": "3333",
+      "sender_account_type": "NORMAL",
+      "amount": 3000,
+      "operator": "MTN",
+      "phone_number": "12345678903",
+      "is_airtime": true,
+      "id": 10
+    },
+    {
+      "transfer_pin": "3333",
+      "sender_account_type": "NORMAL",
+      "amount": 500,
+      "operator": "Glo",
+      "phone_number": "92345678901",
+      "is_airtime": true,
+      "id": 11
     }
   ],
   "user-by-phone": [
