@@ -411,7 +411,7 @@
       "id": 34
     }
   ],
-  "transactions.send.mobile": [
+  "transactions.send.mobiles": [
     {
       "transfer_pin": "0000",
       "sender_account_type": "NORMAL",
@@ -420,6 +420,24 @@
       "phone_number": "4286351832e",
       "is_airtime": true,
       "id": 1
+    },
+    {
+      "transfer_pin": "1230",
+      "sender_account_type": "NORMAL",
+      "amount": 10002,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 2
+    },
+    {
+      "transfer_pin": "4444",
+      "sender_account_type": "NORMAL",
+      "amount": 1000,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 3
     }
   ],
   "user-by-phone": [

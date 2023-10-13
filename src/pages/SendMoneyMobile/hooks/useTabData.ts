@@ -5,6 +5,7 @@ import { TUserAccountType } from "@services/users/types";
 import useTransferPin from "@hooks/useTransferPin";
 
 import useSendMoneyMobileMutation from "./useSendMoneyMobileMutation";
+import useToaster from "./useToaster";
 
 type TProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -20,6 +21,16 @@ const useTabData = ({ currentNetwork, accountType, isAirtime }: TProps) => {
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
   const mutation = useSendMoneyMobileMutation(isAirtime);
+
+  useToaster({
+    mutation: {
+      isSuccess: mutation.isSuccess,
+      isError: mutation.isError,
+      error: mutation.error,
+    },
+    onErrorClose: () => handleClearTransferPin(),
+    onSuccessClose: () => window.location.reload(),
+  });
 
   const handleSubmit = () =>
     _handleSubmit((data) => {

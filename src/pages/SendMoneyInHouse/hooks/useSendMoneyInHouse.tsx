@@ -75,7 +75,7 @@ const useSendMoneyInHouse = () => {
     if (!sendMoneyMutation.isError || !sendMoneyMutation.error) return null;
 
     let error = (sendMoneyMutation.error as AxiosError).response?.data as { message: string };
-    return error.message;
+    return error.message || (sendMoneyMutation.error as AxiosError)?.message;
   }, [sendMoneyMutation.isError, sendMoneyMutation.error]);
 
   useEffect(() => {
