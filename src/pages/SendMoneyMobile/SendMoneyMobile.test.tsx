@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES, LOCAL_STORAGE_KEYS } from "@constants/index";
 
 import SendMoneyMobile from ".";
 
@@ -11,6 +11,7 @@ import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
+import { localStorageGetItem } from "@utils/test/mocks/localStorage";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
@@ -214,7 +215,6 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     await handleAssertLoadingState($payButton);
     expect(screen.getByTestId("success")).toBeInTheDocument();
   };
-
   await handleAssertPhone($dataTab);
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
   await handleAssertBundles(false);
@@ -222,6 +222,23 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   await handleAssertPhone($airtimeTab);
   expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
   await handleAssertBundles(true);
+});
+
+describe("Shows beneficiaries and filter correctly if any", () => {
+  test("When empty", async () => {
+    localStorageGetItem.mockReturnValueOnce(null);
+
+    render(<SendMoneyMobile />, {
+      wrapper: TestProviders,
+    });
+
+    expect(localStorageGetItem).toHaveBeenCalledWith(LOCAL_STORAGE_KEYS.saveBeneficiary);
+    expect(screen.getByText(/no beneficiaries/i)).toBeInTheDocument();
+  });
+
+  // test("When not empty", async () => {
+
+  // });
 });
 
 test("Ensure error is properly handled", async () => {
