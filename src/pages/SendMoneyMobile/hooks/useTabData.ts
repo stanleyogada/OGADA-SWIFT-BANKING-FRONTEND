@@ -13,7 +13,10 @@ type TProps = {
 };
 
 const useTabData = ({ currentNetwork, accountType, isAirtime }: TProps) => {
-  const form = useForm();
+  const form = useForm<{
+    phoneNumber: string;
+    amount: string;
+  }>();
   const { handleSubmit: _handleSubmit } = form;
   const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
   const mutation = useSendMoneyMobileMutation(isAirtime);
@@ -29,7 +32,7 @@ const useTabData = ({ currentNetwork, accountType, isAirtime }: TProps) => {
         transferPin,
         operator: currentNetwork.name,
         phoneNumber: data.phoneNumber,
-        amount: data.amount,
+        amount: +data.amount,
       });
     });
 

@@ -95,8 +95,8 @@ test("Ensure buy mobile data/airtime successfully", async () => {
 
   const handleAssertPhone = async ($tab: HTMLElement) => {
     await user.click($tab);
-    const $phone = screen.getByPlaceholderText(/phone number/i);
 
+    const $phone = screen.getByPlaceholderText(/phone number/i);
     const phoneValue = "08012345678";
 
     await user.type($phone, phoneValue);
@@ -145,6 +145,9 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     };
 
     const $payButton = screen.getByRole("button", { name: /pay/i });
+    const $phone = screen.getByPlaceholderText(/phone number/i);
+    const phoneValue = "08012345678";
+    await user.clear($phone);
 
     expect($payButton).toBeDisabled();
     expect($firstBundle).not.toHaveClass("active");
@@ -152,8 +155,12 @@ test("Ensure buy mobile data/airtime successfully", async () => {
 
     await user.click($firstBundle);
     expect($firstBundle).toHaveClass("active");
-    expect($payButton).toBeEnabled();
     handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
+
+    await user.type($phone, phoneValue.slice(0, -1));
+    expect($payButton).toBeDisabled();
+    await user.type($phone, phoneValue.slice(-1));
+    expect($payButton).toBeEnabled();
 
     await user.click($firstBundle);
     expect($firstBundle).not.toHaveClass("active");

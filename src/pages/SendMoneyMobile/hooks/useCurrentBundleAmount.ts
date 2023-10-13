@@ -2,7 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 type TProps = {
-  form: ReturnType<typeof useForm>;
+  form: ReturnType<
+    typeof useForm<{
+      phoneNumber: string;
+      amount: string;
+    }>
+  >;
   mutationIsLoading: boolean;
   handleClearTransferPin: () => void;
 };
@@ -11,6 +16,7 @@ const useCurrentBundleAmount = ({ form, mutationIsLoading, handleClearTransferPi
   const { watch, setValue } = form;
   const [currentBundleAmount, setCurrentBundleAmount] = useState<string>("");
   const amountValue = watch("amount");
+  const phoneNumberValue = watch("phoneNumber");
 
   useEffect(() => {
     if (!currentBundleAmount) {
@@ -25,10 +31,12 @@ const useCurrentBundleAmount = ({ form, mutationIsLoading, handleClearTransferPi
 
   const isPayButtonDisabled = useMemo(() => {
     if (!amountValue) return true;
+    if (!phoneNumberValue) return true;
+    if (phoneNumberValue.length < 11) return true;
     if (mutationIsLoading) return true;
 
     return false;
-  }, [amountValue, mutationIsLoading]);
+  }, [amountValue, phoneNumberValue, mutationIsLoading]);
 
   const handleBundleClick = (amount: string) => {
     setCurrentBundleAmount(currentBundleAmount === amount ? "" : amount);
