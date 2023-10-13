@@ -31,7 +31,9 @@ const SendMoneyBank = () => {
 
   const listData = () => {
     if (filtered.data) {
-      return filtered.data?.map((bank) => (
+      let sorted = filtered.data.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+      return sorted?.map((bank) => (
         <BankItem
           key={bank.code}
           bankLogo={bank.logo}
@@ -41,7 +43,8 @@ const SendMoneyBank = () => {
         />
       ));
     }
-    return banks.data?.map((bank) => (
+    let sorted = banks.data?.sort((a, b) => (a.name > b.name ? 1 : -1));
+    return sorted?.map((bank) => (
       <BankItem
         key={bank.code}
         bankLogo={bank.logo}

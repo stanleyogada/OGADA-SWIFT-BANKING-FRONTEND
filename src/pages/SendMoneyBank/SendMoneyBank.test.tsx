@@ -158,6 +158,17 @@ beforeEach(() => {
 //   });
 // });
 
+test("sorts data alphabetically", async () => {
+  render(<SendMoneyBank />, {
+    wrapper: TestProviders,
+  });
+
+  let allBanks = await screen.findAllByTestId("bank");
+
+  expect(allBanks).toHaveLength(8);
+  expect(allBanks[7]).toHaveTextContent("Ecobank Nigeria");
+});
+
 test("Allow users to see list of banks to choose from", async () => {
   render(<SendMoneyBank />, {
     wrapper: TestProviders,
