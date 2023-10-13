@@ -8,6 +8,7 @@ import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
 import AccountType from "../AccountType";
 import useAccountType from "../AccountType/useAccountType";
 import useTabData from "../hooks/useTabData";
+import Beneficiaries from "@components/SendMoney/Beneficiaries";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -25,10 +26,19 @@ const SendMoneyMobileAirtime = ({
   handleCurrentNetworkChange,
 }: TSendMoneyMobileAirtimeProps) => {
   const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
-  const { form, mutation, handleSubmit, handleClearTransferPin } = useTabData({
+  const {
+    beneficiaries,
+    showBeneficiaries,
+    form,
+    mutation,
+    handleSubmit,
+    handleClearTransferPin,
+    handleBeneficiaryClick,
+  } = useTabData({
     isAirtime: true,
     currentNetwork,
     accountType,
+    handleCurrentNetworkChange,
   });
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
     form,
@@ -122,6 +132,12 @@ const SendMoneyMobileAirtime = ({
           {mutation.isError && <div data-testid="error"></div>}
         </button>
       </div>
+
+      <Beneficiaries
+        beneficiaries={beneficiaries}
+        showBeneficiaries={showBeneficiaries}
+        onBeneficiaryClick={handleBeneficiaryClick}
+      />
     </div>
   );
 };

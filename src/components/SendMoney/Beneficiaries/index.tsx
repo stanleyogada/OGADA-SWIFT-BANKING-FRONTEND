@@ -6,7 +6,7 @@ import ListItem from "../ListItem";
 type TProps = {
   showBeneficiaries: boolean;
   beneficiaries: TBeneficiary[];
-  onBeneficiaryClick: (beneficiaryAccountNumber: string) => void;
+  onBeneficiaryClick: (beneficiaryAccountNumber: string, beneficiaryPhoneNumber?: string) => void;
 };
 
 const Beneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiaryClick }: TProps) => {
@@ -32,7 +32,7 @@ const Beneficiaries = ({ showBeneficiaries, beneficiaries, onBeneficiaryClick }:
             text={beneficiary.fullName as string}
             secondaryText={beneficiary.accountNumber as string}
             dataTestid="beneficiary"
-            onClick={() => onBeneficiaryClick(beneficiary.accountNumber as string)}
+            onClick={() => onBeneficiaryClick(beneficiary.accountNumber as string, beneficiary.phoneNumber as string)}
           />
         ))}
       </div>

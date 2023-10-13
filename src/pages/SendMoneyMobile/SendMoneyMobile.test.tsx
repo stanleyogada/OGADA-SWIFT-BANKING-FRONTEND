@@ -2,16 +2,16 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES, LOCAL_STORAGE_KEYS } from "@constants/index";
-
-import SendMoneyMobile from ".";
-
-import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
-import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 import { handleAssertLoadingState } from "@utils/test/assertUtils";
 import TestProviders from "@components/TestProviders";
 import createServer from "@utils/test/createServer";
 import { BASE_URL, ENDPOINTS } from "@constants/services";
 import { localStorageGetItem } from "@utils/test/mocks/localStorage";
+
+import SendMoneyMobile from ".";
+
+import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
+import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
@@ -21,6 +21,7 @@ const { handleCreateErrorConfig } = createServer([
     url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
     method: "post",
   },
+  `${BASE_URL}${ENDPOINTS.currentUser}`,
 ]);
 
 test("Renders as mobile page as tabs", async () => {

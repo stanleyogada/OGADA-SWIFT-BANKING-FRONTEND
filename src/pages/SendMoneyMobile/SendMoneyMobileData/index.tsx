@@ -29,6 +29,7 @@ const SendMoneyMobileData = ({
     isAirtime: false,
     currentNetwork,
     accountType,
+    handleCurrentNetworkChange,
   });
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
     form,
