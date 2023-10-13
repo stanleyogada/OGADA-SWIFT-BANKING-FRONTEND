@@ -1,18 +1,13 @@
-import { useForm } from "react-hook-form";
-
 import Input from "@components/SendMoney/Input";
 import Tag from "@components/SendMoney/Tag";
 import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
-import useTransferPin from "@hooks/useTransferPin";
 
 import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
 import AccountType from "../AccountType";
 import useAccountType from "../AccountType/useAccountType";
-
-import type { TUserAccountType } from "@services/users/types";
-import useSendMoneyMobileMutation from "../hooks/useSendMoneyMobileMutation";
+import useTabData from "../hooks/useTabData";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -20,45 +15,6 @@ type TSendMoneyMobileAirtimeProps = {
   restNetworks: TSendMoneyMobileNetwork[];
   handleCurrentNetworkClick: () => void;
   handleCurrentNetworkChange: (networkId: string) => void;
-};
-
-const useSendMoneyMobileAirtime = ({
-  currentNetwork,
-  accountType,
-}: {
-  currentNetwork: TSendMoneyMobileNetwork;
-  accountType: TUserAccountType;
-}) => {
-  const form = useForm();
-  const { handleSubmit: _handleSubmit } = form;
-  const { transferPin, hasTransferPin, handlePushTransferPinModal, handleClearTransferPin } = useTransferPin();
-  const mutation = useSendMoneyMobileMutation(true);
-
-  const handleSubmit = () =>
-    _handleSubmit((data) => {
-      if (hasTransferPin) {
-        return handlePushTransferPinModal();
-      }
-
-      mutation.handleMutate({
-        accountType,
-        transferPin,
-        operator: currentNetwork.name,
-        phoneNumber: data.phoneNumber,
-        amount: data.amount,
-      });
-    });
-
-  return {
-    form,
-    mutation: {
-      isLoading: mutation.isLoading,
-      isSuccess: mutation.isSuccess,
-    },
-
-    handleSubmit,
-    handleClearTransferPin,
-  };
 };
 
 const SendMoneyMobileAirtime = ({
@@ -69,7 +25,8 @@ const SendMoneyMobileAirtime = ({
   handleCurrentNetworkChange,
 }: TSendMoneyMobileAirtimeProps) => {
   const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
-  const { form, mutation, handleSubmit, handleClearTransferPin } = useSendMoneyMobileAirtime({
+  const { form, mutation, handleSubmit, handleClearTransferPin } = useTabData({
+    isAirtime: true,
     currentNetwork,
     accountType,
   });

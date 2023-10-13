@@ -15,7 +15,7 @@ import { BASE_URL, ENDPOINTS } from "@constants/services";
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
 
-createServer([
+const { handleCreateErrorConfig } = createServer([
   {
     url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
     method: "post",
@@ -216,3 +216,16 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
   await handleAssertBundles(true);
 });
+
+// test("Ensure error is properly handled", async () => {
+//   handleCreateErrorConfig({
+//     url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
+//     method: "post",
+//   });
+
+//     // const $airtimeTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[0];
+//   const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
+
+//   // await user.click($airtimeTab);
+
+// })
