@@ -18,6 +18,7 @@ const useSendMoneyMobileMutation = (isAirtime: boolean) => {
     isLoading: mutation.isLoading,
     isSuccess: mutation.isSuccess,
     isError: mutation.isError,
+    error: mutation.error,
     handleMutate,
   };
 };

@@ -41,6 +41,7 @@ const useTabData = ({ currentNetwork, accountType, isAirtime }: TProps) => {
     mutation: {
       isLoading: mutation.isLoading,
       isSuccess: mutation.isSuccess,
+      isError: mutation.isError,
     },
 
     handleSubmit,

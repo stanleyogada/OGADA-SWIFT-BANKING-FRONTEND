@@ -118,9 +118,9 @@ const SendMoneyMobileAirtime = ({
         <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
           Pay
           {mutation.isLoading && <div data-testid="loading"></div>}
+          {mutation.isSuccess && <div data-testid="success"></div>}
+          {mutation.isError && <div data-testid="error"></div>}
         </button>
-
-        {mutation.isSuccess && <div data-testid="success"></div>}
       </div>
     </div>
   );

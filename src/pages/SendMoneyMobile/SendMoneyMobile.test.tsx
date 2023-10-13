@@ -224,15 +224,34 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   await handleAssertBundles(true);
 });
 
-// test("Ensure error is properly handled", async () => {
-//   handleCreateErrorConfig({
-//     url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
-//     method: "post",
-//   });
+test("Ensure error is properly handled", async () => {
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
+    method: "post",
+  });
 
-//     // const $airtimeTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[0];
-//   const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
-//   // await user.click($airtimeTab);
+  const handleAssertPay = async () => {
+    const $payButton = screen.getByRole("button", { name: /pay/i });
+    const $phone = screen.getByPlaceholderText(/phone number/i);
+    await user.type($phone, "08012345678");
 
-// })
+    const [$firstBundle] = screen.getAllByTestId("bundle");
+    await user.click($firstBundle);
+
+    await user.click($payButton);
+
+    await handleAssertLoadingState($payButton);
+  };
+
+  await handleAssertPay();
+  expect(screen.getByTestId("error")).toBeInTheDocument();
+
+  const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
+  await user.click($dataTab);
+  await handleAssertPay();
+  expect(screen.getByTestId("error")).toBeInTheDocument();
+});
