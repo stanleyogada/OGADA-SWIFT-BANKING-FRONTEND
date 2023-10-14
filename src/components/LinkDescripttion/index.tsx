@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
+import { COLORS } from "@constants/colors";
 
 type TProps = {
   text: string;
@@ -22,15 +23,10 @@ const LinkDescription = ({ text, to }: TProps) => {
         <p data-testid="content">{text}</p>
 
         <div className="navigationBtn">
-          <button className="cancelBtn" data-testid="cancel">
+          <button className="cancelBtn" data-testid="cancel" onClick={handleRemove}>
             cancel
           </button>
-          <button
-            className="proceedBtn"
-            data-testid="proceedBtn"
-            onClick={() => handleNavigate()}
-            disabled={to ? false : true}
-          >
+          <button className="proceedBtn" data-testid="proceedBtn" onClick={handleNavigate} disabled={to ? false : true}>
             proceed
           </button>
         </div>
@@ -49,15 +45,22 @@ const LinkDescriptionWrapper = styled.div`
       width: 100%;
       display: flex;
       justify-content: end;
-      margin-top: 10px;
+      padding-top: 50px;
 
       .cancelBtn,
       .proceedBtn {
-        padding: 10px;
-        margin: 5px;
+        padding: 15px;
+        margin: 10px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .proceedBtn {
+        background-color: ${COLORS.blue};
+        color: ${COLORS.white};
       }
     }
   }

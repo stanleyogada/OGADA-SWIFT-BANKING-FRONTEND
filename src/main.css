@@ -25,6 +25,10 @@
   font-family: "Inter", sans-serif;
 }
 
+body {
+  overflow: hidden;
+}
+
 div.space-x-4 > :not(:last-child) {
   margin-right: 1rem;
 }

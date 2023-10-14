@@ -10,6 +10,8 @@ import transfer_icon from "@assets/transfer-icon.svg";
 import data from "@assets/data-icon.svg";
 import deposit from "@assets/deposit-icon.svg";
 import logout from "@assets/logout-icon.png";
+import checkIcon from "@assets/checkIcon.png";
+import errorIcon from "@assets/ErrorIcon.png";
 
 const vector = {
   stats() {
@@ -57,6 +59,12 @@ const vector = {
         }}
       />
     );
+  },
+  checkIcon() {
+    return <img src={checkIcon} width="100px" />;
+  },
+  errorIcon() {
+    return <img src={errorIcon} width="100px" />;
   },
 };
 

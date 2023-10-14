@@ -118,12 +118,11 @@ const HeroWrapper = styled.section`
 
 const PaymentWrapper = styled.section`
   width: 90vw;
-  margin: 0 auto;
-  margin-top: 0.75rem;
+  margin: 30px auto;
   h1 {
     font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 0.7rem;
+    margin: 1.5rem 0px;
   }
 
   .icons {
@@ -152,16 +151,14 @@ const NotifyWrapper = styled.section`
   gap: 0.5rem;
   width: 90vw;
   margin: 0 auto;
-  position: absolute;
+  margin-top: 20px;
   left: 1rem;
-  bottom: 5rem;
-  right: 0;
 
   .notify-1,
   .notify-2,
   .notify-3 {
     background: ${COLORS.gray};
-    padding: 0.5rem;
+    padding: 0.9rem;
     border-radius: 1rem;
     display: flex;
     align-items: center;
@@ -170,10 +167,12 @@ const NotifyWrapper = styled.section`
     a {
       text-decoration: none;
       font-weight: bold;
+      color: black;
     }
 
     p {
-      font-size: 1rem;
+      font-size: 0.8rem;
+      font-weight: light;
     }
   }
 

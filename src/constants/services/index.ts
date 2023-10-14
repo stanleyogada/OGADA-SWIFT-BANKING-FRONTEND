@@ -2,12 +2,22 @@ const env = (() => {
   const dev = {
     BASE_URL: "http://localhost:8000",
     currentUserAccounts: "/users/me.accounts",
+    sendMoneyInHouse: "/transactions.send.in-house",
+    sendMoneyBank: "/transactions.send.bank",
+    sendMoneyMobile: "/transactions.send.mobile",
+    getUserByPhone: "/user-by-phone",
+    getBankVerify: "/banks.verify",
     editUser: "/users/me",
   };
 
   const prod = {
     BASE_URL: "https://opay-demo-backend-production.up.railway.app/api/v1",
     currentUserAccounts: "/users/me/accounts",
+    sendMoneyInHouse: "/transactions/in-houses/send-money",
+    sendMoneyBank: "/transactions/banks/send-money",
+    sendMoneyMobile: "/transactions/mobiles/send-money",
+    getUserByPhone: "/users/by-phone",
+    getBankVerify: "/banks/verify",
     editUser: "/users",
   };
 
@@ -22,6 +32,9 @@ const QUERY_KEYS = {
   currentUser: "currentUser",
   currentUserAccounts: "currentUserAccounts",
   defaultUserLoginInfo: "defaultUserLoginInfo",
+  getUserByPhone: "getUserByPhone",
+  getAllBanks: "getAllBanks",
+  getBankVerify: "getBankVerify",
 };
 
 const ENDPOINTS = {
@@ -36,6 +49,12 @@ const ENDPOINTS = {
   forgetPasscode: "/auth/forgot-login-passcode",
   resetLoginPasscode: "/auth/reset-login-passcode",
   transactions: "/transactions/all", // (++ has fake data)
+  sendMoneyInHouse: env.sendMoneyInHouse, // (++ has fake data)
+  sendMoneyBank: env.sendMoneyBank, // (++ has fake data)
+  sendMoneyMobile: env.sendMoneyMobile, // (++ has fake data)
+  getUserByPhone: env.getUserByPhone, // (++ has fake data)
+  getAllBanks: "/banks", // (++ has fake data)
+  getBankVerify: env.getBankVerify, // (++ has fake data)
   editUser: env.editUser, // (++ has fake data)
 };
 

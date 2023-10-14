@@ -154,7 +154,6 @@ const Home = () => {
           </div>
         </div>
       </NotifyWrapper>
-      <Navigation />
     </>
   );
 };
