@@ -10,6 +10,7 @@ import useDefaultUser from "./hooks/useDefaultUser";
 import ModalHeader from "@components/Modal/ModalHeader";
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 import UpdatePasscode from "@components/UpdatePasscode";
+import UpdatePin from "@components/updatePin";
 
 export type TCredentials = {
   nickname: string | undefined;
@@ -71,7 +72,7 @@ const EditAccount = () => {
               <Input label="Opay Account Number" placeholder="account number" value={data?.phone} disabled={true} />
 
               <div
-                className="update-pin"
+                className="update-passcode"
                 onClick={() => {
                   handleAdd({
                     heading: <ModalHeader text="Update your password" />,
@@ -80,6 +81,18 @@ const EditAccount = () => {
                 }}
               >
                 Update Login Passcode
+              </div>
+
+              <div
+                className="update-pin"
+                onClick={() => {
+                  handleAdd({
+                    heading: <ModalHeader text="Update your Transfer Pin" />,
+                    body: <UpdatePin />,
+                  });
+                }}
+              >
+                Update Pin
               </div>
 
               {updateUserMutation.isSuccess && (

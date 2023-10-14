@@ -69,4 +69,23 @@ const patchPasscode = async ({ oldPasscode, newPasscode }: { oldPasscode: string
   return response;
 };
 
-export { getCurrentUser, getCurrentUserAccounts, patchUser, getDefaultUserLoginInfo, getUserByPhone, patchPasscode };
+const patchPin = async ({ oldPin, newPin }: { oldPin: string; newPin: string }) => {
+  let response = await axiosInstance({
+    url: ENDPOINTS.updatePass,
+    method: "PATCH",
+    data: {
+      old_pin: oldPin,
+      new_pin: newPin,
+    },
+  });
+};
+
+export {
+  getCurrentUser,
+  getCurrentUserAccounts,
+  patchUser,
+  getDefaultUserLoginInfo,
+  getUserByPhone,
+  patchPasscode,
+  patchPin,
+};

@@ -9,6 +9,7 @@ import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import SendMoneyWrapper from "../SendMoneyMobileAirtime/SendMoneyWrapper";
 
 type TSendMoneyMobileDataProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -57,75 +58,57 @@ const SendMoneyMobileData = ({
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount(form);
 
   return (
-    <div>
-      <Tag />
+    <SendMoneyWrapper>
+      <div className="mobile-container">
+        <Tag />
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <NetworkSelector
-          currentNetwork={currentNetwork}
-          isDropRestNetworks={isDropRestNetworks}
-          restNetworks={restNetworks}
-          onCurrentNetworkClick={handleCurrentNetworkClick}
-          onCurrentNetworkChange={handleCurrentNetworkChange}
-        />
+        <div className="network-wrapper">
+          <NetworkSelector
+            currentNetwork={currentNetwork}
+            isDropRestNetworks={isDropRestNetworks}
+            restNetworks={restNetworks}
+            onCurrentNetworkClick={handleCurrentNetworkClick}
+            onCurrentNetworkChange={handleCurrentNetworkChange}
+          />
 
-        <Input
-          muteMargin
-          type="text"
-          placeholder="Phone number"
-          maxLength={11}
-          rest={{
-            ...form.register("phoneNumber"),
-          }}
-        />
+          <Input
+            muteMargin
+            type="text"
+            placeholder="Phone number"
+            maxLength={11}
+            rest={{
+              ...form.register("phoneNumber"),
+            }}
+          />
+        </div>
+
+        <div className="plan-grid">
+          {SEND_MONEY_MOBILE_BUNDLES.map((bundle) => {
+            return (
+              <div
+                key={bundle.amount}
+                data-testid="bundle"
+                id="plans"
+                onClick={() => handleBundleClick(bundle.amount.toString())}
+                className={currentBundleAmount === bundle.amount.toString() ? "active" : ""}
+              >
+                <div>{bundle.amount}</div>
+                <div>{bundle.data}</div>
+                <div>{bundle.validity}</div>
+
+                {bundle.tag && <div data-testid="bundle-tag">{bundle.tag}</div>}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="amount-input">
+          <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
+            Pay
+          </button>
+        </div>
       </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gridGap: "10px",
-          padding: "10px",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
-        {SEND_MONEY_MOBILE_BUNDLES.map((bundle) => {
-          return (
-            <div
-              style={{
-                display: "grid",
-                placeItems: "center",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "10px",
-              }}
-              key={bundle.amount}
-              data-testid="bundle"
-              onClick={() => handleBundleClick(bundle.amount.toString())}
-              className={currentBundleAmount === bundle.amount.toString() ? "active" : ""}
-            >
-              <div>{bundle.amount}</div>
-              <div>{bundle.data}</div>
-              <div>{bundle.validity}</div>
-
-              {bundle.tag && <div data-testid="bundle-tag">{bundle.tag}</div>}
-            </div>
-          );
-        })}
-      </div>
-
-      <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
-        Pay
-      </button>
-    </div>
+    </SendMoneyWrapper>
   );
 };
 

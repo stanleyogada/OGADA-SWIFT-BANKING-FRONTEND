@@ -66,8 +66,10 @@
         "status": "success",
         "message": "Login passcode updated successfully!"
       },
-      "old_login_passcode": "dfnm,",
-      "new_login_passcode": "sdfgh"
+      "old_login_passcode": "cdvbn",
+      "new_login_passcode": "sdfgh",
+      "old_pin": "",
+      "new_pin": ""
     }
   ],
   "transactions": [
@@ -426,6 +428,16 @@
       "amount": "1200",
       "remark": "xcvbn,.",
       "id": 34
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "bank_name": "ALAT by WEMA",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "sdfghj",
+      "id": 35
     }
   ],
   "user-by-phone": [

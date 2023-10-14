@@ -26,10 +26,12 @@ const EditAccountWrapper = styled.div`
       color: blue;
     }
 
+    .update-passcode,
     .update-pin {
       color: ${COLORS.blue};
       cursor: pointer;
       font-weight: 600;
+      padding: 12px;
     }
   }
 `;

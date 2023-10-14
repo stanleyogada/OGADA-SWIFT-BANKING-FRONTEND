@@ -12,8 +12,6 @@ const Rewards = () => {
         </div>
       </div>
       <Reward />
-
-      <Navigation />
     </RewardsWrapper>
   );
 };
