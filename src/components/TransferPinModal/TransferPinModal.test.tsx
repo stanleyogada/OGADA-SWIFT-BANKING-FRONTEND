@@ -8,7 +8,7 @@ import TransferPinModal, { NUMBER_LIST } from ".";
 test("Ensure component has a screen and buttons and completes without errors", async () => {
   const onComplete = jest.fn();
 
-  render(<TransferPinModal onComplete={onComplete} />, {
+  render(<TransferPinModal onComplete={onComplete} cb={jest.fn()} />, {
     wrapper: TestProviders,
   });
   const user = userEvent.setup();

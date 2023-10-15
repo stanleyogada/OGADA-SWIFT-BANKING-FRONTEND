@@ -409,6 +409,16 @@
       "amount": "1200",
       "remark": "xcvbn,.",
       "id": 34
+    },
+    {
+      "transfer_pin": "1547",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "9024173942",
+      "amount": "1234567890",
+      "remark": "1234567890",
+      "id": 35
     }
   ],
   "transactions.send.mobile": [

@@ -90,15 +90,19 @@ const useSendMoneyInHouse = () => {
 
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
-      if (hasTransferPin) return handlePushTransferPinModal();
+      const handler = (pin: string) => {
+        sendMoneyMutation.mutate({
+          amount,
+          remark,
+          receiverAccountNumber: recipientAccountNumber,
+          senderAccountType: "NORMAL",
+          transferPin: pin,
+        });
+      };
 
-      sendMoneyMutation.mutate({
-        amount,
-        remark,
-        receiverAccountNumber: recipientAccountNumber,
-        senderAccountType: "NORMAL",
-        transferPin: transferPin,
-      });
+      if (hasTransferPin) return handlePushTransferPinModal(handler);
+
+      handler(transferPin);
     });
 
   const isSendMoneyButtonDisabled = useMemo(() => {
