@@ -24,10 +24,13 @@ const useTransferPinModal = (onComplete: (pin: string) => void, cb?: (pin: strin
     if (transferPin.length === 4) {
       onComplete(transferPin);
 
-      console.log(transferPin);
-
-      cb && cb(transferPin);
       handleRemove();
+
+      if (!cb) return;
+
+      setTimeout(() => {
+        cb(transferPin);
+      }, 100);
     }
   }, [transferPin]);
 
