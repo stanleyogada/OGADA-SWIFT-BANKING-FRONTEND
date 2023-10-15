@@ -31,11 +31,6 @@ const useSendMoneyBeneficiaries = () => {
         (beneficiary.phoneNumber && b.phoneNumber === beneficiary.phoneNumber)
     );
 
-    console.log({
-      beneficiaries,
-      isBeneficiaryExist,
-    });
-
     if (isBeneficiaryExist) return;
 
     beneficiaries.push({
