@@ -145,15 +145,16 @@ describe("Shows beneficiaries and filter correctly if any", () => {
 
     const beneficiaryElement1 = allBeneficiaries[0];
 
-    expect(within(beneficiaryElement1).getByRole("img")).toHaveAttribute("src", USERS[0].data.avatar);
-    expect(within(allBeneficiaries[1]).getByRole("img")).toHaveAttribute("src", USERS[1].data.avatar);
+    // Beneficiaries is reversed
+    expect(within(beneficiaryElement1).getByRole("img")).toHaveAttribute("src", USERS[1].data.avatar);
+    expect(within(allBeneficiaries[1]).getByRole("img")).toHaveAttribute("src", USERS[0].data.avatar);
 
     await user.click(beneficiaryElement1);
 
-    expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[0]);
+    expect(recipientAccountNumberInput).toHaveValue(ACCOUNT_NUMBER[1]);
 
     await handleAssertLoadingState("get-user-by-account-number-loading");
-    handleAssertUserBlock(USERS[0]);
+    handleAssertUserBlock(USERS[1]);
 
     expect(screen.queryByTestId("beneficiary")).not.toBeInTheDocument();
   });
