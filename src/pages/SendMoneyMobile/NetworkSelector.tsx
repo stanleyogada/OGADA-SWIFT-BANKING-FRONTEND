@@ -16,14 +16,20 @@ const NetworkSelector = ({
   onCurrentNetworkChange,
 }: TProps) => {
   return (
-    <div>
-      <div data-testid="current-network" onClick={onCurrentNetworkClick}>
+    <div className="network-dropdown">
+      <div data-testid="current-network" onClick={onCurrentNetworkClick} className="network-dropdown__current">
         <img src={currentNetwork.logo} alt={currentNetwork.name} width="50" height="50" />
       </div>
+
       {isDropRestNetworks && (
-        <div data-testid="networks">
+        <div data-testid="networks" className="network-dropdown__list">
           {restNetworks.map((network) => (
-            <div key={network.id} data-testid="network" onClick={() => onCurrentNetworkChange(network.id)}>
+            <div
+              key={network.id}
+              data-testid="network"
+              onClick={() => onCurrentNetworkChange(network.id)}
+              className="network-dropdown__item"
+            >
               <img src={network.logo} alt={network.name} width="50" height="50" />
               <p>{network.name}</p>
             </div>

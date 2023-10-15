@@ -9,6 +9,7 @@ import AccountType from "../AccountType";
 import useAccountType from "../AccountType/useAccountType";
 import useTabData from "../hooks/useTabData";
 import Beneficiaries from "@components/SendMoney/Beneficiaries";
+import formatToCurrency from "@utils/formatToCurrency";
 
 type TSendMoneyMobileAirtimeProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -50,13 +51,7 @@ const SendMoneyMobileAirtime = ({
     <div>
       <Tag />
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <div className="network-selector">
         <NetworkSelector
           currentNetwork={currentNetwork}
           isDropRestNetworks={isDropRestNetworks}
@@ -76,33 +71,17 @@ const SendMoneyMobileAirtime = ({
         />
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gridGap: "10px",
-          padding: "10px",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
+      <div className="bundles">
         {SEND_MONEY_MOBILE_BUNDLES.slice(0, 6).map((bundle) => {
           return (
             <div
-              style={{
-                display: "grid",
-                placeItems: "center",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "10px",
-              }}
               key={bundle.amount}
               data-testid="bundle"
-              className={currentBundleAmount === bundle.amount.toString() ? "active" : ""}
+              className={currentBundleAmount === bundle.amount.toString() ? "bundles__item active" : "bundles__item"}
               onClick={() => handleBundleClick(bundle.amount.toString())}
             >
-              <div>{bundle.amount}</div>
+              <p className="bundles__amount">{bundle.amount}</p>
+              <p className="bundles__amount--keep">{formatToCurrency(bundle.amount.toString())}</p>
             </div>
           );
         })}
@@ -125,7 +104,7 @@ const SendMoneyMobileAirtime = ({
           accountType={accountType}
         />
 
-        <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
+        <button disabled={isPayButtonDisabled} onClick={handleSubmit()} className="pay-button">
           Pay
           {mutation.isLoading && <div data-testid="loading"></div>}
           {mutation.isSuccess && <div data-testid="success"></div>}

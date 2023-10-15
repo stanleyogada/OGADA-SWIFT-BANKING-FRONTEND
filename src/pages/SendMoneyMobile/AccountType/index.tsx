@@ -1,4 +1,5 @@
 import { TUserAccountType } from "@services/users/types";
+import AccountTypeWrapper from "./AccountTypeWrapper";
 
 type TProps = {
   allAccountType: TUserAccountType[];
@@ -7,20 +8,18 @@ type TProps = {
 };
 
 const AccountType = ({ allAccountType, handleAccountTypeChange, accountType }: TProps) => (
-  <div>
-    <h3>From Account?</h3>
-
+  <AccountTypeWrapper>
     {allAccountType.map((type) => (
       <div
         key={type}
         data-testid="account-type-radio"
         onClick={() => handleAccountTypeChange(type as TUserAccountType)}
-        className={accountType === type ? "active" : ""}
+        className={accountType === type ? "radio active" : "radio"}
       >
         {type}
       </div>
     ))}
-  </div>
+  </AccountTypeWrapper>
 );
 
 export default AccountType;

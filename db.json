@@ -510,6 +510,15 @@
       "phone_number": "92345678901",
       "is_airtime": true,
       "id": 11
+    },
+    {
+      "transfer_pin": "7777",
+      "sender_account_type": "CASHBACK",
+      "amount": 2000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": false,
+      "id": 12
     }
   ],
   "user-by-phone": [
