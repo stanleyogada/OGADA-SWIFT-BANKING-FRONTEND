@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
 
-const useTransferPinModal = (onComplete: (pin: string) => void) => {
+const useTransferPinModal = (onComplete: (pin: string) => void, cb?: (pin: string) => void) => {
   const [transferPin, setTransferPin] = useState("");
 
   const { handleRemove } = useModalConsumer();
@@ -23,6 +23,10 @@ const useTransferPinModal = (onComplete: (pin: string) => void) => {
   useEffect(() => {
     if (transferPin.length === 4) {
       onComplete(transferPin);
+
+      console.log(transferPin);
+
+      cb && cb(transferPin);
       handleRemove();
     }
   }, [transferPin]);

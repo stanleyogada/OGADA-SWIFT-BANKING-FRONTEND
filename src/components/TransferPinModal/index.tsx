@@ -4,13 +4,14 @@ import useTransferPinModal from "./hooks/useTransferPinModal";
 
 type TProps = {
   onComplete: (pin: string) => void;
+  cb: (pin: string) => void;
 };
 
 // Create an array from 0 to 9
 const NUMBER_LIST = Array.from(Array(10).keys());
 
-const TransferPinModal = ({ onComplete }: TProps) => {
-  const { transferPin, handleNumberClick, handleClear, handleDelete } = useTransferPinModal(onComplete);
+const TransferPinModal = ({ onComplete, cb }: TProps) => {
+  const { transferPin, handleNumberClick, handleClear, handleDelete } = useTransferPinModal(onComplete, cb);
 
   return (
     <TransferPinWrapper>

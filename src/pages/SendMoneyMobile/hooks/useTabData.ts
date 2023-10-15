@@ -44,17 +44,21 @@ const useTabData = ({ currentNetwork, accountType, isAirtime, handleCurrentNetwo
 
   const handleSubmit = () =>
     _handleSubmit((data) => {
+      const handler = (pin: string) => {
+        mutation.handleMutate({
+          accountType,
+          transferPin: pin,
+          operator: currentNetwork.name,
+          phoneNumber: data.phoneNumber,
+          amount: +data.amount,
+        });
+      };
+
       if (hasTransferPin) {
-        return handlePushTransferPinModal();
+        return handlePushTransferPinModal(handler);
       }
 
-      mutation.handleMutate({
-        accountType,
-        transferPin,
-        operator: currentNetwork.name,
-        phoneNumber: data.phoneNumber,
-        amount: +data.amount,
-      });
+      handler(transferPin);
     });
 
   const showBeneficiaries = useMemo(() => {

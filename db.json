@@ -519,6 +519,60 @@
       "phone_number": "92345678902",
       "is_airtime": false,
       "id": 12
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "CASHBACK",
+      "amount": 50,
+      "operator": "Glo",
+      "phone_number": "90123456782",
+      "is_airtime": true,
+      "id": 13
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "CASHBACK",
+      "amount": 2000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": false,
+      "id": 14
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "CASHBACK",
+      "amount": 50000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": false,
+      "id": 15
+    },
+    {
+      "transfer_pin": "0101",
+      "sender_account_type": "CASHBACK",
+      "amount": 1000,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": false,
+      "id": 16
+    },
+    {
+      "transfer_pin": "2228",
+      "sender_account_type": "CASHBACK",
+      "amount": 2000,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 17
+    },
+    {
+      "transfer_pin": "4440",
+      "sender_account_type": "NORMAL",
+      "amount": 3000,
+      "operator": "MTN",
+      "phone_number": "12345678903",
+      "is_airtime": true,
+      "id": 18
     }
   ],
   "user-by-phone": [
