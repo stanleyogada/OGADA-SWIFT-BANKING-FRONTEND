@@ -9,7 +9,6 @@ import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
 
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
-import SendMoneyWrapper from "../SendMoneyMobileAirtime/SendMoneyWrapper";
 
 type TSendMoneyMobileDataProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -58,7 +57,7 @@ const SendMoneyMobileData = ({
   const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount(form);
 
   return (
-    <SendMoneyWrapper>
+    <div>
       <div className="mobile-container">
         <Tag />
 
@@ -108,7 +107,7 @@ const SendMoneyMobileData = ({
           </button>
         </div>
       </div>
-    </SendMoneyWrapper>
+    </div>
   );
 };
 
