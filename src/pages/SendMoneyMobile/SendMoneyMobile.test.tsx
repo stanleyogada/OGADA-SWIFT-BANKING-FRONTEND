@@ -1,18 +1,45 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
+import { SEND_MONEY_MOBILE_NETWORKS, SEND_MONEY_MOBILE_BUNDLES, LOCAL_STORAGE_KEYS } from "@constants/index";
+import { handleAssertLoadingState } from "@utils/test/assertUtils";
+import TestProviders from "@components/TestProviders";
+import createServer from "@utils/test/createServer";
+import { BASE_URL, ENDPOINTS } from "@constants/services";
+import { localStorageGetItem } from "@utils/test/mocks/localStorage";
 
 import SendMoneyMobile from ".";
 
 import type { UserEvent } from "@testing-library/user-event/dist/types/setup/setup";
 import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import { TBeneficiary } from "@components/SendMoney/Beneficiaries/types";
 
 let user: UserEvent;
 beforeEach(() => (user = userEvent.setup()));
 
+const CURRENT_USER_ID = 2000;
+
+const { handleCreateErrorConfig } = createServer([
+  {
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
+    method: "post",
+  },
+  {
+    url: `${BASE_URL}${ENDPOINTS.currentUser}`,
+    res() {
+      return {
+        data: {
+          id: CURRENT_USER_ID,
+        },
+      };
+    },
+  },
+]);
+
 test("Renders as mobile page as tabs", async () => {
-  render(<SendMoneyMobile />);
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
   const $tabs = screen.getByTestId("tabs");
   const withinTabs = within($tabs);
@@ -23,7 +50,9 @@ test("Renders as mobile page as tabs", async () => {
 });
 
 test("Renders a network selector", async () => {
-  render(<SendMoneyMobile />);
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
   const assertNetworks = async (currentNetworkName: string) => {
     let currentNetwork: TSendMoneyMobileNetwork | undefined;
@@ -71,15 +100,17 @@ test("Renders a network selector", async () => {
 });
 
 test("Ensure buy mobile data/airtime successfully", async () => {
-  render(<SendMoneyMobile />);
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
 
   const $airtimeTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[0];
   const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
 
   const handleAssertPhone = async ($tab: HTMLElement) => {
     await user.click($tab);
-    const $phone = screen.getByPlaceholderText(/phone number/i);
 
+    const $phone = screen.getByPlaceholderText(/phone number/i);
     const phoneValue = "08012345678";
 
     await user.type($phone, phoneValue);
@@ -128,6 +159,9 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     };
 
     const $payButton = screen.getByRole("button", { name: /pay/i });
+    const $phone = screen.getByPlaceholderText(/phone number/i);
+    const phoneValue = "08012345678";
+    await user.clear($phone);
 
     expect($payButton).toBeDisabled();
     expect($firstBundle).not.toHaveClass("active");
@@ -135,8 +169,12 @@ test("Ensure buy mobile data/airtime successfully", async () => {
 
     await user.click($firstBundle);
     expect($firstBundle).toHaveClass("active");
-    expect($payButton).toBeEnabled();
     handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
+
+    await user.type($phone, phoneValue.slice(0, -1));
+    expect($payButton).toBeDisabled();
+    await user.type($phone, phoneValue.slice(-1));
+    expect($payButton).toBeEnabled();
 
     await user.click($firstBundle);
     expect($firstBundle).not.toHaveClass("active");
@@ -155,9 +193,41 @@ test("Ensure buy mobile data/airtime successfully", async () => {
     expect($payButton).toBeEnabled();
     handleAssertAmountInput(SEND_MONEY_MOBILE_BUNDLES[0].amount.toString());
 
-    await user.click($payButton);
-  };
+    const allAccountTypeRadio = screen.getAllByTestId("account-type-radio");
+    expect(allAccountTypeRadio).toHaveLength(2);
 
+    const [$NormalAccountTypeRadio, $CashbackAccountTypeRadio] = allAccountTypeRadio;
+    expect($NormalAccountTypeRadio).toHaveTextContent(/normal/i);
+    expect($CashbackAccountTypeRadio).toHaveTextContent(/cashback/i);
+
+    expect($NormalAccountTypeRadio).toHaveClass("active");
+    expect($CashbackAccountTypeRadio).not.toHaveClass("active");
+
+    const handleAssertClickAccountTypeRadio = async (isNormalAccountTypeRadio: boolean) => {
+      if (isNormalAccountTypeRadio) {
+        await user.click($NormalAccountTypeRadio);
+
+        expect($NormalAccountTypeRadio).toHaveClass("active");
+        expect($CashbackAccountTypeRadio).not.toHaveClass("active");
+
+        return;
+      }
+
+      await user.click($CashbackAccountTypeRadio);
+
+      expect($CashbackAccountTypeRadio).toHaveClass("active");
+      expect($NormalAccountTypeRadio).not.toHaveClass("active");
+    };
+
+    await handleAssertClickAccountTypeRadio(false);
+    await handleAssertClickAccountTypeRadio(true);
+    await handleAssertClickAccountTypeRadio(true);
+
+    await user.click($payButton);
+
+    await handleAssertLoadingState($payButton);
+    expect(screen.getByTestId("success")).toBeInTheDocument();
+  };
   await handleAssertPhone($dataTab);
   expect(screen.queryByPlaceholderText(/amount/i)).not.toBeInTheDocument();
   await handleAssertBundles(false);
@@ -165,4 +235,36 @@ test("Ensure buy mobile data/airtime successfully", async () => {
   await handleAssertPhone($airtimeTab);
   expect(screen.getByPlaceholderText(/amount/i)).toBeInTheDocument();
   await handleAssertBundles(true);
+});
+
+test("Ensure error is properly handled", async () => {
+  handleCreateErrorConfig({
+    url: `${BASE_URL}${ENDPOINTS.sendMoneyMobile}`,
+    method: "post",
+  });
+
+  render(<SendMoneyMobile />, {
+    wrapper: TestProviders,
+  });
+
+  const handleAssertPay = async () => {
+    const $payButton = screen.getByRole("button", { name: /pay/i });
+    const $phone = screen.getByPlaceholderText(/phone number/i);
+    await user.type($phone, "08012345678");
+
+    const [$firstBundle] = screen.getAllByTestId("bundle");
+    await user.click($firstBundle);
+
+    await user.click($payButton);
+
+    await handleAssertLoadingState($payButton);
+  };
+
+  await handleAssertPay();
+  expect(screen.getByTestId("error")).toBeInTheDocument();
+
+  const $dataTab = within(screen.getByTestId("tabs")).getAllByTestId("tab")[1];
+  await user.click($dataTab);
+  await handleAssertPay();
+  expect(screen.getByTestId("error")).toBeInTheDocument();
 });

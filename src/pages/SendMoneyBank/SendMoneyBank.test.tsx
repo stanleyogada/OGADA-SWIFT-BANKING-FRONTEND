@@ -10,11 +10,6 @@ import { handleAssertLoadingState, handleTypeAmountRemarkAndSendMoney } from "@u
 
 const BANKS = [
   {
-    name: "Access Bank",
-    code: "044",
-    logo: "https://nigerianbanks.xyz/logo/access-bank.png",
-  },
-  {
     name: "ALAT by WEMA",
     code: "035A",
     logo: "https://nigerianbanks.xyz/logo/alat-by-wema.png",
@@ -23,6 +18,11 @@ const BANKS = [
     name: "ASO Savings and Loans",
     code: "401",
     logo: null,
+  },
+  {
+    name: "Access Bank",
+    code: "044",
+    logo: "https://nigerianbanks.xyz/logo/access-bank.png",
   },
   {
     name: "Bowen Microfinance Bank",

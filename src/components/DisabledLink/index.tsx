@@ -44,7 +44,6 @@ const DisabledLinkWrapper = styled.div<{
   mute?: boolean;
 }>`
   width: 100%;
-  border: 1px solid rgba(0, 0, 225, 0.2);
   position: relative;
 
   .disabledLink-container {

@@ -14,7 +14,7 @@
         "email_is_verified": false,
         "phone": "1234567890"
       },
-      "nickname": "ewrtyu!sd",
+      "nickname": "ewrtyu!dfgh",
       "email": "test2@gmail.comsfh"
     },
     {
@@ -59,6 +59,17 @@
         }
       ],
       "count": 2
+    },
+    {
+      "id": "updatePass",
+      "data": {
+        "status": "success",
+        "message": "Login passcode updated successfully!"
+      },
+      "old_login_passcode": "cdvbn",
+      "new_login_passcode": "sdfgh",
+      "old_pin": "",
+      "new_pin": ""
     }
   ],
   "transactions": [
@@ -121,6 +132,14 @@
       "amount": "1200",
       "remark": "sdfghj",
       "id": 1
+    },
+    {
+      "transfer_pin": "1111",
+      "sender_account_type": "NORMAL",
+      "receiver_account_number": "1234567890",
+      "amount": "1200",
+      "remark": "sdfghjkl;",
+      "id": 2
     }
   ],
   "transactions.send.bank": [
@@ -409,6 +428,171 @@
       "amount": "1200",
       "remark": "xcvbn,.",
       "id": 34
+    },
+    {
+      "transfer_pin": "1547",
+      "sender_account_type": "NORMAL",
+      "bank_name": "Access Bank",
+      "bank_account_full_name": "CHINEDU STANLEY OGADA",
+      "bank_account_number": "9024173942",
+      "amount": "1234567890",
+      "remark": "1234567890",
+      "id": 35
+    }
+  ],
+  "transactions.send.mobile": [
+    {
+      "transfer_pin": "0000",
+      "sender_account_type": "NORMAL",
+      "amount": 12233,
+      "operator": "Glo",
+      "phone_number": "4286351832e",
+      "is_airtime": true,
+      "id": 1
+    },
+    {
+      "transfer_pin": "1230",
+      "sender_account_type": "NORMAL",
+      "amount": 10002,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 2
+    },
+    {
+      "transfer_pin": "4444",
+      "sender_account_type": "NORMAL",
+      "amount": 1000,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 3
+    },
+    {
+      "transfer_pin": "4444",
+      "sender_account_type": "NORMAL",
+      "amount": 200,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 4
+    },
+    {
+      "transfer_pin": "2525",
+      "sender_account_type": "NORMAL",
+      "amount": 2000,
+      "operator": "Glo",
+      "phone_number": "90241739422",
+      "is_airtime": true,
+      "id": 5
+    },
+    {
+      "transfer_pin": "6666",
+      "sender_account_type": "NORMAL",
+      "amount": 3000,
+      "operator": "Glo",
+      "phone_number": "90123456782",
+      "is_airtime": true,
+      "id": 6
+    },
+    {
+      "transfer_pin": "6666",
+      "sender_account_type": "NORMAL",
+      "amount": 50,
+      "operator": "Glo",
+      "phone_number": "92345678901",
+      "is_airtime": true,
+      "id": 7
+    },
+    {
+      "transfer_pin": "2587",
+      "sender_account_type": "NORMAL",
+      "amount": 1000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": true,
+      "id": 8
+    },
+    {
+      "transfer_pin": "6666",
+      "sender_account_type": "NORMAL",
+      "amount": 1000,
+      "operator": "MTN",
+      "phone_number": "12345678903",
+      "is_airtime": true,
+      "id": 9
+    },
+    {
+      "transfer_pin": "3333",
+      "sender_account_type": "NORMAL",
+      "amount": 3000,
+      "operator": "MTN",
+      "phone_number": "12345678903",
+      "is_airtime": true,
+      "id": 10
+    },
+    {
+      "transfer_pin": "3333",
+      "sender_account_type": "NORMAL",
+      "amount": 500,
+      "operator": "Glo",
+      "phone_number": "92345678901",
+      "is_airtime": true,
+      "id": 11
+    },
+    {
+      "transfer_pin": "7777",
+      "sender_account_type": "CASHBACK",
+      "amount": 2000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": false,
+      "id": 12
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "CASHBACK",
+      "amount": 50,
+      "operator": "Glo",
+      "phone_number": "90123456782",
+      "is_airtime": true,
+      "id": 13
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "CASHBACK",
+      "amount": 2000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": false,
+      "id": 14
+    },
+    {
+      "transfer_pin": "",
+      "sender_account_type": "CASHBACK",
+      "amount": 50000,
+      "operator": "Airtel",
+      "phone_number": "92345678902",
+      "is_airtime": false,
+      "id": 15
+    },
+    {
+      "transfer_pin": "0101",
+      "sender_account_type": "CASHBACK",
+      "amount": 1000,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": false,
+      "id": 16
+    },
+    {
+      "transfer_pin": "2228",
+      "sender_account_type": "CASHBACK",
+      "amount": 2000,
+      "operator": "Glo",
+      "phone_number": "42863518323",
+      "is_airtime": true,
+      "id": 17
     }
   ],
   "user-by-phone": [

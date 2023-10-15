@@ -8,6 +8,7 @@ const env = (() => {
     getUserByPhone: "/user-by-phone",
     getBankVerify: "/banks.verify",
     editUser: "/users/me",
+    updateLoginPass: "/users/updatePass",
   };
 
   const prod = {
@@ -19,6 +20,7 @@ const env = (() => {
     getUserByPhone: "/users/by-phone",
     getBankVerify: "/banks/verify",
     editUser: "/users",
+    updateLoginPass: "/users/update-login-passcode",
   };
 
   if (["development", "test"].includes(process.env.NODE_ENV as string)) return dev;
@@ -56,6 +58,7 @@ const ENDPOINTS = {
   getAllBanks: "/banks", // (++ has fake data)
   getBankVerify: env.getBankVerify, // (++ has fake data)
   editUser: env.editUser, // (++ has fake data)
+  updatePass: env.updateLoginPass,
 };
 
 const TEST_NETWORK_SUCCESS_INFO = {

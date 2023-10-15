@@ -75,7 +75,7 @@ const useSendMoneyInHouse = () => {
     if (!sendMoneyMutation.isError || !sendMoneyMutation.error) return null;
 
     let error = (sendMoneyMutation.error as AxiosError).response?.data as { message: string };
-    return error.message;
+    return error.message || (sendMoneyMutation.error as AxiosError)?.message;
   }, [sendMoneyMutation.isError, sendMoneyMutation.error]);
 
   useEffect(() => {
@@ -90,15 +90,19 @@ const useSendMoneyInHouse = () => {
 
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
-      if (hasTransferPin) return handlePushTransferPinModal();
+      const handler = (pin: string) => {
+        sendMoneyMutation.mutate({
+          amount,
+          remark,
+          receiverAccountNumber: recipientAccountNumber,
+          senderAccountType: "NORMAL",
+          transferPin: pin,
+        });
+      };
 
-      sendMoneyMutation.mutate({
-        amount,
-        remark,
-        receiverAccountNumber: recipientAccountNumber,
-        senderAccountType: "NORMAL",
-        transferPin: transferPin,
-      });
+      if (hasTransferPin) return handlePushTransferPinModal(handler);
+
+      handler(transferPin);
     });
 
   const isSendMoneyButtonDisabled = useMemo(() => {

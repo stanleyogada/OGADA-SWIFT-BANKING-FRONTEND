@@ -7,6 +7,10 @@ import usePatchUser from "./hooks/usePatchUser";
 import SplashScreen from "@components/SplashScreen";
 import useEditUser from "./hooks/useEditUser";
 import useDefaultUser from "./hooks/useDefaultUser";
+import ModalHeader from "@components/Modal/ModalHeader";
+import useModalConsumer from "@contexts/Modal/hooks/useModalConsumer";
+import UpdatePasscode from "@components/UpdatePasscode";
+import UpdatePin from "@components/updatePin";
 
 export type TCredentials = {
   nickname: string | undefined;
@@ -14,6 +18,7 @@ export type TCredentials = {
 };
 const EditAccount = () => {
   const { data, isError } = useCurrentUser();
+  const { handleAdd } = useModalConsumer();
 
   const { updateUserMutation } = usePatchUser();
 
@@ -65,6 +70,31 @@ const EditAccount = () => {
                 disabled={checkUser()}
               />
               <Input label="Opay Account Number" placeholder="account number" value={data?.phone} disabled={true} />
+
+              <div
+                className="update-passcode"
+                onClick={() => {
+                  handleAdd({
+                    heading: <ModalHeader text="Update your password" />,
+                    body: <UpdatePasscode />,
+                  });
+                }}
+              >
+                Update Login Passcode
+              </div>
+
+              <div
+                className="update-pin"
+                onClick={() => {
+                  handleAdd({
+                    heading: <ModalHeader text="Update your Transfer Pin" />,
+                    body: <UpdatePin />,
+                  });
+                }}
+              >
+                Update Pin
+              </div>
+
               {updateUserMutation.isSuccess && (
                 <p className="updateUser" data-testid="success">
                   User updated successfully!

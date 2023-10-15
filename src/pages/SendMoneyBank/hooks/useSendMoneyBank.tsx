@@ -98,7 +98,7 @@ const useSendMoneyBank = () => {
     if (!sendMoneyMutation.isError || !sendMoneyMutation.error) return null;
 
     let error = (sendMoneyMutation.error as AxiosError).response?.data as { message: string };
-    return error.message;
+    return error.message || (sendMoneyMutation.error as AxiosError)?.message;
   }, [sendMoneyMutation.isError, sendMoneyMutation.error]);
 
   useEffect(() => {
@@ -113,19 +113,23 @@ const useSendMoneyBank = () => {
 
   const handleSendMoney = () =>
     handleSubmit(({ amount, remark, recipientAccountNumber }) => {
+      const handler = (pin: string) => {
+        sendMoneyMutation.mutate({
+          amount,
+          remark,
+          senderAccountType: "NORMAL",
+          transferPin: pin,
+          bankAccountFullName: verifyAccount.data?.accountName as string,
+          bankAccountNumber: recipientAccountNumber,
+          bankName: currentBank?.name as string,
+        });
+      };
+
       if (hasTransferPin) {
-        return handlePushTransferPinModal();
+        return handlePushTransferPinModal(handler);
       }
 
-      sendMoneyMutation.mutate({
-        amount,
-        remark,
-        senderAccountType: "NORMAL",
-        transferPin: transferPin,
-        bankAccountFullName: verifyAccount.data?.accountName as string,
-        bankAccountNumber: recipientAccountNumber,
-        bankName: currentBank?.name as string,
-      });
+      handler(transferPin);
     });
 
   const currentBank = useMemo(() => {

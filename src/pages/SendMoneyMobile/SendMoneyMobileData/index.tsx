@@ -1,14 +1,15 @@
-import { useForm } from "react-hook-form";
-
 import Input from "@components/SendMoney/Input";
 import Tag from "@components/SendMoney/Tag";
 import { SEND_MONEY_MOBILE_BUNDLES } from "@constants/index";
-import useTransferPin from "@hooks/useTransferPin";
+import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
 
 import NetworkSelector from "../NetworkSelector";
 import useCurrentBundleAmount from "../hooks/useCurrentBundleAmount";
-
-import type { TSendMoneyMobileNetwork } from "@customTypes/SendMoneyMobileNetwork";
+import AccountType from "../AccountType";
+import useAccountType from "../AccountType/useAccountType";
+import useTabData from "../hooks/useTabData";
+import formatToCurrency from "@utils/formatToCurrency";
+import Beneficiaries from "@components/SendMoney/Beneficiaries";
 
 type TSendMoneyMobileDataProps = {
   currentNetwork: TSendMoneyMobileNetwork;
@@ -18,34 +19,6 @@ type TSendMoneyMobileDataProps = {
   handleCurrentNetworkChange: (networkId: string) => void;
 };
 
-const useSendMoneyMobileData = ({ currentNetwork }: { currentNetwork: TSendMoneyMobileNetwork }) => {
-  const form = useForm();
-  const { handleSubmit: _handleSubmit } = form;
-  const { transferPin, hasTransferPin, handlePushTransferPinModal } = useTransferPin();
-
-  const handleSubmit = () =>
-    _handleSubmit((data) => {
-      if (hasTransferPin) {
-        return handlePushTransferPinModal();
-      }
-
-      const body = {
-        phone_number: data.phoneNumber,
-        amount: data.amount,
-        operator: currentNetwork.name,
-        is_airtime: false,
-        transfer_pin: transferPin,
-      };
-
-      console.log(body);
-    });
-
-  return {
-    form,
-    handleSubmit,
-  };
-};
-
 const SendMoneyMobileData = ({
   currentNetwork,
   isDropRestNetworks,
@@ -53,20 +26,32 @@ const SendMoneyMobileData = ({
   handleCurrentNetworkClick,
   handleCurrentNetworkChange,
 }: TSendMoneyMobileDataProps) => {
-  const { form, handleSubmit } = useSendMoneyMobileData({ currentNetwork });
-  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount(form);
+  const { allAccountType, accountType, handleAccountTypeChange } = useAccountType();
+  const {
+    beneficiaries,
+    showBeneficiaries,
+    form,
+    mutation,
+    handleSubmit,
+    handleClearTransferPin,
+    handleBeneficiaryClick,
+  } = useTabData({
+    isAirtime: false,
+    currentNetwork,
+    accountType,
+    handleCurrentNetworkChange,
+  });
+  const { currentBundleAmount, isPayButtonDisabled, handleBundleClick } = useCurrentBundleAmount({
+    form,
+    mutationIsLoading: mutation.isLoading,
+    handleClearTransferPin,
+  });
 
   return (
     <div>
       <Tag />
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <div className="network-selector">
         <NetworkSelector
           currentNetwork={currentNetwork}
           isDropRestNetworks={isDropRestNetworks}
@@ -86,45 +71,48 @@ const SendMoneyMobileData = ({
         />
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gridGap: "10px",
-          padding: "10px",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          cursor: "pointer",
-        }}
-      >
+      <div className="bundles">
         {SEND_MONEY_MOBILE_BUNDLES.map((bundle) => {
           return (
             <div
-              style={{
-                display: "grid",
-                placeItems: "center",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "10px",
-              }}
               key={bundle.amount}
               data-testid="bundle"
               onClick={() => handleBundleClick(bundle.amount.toString())}
-              className={currentBundleAmount === bundle.amount.toString() ? "active" : ""}
+              className={currentBundleAmount === bundle.amount.toString() ? "bundles__item active" : "bundles__item"}
             >
-              <div>{bundle.amount}</div>
-              <div>{bundle.data}</div>
-              <div>{bundle.validity}</div>
+              <p className="bundles__amount">{bundle.amount}</p>
+              <p className="bundles__amount--keep">{formatToCurrency(bundle.amount.toString())}</p>
+              <p className="bundles__data">{bundle.data}</p>
+              <p className="bundles__validity">{bundle.validity}</p>
 
-              {bundle.tag && <div data-testid="bundle-tag">{bundle.tag}</div>}
+              {bundle.tag && (
+                <div data-testid="bundle-tag" className="bundles__tag">
+                  <p>{bundle.tag}</p>
+                </div>
+              )}
             </div>
           );
         })}
       </div>
 
-      <button disabled={isPayButtonDisabled} onClick={handleSubmit()}>
+      <AccountType
+        allAccountType={allAccountType}
+        handleAccountTypeChange={handleAccountTypeChange}
+        accountType={accountType}
+      />
+
+      <button disabled={isPayButtonDisabled} onClick={handleSubmit()} className="pay-button">
         Pay
+        {mutation.isLoading && <div data-testid="loading"></div>}
+        {mutation.isSuccess && <div data-testid="success"></div>}
+        {mutation.isError && <div data-testid="error"></div>}
       </button>
+
+      <Beneficiaries
+        beneficiaries={beneficiaries}
+        showBeneficiaries={showBeneficiaries}
+        onBeneficiaryClick={handleBeneficiaryClick}
+      />
     </div>
   );
 };

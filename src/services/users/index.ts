@@ -57,4 +57,35 @@ const patchUser = async ({ nickname, email }: { nickname: string | undefined; em
   });
 };
 
-export { getCurrentUser, getCurrentUserAccounts, patchUser, getDefaultUserLoginInfo, getUserByPhone };
+const patchPasscode = async ({ oldPasscode, newPasscode }: { oldPasscode: string; newPasscode: string }) => {
+  let response = await axiosInstance({
+    method: "PATCH",
+    url: ENDPOINTS.updatePass,
+    data: {
+      old_login_passcode: oldPasscode,
+      new_login_passcode: newPasscode,
+    },
+  });
+  return response;
+};
+
+const patchPin = async ({ oldPin, newPin }: { oldPin: string; newPin: string }) => {
+  let response = await axiosInstance({
+    url: ENDPOINTS.updatePass,
+    method: "PATCH",
+    data: {
+      old_pin: oldPin,
+      new_pin: newPin,
+    },
+  });
+};
+
+export {
+  getCurrentUser,
+  getCurrentUserAccounts,
+  patchUser,
+  getDefaultUserLoginInfo,
+  getUserByPhone,
+  patchPasscode,
+  patchPin,
+};

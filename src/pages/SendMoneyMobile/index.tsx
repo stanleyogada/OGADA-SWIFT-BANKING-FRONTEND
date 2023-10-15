@@ -4,14 +4,15 @@ import PageNavHeader from "@components/PageNavHeader";
 import SendMoneyMobileData from "./SendMoneyMobileData";
 import SendMoneyMobileAirtime from "./SendMoneyMobileAirtime";
 import useCurrentNetwork from "./hooks/useCurrentNetwork";
+import SendMoneyMobileWrapper from "./SendMoneyMobileWrapper";
 
 const SendMoneyMobile = () => {
   const { currentNetwork, isDropRestNetworks, restNetworks, handleCurrentNetworkClick, handleCurrentNetworkChange } =
     useCurrentNetwork();
 
   return (
-    <>
-      <PageNavHeader heading="Transfer to Bank Account" />
+    <SendMoneyMobileWrapper>
+      <PageNavHeader heading="Buy Mobile bundles" />
 
       <Tabs
         data={[
@@ -41,7 +42,7 @@ const SendMoneyMobile = () => {
           handleCurrentNetworkChange={handleCurrentNetworkChange}
         />
       </Tabs>
-    </>
+    </SendMoneyMobileWrapper>
   );
 };
 
