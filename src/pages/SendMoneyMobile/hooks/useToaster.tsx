@@ -45,27 +45,16 @@ const useToaster = ({ phoneNumber, currentNetwork, mutation, onErrorClose, onSuc
     if (!mutation.isSuccess) return;
 
     setTimeout(() => {
-      handleSetBeneficiary("mobile", {
+      handleSetBeneficiary({
         phoneNumber,
         operator: currentNetwork.id,
-        // avatar: recipient.data?.avatar,
         type: "mobile",
       });
-
-      // handleFormReset();
-      // setValue("recipientAccountNumber", ""); // Have no idea why the input value is not reset
       handleAdd({
         heading: <ModalHeader text="Transfer successful!" />,
         body: <SendMoneyModal />,
         onClose: onSuccessClose,
       });
-
-      // handleSetBeneficiary("in-house", {
-      //   accountNumber: recipient.data?.phone,
-      //   avatar: recipient.data?.avatar,
-      //   fullName: recipient.data?.fullName,
-      //   type: "in-house",
-      // });
     }, 5);
   }, [mutation.isSuccess]);
 };
