@@ -74,7 +74,7 @@ const SendMoneyMobileWrapper = styled.div`
 
   .bundles {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 10px;
     padding: 10px;
     padding: 0 16px;
@@ -118,7 +118,7 @@ const SendMoneyMobileWrapper = styled.div`
 
       &--keep {
         font-weight: bold;
-        font-size: 17px;
+        font-size: 13px;
       }
     }
     &__data {
