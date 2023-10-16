@@ -61,7 +61,7 @@ const useSendMoneyInHouse = () => {
           onClose: () => window.location.reload(),
         });
 
-        handleSetBeneficiary("in-house", {
+        handleSetBeneficiary({
           accountNumber: recipient.data?.phone,
           avatar: recipient.data?.avatar,
           fullName: recipient.data?.fullName,
