@@ -92,7 +92,7 @@ const EditAccount = () => {
                   });
                 }}
               >
-                Update Pin
+                Update Transfer Pin
               </div>
 
               {updateUserMutation.isSuccess && (

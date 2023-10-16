@@ -42,7 +42,7 @@ const UpdatePin = () => {
           />
 
           <button className="btn" data-testid="updatebtn" type="submit">
-            Update
+            Update Transfer Pin
           </button>
         </form>
         {updatePinMutation.isLoading && <p data-testid="load">loading</p>}
