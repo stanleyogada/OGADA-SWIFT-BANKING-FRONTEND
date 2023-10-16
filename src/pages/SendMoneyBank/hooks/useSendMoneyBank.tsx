@@ -82,7 +82,7 @@ const useSendMoneyBank = () => {
           onClose: () => window.location.reload(),
         });
 
-        handleSetBeneficiary("bank", {
+        handleSetBeneficiary({
           accountNumber: recipientAccountNumber,
           fullName: verifyAccount.data?.accountName,
           bankName: currentBank?.name,
