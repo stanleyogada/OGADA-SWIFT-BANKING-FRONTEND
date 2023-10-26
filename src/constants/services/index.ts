@@ -12,7 +12,7 @@ const env = (() => {
   };
 
   const prod = {
-    BASE_URL: "https://opay-demo-backend-production.up.railway.app/api/v1",
+    BASE_URL: "https://ogada-swift-banking-production.up.railway.app/api/v1",
     currentUserAccounts: "/users/me/accounts",
     sendMoneyInHouse: "/transactions/in-houses/send-money",
     sendMoneyBank: "/transactions/banks/send-money",
