@@ -1,6 +1,6 @@
 # OGADA-SWIFT-BANKING-FRONTEND
 
-<a href="https://opay-demo-peach.vercel.app/">Production Link</a> 🚀
+<a href="https://ogada-swift-banking.vercel.app/">Production Link</a> 🚀
 
 An application solely for education purposes! 
 This is a DEMO simple banking application that allows users to create accounts, deposit, withdraw, and transfer funds between accounts.
@@ -17,8 +17,8 @@ This is a DEMO simple banking application that allows users to create accounts, 
 ## Usage
 
 1. First Run `node -v` if your version **< v12** Then update to the latest node version - https://nodejs.org/en/download/, Don't download the latest
-2. Run `git clone https://github.com/stanleyogada/Opay-Demo-Frontend.git`
-3. Run `cd Opay-Demo-Frontend`
+2. Run `git clone https://github.com/stanleyogada/OGADA-SWIFT-BANKING-FRONTEND.git`
+3. Run `cd OGADA-SWIFT-BANKING-FRONTEND`
 4. Run `npm i --force --legacy-peer-deps`
 
 ### Run directly on your machine
