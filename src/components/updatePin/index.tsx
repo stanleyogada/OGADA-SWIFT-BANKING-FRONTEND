@@ -14,11 +14,13 @@ const UpdatePin = () => {
 
   return (
     <UpdatePinWrapper>
+      <div className="overlay">LOCKED</div>
+
       <div>
         <form onSubmit={handleFormSubmit()}>
           <Input
             data-testid="old-pass-input"
-            placeholder="Old login passcode"
+            placeholder="Old transfer pin"
             type="Old login passcode"
             {...register("Old login passcode", { maxLength: 6 })}
             onChange={(e) => {
@@ -30,7 +32,7 @@ const UpdatePin = () => {
           />
           <Input
             data-testid="new-pass-input"
-            placeholder="New login passcode"
+            placeholder="New transfer pin"
             type="New login passcode"
             {...register("New login passcode", { maxLength: 6 })}
             onChange={(e) => {
@@ -46,8 +48,8 @@ const UpdatePin = () => {
           </button>
         </form>
         {updatePinMutation.isLoading && <p data-testid="load">loading</p>}
-        {updatePinMutation.isSuccess && <p data-testid="success">Successfull</p>}
-        {updatePinMutation.isError && <p data-testid="error">an arrow has occured</p>}
+        {updatePinMutation.isSuccess && <p data-testid="success">Successful</p>}
+        {updatePinMutation.isError && <p data-testid="error">An Error has occurred</p>}
       </div>
     </UpdatePinWrapper>
   );
@@ -56,6 +58,27 @@ const UpdatePin = () => {
 export default UpdatePin;
 
 const UpdatePinWrapper = styled.div`
+  position: relative;
+
+  .overlay {
+    font-style: italic;
+    font-size: 80px;
+    font-weight: 700;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    display: grid;
+    place-items: center;
+
+    background-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.25);
+  }
+
   .btn {
     padding: 12px;
     background: ${COLORS.blue};

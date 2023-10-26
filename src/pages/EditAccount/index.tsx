@@ -87,7 +87,7 @@ const EditAccount = () => {
                 className="update-pin"
                 onClick={() => {
                   handleAdd({
-                    heading: <ModalHeader text="Update your Transfer Pin" />,
+                    heading: <ModalHeader text="Update your Transfer Pin (NOT YET IMPLEMENTED!!)" />,
                     body: <UpdatePin />,
                   });
                 }}

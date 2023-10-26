@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 
-import ProfileWrapper from "./ProfileStyle";
-
 import icons from "@constants/icons";
 import { CLIENT_ROUTES } from "@constants/routes";
-
-import Navigation from "@components/Navigation";
 import Avatar from "@components/Avatar/Avatar";
+
+import ProfileWrapper from "./ProfileStyle";
 
 const Profile = () => {
   return (
@@ -15,12 +13,16 @@ const Profile = () => {
         <div className="top-profile-wrapper">
           <div className="profile-title">
             <div className="profile-image">
-              <Avatar />
+              <Link to={CLIENT_ROUTES.editAccount}>
+                <Avatar />
+              </Link>
             </div>
 
             <div className="profile-name">Hello, Tega</div>
           </div>
-          <div className="settings-icon"> {icons.settingIcon()} </div>
+          <div className="settings-icon">
+            <Link to={CLIENT_ROUTES.editAccount}>{icons.settingIcon()}</Link>
+          </div>
         </div>
 
         <div className="profile-buttons">

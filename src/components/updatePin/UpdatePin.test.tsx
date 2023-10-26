@@ -29,8 +29,8 @@ const { handleCreateErrorConfig } = createServer([
 ]);
 
 const simulateTypePin = async () => {
-  let newPasscodeInput = screen.getByPlaceholderText(/Old login passcode/);
-  let oldPasscodeInput = screen.getByPlaceholderText(/New login passcode/);
+  let newPasscodeInput = screen.getByPlaceholderText(/Old transfer pin/);
+  let oldPasscodeInput = screen.getByPlaceholderText(/New transfer pin/);
 
   user.type(oldPasscodeInput, "4444444");
   user.type(newPasscodeInput, "123456");
@@ -45,7 +45,7 @@ test("assert user update the password successfully", async () => {
     wrapper: TestProviders,
   });
 
-  simulateTypePin();
+  await simulateTypePin();
   const success = await screen.findByTestId("success");
   expect(success).toBeInTheDocument();
 });
@@ -60,7 +60,7 @@ test("assert user update the password failed", async () => {
     wrapper: TestProviders,
   });
 
-  simulateTypePin();
+  await simulateTypePin();
   const error = await screen.findByTestId("error");
   expect(error).toBeInTheDocument();
 });

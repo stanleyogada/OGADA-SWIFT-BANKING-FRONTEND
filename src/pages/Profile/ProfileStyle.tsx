@@ -12,27 +12,36 @@ const ProfileWrapper = styled.div`
 
   .top-profile-wrapper {
     width: 100%;
-    height: 238px;
+    height: 150px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background: ${COLORS.blue};
+    padding: 45px;
+
+    .profile-image {
+      cursor: pointer;
+    }
 
     .profile-title {
       display: flex;
-      padding: 47px 0px 137px 25px;
+      align-items: center;
 
       .profile-name {
         font-style: normal;
         font-weight: 700;
-        font-size: 11px;
-        line-height: 13px;
-        color: ${COLORS.black};
+        font-size: 16px;
+        color: ${COLORS.white};
         margin-left: 10px;
       }
     }
 
     .settings-icon {
-      padding: 55.18px 25.17px 169.8px 0px;
+      svg {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
     }
   }
 

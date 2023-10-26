@@ -1,8 +1,10 @@
-import Input from "@components/Input";
-import useChangePasscode from "./hook/useChangePasscode";
 import { useState } from "react";
 import styled from "styled-components";
+
+import Input from "@components/Input";
 import { COLORS } from "@constants/colors";
+
+import useChangePasscode from "./hook/useChangePasscode";
 
 const UpdatePasscode = () => {
   const [passcode, setPasscode] = useState({
@@ -46,8 +48,8 @@ const UpdatePasscode = () => {
           </button>
         </form>
         {updatePassCodeMutation.isLoading && <p data-testid="load">loading</p>}
-        {updatePassCodeMutation.isSuccess && <p data-testid="success">Successfull</p>}
-        {updatePassCodeMutation.isError && <p data-testid="error">an arrow has occured</p>}
+        {updatePassCodeMutation.isSuccess && <p data-testid="success">Successful</p>}
+        {updatePassCodeMutation.isError && <p data-testid="error">An Error has occurred</p>}
       </div>
     </UpdatePassCodeWrapper>
   );
