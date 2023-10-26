@@ -1,4 +1,4 @@
-# Opay-Demo-Frontend
+# OGADA-SWIFT-BANKING-FRONTEND
 
 <a href="https://opay-demo-peach.vercel.app/">Production Link</a> 🚀
 
