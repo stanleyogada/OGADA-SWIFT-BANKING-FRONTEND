@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import Navigation from "@components/Navigation";
 import icons from "@constants/icons";
 import Button from "@components/Button";
 import Avatar from "@components/Avatar/Avatar";
@@ -15,6 +14,7 @@ import getTransactionIcon from "@utils/getTransactionIcon";
 
 import { HomeInfoWrapper, HeroWrapper, PaymentWrapper, NotifyWrapper } from "./HomeInfoWrapper";
 import { ETransactionAllType } from "@services/transaction/types";
+import DisabledLink from "@components/DisabledLink";
 
 const useHome = () => {
   const { handleSignOut, currentUser } = useAuth();
@@ -65,7 +65,7 @@ const Home = () => {
               {vector.logoutIcon()}
             </div>
 
-            <Link to="/" className="notify">
+            <Link to={CLIENT_ROUTES.editAccount} className="notify">
               <span>{icons.bellIcon()}</span>
             </Link>
           </div>
@@ -106,9 +106,13 @@ const Home = () => {
         </div>
         {/* Below Card */}
         <div className="bottom-card">
-          <Button icon={icons.addMoneyIcon()} link={CLIENT_ROUTES.addMoney} className="bottom-card-link">
-            Add Money
-          </Button>
+          <div>
+            <DisabledLink to="/add-money">
+              <Button icon={icons.addMoneyIcon()} link={CLIENT_ROUTES.addMoney} className="bottom-card-link">
+                Add Money
+              </Button>
+            </DisabledLink>
+          </div>
 
           <Button icon={icons.transferIcon()} link={CLIENT_ROUTES.sendMoneyInHouse} className="bottom-card-link">
             Transfer

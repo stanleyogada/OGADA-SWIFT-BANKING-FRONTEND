@@ -208,3 +208,5 @@ describe("When user has NO nickname and NO avatar", () => {
     await getBalance();
   });
 });
+
+test("Have all links wired up correctly", async () => {});
