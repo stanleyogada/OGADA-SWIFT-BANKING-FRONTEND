@@ -1,5 +1,9 @@
 # OGADA-SWIFT-BANKING-FRONTEND
 
+### With 79+ Unit / Component passing Tests
+https://github.com/stanleyogada/OGADA-SWIFT-BANKING-FRONTEND/assets/102979724/499b0855-a45d-4b74-8a79-f6055ea85b26
+
+
 <a href="https://ogada-swift-banking.vercel.app/">Production Link</a> 🚀
 
 An application solely for education purposes! 
