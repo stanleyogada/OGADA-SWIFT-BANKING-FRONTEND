@@ -1,8 +1,6 @@
 # OGADA-SWIFT-BANKING-FRONTEND
 
 ### With 79+ Unit / Component passing Tests
-https://github.com/stanleyogada/OGADA-SWIFT-BANKING-FRONTEND/assets/102979724/499b0855-a45d-4b74-8a79-f6055ea85b26
-
 ![TEST VIDEO (1)](https://github.com/stanleyogada/OGADA-SWIFT-BANKING-FRONTEND/assets/102979724/f12022c0-f61d-4429-9feb-bfd327ddaa72)
 
 
