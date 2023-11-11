@@ -1,12 +1,16 @@
 FROM node:18.18.0-alpine3.18
 
-RUN addgroup -S app && adduser -S app -G app
-USER app
 
 WORKDIR /app
 
 COPY ["package.json", "./"]
 RUN npm i --force --legacy-peer-deps
+RUN npm i esbuild-wasm --legacy-peer-deps
+
+
+RUN addgroup -S app && adduser -S app -G app
+USER app
+
 
 # FOR DEV environment
 # The default "esbuild" failed to run dev server due incompatible platform (BECAUSE I USED ... -v $(pwd):/app ... to run the container)

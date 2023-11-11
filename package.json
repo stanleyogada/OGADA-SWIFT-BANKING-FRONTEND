@@ -34,7 +34,6 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "esbuild-wasm": "^0.19.4",
     "@testing-library/dom": "^9.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
