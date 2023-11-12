@@ -8,7 +8,10 @@ export const Header = styled.header`
   justify-content: center;
   position: relative;
   padding-bottom: 15px;
-  transform: translateY(-15px);
+  /* transform: translateY(-15px); */
+
+  position: fixed;
+  bottom: 0;
 `;
 
 export const Nav = styled.nav`

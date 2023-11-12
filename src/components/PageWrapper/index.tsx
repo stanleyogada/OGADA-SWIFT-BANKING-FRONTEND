@@ -19,7 +19,7 @@ const PageWrapper = ({ children }: { children: JSX.Element[] | JSX.Element }) =>
         <div
           data-app-container
           style={{
-            height: "calc(100vh - 63.55px)",
+            height: "calc(100vh - 85px)",
             overflowY: "auto",
           }}
         >
