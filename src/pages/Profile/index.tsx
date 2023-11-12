@@ -5,8 +5,11 @@ import { CLIENT_ROUTES } from "@constants/routes";
 import Avatar from "@components/Avatar/Avatar";
 
 import ProfileWrapper from "./ProfileStyle";
+import useCurrentUser from "@hooks/useCurrentUser";
 
 const Profile = () => {
+  const user = useCurrentUser();
+
   return (
     <>
       <ProfileWrapper>
@@ -18,7 +21,12 @@ const Profile = () => {
               </Link>
             </div>
 
-            <div className="profile-name">Hello, Tega</div>
+            {user.isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              <div className="profile-name">Hello, {user.data?.first_name}</div>
+            )}
+            {user.isError && <div>Error occurred while fetching user data</div>}
           </div>
           <div className="settings-icon">
             <Link to={CLIENT_ROUTES.editAccount}>{icons.settingIcon()}</Link>
