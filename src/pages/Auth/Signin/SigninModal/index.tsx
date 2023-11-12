@@ -10,8 +10,8 @@ import SigninModalWrapper from "./SigninModalWrapper";
 const DATA = [
   {
     id: 1,
-    name: "No need for sign in",
-    info: "Use a default user to sign in without the need of creating a new user.",
+    name: "Test User (Login)",
+    info: "No need for sign in, Use a default user to sign in without the need of creating a new user.",
     value: SIGNIN_MODAL_URL_USER_QUERY_OPTIONS.defaultUser,
   },
   {
