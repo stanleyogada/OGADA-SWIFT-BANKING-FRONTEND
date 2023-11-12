@@ -21,6 +21,8 @@ const PageWrapper = ({ children }: { children: JSX.Element[] | JSX.Element }) =>
           style={{
             height: "calc(100vh - 85px)",
             overflowY: "auto",
+            paddingBottom: "7rem",
+            borderBottom: "2rem solid transparent",
           }}
         >
           {children}
