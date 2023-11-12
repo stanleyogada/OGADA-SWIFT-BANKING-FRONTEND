@@ -1,9 +1,9 @@
 import Input from "@components/Input";
+import PageNavHeader from "@components/PageNavHeader";
 
+import useResetLoginPasscode from "./hooks/useResetLoginPasscode";
 import ResetLoginPasscodeWrapper from "./ResetLoginPasscodeWrapper";
 import { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useResetLoginPasscode";
-import useResetLoginPasscode from "./hooks/useResetLoginPasscode";
-import PageNavHeader from "@components/PageNavHeader";
 
 const ResetLoginPasscode = () => {
   const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } =

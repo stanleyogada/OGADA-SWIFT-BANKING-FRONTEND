@@ -13,6 +13,7 @@ const VerifyEmail = () => {
     }
 
     return RESEND_BUTTON_ENABLED_TEXT;
+    ``;
   };
 
   return (

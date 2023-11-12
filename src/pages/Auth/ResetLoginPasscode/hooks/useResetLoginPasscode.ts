@@ -9,6 +9,7 @@ import { LOCAL_STORAGE_KEYS } from "@constants/index";
 import { CLIENT_ROUTES } from "@constants/routes";
 
 import { TResendDetails, TResetLoginPasscodeFormValues } from "../type";
+import useQueryCodeValue from "@hooks/useQueryCodeValue";
 
 const RESEND_SECONDS = 45;
 const RESEND_BUTTON_ENABLED_TEXT = "You can resend now!";
@@ -46,8 +47,13 @@ const useResetLoginPasscode = () => {
   const {
     register,
     handleSubmit: _handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TResetLoginPasscodeFormValues>();
+  useQueryCodeValue<TResetLoginPasscodeFormValues>({
+    formSetValue: setValue,
+    formValueName: "code",
+  });
 
   const handleSubmit = () => {
     return _handleSubmit((formValues: TResetLoginPasscodeFormValues) => {
