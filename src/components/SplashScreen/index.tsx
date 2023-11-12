@@ -11,8 +11,8 @@ export default function SplashScreen() {
         </div>
 
         <div className="content">
-          <div className="logo-label"> Welcome to Opay </div>
-          <div className="description">We offer the best</div>
+          <div className="logo-label">Welcome to OGADA SWIFT BANKING</div>
+          <div className="description">Offering the best services (DEMO!)</div>
         </div>
       </div>
     </SplashScreenWrapper>
