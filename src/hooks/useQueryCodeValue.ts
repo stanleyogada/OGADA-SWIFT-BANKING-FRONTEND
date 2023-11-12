@@ -17,7 +17,7 @@ const useQueryCodeValue = <T extends FieldValues>({
   useEffect(() => {
     if (!queryCodeValue) return;
 
-    formSetValue(formValueName, queryCodeValue as unknown as PathValue<T, Path<T>>);
+    formSetValue(formValueName, queryCodeValue.replace('"', "") as unknown as PathValue<T, Path<T>>);
   }, [queryCodeValue]);
 };
 
