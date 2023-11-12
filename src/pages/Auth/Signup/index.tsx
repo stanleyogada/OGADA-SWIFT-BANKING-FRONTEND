@@ -8,6 +8,7 @@ import Input from "@components/Input";
 import PhoneInput from "@components/Input/PhoneInput";
 import PasswordInput from "@components/Input/PasswordInput";
 import Button from "@components/Button";
+import PageNavHeader from "@components/PageNavHeader";
 
 const Signup = () => {
   const { handleSubmit, register, mutationState, errors } = useSignup();
@@ -16,9 +17,7 @@ const Signup = () => {
     <SignupWrapper>
       {mutationState.isError && <p data-testid="error">{mutationState.error}</p>}
 
-      <header>
-        <h1 className="page-title">Create a new account</h1>
-      </header>
+      <PageNavHeader heading="Create a new account" />
 
       <main className="content">
         <form onSubmit={handleSubmit()} className="form">

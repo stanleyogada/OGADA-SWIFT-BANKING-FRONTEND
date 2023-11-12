@@ -2,6 +2,7 @@ import Input from "@components/Input";
 
 import VerifyEmailWrapper from "./VerifyEmailWrapper";
 import useVerifyEmail, { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useVerifyEmail";
+import PageNavHeader from "@components/PageNavHeader";
 
 const VerifyEmail = () => {
   const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } = useVerifyEmail();
@@ -17,8 +18,8 @@ const VerifyEmail = () => {
   return (
     <VerifyEmailWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
-      
-      <h1 className="page-title">Verify email address</h1>
+
+      <PageNavHeader heading="Verify email address" />
 
       <div className="page-sub-title-wrapper">
         <h2 className="page-sub-title">Please enter code</h2>

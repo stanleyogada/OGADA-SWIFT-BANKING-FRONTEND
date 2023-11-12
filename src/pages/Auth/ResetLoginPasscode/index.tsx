@@ -3,6 +3,7 @@ import Input from "@components/Input";
 import ResetLoginPasscodeWrapper from "./ResetLoginPasscodeWrapper";
 import { RESEND_BUTTON_ENABLED_TEXT } from "./hooks/useResetLoginPasscode";
 import useResetLoginPasscode from "./hooks/useResetLoginPasscode";
+import PageNavHeader from "@components/PageNavHeader";
 
 const ResetLoginPasscode = () => {
   const { register, handleSubmit, handleResendButtonClick, mutationState, resendDetails, errors } =
@@ -20,7 +21,7 @@ const ResetLoginPasscode = () => {
     <ResetLoginPasscodeWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
 
-      <h1 className="page-title">Reset Login Passcode</h1>
+      <PageNavHeader heading="Reset Login Passcode" />
 
       <form onSubmit={handleSubmit()}>
         <Input

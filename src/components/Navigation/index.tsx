@@ -70,7 +70,15 @@ const Navigation = ({ mute }: TProps) => {
           fontWeight: "bold",
         }}
       >
-        © {new Date().getFullYear()} OGADA SWIFT BANKING. All rights reserved.
+        ©&nbsp;{new Date().getFullYear()}&nbsp;
+        <span
+          style={{
+            color: COLORS.blue,
+          }}
+        >
+          OGADA SWIFT BANKING
+        </span>
+        . All rights reserved.
       </div>
     </Header>
   );

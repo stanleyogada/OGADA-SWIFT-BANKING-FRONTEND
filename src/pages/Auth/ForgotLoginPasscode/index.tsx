@@ -3,6 +3,7 @@ import PhoneInput from "@components/Input/PhoneInput";
 
 import ForgotLoginPasscodeWrapper from "./ForgotLoginPasscodeWrapper";
 import useForgetPasscode from "./hooks/useForgotLoginPasscode";
+import PageNavHeader from "@components/PageNavHeader";
 
 const ForgotLoginPasscode = () => {
   const { register, handleSubmit, mutationState, errors } = useForgetPasscode();
@@ -10,7 +11,8 @@ const ForgotLoginPasscode = () => {
   return (
     <ForgotLoginPasscodeWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
-      <h1 className="page-title">Forgot Password</h1>
+
+      <PageNavHeader heading="Forgot Password" />
 
       <div className="page-sub-title-wrapper">
         <h2 className="page-sub-title">Please enter your Email</h2>

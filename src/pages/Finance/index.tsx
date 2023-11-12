@@ -1,3 +1,4 @@
+import PageNavHeader from "@components/PageNavHeader";
 import { finances } from "./Finance";
 import FinanceWrapper from "./FinanceStyle";
 import Tabs from "@components/Tabs/Tabs";
@@ -6,7 +7,8 @@ const Finance = () => {
   return (
     <>
       <FinanceWrapper>
-        <h3 className="top-header">Finance</h3>
+        <PageNavHeader heading="Finance" />
+
         <div className="finance-hero">
           <h4>
             Make Transfer Directly <br /> With Owealth

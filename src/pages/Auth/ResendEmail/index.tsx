@@ -3,6 +3,7 @@ import Input from "@components/Input";
 import ResendEmailWrapper from "./ResendEmailWrapper";
 
 import useResendEmail from "./hooks/useResendEmail";
+import PageNavHeader from "@components/PageNavHeader";
 
 const ResendEmail = () => {
   const { register, handleSubmit, errors, mutationState } = useResendEmail();
@@ -11,7 +12,7 @@ const ResendEmail = () => {
     <ResendEmailWrapper>
       {mutationState.isError && <div data-testid="error"></div>}
 
-      <h1 className="page-title">Resend email verification</h1>
+      <PageNavHeader heading="Resend email verification" />
       <h2 className="page-sub-title">Manually send email verification code</h2>
 
       <form onSubmit={handleSubmit()}>

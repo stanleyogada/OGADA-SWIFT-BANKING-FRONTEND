@@ -1,11 +1,13 @@
 import Navigation from "@components/Navigation";
+import PageNavHeader from "@components/PageNavHeader";
 import GlobalStyles from "@components/styles/Global";
 
 const About = () => {
   return (
     <>
       <GlobalStyles />
-      <h1>About page</h1>
+      <PageNavHeader heading="About" />
+
       <p> Something about the App page</p>
 
       <Navigation />
