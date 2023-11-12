@@ -26,7 +26,7 @@ const PageWrapper = ({ children }: { children: JSX.Element[] | JSX.Element }) =>
           {children}
         </div>
 
-        {!isAuthPage && <Navigation />}
+        <Navigation mute={isAuthPage} />
       </div>
     </>
   );

@@ -6,6 +6,9 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  padding-bottom: 15px;
+  transform: translateY(-15px);
 `;
 
 export const Nav = styled.nav`
