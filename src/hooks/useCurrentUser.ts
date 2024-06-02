@@ -31,7 +31,7 @@ const useCurrentUser = () => {
         error: err,
       });
 
-      // If the error is a 401 error, we want to set the current user to null.
+      // If the error is a 403 error, we want to set the current user to null.
       // So RQ will cache that the current user is null and we won't keep trying
       queryClient.setQueryData(QUERY_KEYS.currentUser, null); // NOTE: is simulates a SUCCESSFUL request: THUS you need to manage a custom status state
     },
